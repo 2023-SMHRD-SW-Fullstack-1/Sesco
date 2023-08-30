@@ -19,7 +19,7 @@ public interface MemberMapper {
 	public int nick_Check(String user_nick);
 
 	// 가입여부조회
-	@Select("select count(*) from member where user_id=#{user_id} and user_pw=#{user_pw} and user_d_yn='n'")
+	@Select("select count(*) from t_member where user_id=#{user_id} and user_pw=#{user_pw} and user_d_yn='n'")
 	public int userSelect(String user_id, String user_pw);
 
 	// 기존회원 로그인
