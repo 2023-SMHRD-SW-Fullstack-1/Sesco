@@ -45,7 +45,7 @@ public class MemberController {
 	// 기존회원 로그인
 	@PostMapping(value = "/login")
 	public JSONObject login(@RequestBody Map<String, Object> map) {
-		System.out.println(map);
+		System.out.println("로그인 map : "+map);
 		String user_id = map.get("user_id").toString();
 		String user_pw = map.get("user_pw").toString();
 
