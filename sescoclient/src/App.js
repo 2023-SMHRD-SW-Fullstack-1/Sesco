@@ -15,10 +15,11 @@ function App() {
     <Header/>
     <Routes>
       <Route path="/" element={<Main/>}></Route>
-      <Route path="/gallery" element={<Gallery/>}></Route>
+      <Route path="/gallery" element={<Gallery/>}></Route> 
       <Route path="/note" element={<Note/>}></Route>
       <Route path="/tip" element={<Tip/>}></Route>
     </Routes>
+
     <Footer/>
     </>
   );
