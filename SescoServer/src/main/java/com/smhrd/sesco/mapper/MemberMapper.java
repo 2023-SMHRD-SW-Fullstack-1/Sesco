@@ -1,10 +1,12 @@
 package com.smhrd.sesco.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.smhrd.sesco.domain.Member;
 
+@Mapper
 public interface MemberMapper {
 
 	// 기존회원 가입
@@ -17,6 +19,10 @@ public interface MemberMapper {
 	// 닉네임 중복체크
 	@Select("select count(*) from t_member where user_nick=#{user_nick} and user_d_yn='n'")
 	public int nick_Check(String user_nick);
+
+	// 이메일 중복체크
+	@Select("select count(*) from t_member where user_email=#{user_email} and user_d_yn='n'")
+	public int email_Check(String user_email);
 
 	// 가입여부조회
 	@Select("select count(*) from t_member where user_id=#{user_id} and user_pw=#{user_pw} and user_d_yn='n'")
@@ -31,6 +37,6 @@ public interface MemberMapper {
 
 	// 기존회원탈퇴
 	@Update("update t_member set user_d_yn='y' where user_id=#{user_id}")
-	public void update(String user_id);
+	public void delete(String user_id);
 
 }
