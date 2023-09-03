@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import './gst.css'
 
-const GeneralStepTip = () => {
+const GeneralStepTip = ({number, title, content}) => {
 
 const [isOpen, setIsOpen] = useState(false)
 
@@ -13,22 +13,23 @@ const [isOpen, setIsOpen] = useState(false)
     <div className='tip-general-container'>
         {/* 번호 */}
         <div className='tip-general-accordion-number'>
-            {/* 번호 기입  */}
+            {number}
         </div>
 
         {/* 토글부분 */}
         <button className='tip-general-accordion-head' onClick={()=>setIsOpen(!isOpen)}>
            {/* head 내용 */}
-           0~2세
+           {title}
         </button>
         <div className={`tip-general-content-body ${isOpen ? 'open' : 'close'}`}>
           {isOpen &&  
             <div className='tip-general-accordion-text'>
               <span>
                 {/*  팁 내용 */}
+               {content}
               </span>
-            </div>}
-
+            </div>
+          }
         </div>
     </div>
   )

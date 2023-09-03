@@ -1,8 +1,12 @@
 import React from 'react'
 import './tip.css'
-import GeneralStepTip from './components/GeneralStepTip'
+import TipAccordion from './components/TipAccordion'
 
 const TipMain = () => {
+
+  const titleList = [1,2,3,4,5]
+  const contentList = ['a','b','c','d','e']
+
   return (
     <>
       <div className='tip-title-img'> 
@@ -16,7 +20,7 @@ const TipMain = () => {
 
         {/* 팁공간 */}
         <div className='tip-content-general-tip'>
-          <GeneralStepTip></GeneralStepTip>
+          <TipAccordion titleList={titleList} contentList={contentList}></TipAccordion>
         </div>
       </div>
     
