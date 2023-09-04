@@ -18,7 +18,7 @@ console.log(list);
     <div>
       <div>
       
-            {list.city.map((list,index)=><p key={index} onClick={()=>handleOpenModal(index)}>{list}</p>)} 
+            {list.map((list,index)=><p key={index} onClick={()=>handleOpenModal(index)}>{list}</p>)} 
               <div>
                 <GalleryImg index={list}/>
               </div>
