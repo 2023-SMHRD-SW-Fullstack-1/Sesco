@@ -1,13 +1,15 @@
 import React from 'react'
 import AccordionItem from './AccordionItem'
-import './acc.css'
+import './accordion.css'
 
-const AccordionList = () => {
+const AccordionList = ({titleList, contentList}) => {
+
   return (
     <div className='accordion'>
-        <AccordionItem></AccordionItem>
-        <AccordionItem></AccordionItem>
-        <AccordionItem></AccordionItem>
+        {titleList.map((title, index)=>
+          <AccordionItem key={index} number={index+1} title={title} content={contentList[index]} ></AccordionItem>
+          )
+        }
     </div>
   )
 }

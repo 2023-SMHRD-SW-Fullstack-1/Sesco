@@ -1,25 +1,18 @@
 import React, { useState } from 'react'
-import './acc.css'
+import './accordion.css'
 
-const AccordionItem = () => {
+const AccordionItem = ({number, title, content}) => {
 
   const [isOpen, setIsOpen] = useState(false)
 
   return (
         <div className={`item ${isOpen && 'open'}`} onClick={()=>{setIsOpen(!isOpen)}}>
-            <p className="number">01</p>
-            <p className="text">How much does a website cost?</p>
-            <div className="hidden-box">
-            <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam
-                dolor, molestiae maiores accusantium consequuntur labore!
+            <p className="number">
+                    0{number}
             </p>
-            <ul>
-                <li>Lorem ipsum dolor sit <a href="#test">amet</a> consectetur adipisicing elit.</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-            </ul>
+            <p className="text">{title}</p>
+            <div className="hidden-box">
+                {content}
             </div>
         </div>
   )
