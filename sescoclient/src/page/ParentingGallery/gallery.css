@@ -1,0 +1,17 @@
+.banner_info{
+    position: relative;
+    top: 37%;
+    left: 60%;
+    width: 200px;
+}
+.banner{
+    height: 30vh;
+}
+.galleryMap{
+    width: auto;
+    height: 700px;
+    margin-top: 8%;
+}
+.glist{
+    background-color: aliceblue;
+}
