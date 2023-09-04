@@ -3,7 +3,7 @@ import React from 'react'
 const Login = () => {
 
   //api key값
-    const clientId = '63b4bec7f09591c75aa8cc33c771ed1a'
+    const clientId = 'fa08f9dd3f1a65f4f4c681ca677d334c'
     const redirectUri = 'http://localhost:3000/sesco/login/oauth2/callback/kakao'
     const KAKAO_AUTH_URI = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}`;
     const loginHandler = () => {
