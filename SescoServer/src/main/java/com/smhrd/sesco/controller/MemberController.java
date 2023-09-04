@@ -20,8 +20,8 @@ public class MemberController {
 
 	// 기존회원 가입
 	@PostMapping(value = "/join")
-	public boolean join(@RequestBody Map<String, Object> map) {
-		System.out.println("회원가입map : " + map);
+	public String join(@RequestBody Map<String, Object> map) {
+
 		String user_id = map.get("user_id").toString();
 		String user_pw = map.get("user_pw").toString();
 		String user_nick = map.get("user_nick").toString();
@@ -33,19 +33,24 @@ public class MemberController {
 		// id 중복체크 , 닉네임 중복체크
 		int id_Check = memberService.id_Check(user_id);
 		int nick_Check = memberService.nick_Check(user_nick);
+		int email_Check = memberService.email_Check(user_email);
 		
-		if (id_Check == 1 || nick_Check==1) {// id 중복 O , 닉네임 중복
-			return false;
-		} else { // id 중복 X , 닉네임 중복 X
-			memberService.join(member);
-			return true;
+		if (id_Check == 1) {// id 중복 O 
+			return "id중복";
+		} else if(nick_Check==1){ // 닉네임 중복 O
+			return "nick중복";
+		} else if(email_Check==1) {
+			return "email중복";
+		} else { // id 중복 X , 닉네임 중복 X , 이메일 중복 X
+			 memberService.join(member);
+			 return "success";
 		}
 	}
 
 	// 기존회원 로그인
 	@PostMapping(value = "/login")
 	public JSONObject login(@RequestBody Map<String, Object> map) {
-		System.out.println("로그인 map : "+map);
+
 		String user_id = map.get("user_id").toString();
 		String user_pw = map.get("user_pw").toString();
 
@@ -54,7 +59,6 @@ public class MemberController {
 		if (result == 1) { // 로그인 성공
 			Member member = memberService.login(user_id, user_pw);
 			obj.put("loginUser", member);
-			System.out.println(obj);
 			return obj;
 		} else { // 로그인 실패
 			return obj;
@@ -67,11 +71,13 @@ public class MemberController {
 		System.out.println(map);
 
 		String user_id = map.get("user_id").toString();
+		String user_pw = map.get("user_pw").toString();
 		String user_nick = map.get("user_nick").toString();
-		Member member = new Member(user_id, user_nick);
+		Member member = new Member(user_id, user_pw, user_nick);
 		memberService.update(member);
 		JSONObject obj = new JSONObject();
 		obj.put("loginUser", member);
+		// System.out.println("update obj : "+obj);
 
 		return obj;
 

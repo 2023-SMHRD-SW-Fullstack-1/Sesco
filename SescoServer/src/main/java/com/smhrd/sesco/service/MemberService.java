@@ -16,9 +16,19 @@ public class MemberService {
 		memberMapper.join(member);
 	}
 
-	// id중복체크
+	// id 중복체크
 	public int id_Check(String user_id) {
 		return memberMapper.id_Check(user_id);
+	}
+
+	// 닉네임 중복체크
+	public int nick_Check(String user_nick) {
+		return memberMapper.nick_Check(user_nick);
+	}
+	
+	// 이메일 중복체크
+	public int email_Check(String user_email) {
+		return memberMapper.email_Check(user_email);
 	}
 
 	// 가입여부조회
@@ -38,11 +48,8 @@ public class MemberService {
 
 	// 기존회원탈퇴
 	public void delete(String user_id) {
-		memberMapper.update(user_id);
+		memberMapper.delete(user_id);
 	}
 
-	public int nick_Check(String user_nick) {
-		return memberMapper.nick_Check(user_nick);
-	}
 
 }
