@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 
 
-@CrossOrigin
+@CrossOrigin (origins ="*")
 @RestController
 @RequestMapping("${api.path.uri}")
 @RequiredArgsConstructor
@@ -32,7 +32,7 @@ public class KakaoController {
         return "Test Working";
     }
     
-    @GetMapping(path="/kakaoLogin")
+    @GetMapping(path="/kakaologin")
     public ResponseEntity<String> login(@RequestParam("code") String code, Model model) {
     	System.out.println("통신성공");
         log.info("Authorization Code is " + code);
