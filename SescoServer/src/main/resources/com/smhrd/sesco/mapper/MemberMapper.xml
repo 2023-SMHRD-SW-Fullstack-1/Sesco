@@ -5,11 +5,9 @@
 <mapper namespace="com.smhrd.sesco.mapper.MemberMapper">
 
    <!-- 회원가입 -->
-   <insert id="join" parameterType="com.smhrd.road.domain.t_user">
+   <insert id="join" parameterType="com.smhrd.sesco.mapper.MemberMapper">
       insert into t_member(user_id, user_pw, user_nick, user_name, user_email)
       values(#{user_id},#{user_pw},#{user_nick},#{user_name},#{user_email})
    </insert>
    
-   
-
 </mapper>
