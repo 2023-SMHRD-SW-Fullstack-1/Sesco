@@ -1,5 +1,5 @@
 package com.smhrd.sesco.domain;
 
-public class HtServeyDetail {
+public class HtSurveyTip {
 
 }
