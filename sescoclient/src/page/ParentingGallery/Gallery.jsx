@@ -1,5 +1,5 @@
 import React from 'react'
-import './Gallery.css';
+import './gallery.css';
 import Banner from './components/Banner';
 import GalleryMap from './components/GalleryMap';
 import GalleryList from './components/GalleryList';
