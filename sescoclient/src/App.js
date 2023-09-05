@@ -7,8 +7,6 @@ import Main from './page/Main';
 import Tip from './page/ParentingTip/Tip';
 import Note from './page/ParentingNote/Note';
 import Gallery from './page/ParentingGallery/Gallery';
-import Login from './components/Login';
-import Callback from './components/Callback';
 
 
 function App() {
@@ -16,12 +14,15 @@ function App() {
     <>
     <Header/>
     <Routes>
-      <Route path="/a" element={<Main/>}></Route>
+      <Route path="/" element={<Main/>}></Route>
       <Route path="/gallery" element={<Gallery/>}></Route> 
       <Route path="/note" element={<Note/>}></Route>
       <Route path="/tip" element={<Tip/>}></Route>
+<<<<<<< HEAD
       <Route path="/" element={<Login />} />
       <Route path="/sesco/login/oauth2/callback/kakao" element={<Callback />}/>
+=======
+>>>>>>> parent of 9939962 (Kakao 302에러)
     </Routes>
 
     <Footer/>
