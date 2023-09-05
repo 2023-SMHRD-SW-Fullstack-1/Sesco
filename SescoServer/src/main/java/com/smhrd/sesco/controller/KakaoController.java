@@ -19,7 +19,7 @@ import org.springframework.ui.Model;
 
 @CrossOrigin("http://localhost:3000")
 @RestController
-@RequestMapping("/${api.path.uri}")
+@RequestMapping("${api.path.uri}")
 @RequiredArgsConstructor
 public class KakaoController {
 	
