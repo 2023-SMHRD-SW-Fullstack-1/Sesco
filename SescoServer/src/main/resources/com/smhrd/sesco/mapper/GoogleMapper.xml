@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.smhrd.sesco.mapper.GoogleMapper">
+    <insert id="createUser">
+        INSERT INTO kakaouser_info (k_email, k_id, k_nick)
+        VALUES (#{email}, #{id}, #{nickname})
+    </insert>
+    <select id="emailCheck" resultType="int">
+        SELECT COUNT(*)
+        FROM kakaouser_info
+        WHERE k_email = #{email}
+    </select>
+	
+</mapper>
+
+  
