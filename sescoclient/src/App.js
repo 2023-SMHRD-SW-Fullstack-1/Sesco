@@ -21,7 +21,7 @@ function App() {
       <Route path="/note" element={<Note/>}></Route>
       <Route path="/tip" element={<Tip/>}></Route>
       <Route path="/" element={<Login />} />
-      <Route path="/sesco/login/oauth2/callback/kakao" element={<Callback />} />
+      <Route path="/sesco/login/oauth2/callback/kakao" element={<Callback />}/>
     </Routes>
 
     <Footer/>

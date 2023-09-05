@@ -16,7 +16,7 @@ import com.smhrd.sesco.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000") 
 public class MemberController {
 
 	@Autowired
