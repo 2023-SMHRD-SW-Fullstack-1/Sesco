@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import GalleryImg from './GalleryImg';
+import './gallerylist.css'
 
 
 
@@ -15,7 +16,7 @@ const GalleryList = ({list}) => {
 console.log(list);
 
   return (
-    <div>
+    <div className='gallery-list-container'>
       <div>
       
             {list.map((list,index)=><p key={index} onClick={()=>handleOpenModal(index)}>{list}</p>)} 

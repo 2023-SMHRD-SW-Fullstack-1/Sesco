@@ -1,0 +1,81 @@
+.gallery-map-container{
+    padding: 540px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-map-item{
+    position: inherit;
+    z-index: 0;
+}
+
+
+.gallery-map-marker {
+    width : 100px;
+    height : 100px;
+    background-repeat : no-repeat;
+    background-size : cover;
+}
+
+
+.gallery-map-marker:hover {
+    height: 150px;
+    width: 150px;
+}
+
+.gallery-map-marker.keonggi{
+    position: inherit;
+    left: 38%;
+    top : 15%;
+    z-index: 3;
+}
+
+.gallery-map-marker.gangwon{
+    position: absolute;
+    left: 61.4%;
+    top : 15%;
+    z-index: 3;
+}
+.gallery-map-marker.north-chungcheong{
+    position: absolute;
+    left: 50%;
+    top : 27%;
+    z-index: 3;
+}
+.gallery-map-marker.south-chungcheong{
+    position: absolute;
+    left: 29%;
+    top : 33%;
+    z-index: 3;
+}
+.gallery-map-marker.north-gyeongsang{
+    position: absolute;
+    left: 64%;
+    top : 41.1%;
+    z-index: 3;
+}
+.gallery-map-marker.south-gyeongsang{
+    position: absolute;
+    left: 54.1%;
+    top : 60%;
+    z-index: 3;
+}
+.gallery-map-marker.north-jeonla{
+    position: absolute;
+    left: 31.2%;
+    top : 49.2%;
+    z-index: 3;
+}
+.gallery-map-marker.south-jeonla{
+    position: absolute;
+    left: 23.4%;
+    top : 64%;
+    z-index: 3;
+}
+.gallery-map-marker.jeju{
+    position: absolute;
+    left: 11.4%;
+    top : 84.7%;
+    z-index: 3;
+}

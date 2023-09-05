@@ -8,7 +8,6 @@ import Tip from './page/ParentingTip/TipMain';
 import Note from './page/ParentingNote/Note';
 import Gallery from './page/ParentingGallery/Gallery';
 import Login from './components/Login';
-import Callback from './components/Callback';
 
 
 function App() {
@@ -21,7 +20,6 @@ function App() {
       <Route path="/note" element={<Note/>}></Route>
       <Route path="/tip" element={<Tip/>}></Route>
       <Route path="/login" element={<Login/>}></Route>
-      <Route path="/sesco/login/oauth2/callback/kakao" element={<Callback/>}></Route>
     </Routes>
 
     <Footer/>

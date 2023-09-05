@@ -1,8 +1,7 @@
 import React from 'react'
 import './Gallery.css';
 import Banner from './components/Banner';
-import GalleryMap from './components/GalleryMap';
-import GalleryList from './components/GalleryList';
+import GalleryMapItem from './components/GalleryMapItem'
 
 
 const Gallery = () => {
@@ -10,8 +9,7 @@ const Gallery = () => {
   return (
         <div>
           <Banner/>
-          <GalleryMap/>
-          <GalleryList list={list}/>
+          <GalleryMapItem></GalleryMapItem>
         </div>
   )
 }
