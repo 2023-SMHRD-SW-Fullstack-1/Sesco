@@ -11,20 +11,40 @@ $blue: #03b5d2;
   }
 }
 
-body {
-  margin: 0;
+.tip-content-container{
+  display: flex;
+  flex-direction: row;
+  height: 600px;
+  justify-content: center;
+}
+.tipImg{
+  width: 400px;
+  margin-top: 15%;
+}
+.tip {
   padding: 0;
   font-family: 'Hind', sans-serif;
   background: $bg;
   color: $gray;
   display: flex;
   min-height: 100vh;
+  width: 65%;
+  position: relative;
 }
 
-.container {
+.tipContainer {
   margin: 0 auto;
-  padding: 4rem;
-  width: 48rem;
+  padding: 2rem;
+  width: 37rem;
+  display: flex;
+  flex-direction: column;
+}
+.imgContainer{
+  margin: 0 auto;
+  padding: 3rem;
+  width: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .accordion {
@@ -46,6 +66,7 @@ body {
     border: none;
     background: none;
     outline: none;
+    height: 60px;
     &:hover, &:focus {
       cursor: pointer;
       color: $blue;
@@ -58,6 +79,8 @@ body {
     .accordion-title {
       padding: 1em 1.5em 1em 0;
     }
+
+
     .icon {
       display: inline-block;
       position: absolute;
@@ -98,7 +121,7 @@ body {
     }
     + .accordion-content {
       opacity: 1;
-      max-height: 9em;
+      max-height: 30em;
       transition: all 200ms linear;
       will-change: opacity, max-height;
     }
@@ -115,4 +138,61 @@ body {
       margin: 2em 0;
     }
   }
+}
+@media screen and (max-width: 1250px){
+	.tip{
+    flex-direction: column;
+  }
+  .tip-content-container{
+    position: relative;
+    height: auto;
+    justify-content: center;
+  }
+  .tipImg{
+    width: 500px;
+    margin-top: 10%;
+  }
+}
+@media screen and (max-width: 910px){
+	.tip{
+   width: 450px;
+    flex-direction: column;
+  }
+
+  .tipImg{
+    width: 390px;
+    margin-top: 10%;
+  }
+  .tipContainer {
+    width: 30rem;
+  }
+}
+@media screen and (max-width: 550px){
+	.tip{
+   width: 400px;
+    flex-direction: column;
+  }
+  .tip-content-container{
+    position: relative;
+    height: auto;
+    justify-content: center;
+  }
+  .tipImg{
+    width: 280px;
+    margin-top: 10%;
+  }
+  .tipContainer {
+    width: 22rem;
+  }
+}
+
+/*Banner*/
+.banner_info{
+  position: relative;
+  top: 37%;
+  left: 60%;
+  width: 200px;
+}
+.banner{
+  height: 30vh;
 }
