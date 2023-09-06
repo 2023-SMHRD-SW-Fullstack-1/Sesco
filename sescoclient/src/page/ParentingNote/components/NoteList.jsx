@@ -1,6 +1,6 @@
 import React from 'react';
 import './noteList.css';
-import noteList from '../noteImg/noteList.PNG'
+import noteList from '../noteImg/noteList.png'
 import addNoteBtn from '../noteImg/addNoteBtn.png'
 
 function NoteList({ year, notes, onAddNote }) {
