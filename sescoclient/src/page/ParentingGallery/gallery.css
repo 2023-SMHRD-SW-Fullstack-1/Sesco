@@ -1,5 +1,7 @@
 .banner_info{
-    position: relative;
+    position: flex;
+    align-items: start;
+    justify-content: start;
     top: 37%;
     left: 60%;
     width: 200px;
