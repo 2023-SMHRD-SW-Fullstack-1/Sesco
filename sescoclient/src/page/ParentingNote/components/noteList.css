@@ -1,8 +1,8 @@
 /* 구글 폰트 사용 */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap');
 
-
-.noteList-year{
+/* 연도 */
+.noteList-year {
     width: 182px;
     height: 79px;
     flex-shrink: 0;
@@ -13,7 +13,8 @@
     font-size: 70px;
     font-style: normal;
     font-weight: 600;
-    line-height: 44px; /* 62.857% */
+    line-height: 44px;
+    /* 62.857% */
     letter-spacing: -0.64px;
 
     margin-top: 945px;
@@ -21,38 +22,55 @@
     margin-left: 792px;
     margin-right: 946px;
     margin-bottom: 2676px;
+    align-items: center;
 
-    /* 이미지위에 텍스트 띄우기 위해 position */
+}
+
+
+/* 수첩 영역 */
+.notes-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-left: 129px;
+    margin-right: 1225px;
+    /* margin-top: 1075px; */
+}
+
+.note-item-container {
     position: relative;
+    align-items: center;
 }
 
-.note-item {
 
-color: #000;
-text-align: center;
-font-family: Akshar;
-font-size: 20px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-width: 114px;
-height: 48px;
-flex-shrink: 0;
-position: relative;
-}
 
 .note-item-span {
     position: absolute;
-    
-   /* Adjust these values to position the text within the image */
-   top:50%;
-   left:50%;
-   
-   color:#000;
-   font-family:Akshar;
-   font-size:20px;
-   font-style:normal;
-   font-weight:400;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000;
+    font-family: Akshar;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
 
-    transform : translate(-50%, -50%); 
+}
+
+/* 노트 추가 버튼 */
+.noteList-addBtn {
+    width: 70.439px;
+    height: 71.887px;
+    flex-shrink: 0;
+    margin-top: 56.5px;
+    margin-left: 32.7px;
+    margin-right: 26.9;
+    margin-bottom: 53.5px;
+
+    cursor: pointer; 
+    transition: transform 0.3s ease-in-out;
+}
+
+.noteList-addBtn:hover {
+    transform: scale(1.3);
 }
