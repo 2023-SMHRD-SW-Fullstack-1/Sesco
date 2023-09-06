@@ -1,16 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Gallery.css';
 import Banner from './components/Banner';
-import GalleryMapItem from './components/GalleryMapItem'
+import GalleryMap from './components/GalleryMap';
+import LocalList from './components/LocalList';
 
 
 const Gallery = () => {
+
   const list =["광주","화순","나주","담양","목포"];
+
+  const [imgList, setImgList] = useState([]);
+
+
+
   return (
-        <div>
-          <Banner/>
-          <GalleryMapItem></GalleryMapItem>
+    <>
+    <Banner/>
+        <div style={{ display: 'flex'}}>
+          <div style={{ width: "1080px", height: "800px" }}>
+            <GalleryMap></GalleryMap>
+          </div>
+          <div>
+            <LocalList></LocalList>
+          </div>
         </div>
+    </>
   )
 }
 

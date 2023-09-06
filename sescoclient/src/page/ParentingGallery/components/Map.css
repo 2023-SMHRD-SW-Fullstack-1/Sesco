@@ -11,7 +11,7 @@
 }
 
 
-.gallery-map-marker {
+.gallery-map-marker{
     width : 100px;
     height : 100px;
     background-repeat : no-repeat;
@@ -27,12 +27,12 @@
 .gallery-map-marker.keonggi{
     position: inherit;
     left: 38%;
-    top : 15%;
-    z-index: 3;
+    top: 15%;
+    z-index: 0;
 }
 
 .gallery-map-marker.gangwon{
-    position: absolute;
+    position: inherit;
     left: 61.4%;
     top : 15%;
     z-index: 3;

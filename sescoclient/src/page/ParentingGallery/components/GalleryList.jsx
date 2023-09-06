@@ -27,7 +27,6 @@ console.log(list);
         
       </div>
     </div>
-    
   )
 }
 
