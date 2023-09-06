@@ -1,5 +1,4 @@
 import React from "react";
-import Slider from "react-slick";
 
 const LocalList = () => {
 
@@ -14,14 +13,7 @@ const LocalList = () => {
 
   return (
     <div>
-        <Slider {...settings}>
-          <div>
-            dooo
-          </div>
-          <div>
-            dwjowqfw
-          </div>
-        </Slider>
+       dw
     </div>
   )
 }
