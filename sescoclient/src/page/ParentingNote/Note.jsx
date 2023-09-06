@@ -1,8 +1,12 @@
+
 import React, { useState } from 'react'
 import NoteList from './components/NoteList'
 import Diary from './components/Diary'
 import noteBackground from './noteImg/noteBackground.png'
 import './note.css';
+
+
+import Diarycopy from './components/Diarycopy'
 
 
 const Note = () => {
@@ -40,6 +44,7 @@ const Note = () => {
 
   return (
     <div>
+
       
       {/* book div */}
       {/* <div className='book-group'> */}
@@ -86,6 +91,9 @@ const Note = () => {
         <NoteList year={2021} notes={notes2021} onAddNote={handleAddNote} />
         {diaries[2021] && <Diary />}
        </div>
+
+
+      <Diarycopy></Diarycopy>
 
     </div>
   )

@@ -1,6 +1,7 @@
 import React from 'react'
 import './tip.css'
 import AccordionList from './components/AccordionList'
+import AccordionItem from './components/AccordionItem'
 const TipMain = () => {
 
   const titleList = [1,2,3,4,5]
@@ -19,7 +20,7 @@ const TipMain = () => {
 
         {/* 팁공간 */}
         <div className='tip-content-general-tip'>
-          <AccordionList></AccordionList>
+          <AccordionList titleList={titleList} contentList={contentList}></AccordionList>
         </div>
       </div>
     
