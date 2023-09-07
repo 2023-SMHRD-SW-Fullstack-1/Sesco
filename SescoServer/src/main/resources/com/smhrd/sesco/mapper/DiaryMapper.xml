@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smhrd.sesco.mapper.DiaryMapper">
+
+<select id="getDiaryListWithImg" resultType="com.smhrd.sesco.domain.Diary">
+	SELECT *
+	FROM t_diary
+	WHERE d_img_yn = 'Y'
+	  AND note_seq IN (
+					    SELECT note_seq
+					    FROM t_note
+					    WHERE kid_seq IN (
+									      SELECT kid_seq
+									      FROM t_kid
+									      WHERE user_id = #{user_id}
+								    	)
+					  );
+</select>
+
+</mapper>
