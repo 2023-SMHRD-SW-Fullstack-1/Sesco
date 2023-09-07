@@ -8,7 +8,7 @@ const AccordionItem = ({number, title, content}) => {
   return (
         <div className={`item ${isOpen && 'open'}`} onClick={()=>{setIsOpen(!isOpen)}}>
             <p className="number">
-                    0{number}
+                0{number}
             </p>
             <p className="text">{title}</p>
             <div className="hidden-box">

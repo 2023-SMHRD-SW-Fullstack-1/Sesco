@@ -1,0 +1,76 @@
+/* 구글 폰트 사용 */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap');
+
+/* 연도 */
+.noteList-year {
+    width: 182px;
+    height: 79px;
+    flex-shrink: 0;
+    color: #000;
+    text-align: center;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Playfair Display;
+    font-size: 70px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 44px;
+    /* 62.857% */
+    letter-spacing: -0.64px;
+
+    margin-top: 945px;
+    /* margin-top: 58px; */
+    margin-left: 792px;
+    margin-right: 946px;
+    margin-bottom: 2676px;
+    align-items: center;
+
+}
+
+
+/* 수첩 영역 */
+.notes-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-left: 129px;
+    margin-right: 1225px;
+    /* margin-top: 1075px; */
+}
+
+.note-item-container {
+    position: relative;
+    align-items: center;
+}
+
+
+
+.note-item-span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000;
+    font-family: Akshar;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+
+}
+
+/* 노트 추가 버튼 */
+.noteList-addBtn {
+    width: 70.439px;
+    height: 71.887px;
+    flex-shrink: 0;
+    margin-top: 56.5px;
+    margin-left: 32.7px;
+    margin-right: 26.9;
+    margin-bottom: 53.5px;
+
+    cursor: pointer; 
+    transition: transform 0.3s ease-in-out;
+}
+
+.noteList-addBtn:hover {
+    transform: scale(1.3);
+}
