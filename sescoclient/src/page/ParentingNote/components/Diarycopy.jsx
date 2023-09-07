@@ -33,9 +33,24 @@ const Diarycopy = () => {
     // 클릭한 날짜의 정보를 가져와서 처리합니다.
     setSelectedDate(info.date);
     //  setIsClick(true); // 일기 작성 폼 열기
+    console.log("handledateclick", selectedDate);
+
+    //이게 2023-9-9 이렇게 바뀌고
+    console.log("바꾸기",selectedDate?.toLocaleDateString());
+
+    //diary안에 있는 값이 2023-09-09로 바뀌는데
+  }
+
+  function formatDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // getMonth()는 0부터 시작하므로 1을 더해줍니다.
+    const day = String(date.getDate()).padStart(2, '0');
+    
+    return `${year}-${month}-${day}`;
   }
 
 
+  
   function onComplete(title, content) {
     setTitle(title)
     console.log(dtitle);
@@ -51,6 +66,8 @@ const Diarycopy = () => {
 
       const newDiary = { date: localDateString, title: title, content: content };
       setDiaries([...diaries, newDiary]);
+      console.log("seletedDate",selectedDate);
+      console.log("diarydate",diaries);
     }
 
     setIsClick(false);
@@ -122,12 +139,27 @@ const Diarycopy = () => {
           <div style={{ width: "455px", height: "100px", marginTop: "10px", border: "solid 2px red" }}>
 
             {/* 일기 리스트 출력 */}
-            {diaries.map((diary) => (
-              <div key={diary.date}>
-                <p>{diary.title}</p>
-                <p>{diary.content}</p>
-              </div>
-            ))}
+            
+            
+              
+                {/* {diaries.map((diary) => (
+              
+                  <div key={diary.date}>
+                    
+                    <p>{diary.title}</p>
+                    <p>{diary.content}</p>
+                  </div>
+                ))}  */}
+                {diaries.filter(diary => diary.date === formatDate(selectedDate)).map((diary, index) => (
+  <div key={index}>
+    <p>{diary.title}</p>
+    <p>{diary.content}</p>
+  </div>
+))}
+              
+            
+            
+          
 
           </div>
         </div>
