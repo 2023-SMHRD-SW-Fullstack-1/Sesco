@@ -154,3 +154,16 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,java,eclipse,react,visualstudiocode
+GoogleMapper/SpaceWarGame/ResultSheet.xml
+GoogleMapper/.project
+GoogleMapper/GolfCountryClub/GolfCountryClub.xml
+GoogleMapper/GolfCountryClub/GolfCountryClub.xsd
+GoogleMapper/Invoice/Invoice.dtd
+GoogleMapper/Invoice/Invoice.xml
+GoogleMapper/PhoneBanking/PhoneBanking.wsdl
+GoogleMapper/PhoneBanking/PhoneBanking.xsd
+GoogleMapper/PublicationCatalogue/Catalogue.xml
+GoogleMapper/PublicationCatalogue/Catalogue.xsd
+GoogleMapper/SpaceWarGame/CommandSheet.xml
+GoogleMapper/SpaceWarGame/SpaceWarGame.wsdl
+GoogleMapper/SpaceWarGame/SpaceWarGame.xsd
