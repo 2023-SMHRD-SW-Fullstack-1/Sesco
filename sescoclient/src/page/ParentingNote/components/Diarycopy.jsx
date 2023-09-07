@@ -1,55 +1,70 @@
-import React from 'react'
-import './diary.css'
+import React, { useEffect, useState } from 'react'
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from "@fullcalendar/interaction";
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import CreateDiary from './CreateDiary';
+import './diary.css'
 
 const Diarycopy = () => {
-  const navigate = useNavigate();
-
+  //일기 추가 클릭했을 때 true로 되고 일기작성 폼 출력
   const [isClick, setIsClick] = useState(false)
+
   const [selectedDate, setSelectedDate] = useState(null);
+
+
   const [dtitle, setTitle] = useState(null);
+
+
   const [dcontent, setContent] = useState(null);
+
+  //이미지 저장
   const [image, setImage] = useState("");
+
+  //일기 추가 시 이벤트 처리
+  const [events, setEvents] = useState([]);
+
+  // 일기 리스트
+  const [diaries, setDiaries] = useState([]);
+
+  // --------------------------------------------------------------------------------------------------------------------------------------------------------
 
   function handleDateClick(info) {
     // 클릭한 날짜의 정보를 가져와서 처리합니다.
-    const clickedDate = info.date;
-    setSelectedDate(clickedDate);
-    console.log('Selected date:', clickedDate);
+    setSelectedDate(info.date);
+    //  setIsClick(true); // 일기 작성 폼 열기
   }
 
-  function onComplete(title, content) { 
+
+  function onComplete(title, content) {
     setTitle(title)
-    setContent(content)
-		console.log('전달된 제목:', title);
-		console.log('전달된 내용:', content);
-		// ... Diarycopy 컴포넌트에서 받은 데이터 처리 로직 추가
-	}
+    console.log(dtitle);
+    console.log(selectedDate.toLocaleDateString());
 
+    if (selectedDate && title && content) {
 
-  // function handleComplete(title, content) { 
-  //   setTitle=this.title
-  //   setContent=this.content
-  // setTitle(title)
-	// 	console.log('전달된 제목:', title);
-	// 	console.log('전달된 내용:', content);
-	// 	// ... Diarycopy 컴포넌트에서 받은 데이터 처리 로직 추가
-	// }
-  
+      //const localDateString = ...: 선택된 날짜에서 현재 시스템의 타임존 오프셋을 빼서 UTC로부터 로컬 시간으로 변환하고, 그 결과를 'YYYY-MM-DD' 형식의 문자열로 만듭니다.
+      const localDateString = new Date(selectedDate.getTime() - (selectedDate.getTimezoneOffset() * 60000)).toISOString().split("T")[0];
 
+      const newEvent = { title: title, date: localDateString };
+      setEvents([...events, newEvent]);
 
-  function CreateDiaryForm (){ 
-    setIsClick(!isClick)
-    console.log(isClick);
-    
+      const newDiary = { date: localDateString, title: title, content: content };
+      setDiaries([...diaries, newDiary]);
+    }
+
+    setIsClick(false);
+    // setContent("");
+
   }
- 
+
+
+
+  function CreateDiaryForm() {
+    setIsClick(!isClick)
+  }
+
+
   return (
     // 수첩칸
     <div className='diary-whole-container'>
@@ -62,14 +77,18 @@ const Diarycopy = () => {
       <div className='diary-left-container'>
         <div className="diary-page-inner">
           <div className='diary-left-calendar'>
-          <FullCalendar
-            plugins={[dayGridPlugin,timeGridPlugin,interactionPlugin]}
-            events={[
-              { title: 'event 1', date: '2023-09-04' },
-              { title: 'event 1', date: '2023-09-05' }
 
-            ]}
-            initialView="dayGridMonth"
+
+            <FullCalendar
+              //풀캘린더 플러그인
+              plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+
+              //클릭했을 때 날짜 가져오는 메서드
+              dateClick={handleDateClick}
+
+              //일기 작성했을 때 이벤트 추가
+              events={events}
+              initialView="dayGridMonth"
               headerToolbar={
                 {
                   start: 'today',
@@ -77,46 +96,42 @@ const Diarycopy = () => {
                   end: 'prev,next',
                 }
               }
-              eventDidMount={function(info) {				
+              //이건 뭔데
+              eventDidMount={function (info) {
                 var gColor = 'lightGreen';
                 var bColor = 'lightBlue';
                 if (info.event.extendedProps.status == 'done') {
                   info.el.style.backgroundColor = "red";
-                } else if(info.event.extendedProps.status == '') {
+                } else if (info.event.extendedProps.status == '') {
                   info.el.style.backgroundColor = bColor;
-                }		
+                }
               }
               }
-            eventDisplay={'block'}
-            eventTextColor={'#FFF'}
-            eventColor={'#F2921D'}
-            height={'300px'}
-            dateClick={handleDateClick} // DateClick
-            
-            
-            
-            
-            
-            
-          />
+              eventDisplay={'block'}
+              eventTextColor={'#FFF'}
+              eventColor={'#F2921D'}
+              height={'300px'}
+            />
           </div>
 
           <div >
-            
-            <button onClick={CreateDiaryForm} style={{width : "460px", height : "100px", marginTop : "10px"}} >일기추가</button>
+
+            <button onClick={CreateDiaryForm} style={{ width: "460px", height: "100px", marginTop: "10px" }} >일기추가</button>
           </div>
 
-          <div style={{width : "455px", height : "100px", marginTop : "10px", border : "solid 2px red"}}>
-            <p>{dtitle}</p>
-            <p>{dcontent}</p>
+          <div style={{ width: "455px", height: "100px", marginTop: "10px", border: "solid 2px red" }}>
+
+            {/* 일기 리스트 출력 */}
+            {diaries.map((diary) => (
+              <div key={diary.date}>
+                <p>{diary.title}</p>
+                <p>{diary.content}</p>
+              </div>
+            ))}
 
           </div>
         </div>
       </div>
-
-
-
-
 
       {/* 오른쪽칸 */}
       <div className='diary-right-container'>
@@ -131,23 +146,12 @@ const Diarycopy = () => {
             // CreateDiary 컴포넌트에 선택된 날짜 전달 (props로)
             // 예시: <CreateDiary selectedDate={selectedDate} />
             // 필요에 따라 선택된 날짜를 CreateDiary 컴포넌트로 전달해주세요.
-            <CreateDiary selectedDate={selectedDate} onComplete={onComplete}/>
+            <CreateDiary selectedDate={selectedDate} onComplete={onComplete} />
           )}
-        
+
         </div>
-
-
-
-
       </div>
     </div>
   )
 }
-
 export default Diarycopy
-
-
-
-
-
-    // <div class="page-inner" contenteditable>

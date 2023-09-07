@@ -15,7 +15,7 @@ const CreateDiary = ({ onComplete }) => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    
     // 작성완료 버튼 클릭 시 처리 로직 추가
     console.log('제목:', title);
     console.log('내용:', content);
@@ -25,7 +25,7 @@ const CreateDiary = ({ onComplete }) => {
     onComplete(title, content);
 
     setTitle("");
-    setContent("");
+    setContent("");///
 
     // Diarycopy 컴포넌트로 데이터 전달
     // 예시: props.onComplete(title, content)
