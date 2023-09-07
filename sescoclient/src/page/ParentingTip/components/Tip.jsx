@@ -3,12 +3,21 @@ import './Tip.css'
 import TipImg from '../../../img/TipImg.png'
 import { FiBookOpen } from "react-icons/fi";
 import axios from 'axios';
+import babyTip0 from '../../../img/baby0tip.png'
+import babyTip1 from '../../../img/baby1tip.png'
+import babyTip2 from '../../../img/baby2tip.png'
+import babyTip3 from '../../../img/baby3tip.png'
+import babyTip4 from '../../../img/baby4tip.png'
+import babyTip5 from '../../../img/baby5tip.png'
+import babyTip6 from '../../../img/baby6tip.png'
+import babyTip7 from '../../../img/baby7tip.png'
+import babyTip8 from '../../../img/baby8tip.png'
 
 
 const Tip = () => {
     const [datas, setDatas] = useState(['']);
     const [activeButtonId, setActiveButtonId] = useState('0');
-
+    const imgs = [babyTip0, babyTip1, babyTip2, babyTip3, babyTip4, babyTip5, babyTip6, babyTip7, babyTip8]
     useEffect(() => {
         axios.get('http://localhost:5000/tip')
             .then(res => {
@@ -83,9 +92,34 @@ const Tip = () => {
 
             <div>
                 <div className='tip-content-container'>
-                    <div className='tip-content'>
-                        {datas[activeButtonId].context?.map((context,index)=><li key={index}>{context}</li>)}
-                    </div>
+                    {activeButtonId == 0 ?
+                        <div className='tip-mainContent'>
+                            <img className='tipMainImg' width={'350px'} src={imgs[0]} />
+                            <h3>연령별 아이 특성을 확인하여 <br />육아 TIP을 받아보세요!</h3>
+
+                        </div>
+                        :
+                        <div className='tip-content'>
+                            <div className='mainContent'>
+                                <img width={'300px'} src={imgs[activeButtonId]} />
+                                <div className='mainContentContext'>
+                                    <h3>주요발달 특성</h3>
+                                    {datas[activeButtonId]?.mainContext?.map((one, index) => <li className='mainText' key={index}>{one}</li>)}
+                                </div>
+                            </div>
+                            <h4>신체발달</h4>
+                            {datas[activeButtonId]?.detailOne?.map((one, index) => <li key={index}>{one}</li>)}
+                            <h4>정서발달</h4>
+                            {datas[activeButtonId]?.detailTwo?.map((one, index) => <li key={index}>{one}</li>)}
+                            <h4>사회성발달</h4>
+                            {datas[activeButtonId]?.detailTree?.map((one, index) => <li key={index}>{one}</li>)}
+                            <h4>언어발달</h4>
+                            {datas[activeButtonId]?.detailFour?.map((one, index) => <li key={index}>{one}</li>)}
+                            <h4>인지발달</h4>
+                            {datas[activeButtonId]?.detailFive?.map((one, index) => <li key={index}>{one}</li>)}
+                        </div>
+                    }
+
                 </div>
                 <button className="btn-4"><span>아이 설문하러 가기 <FiBookOpen /></span></button>
             </div>

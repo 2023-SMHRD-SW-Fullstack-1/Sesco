@@ -1,4 +1,5 @@
-.tip-content{
+.tip-content,
+.tip-mainContent{
     width: 55%;
     padding: 20px;
     border: 3px solid;
@@ -7,10 +8,40 @@
     padding: 55px;
     padding-bottom: 80px;
 }
+.tip-mainContent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tip-mainContent h3{
+    text-align: center;
+}
+.tip-content h4{
+    color: rgb(233, 151, 0);
+}
+.tipMainImg{
+    margin-right: 70px;
+}
 .Tbanner{
     height: 350px;
 }
+.mainContent{
+    display: flex;
+    justify-content: center;
+    margin-left: 10px;
+    margin-right: 10px;
 
+}
+.mainContentContext{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    justify-content: center;
+}
+
+.tipMainImg{
+    border-radius: 100px;
+}
 .tip-content-container{
     display: flex;
     width: 100%;
