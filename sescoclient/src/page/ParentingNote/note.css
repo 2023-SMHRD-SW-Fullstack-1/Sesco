@@ -40,6 +40,25 @@
   height: 200px;
 }
 
+.noteTagSearch-container {
+  position: relative;
+}
+
+
+.noteTagFindIcon {
+  position: absolute;
+  width: 25.54px;
+  height: 26.637px;
+  flex-shrink: 0;
+  top: 40%;
+  right: 70px;
+  cursor: pointer;
+}
+
+.noteTagFindIcon:hover {
+  transform: scale(1.4);
+}
+
 /* 태그검색 */
 .noteTagFind2 {
   width: 502px;
@@ -69,6 +88,7 @@
   margin-left: 45px;
   margin-right: 509px;
   color: #505050;
+  cursor: pointer;
 }
 
 .myKidSelectOption {
@@ -82,4 +102,25 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+/*일기 보여지는 영역*/
+.diary-container {
+  margin-top: 150px;
+  position: relative;
+  animation: pop 1.0s;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(1.5);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }

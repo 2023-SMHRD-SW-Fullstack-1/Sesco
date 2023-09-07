@@ -6,6 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.smhrd.sesco.domain.Note;
@@ -23,4 +26,9 @@ public class NoteController {
 	public Map<Integer,List<Note>> getNotes(){
 		return noteService.getNotesGroupByYear();
 	}
+	
+	 @PostMapping("/note/getnotelist")
+	  public List<Note> getNoteList(@RequestBody Map<String, Integer> kidSeqMap){
+	    return noteService.getNotesByKid(kidSeqMap.get("kid_seq"));
+	  }
 }

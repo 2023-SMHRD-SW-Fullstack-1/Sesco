@@ -3,10 +3,9 @@ import React, { useEffect, useState } from 'react'
 import NoteList from './components/NoteList'
 import Diary from './components/Diary'
 import noteBackground from './noteImg/noteBackground.png'
+import noteFind from './noteImg/noteFind.png'
 import './note.css';
-
-
-// import Diarycopy from './components/Diarycopy'
+import Diarycopy from './components/Diarycopy'
 
 
 const Note = () => {
@@ -19,9 +18,18 @@ const Note = () => {
   // const [diaries, setDiaries] = useState({});
   const [notes, setNotes] = useState({});
   const [notesDisplay, setNotesDisplay] = useState({});
+  //수첩 선택
+  const [selectedNoteSeq, setSelectedNoteSeq] = useState(null);
+  const [selectedNoteYear, setSelectedNoteYear] = useState(null);
 
   //사용자 닉네임
   const [userNick, setUserNick] = useState("Nick")
+
+  //아이 정보
+  const [kids, setKids] = useState([]);
+
+  //일기
+  const [diary, setDiary] = useState(null);
 
   //더미데이터
   //아이 리스트
@@ -37,7 +45,7 @@ const Note = () => {
       try {
         const response = await axios.get('http://localhost:8081/sesco/note');
         setNotes(response.data);
-        console.log(response.data);
+        console.log("노트 불러오기", response.data);
       } catch (e) {
         console.error("노트 불러오기 실패 : ", e);
       }
@@ -45,26 +53,92 @@ const Note = () => {
     getNotes();
   }, []);
 
+
+  //아이 선택했을때
+  useEffect(() => {
+    const getNotesByKid = async () => {
+      try {
+        let url;
+        if (kidSelect === "모든 아이") { // '모든 아이'가 선택된 경우
+          url = 'http://localhost:8081/sesco/note';
+
+        } else { // 특정 아이가 선택된 경우
+          url = 'http://localhost:8081/sesco/note/getnotelist';
+
+        }
+        const response = await axios.post(url, { kid_seq: kidSelect });
+        setNotes(response.data);
+      } catch (e) {
+        console.error("노트 불러오기 실패 : ", e);
+      }
+    }
+    if (kidSelect) {
+      getNotesByKid();
+    }
+  }, [kidSelect]);
+
+
+
   //태그 검색 함수
   const handleSearchTagChange = (e) => {
     setSearchTag(e.target.value);
     console.log(e.target.value)
   };
 
+  //검색 버튼 눌렀을 때
+  const handleTagSearch = (e) => {
+    console.log("검색 결과는 : ", searchTag)
+    setSearchTag("")
+  }
+  // Enter 키 누를 때 검색 실행
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleTagSearch();
+      setSearchTag("")
+    }
+  }
+
   //아이 선택 함수
   const handlekidSelectChange = (e) => {
     setKidSelect(e.target.value);
     console.log(e.target.value)
+    //선택 시 그 아이의 수첩만 가져오게 하기
+
   }
 
+  //추가 버튼 클릭했을 때
   const handleAddNote = (year) => {
-    setNotesDisplay(prev => ({ ...prev, [year]: true }));
+    console.log("추가버튼클릭:", year)
+    //setNotesDisplay(prev => ({ ...prev, [year]: true }));
+    setNotesDisplay(prev => ({ ...prev, [year]: !prev[year] }));
   };
+
+  //노트 클릭시 
+  const handleNoteClick = async (note_seq, year) => {
+    console.log('노트클릭,note_seq:', note_seq, year)
+    setSelectedNoteSeq(note_seq);
+    setSelectedNoteYear(year);
+
+    // 만약 이미 선택된 노트를 다시 클릭했다면
+    if (selectedNoteSeq === note_seq && selectedNoteYear === year) {
+      setSelectedNoteSeq(null);
+      setSelectedNoteYear(null);
+    } else {
+      setSelectedNoteSeq(note_seq);
+      setSelectedNoteYear(year);
+    }
+    /** 
+    try{
+      const response = await axios.get(`http://localhost:8081/sesco/????`);
+      setDiary(response.data);
+    }catch (e){
+      console.error("상세 정보 조회 실패:",e)
+    }*/
+  }
 
 
   return (
     <div>
-
 
       <div class="book">
         <img class="noteBackground" src={noteBackground} />
@@ -77,13 +151,16 @@ const Note = () => {
 
       {/* 태그 검색 div */}
       <div className='noteTagAndKid-container'>
-        <input
-          className='noteTagFind2'
-          type='search'
-          placeholder='태그 검색'
-          value={searchTag}
-          onChange={handleSearchTagChange} />
-
+        <div className='noteTagSearch-container'>
+          <input
+            className='noteTagFind2'
+            type='search'
+            placeholder='태그 검색'
+            value={searchTag}
+            onChange={handleSearchTagChange}
+            onKeyDown={handleKeyPress} />
+          <img src={noteFind} alt='tagSearch ' className='noteTagFindIcon' onClick={handleTagSearch} />
+        </div>
 
         {/* 아이선택 div */}
         <div className='noteKidSelect'>
@@ -96,32 +173,39 @@ const Note = () => {
       </div>
 
 
-      {/* 수첩리스트 div */}
-      {/* <div className='noteList'>
-        <NoteList year={2023} notes={notes2023} onAddNote={handleAddNote} />
-        {diaries[2023] && <Diary />}
-        <NoteList year={2022} notes={notes2022} onAddNote={handleAddNote} />
-        {diaries[2022] && <Diary />}
-        <NoteList year={2021} notes={notes2021} onAddNote={handleAddNote} />
-        {diaries[2021] && <Diary />}
-      </div> */}
-
       <div className='noteList'>
-        {Object.entries(notes).map(([year, notesInYear]) => (
+        {/* Object.entries 객체=>배열로, map 사용하기위함 */}
+        {/* 연도 최신순부터 정렬 */}
+
+        {Object.entries(notes).sort((a, b) => b[0] - a[0]).map(([year, notesInYear]) => (
           <>
-            <NoteList year={year} notes={notesInYear.map(note => note.n_name)} onAddNote={() => handleAddNote(year)} />
-            {notesDisplay[year] &&
-              <Diary
-                noteName={notes[year].n_name}
-                startDate={notes[year].n_s_date}
-                endDate={notes[year].n_e_date}
-              />}
+            <NoteList
+              year={year}
+              notes={notesInYear.map(note => ({
+                name: note.n_name,
+                startDate: note.n_s_date,
+                endDate: note.n_e_date,
+                seq: note.note_seq
+              }))}
+              onAddNote={() => handleAddNote(year)}
+              onNoteClick={(note_seq) => handleNoteClick(note_seq, year)}
+            />
+
+            {selectedNoteYear === year && selectedNoteSeq &&
+              <div className='diary-container'>
+                <Diarycopy />
+              </div>}
+            {notesDisplay[year] && (
+              <div className='diary-container'>
+                <Diarycopy />
+              </div>
+            )}
           </>
         ))}
+
+
+
       </div>
-
-
-      {/* <Diarycopy></Diarycopy> */}
 
     </div>
   )

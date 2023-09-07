@@ -3,7 +3,7 @@ import './noteList.css';
 import noteList from '../noteImg/noteList.png'
 import addNoteBtn from '../noteImg/addNoteBtn.png'
 
-function NoteList({ year, notes, onAddNote }) {
+function NoteList({ year, notes, onAddNote, onNoteClick }) {
     return (
         <div>
             {/* 연도 div */}
@@ -15,9 +15,10 @@ function NoteList({ year, notes, onAddNote }) {
             <div className="notes-container">
                 {notes.map((note, index) => (
                     // 노트 제목 + 일자 등등 영역
-                    <div key={index} className='note-item-container'>
+                    <div key={index} className='note-item-container'
+                        onClick={() => onNoteClick(note.seq)}>
                         <img src={noteList} className="note-background" />
-                        <span className='note-item-span'>{note}</span>
+                        <span className='note-item-span'>{`${note.name} (${note.startDate} ~ ${note.endDate})`}</span>
                     </div>
                 ))}
                 {/* +버튼 영역 */}
@@ -27,5 +28,6 @@ function NoteList({ year, notes, onAddNote }) {
         </div>
     );
 }
+
 
 export default NoteList;
