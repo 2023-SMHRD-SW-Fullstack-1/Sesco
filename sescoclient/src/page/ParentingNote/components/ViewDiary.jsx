@@ -1,8 +1,15 @@
 import React from 'react'
 
-const ViewDiary = () => {
+const ViewDiary = ({dtitle,dcontent,idx}) => {
+  console.log(dtitle);
+  console.log(dcontent);
+
+
   return (
-    <div>ViewDiary</div>
+    <div>
+    {dtitle}
+    {dcontent}
+    </div>
   )
 }
 

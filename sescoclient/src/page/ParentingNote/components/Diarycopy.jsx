@@ -5,10 +5,13 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from "@fullcalendar/interaction";
 import CreateDiary from './CreateDiary';
 import './diary.css'
+import ViewDiary from './ViewDiary';
 
 const Diarycopy = () => {
   //일기 추가 클릭했을 때 true로 되고 일기작성 폼 출력
-  const [isClick, setIsClick] = useState(false)
+  const [isClick, setIsClick] = useState(false);
+
+  const [dClick, setdClick] = useState(false);
 
   const [selectedDate, setSelectedDate] = useState(null);
 
@@ -26,6 +29,12 @@ const Diarycopy = () => {
 
   // 일기 리스트
   const [diaries, setDiaries] = useState([]);
+
+  const [ctitle, setcTitle] = useState("");
+  const [idx,setIdx] = useState(0);
+
+  
+
 
   // --------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -51,8 +60,9 @@ const Diarycopy = () => {
 
 
   
-  function onComplete(title, content) {
+  function onComplete(title, content, imageFile) {
     setTitle(title)
+    setContent(content)
     console.log(dtitle);
     console.log(selectedDate.toLocaleDateString());
 
@@ -72,6 +82,14 @@ const Diarycopy = () => {
 
     setIsClick(false);
     // setContent("");
+
+  }
+
+  function ClickDiary(index){
+    console.log(index)
+    setIdx(index)
+    setdClick(!dClick)
+    
 
   }
 
@@ -135,27 +153,23 @@ const Diarycopy = () => {
 
             <button onClick={CreateDiaryForm} style={{ width: "460px", height: "100px", marginTop: "10px" }} >일기추가</button>
           </div>
-
+ 
           <div style={{ width: "455px", height: "100px", marginTop: "10px", border: "solid 2px red" }}>
 
             {/* 일기 리스트 출력 */}
             
+            <div className='c'>
+            {diaries.filter(diary => diary.date === formatDate(selectedDate)).map((diary, index) => (
+              <button key={index} className='oval-button' onClick={()=>ClickDiary(index)}>
+                <div className="b">
+                <p>{diary.title}</p><br />
+                <p>{diary.content}</p>
+                </div>
+                <br />
+              </button>
+            ))}
+            </div>
             
-              
-                {/* {diaries.map((diary) => (
-              
-                  <div key={diary.date}>
-                    
-                    <p>{diary.title}</p>
-                    <p>{diary.content}</p>
-                  </div>
-                ))}  */}
-                {diaries.filter(diary => diary.date === formatDate(selectedDate)).map((diary, index) => (
-  <div key={index}>
-    <p>{diary.title}</p>
-    <p>{diary.content}</p>
-  </div>
-))}
               
             
             
@@ -180,8 +194,10 @@ const Diarycopy = () => {
             // 필요에 따라 선택된 날짜를 CreateDiary 컴포넌트로 전달해주세요.
             <CreateDiary selectedDate={selectedDate} onComplete={onComplete} />
           )}
-
         </div>
+        {dClick &&(
+          <ViewDiary dtitle={dtitle} dcontent={dcontent} idx={idx}/>
+        )}
       </div>
     </div>
   )
