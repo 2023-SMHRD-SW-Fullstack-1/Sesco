@@ -1,16 +1,14 @@
 import React from 'react'
-import'./styles.scss'
-import TipQnA from './TipQnA'
+import Tip from './components/Tip'
 import Banner from './components/Banner'
+import './components/Tip.css'
 
 
 const Main = () => {
   return (
     <>
       <Banner/>
-    <div className='tip-content-container'>
-      <TipQnA/>
-    </div>
+      <Tip/>
     </>
   )
 }

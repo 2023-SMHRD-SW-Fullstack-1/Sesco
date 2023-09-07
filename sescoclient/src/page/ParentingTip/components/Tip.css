@@ -1,0 +1,256 @@
+.tip-content{
+    width: 55%;
+    padding: 20px;
+    border: 3px solid;
+    border-radius: 20px;
+    border-color: rgb(201, 186, 199);
+    padding: 55px;
+    padding-bottom: 80px;
+}
+.Tbanner{
+    height: 350px;
+}
+
+.tip-content-container{
+    display: flex;
+    width: 100%;
+    /* margin-left: 160px; */
+    margin-bottom: 300px;
+    justify-content: center;
+    align-items: center;
+}
+.Tbanner_info{
+    position: relative;
+    top: 130px;
+    left: 420px;
+}
+.timeline{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 85px;
+    margin-bottom: 130px;
+    
+    
+}
+/* 
+.timeline{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 110px;
+    margin-bottom: 130px;
+    
+    
+}
+.ageBtns2{
+    position: relative;
+    top: 42px;
+    left: 100px;
+    
+ 
+}
+.ageBtn{
+    position: relative;
+    left: 32px;
+    background-color: rgb(247, 247, 247);
+    width: 87px;
+    height: 47px;
+    margin-right: 110px;
+}
+.timeline button{
+    border-color: beige;
+    background-color: rgba(243, 243, 243, 0);
+    padding: 5px;
+    border-radius: 100px;
+    filter: drop-shadow(0 0 5px #24baffb3)
+}
+.ageBtn:hover{
+    color: rgb(33, 159, 218);
+    filter: drop-shadow(0 0 1px #24baffb3)
+      drop-shadow(0 0 1px rgba(36, 186, 255, 0.7))
+      drop-shadow(0 0 40px rgba(36, 229, 255, 0.7));
+
+}
+
+ */
+
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+
+}
+
+nav ul li {
+
+    font-size: 178x;
+    border: 0.15em solid;
+    border-radius: 1em;
+    width: 9em;
+    height: 3.4em;
+    text-transform: uppercase;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
+    font-weight: 600;
+    font-family: sans-serif;
+    letter-spacing: 0.1em;
+    text-align: center;
+    line-height: 3em;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: 0.5s;
+    margin-right: 53px;
+    cursor: pointer;
+}
+.ageBtns2 nav ul li{
+    position: relative;
+    left: 110px;
+    top: 53px;
+}
+
+.tipNav ul li span {
+    position: absolute;
+    width: 25%;
+    height: 100%;
+
+    transform: translateY(150%);
+    border-radius: 50%;
+    left: calc((var(--n) - 1) * 25%);
+    transition: 0.5s;
+    transition-delay: calc((var(--n) - 1) * 0.1s);
+    z-index: -1;
+}
+.timelinLi1{
+    border-color: rgb(221, 197, 197);
+    color: rgb(177, 139, 139);
+}
+.timelinLi1 span{
+    background-color: rgb(221, 197, 197);
+}
+.timelinLi1:hover{
+    color: rgb(150, 103, 103);
+}
+.timelinLi2{
+    border-color:rgb(142, 174, 184);
+    color: rgb(110, 152, 165);
+}
+.timelinLi2 span{
+    background-color: rgb(136, 173, 184);
+}
+.timelinLi2:hover{
+    color: rgb(71, 97, 105);
+}
+.timelinLi3{
+    border-color:rgb(247, 182, 182);
+    color: rgb(201, 127, 127);
+}
+.timelinLi3 span{
+    background-color: rgb(247, 182, 182);
+}
+.timelinLi3:hover{
+    color: rgb(170, 88, 88);
+}
+.timelinLi4{
+    border-color:rgb(248, 195, 48);
+    color: rgb(196, 147, 13);
+}
+.timelinLi4 span{
+    background-color: rgb(248, 195, 48);
+}
+.timelinLi4:hover{
+    color: rgb(138, 106, 1);
+}
+.timelinLi5{
+    border-color:rgb(248, 193, 41);
+    color: rgb(196, 147, 13);
+}
+.timelinLi5 span{
+    background-color: rgb(248, 195, 48);
+}
+.timelinLi5:hover{
+    color: rgb(138, 106, 1);
+}
+.timelinLi6{
+    border-color:rgb(101, 177, 151);
+    color: rgb(71, 146, 121);
+}
+.timelinLi6 span{
+    background-color: rgb(101, 177, 151);
+}
+.timelinLi6:hover{
+    color: rgb(33, 83, 65);
+}
+.timelinLi7{
+    border-color:rgb(192, 228, 135);
+    color: rgb(131, 168, 82);
+}
+.timelinLi7 span{
+    background-color: rgb(202, 238, 144);
+}
+.timelinLi7:hover{
+    color: rgb(76, 102, 44);
+}
+.timelinLi8{
+    border-color:rgb(162, 125, 179);
+    color: rgb(143, 109, 158);
+}
+.timelinLi8 span{
+    background-color: rgb(162, 125, 179);
+}
+.timelinLi8:hover{
+    color: rgb(88, 47, 105);
+}
+
+
+
+nav ul li:hover {
+    color: rgb(35, 127, 163);
+}
+
+nav ul li:hover span {
+    transform: translateY(0) scale(2);
+}
+
+nav ul li span:nth-child(1) {
+    --n: 1;
+}
+
+nav ul li span:nth-child(2) {
+    --n: 2;
+}
+
+nav ul li span:nth-child(3) {
+    --n: 3;
+}
+
+nav ul li span:nth-child(4) {
+    --n: 4;
+}
+
+
+  .btn-4{
+    display: inline-block;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    bottom: 250px;
+    left: 68%;
+    background-color:antiquewhite;
+    border: none;
+    color: #3e8abd;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 20px 30px;
+    background: rgb(255 255 255 / 9%);
+    border-radius: 10px;
+  }
+  .btn-4:hover{
+    color: #104a70;
+  }
