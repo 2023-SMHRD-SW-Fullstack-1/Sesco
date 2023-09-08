@@ -94,14 +94,14 @@ const Tip = () => {
                 <div className='tip-content-container'>
                     {activeButtonId == 0 ?
                         <div className='tip-mainContent'>
-                            <img className='tipMainImg' width={'350px'} src={imgs[0]} />
+                            <img className='tipMainImg' width={'500px'} src={imgs[0]} />
                             <h3>연령별 아이 특성을 확인하여 <br />육아 TIP을 받아보세요!</h3>
 
                         </div>
                         :
                         <div className='tip-content'>
                             <div className='mainContent'>
-                                <img width={'300px'} src={imgs[activeButtonId]} />
+                                <img width={'550px'} src={imgs[activeButtonId]} />
                                 <div className='mainContentContext'>
                                     <h3>주요발달 특성</h3>
                                     {datas[activeButtonId]?.mainContext?.map((one, index) => <li className='mainText' key={index}>{one}</li>)}
