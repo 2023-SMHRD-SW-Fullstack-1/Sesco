@@ -1,14 +1,13 @@
-import React from 'react'
+import React from "react";
 
 const Login = () => {
-
   return (
     <div>
-        <button onClick={loginHandler}>
-          로그인
-        </button>
+      {/* <button onClick={loginHandler}> */}
+      로그인
+      {/* </button> */}
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
