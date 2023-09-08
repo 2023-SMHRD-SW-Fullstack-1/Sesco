@@ -2,7 +2,7 @@ import React from 'react'
 import './gallerymap.css'
 import { useState } from 'react'
 
-const GalleryMap = () => {
+const GalleryMap = ({firstNameList, secondNameList}) => {
 
   const [isHovered, setIsHovered] = useState(false);
 
