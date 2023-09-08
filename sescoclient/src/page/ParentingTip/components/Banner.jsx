@@ -2,7 +2,8 @@ import React from 'react'
 import tImg from '../../../img/tImg.png'
 
 
-const Banner = () => {
+const Banner = ({user_id}) => {
+
   return (
         <div className='Tbanner' style={{
           backgroundImage: `url("${tImg}")`,
@@ -11,7 +12,7 @@ const Banner = () => {
           backgroundSize: 'cover',
         }}>
           <div className='Tbanner_info'>
-            {/* <h2>"00"님을 위한  육아TIP</h2> */}
+            <h2>"{user_id}"님을 위한  육아TIP</h2>
           </div>
         </div>
   )

@@ -14,7 +14,7 @@ import babyTip7 from '../../../img/baby7tip.png'
 import babyTip8 from '../../../img/baby8tip.png'
 
 
-const Tip = () => {
+const Tip = ({user_id}) => {
     const [datas, setDatas] = useState(['']);
     const [activeButtonId, setActiveButtonId] = useState('0');
     const imgs = [babyTip0, babyTip1, babyTip2, babyTip3, babyTip4, babyTip5, babyTip6, babyTip7, babyTip8]
@@ -27,14 +27,18 @@ const Tip = () => {
             .catch(error => {
                 console.error(error);
             });
+
+
+{/* 유저한테 아이가 있는지 확인 
+            axios.post('http://localhost:8081/kid/'){
+                [아이1, 아이2, 아이3]
+            } */}           
+
     }, []);
 
     const handleToggle = (buttonId) => {
-        if (activeButtonId === buttonId) {
-            setActiveButtonId(0);
-        } else {
+        
             setActiveButtonId(buttonId);
-        }
     };
 
 
@@ -101,8 +105,9 @@ const Tip = () => {
                         :
                         <div className='tip-content'>
                             <div className='mainContent'>
-                                <img width={'550px'} src={imgs[activeButtonId]} />
+                                <img width={'500px'} src={imgs[activeButtonId]} />
                                 <div className='mainContentContext'>
+                                    <h1>{datas[activeButtonId]?.ageT}</h1>
                                     <h3>주요발달 특성</h3>
                                     {datas[activeButtonId]?.mainContext?.map((one, index) => <li className='mainText' key={index}>{one}</li>)}
                                 </div>

@@ -1,11 +1,13 @@
 .tip-content,
 .tip-mainContent{
-    width: 55%;
-    padding: 20px;
+    width: 50%;
+    padding: 50px;
+    margin-top: 20px;
     border: 3px solid;
     border-radius: 20px;
-    border-color: rgb(201, 186, 199);
-    padding: 55px;
+    border-color: rgb(215, 200, 197);
+    padding-left: 100px;
+    padding-right: 100px;
     padding-bottom: 80px;
 }
 .tip-mainContent{
@@ -36,7 +38,10 @@
     display: flex;
     flex-direction: column;
     margin-left: 20px;
-    justify-content: center;
+}
+.mainContentContext h1{
+    color: rgb(232, 129, 3);
+
 }
 
 .tipMainImg{
@@ -49,6 +54,7 @@
     margin-bottom: 300px;
     justify-content: center;
     align-items: center;
+   
 }
 .Tbanner_info{
     position: relative;
@@ -161,6 +167,8 @@ nav ul li {
     border-color: rgb(221, 197, 197);
     color: rgb(177, 139, 139);
 }
+
+
 .timelinLi1 span{
     background-color: rgb(221, 197, 197);
 }
