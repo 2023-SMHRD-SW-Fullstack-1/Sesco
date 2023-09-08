@@ -18,21 +18,32 @@ public class NoteService {
 	@Autowired
 	private NoteMapper noteMapper;
 	
-	//노트 불러오기(연도별로 그룹화)
+	//수첩 불러오기(연도별로 그룹화)
 	public Map<Integer,List<Note>> getNotesGroupByYear(){
 		Map<Integer, List<Note>> groupNotes = new LinkedHashMap<>();
 		
 		// 현재 연도부터 2000년까지 역순
 	    for(int year = LocalDate.now().getYear(); year >= 2000; year--) {
 	        List<Note> notesInYear = noteMapper.selectNotesByYear(year);
-	        if (!notesInYear.isEmpty()) { // 해당 연도에 노트가 있으면 추가
+	        if (!notesInYear.isEmpty()) { // 해당 연도에 수첩 있으면 추가
 	            groupNotes.put(year, notesInYear);
 	        }
 	    }
 		return groupNotes; 
 	}
 	
-	public List<Note> getNotesByKid(int kidSeq){
-		return noteMapper.selectNotesByKid(kidSeq);
+	//아이 선택했을때 수첩 불러오기
+	public Map<Integer,List<Note>> getNotesByKid(int kidSeq){
+	    Map<Integer, List<Note>> groupNotes = new LinkedHashMap<>();
+		
+	    // 현재 연도부터 2000년까지 역순
+	    for(int year = LocalDate.now().getYear(); year >= 2000; year--) {
+	        List<Note> notesInYear = noteMapper.selectNotesByKid(kidSeq, year);
+	        if (!notesInYear.isEmpty()) { // 해당 연도에 수첩 있으면 추가
+	            groupNotes.put(year, notesInYear);
+	        }
+	    }
+	    return groupNotes; 
 	}
+
 }

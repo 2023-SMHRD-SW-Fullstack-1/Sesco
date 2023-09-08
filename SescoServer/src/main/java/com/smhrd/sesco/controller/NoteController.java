@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.smhrd.sesco.domain.Note;
@@ -21,14 +20,18 @@ public class NoteController {
 	@Autowired
 	private NoteService noteService;
 	
-	//노트 불러오기 
+	//수첩 불러오기 
 	@GetMapping("/note")
 	public Map<Integer,List<Note>> getNotes(){
+		System.out.println("수첩 불러오기"+noteService.getNotesGroupByYear());
 		return noteService.getNotesGroupByYear();
 	}
 	
+	//옵션에서 아이 선택시 해당 아이의 수첩 불러오기
+	//kid_seq값을 받음
 	 @PostMapping("/note/getnotelist")
-	  public List<Note> getNoteList(@RequestBody Map<String, Integer> kidSeqMap){
-	    return noteService.getNotesByKid(kidSeqMap.get("kid_seq"));
+	  public Map<Integer,List<Note>> getNoteList(@RequestBody Map<String, Integer> kidSeqMap){
+	    System.out.println("아이 선택시 수첩 불러오기"+noteService.getNotesByKid(kidSeqMap.get("kid_seq")));
+		 return noteService.getNotesByKid(kidSeqMap.get("kid_seq"));
 	  }
 }

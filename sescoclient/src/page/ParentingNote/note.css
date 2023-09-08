@@ -75,7 +75,7 @@
 }
 
 /* 아이 선택 옵션 */
-.myKidSelect {
+.note-myKidSelect {
   width: 284px;
   height: 51px;
   flex-shrink: 0;
@@ -91,7 +91,7 @@
   cursor: pointer;
 }
 
-.myKidSelectOption {
+.note-myKidSelectOption {
   width: 258px;
   height: 14px;
   flex-shrink: 0;
