@@ -32,6 +32,7 @@ public class HtSurveyController {
 		
 		HtSurveyDetail svDetail = new HtSurveyDetail();
 		svDetail.setHsv_seq(hsv_seq);
+		System.out.println(svDetail.getHsvd_seq());
 		
 		return htsurService.viewSurveyDetail(svDetail);
 		

@@ -11,6 +11,7 @@ import lombok.Setter;
 @Setter
 public class HtSurveyDetail {
 
+	private long hsvd_seq;
 	private String hsvd_category;
 	private int hsvd_num;
 	private String hsvd_content;
