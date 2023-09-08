@@ -34,10 +34,7 @@ public class HtSurveyController {
 		svDetail.setHsv_seq(hsv_seq);
 		
 		
-		List<HtSurveyDetail> result =  htsurService.viewSurveyDetail(svDetail);
-		System.out.println("result"+ result.toString());
-		
-		return result;
+		return htsurService.viewSurveyDetail(svDetail);
 	
 	}
 	
