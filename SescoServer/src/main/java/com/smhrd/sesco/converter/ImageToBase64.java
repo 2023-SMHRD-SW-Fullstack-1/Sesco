@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
 
-import org.apache.tomcat.util.http.fileupload.FileUtils;
+import org.apache.commons.io.FileUtils;
 
 public class ImageToBase64 extends ImageConverter<File, String> {
 	@Override
