@@ -1,13 +1,13 @@
 import React from "react";
 import './locallist.css'
 
-const Local = () => {
+const Local = ({localName, localImgList}) => {
   return (
     <>
         <div className="wrapper">
         <div className="card">
             <div className="front">
-            <h1>Signature</h1>
+            <h1></h1>
             <p>7.7 deck<span>2018</span></p>
             <p className="price">$ 89.00</p>
             </div>
