@@ -4,12 +4,13 @@ import Banner from './components/Banner';
 import GalleryMap from './components/GalleryMap';
 import LocalList from './components/LocalList';
 import axios from 'axios'
+import { LocalContext } from './localContext';
 
 const Gallery = () => {
 
   // 사진정보리스트
-  const [clickLocal, setClickLocal] = useState()
   const [imgNameList, setImgNameList] = useState()
+  const [clickedLocal, setClickedLocal] = useState()
   const [firstNameList, setFirstNameList] = useState(["전라남도", "전라남도"])
   const [secondNameList, setSecondNameList] = useState(["여수시", "여수시"])
 
@@ -39,6 +40,7 @@ const Gallery = () => {
   return (
     <>
     <Banner/>
+    <LocalContext.Provider value={{clickedLocal, setClickedLocal}}>
         <div style={{ display: 'flex'}}>
           <div style={{ width: "1080px", height: "800px" }}>
             <GalleryMap firstNameList={new Set(firstNameList)} secondNameList={new Set(secondNameList)} ></GalleryMap>
@@ -47,6 +49,7 @@ const Gallery = () => {
             <LocalList></LocalList>
           </div>
         </div>
+      </LocalContext.Provider>
     </>
   )
 }
