@@ -6,6 +6,7 @@ import lombok.Data;
 public class Diary {
 	
 	//일기 구분 번호
+	private String d_seq;
 	
 	//일기 제목
 	private String d_title;
@@ -28,5 +29,4 @@ public class Diary {
 	//사진 여부
 	private char d_img_yn;
 	
-
 }
