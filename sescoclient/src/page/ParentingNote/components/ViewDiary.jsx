@@ -1,16 +1,19 @@
-import React from 'react'
+import React from "react";
 
-const ViewDiary = ({dtitle,dcontent,idx}) => {
+const ViewDiary = ({ dtitle, dcontent, idx, tags }) => {
   console.log(dtitle);
   console.log(dcontent);
-
+  console.log(tags);
 
   return (
     <div>
-    {dtitle}
-    {dcontent}
+      {dtitle}
+      {dcontent}
+      {tags.map((tag, index) => (
+        <span key={index}>{tag}</span>
+      ))}
     </div>
-  )
-}
+  );
+};
 
-export default ViewDiary
+export default ViewDiary;

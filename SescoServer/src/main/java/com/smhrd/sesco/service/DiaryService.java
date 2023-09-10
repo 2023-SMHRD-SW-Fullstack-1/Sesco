@@ -2,6 +2,7 @@ package com.smhrd.sesco.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -25,7 +26,7 @@ public class DiaryService {
 	private DiaryMapper diaryMapper;
 	
 	//해당 날짜의 게시글 조회
-	public List DiaryList(String d_date) {
+	public List DiaryList(Date d_date) {
 		List<Diary> list = diaryMapper.DiaryList(d_date);
 		
 		JSONArray jsonArray = new JSONArray();
@@ -55,11 +56,30 @@ public class DiaryService {
 			JSONObject obj = new JSONObject();
 
 			jsonArray.add(community);
+			
 		}
 
 		return list;
 		
-		
 	}
+	
+	
+	//일기 등록
+	public int DiaryRegister(Diary diary) {
+		return diaryMapper.DiaryRegister(diary);
+	}
+	
+	//일기 수정
+	public void DiaryUpdate(Diary diary) {
+		diaryMapper.DiaryUpdate(diary);
+	}
+	
+	//일기 삭제
+	public int DiaryDelete(Date d_date) {
+		System.out.println(d_date);
+		return diaryMapper.DiaryDelete(d_date);
+	}
+
+	
 	
 }

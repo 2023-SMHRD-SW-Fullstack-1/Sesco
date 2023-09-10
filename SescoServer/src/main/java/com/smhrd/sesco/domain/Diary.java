@@ -1,5 +1,7 @@
 package com.smhrd.sesco.domain;
 
+import java.sql.Date;
+
 import lombok.Data;
 
 @Data
@@ -12,7 +14,7 @@ public class Diary {
 	private String d_title;
 	
 	//일기 날짜
-	private String d_date;
+	private Date d_date;
 	
 	//일기 내용
 	private String d_content;
