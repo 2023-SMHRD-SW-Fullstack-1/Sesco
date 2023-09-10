@@ -13,7 +13,7 @@ const Note = () => {
   //태그 검색
   const [searchTag, setSearchTag] = useState("")
   //아이 선택
-  const [kidSelect, setKidSelect] = useState("")
+  const [kidSelect, setKidSelect] = useState("모든 아이")
   //수첩
   const [notes, setNotes] = useState({});
   //수첩 표시 
@@ -167,6 +167,7 @@ const Note = () => {
         <div className='noteKidSelect'>
           {/* value 값은 현재 선택한 아이 kid_seq값으로 설정 */}
           <select className='note-myKidSelect' onChange={handlekidSelectChange} value={kidSelect}>
+          <option className='note-myKidSelectOption' value="모든 아이">모든 아이</option> {/* '모든 아이' 옵션 추가 */}
             {kids.map((kid) => (
               <option className='note-myKidSelectOption' value={kid.kid_seq} key={kid.kid_seq}>{kid.kid_name}</option>
             ))}

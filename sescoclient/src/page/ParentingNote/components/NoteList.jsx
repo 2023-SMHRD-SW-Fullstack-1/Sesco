@@ -28,6 +28,4 @@ function NoteList({ year, notes, onAddNote, onNoteClick }) {
         </div>
     );
 }
-
-
 export default NoteList;
