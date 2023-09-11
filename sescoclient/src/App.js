@@ -8,6 +8,7 @@ import Tip from './page/ParentingTip/TipMain';
 import Note from './page/ParentingNote/Note';
 import Gallery from './page/ParentingGallery/Gallery';
 import Login from './components/Login';
+import Join from './components/Join';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <Route path="/note" element={<Note/>}></Route>
       <Route path="/tip" element={<Tip/>}></Route>
       <Route path="/login" element={<Login/>}></Route>
+      <Route path="/join" element={<Join/>}></Route>
     </Routes>
 
     <Footer/>

@@ -40,6 +40,7 @@
 .note-item-container {
     position: relative;
     align-items: center;
+    cursor: pointer;
 }
 
 
@@ -67,7 +68,7 @@
     margin-right: 26.9;
     margin-bottom: 53.5px;
 
-    cursor: pointer; 
+    cursor: pointer;
     transition: transform 0.3s ease-in-out;
 }
 

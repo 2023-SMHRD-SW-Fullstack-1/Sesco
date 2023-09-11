@@ -33,8 +33,8 @@ public class HtSurveyController {
 		HtSurveyDetail svDetail = new HtSurveyDetail();
 		svDetail.setHsv_seq(hsv_seq);
 		
-		return htsurService.viewSurveyDetail(svDetail);
 		
+		return htsurService.viewSurveyDetail(svDetail);
 	
 	}
 	

@@ -1,0 +1,103 @@
+.loginInput_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+.loginInput_container h2{
+    margin-bottom: 70px;
+}
+.loginInput_container input{
+    margin-bottom: 15px;
+    width: 60%;
+    height: 30px;
+    padding: 5px;
+}
+.joinInput_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+.joinInput_container h2{
+    margin-bottom: 40px;
+}
+.joinInput_container input{
+    margin-bottom: 10px;
+    width: 60%;
+    height: 25px;
+    padding: 5px;
+}
+.email_txt{
+    display: flex;
+    margin-right: 100px;
+    font-size: 12px;
+    margin: 8px;
+    width: 60%;
+   
+}
+.join_txt{
+    display: flex;
+    margin-right: 100px;
+    font-size: 12px;
+    margin: 8px;
+    width: 60%;
+}
+.password_txt{
+    display: flex;
+    font-size: 12px;
+    margin: 8px;
+}
+.password_txt span{
+    margin-right: 82px;
+}
+.loginBtn{
+    margin-top: 35px;
+    margin-bottom: 30px;
+    width: 63%;
+    height: 40px;
+}
+.joginBtn{
+    margin-top: 30px;
+    margin-bottom: 25px;
+    width: 63%;
+    height: 40px;
+}
+.kakaoBtn,
+.googleBtn{
+    width: 80px;
+    height: 35px;
+
+    box-shadow: 1px 1px 1px 1px rgb(193, 193, 193);
+    margin: 10px 35px 30px 0px;
+}
+.socialBtns{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    margin-left: 40px;
+}
+.img_container{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 650px;
+}
+.loginForm_container{
+    box-shadow: 2px 2px 2px 2px rgb(193, 193, 193);
+    border-radius: 10px;
+    width: 50%;
+    height: 650px;
+    margin-top: 100px;
+    display: flex;
+    background-color: rgb(254, 255, 176);
+    justify-content: center;
+    align-items: center;
+}
+.login_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
