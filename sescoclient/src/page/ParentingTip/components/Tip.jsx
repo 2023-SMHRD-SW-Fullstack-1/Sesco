@@ -12,13 +12,30 @@ import babyTip5 from '../../../img/baby5tip.png'
 import babyTip6 from '../../../img/baby6tip.png'
 import babyTip7 from '../../../img/baby7tip.png'
 import babyTip8 from '../../../img/baby8tip.png'
-
+import Survey from '../../ParentingSurvey/components/Survey';
+import Modal from '../../ParentingSurvey/Modal';
 
 const Tip = ({user_id}) => {
     const [datas, setDatas] = useState(['']);
     const [activeButtonId, setActiveButtonId] = useState('0');
     const imgs = [babyTip0, babyTip1, babyTip2, babyTip3, babyTip4, babyTip5, babyTip6, babyTip7, babyTip8]
+    const [surveyUp, setSurveyUp] = useState(false); // 모달 열림/닫힘 상태 관리
+
+    // 모달 열기 함수
+    const openSurveyModal = () => {
+        // main2-> 아이정보 값을 받아와서 값이 있다면 openModal 
+        // 아이정보 null  ->  user_id 의 kid 값이 있는지 확인후  있다면 -> 아이 선택 옵션 
+        // null-> 아이 등록 하세요 알림 (등록하겠습니까  예 버튼 -> main2, 아니오 버튼 -> 취소 )
+        setSurveyUp(true);
+    };
+  
+    // 모달 닫기 함수
+    const closeSurveyModal = () => {
+      setSurveyUp(false);
+    };
+  
     useEffect(() => {
+        console.log(surveyUp);
         axios.get('http://localhost:5000/tip')
             .then(res => {
                 setDatas(res.data);
@@ -44,9 +61,9 @@ const Tip = ({user_id}) => {
 
 
     return (
-        <>
+        <div className='tipDiv'>
             <div className='timeline' >
-                <div style={{ width: '920px', height: '125px', backgroundImage: `url("${TipImg}")`, backgroundPosition: 'center' }}>
+                <div style={{ width: '900px', height: '125px', backgroundImage: `url("${TipImg}")`, backgroundPosition: 'center' }}>
                     <div className='ageBtns1'>
                         <nav className='tipNav'>
                             <ul>
@@ -105,7 +122,7 @@ const Tip = ({user_id}) => {
                         :
                         <div className='tip-content'>
                             <div className='mainContent'>
-                                <img width={'500px'} src={imgs[activeButtonId]} />
+                                <img width={'480px'} src={imgs[activeButtonId]} />
                                 <div className='mainContentContext'>
                                     <h1>{datas[activeButtonId]?.ageT}</h1>
                                     <h3>주요발달 특성</h3>
@@ -126,10 +143,12 @@ const Tip = ({user_id}) => {
                     }
 
                 </div>
-                <button className="btn-4"><span>아이 설문하러 가기 <FiBookOpen /></span></button>
+                <button className="btn-4" onClick={()=>openSurveyModal()}><span>아이 설문하러 가기 <FiBookOpen /></span></button>
+                {surveyUp &&  <Modal surveyUp = {surveyUp} closeSurveyModal={closeSurveyModal}/>}
+                
             </div>
 
-        </>
+        </div>
     )
 }
 
