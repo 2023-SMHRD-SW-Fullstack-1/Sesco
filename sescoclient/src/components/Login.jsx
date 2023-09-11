@@ -13,17 +13,24 @@ const Login = () => {
         <div className='loginInput_container'>
 
           <h2>로그인</h2>
+          {/* 이메일 입력 */}
           <span className='email_txt'>이메일</span>
-          <input placeholder='이메일을 입력해주세요.' />
+          <div className='email'>
+
+            <input className='emailInput' placeholder='이메일' type='email' />
+            <span>@</span>
+            <input className='emailInput' placeholder='주소' type='email' />
+          </div>
           {/* 비밀번호 찾기 */}
           <div className='password_txt'>
             <span>비밀번호</span>
             <a href='#'>비밀번호를 잊어버리셨나요?</a>
           </div>
-          <input placeholder='비밀번호를 입력해주세요.' />
+          {/* 비밀번호 입력 */}
+          <input className='passInput' placeholder='비밀번호를 입력해주세요.' type='password' />
           {/* 로그인 버튼 */}
           <button className='loginBtn'>로그인</button>
-          <p> 계정이 없으신가요? <a href='/join'>회원가입</a></p>
+          <p className='login_jointxt'> 계정이 없으신가요? <a href='/join'>회원가입</a></p>
           {/* 소셜 로그인 버튼  */}
           <div className='socialBtns'>
             <button className='kakaoBtn'>카카오</button>
@@ -38,6 +45,7 @@ const Login = () => {
 
       </div>
     </div>
+
   )
 }
 
