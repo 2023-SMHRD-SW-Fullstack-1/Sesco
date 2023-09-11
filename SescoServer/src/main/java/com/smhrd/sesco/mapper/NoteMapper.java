@@ -8,10 +8,14 @@ import com.smhrd.sesco.domain.Note;
 
 @Mapper
 public interface NoteMapper {
-	
-	//모든 수첩 불러오기
+
+	// 모든 수첩 불러오기
 	List<Note> selectNotesByYear(int year);
-	
-	//특정 아이의 수첩 불러오기
+
+	// 특정 아이의 수첩 불러오기
 	List<Note> selectNotesByKid(int kidSeq, int year);
+
+	// 태그 검색
+	List<Note> selectNotesByTagAndYear(String tag, int year);
+
 }

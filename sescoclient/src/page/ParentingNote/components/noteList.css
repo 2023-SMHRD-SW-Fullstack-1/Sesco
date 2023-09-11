@@ -1,6 +1,6 @@
 /* 구글 폰트 사용 */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Akshar');
 /* 연도 */
 .noteList-year {
     width: 182px;
@@ -41,6 +41,7 @@
     position: relative;
     align-items: center;
     cursor: pointer;
+    margin-left: 10px;
 }
 
 
@@ -51,7 +52,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     color: #000;
-    font-family: Akshar;
+    font-family: Akshar; 
     font-size: 20px;
     font-style: normal;
     font-weight: 400;

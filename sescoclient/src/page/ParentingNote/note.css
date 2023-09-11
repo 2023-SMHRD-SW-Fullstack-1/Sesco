@@ -33,6 +33,24 @@
   letter-spacing: -0.64px;
 }
 
+
+    @keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            transform: translate3d(0, 100%, 0);
+        }
+        to {
+            opacity: 1;
+            transform: translateZ(0);
+        }
+    }
+ 
+     .book-span,.book-span2{
+        /**position: relative;*/
+        animation: fadeInUp 2s;
+    }
+
+
 /* 태그 검색창 + 아이 선택 창 컨테이너 */
 .noteTagAndKid-container {
   display: flex;
@@ -109,6 +127,13 @@
   margin-top: 150px;
   position: relative;
   animation: pop 1.0s;
+  z-index: 2;
+  
+}
+
+.diary-container.active {
+  min-height: 400px; /* 다이어리가 나타날 때 노트가 가려지지 않도록 높이를 조절 */
+  margin-bottom: 400px;
 }
 
 @keyframes pop {
@@ -123,4 +148,29 @@
   100% {
     transform: scale(1);
   }
+}
+
+.diary-close {
+  background-color: #f8bf54;
+background-image: linear-gradient(315deg, #f0ecfc 0%, #f8bf54 74%);
+  line-height: 32px;
+  padding: 5px;
+  border: none;
+  
+  cursor: pointer;
+  color: #fff;
+  transition: transform 0.3s ease-in-out;
+  border-radius:10px;
+
+  position:absolute;
+  top:5px;
+
+  right: 400px;
+
+}
+
+
+
+.diary-close:hover {
+    transform: scale(1.3);
 }
