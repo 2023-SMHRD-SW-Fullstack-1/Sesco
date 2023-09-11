@@ -9,7 +9,7 @@
 	
 	<!--일기 작성-->
 	<insert id="DiaryRegister" parameterType="com.smhrd.sesco.domain.Diary">
-		insert into t_diary (d_title,d_date,d_content,img_real_name)
+		insert into t_diary (d_title,d_content,img_real_name)
 		values(#{d_title},#{d_date},#{d_content},#{img_real_name}#)
 	</insert>
 	

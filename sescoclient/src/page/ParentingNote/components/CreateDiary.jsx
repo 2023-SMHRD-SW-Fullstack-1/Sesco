@@ -61,7 +61,7 @@ const CreateDiary = ({ onComplete }) => {
       }
 
       // Spring 서버로 POST 요청 보내기
-      await axios.post("http://localhost:8081/a", formData);
+      await axios.post("http://localhost:8081/sesco/a", formData);
 
       // 완료 콜백 호출하여 부모 컴포넌트에 데이터 전달
       onComplete(title, content, imageFile, tags);
