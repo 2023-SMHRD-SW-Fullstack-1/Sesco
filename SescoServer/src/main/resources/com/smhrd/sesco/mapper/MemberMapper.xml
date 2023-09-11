@@ -5,14 +5,14 @@
 <mapper namespace="com.smhrd.sesco.mapper.MemberMapper">
 
    <!-- 회원가입 -->
-   <insert id="join" parameterType="com.smhrd.sesco.domain.Member">
+   <insert id="MemberJoin" parameterType="com.smhrd.sesco.domain.Member">
       insert into t_member(user_id, user_pw, user_nick, user_name, user_email)
       values(#{user_id},#{user_pw},#{user_nick},#{user_name},#{user_email})
    </insert>
 
 
    <!-- 회원정보수정 -->
-	<update id="update" parameterType="com.smhrd.sesco.domain.Member">
+	<update id="MemberUpdate" parameterType="com.smhrd.sesco.domain.Member">
 		update t_member set
 		user_pw=#{user_pw},user_nick=#{user_nick} where
 		user_id=#{user_id} and user_d_yn='n'
