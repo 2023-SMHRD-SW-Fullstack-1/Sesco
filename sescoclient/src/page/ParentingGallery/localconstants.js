@@ -12,6 +12,23 @@ export const LOCAL ={
     CHUNGCHEONGBUK_DO : "충청북도"
 }
 
+export const JEOLLANAM_DO = {
+            
+    GANGJIN : '강진군',
+    GOHEUNG : '고흥군',
+    GOKSEONG :'곡성군',
+    GWANGYANG : '광양시',
+    GURYE : '구례군'
+    // '나주시',
+    // '담양군',
+    // '목포시',
+    // '무안군',
+    // '보성군',
+    // '순천시',
+    // '신안군',
+
+}
+
 // Gyeongsangnam-do
 // Gyeongsangbuk-do
 // Jeollanam-do

@@ -9,11 +9,19 @@
 .banner{
     height: 30vh;
 }
-.galleryMap{
+/* .galleryMap{
     width: auto;
     height: 700px;
     margin-top: 8%;
 }
 .glist{
     background-color: aliceblue;
+} */
+
+.gallery-city-container{
+    height: 500px;
+    width: 50%;
+    margin-top: 120px;
+    background-color: brown;
+    padding: 80px;
 }

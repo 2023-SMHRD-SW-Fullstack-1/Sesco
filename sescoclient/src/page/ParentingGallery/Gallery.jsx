@@ -6,16 +6,20 @@ import GalleryMap from './components/GalleryMap';
 import LocalList from './components/LocalList';
 import axios from 'axios'
 import { LocalContext } from './localContext';
+import CityList from './components/CityList';
+
 
 const Gallery = () => {
 
+  //선택한 지역
+  const [clickedLocal, setClickedLocal] = useState()
   // 사진정보리스트
   const [imgNameList, setImgNameList] = useState()
-  const [clickedLocal, setClickedLocal] = useState()
   const [firstNameList, setFirstNameList] = useState(["전라남도", "전라남도"])
   const [secondNameList, setSecondNameList] = useState(["여수시", "여수시"])
 
-  // childList
+  // 사진정보객체리스트
+  const [imgInfoList, setimgInfoList] = useState([])
   
   useEffect(() => {
     //회원정보가 있는지 확인하기
@@ -31,28 +35,36 @@ const Gallery = () => {
       }
     }).then((res)=>{
       //이미지가 있는 일기 정보를 전부다 가져왔음
-      // res.data.img_name
-      // res.data.img_lat
-      setFirstNameList([...firstNameList])
-      setSecondNameList([...secondNameList])
-      // res.data.img_lon
+      setimgInfoList([...imgInfoList, 
+        {
+          // imgName : res.data.img_real_name
+          // firstName : 
+          // secondName : 
+        }])
     })
   }, []) 
+
+  // 선택지역이 바뀌면 데이터가 바뀜
+  useEffect(()=>{
+    setImgNameList()
+    setFirstNameList()
+    setSecondNameList()
+  },[clickedLocal])
     
   return (
     <>
-    <Banner/>
-    <LocalContext.Provider value={{clickedLocal, setClickedLocal}}>
-        <div style={{ display: 'flex'}}>
-          <div style={{ width: "1080px", height: "800px" }}>
-            <GalleryMap firstNameList={new Set(firstNameList)} secondNameList={new Set(secondNameList)} ></GalleryMap>
-          </div>
-          <div>
-            <LocalList></LocalList>
-          </div>
-
-        </div>
-      </LocalContext.Provider>
+      <Banner/>
+        <LocalContext.Provider value={{clickedLocal, setClickedLocal}}>
+            <div style={{ display: 'flex'}}>
+              <div style={{ width: "1080px", height: "800px" }}>
+                <GalleryMap firstNameList={new Set(firstNameList)} secondNameList={new Set(secondNameList)} ></GalleryMap>
+              </div>
+              <div className='gallery-city-container'>
+                {/* <LocalList></LocalList> */}
+                <CityList imgNameList={imgNameList} firstNameList={firstNameList} secondNameList={secondNameList}></CityList>
+              </div>
+            </div>
+        </LocalContext.Provider>
     </>
   );
 };
