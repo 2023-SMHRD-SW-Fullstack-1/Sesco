@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import SurveyResult from './SurveyResult';
+import PreSurveyResult from './PreSurveyResult';
 
 function Survey() {
     const category = ['사회/정서적 영역', '언어/의사소통 영역', '인지(학습,사고,문제해결력)', '운동/신체발달 영역'];
@@ -80,6 +81,13 @@ function Survey() {
             { total: filteredData4.length, check: physicalCheckList.length, checkList: physicalCheckList }
         ])
     }
+
+    const [showPreSurveyResult, setShowPreSurveyResult] = useState(false); // 이전 설문 결과 모달 열림/닫힘 상태 관리
+
+    // Survey 컴포넌트에서 이전 설문 결과 모달 열기
+    const openPreSurveyResult = () => {setShowPreSurveyResult(true)};
+    // Survey 컴포넌트에서 이전 설문 결과 모달 닫기
+    const closePreSurveyResult = () => {setShowPreSurveyResult(false)};
 
     useEffect(() => {
         const fetchData = async () => {
@@ -189,7 +197,7 @@ function Survey() {
                     </div>
 
                     <div className='survey-bottom-container'>
-                        <button className='survey_btnPreResult'>이전 설문 불러오기</button>
+                        <button className='survey_btnPreResult' onClick={openPreSurveyResult}>이전 설문 불러오기</button>
                         {/* <button className='btnResult' onClick={() => setResultSurvey(true)}>결과보기</button> */}
                         <button className='btnResult' onClick={submitResult}>결과보기</button>
                     </div>

@@ -16,7 +16,7 @@ import com.smhrd.sesco.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000") 
 public class MemberController {
 
 	@Autowired
@@ -24,8 +24,8 @@ public class MemberController {
 	
 
 	// 기존회원 가입
-	@PostMapping(value = "/join")
-	public String join(@RequestBody Map<String, Object> map) {
+	@PostMapping(value = "member/join")
+	public String MemberJoin(@RequestBody Map<String, Object> map) {
 
 		String user_id = map.get("user_id").toString();
 		String user_pw = map.get("user_pw").toString();
@@ -47,14 +47,14 @@ public class MemberController {
 		} else if(email_Check==1) {
 			return "email중복";
 		} else { // id 중복 X , 닉네임 중복 X , 이메일 중복 X
-			 memberService.join(member);
+			 memberService.MemberJoin(member);
 			 return "success";
 		}
 	}
 
 	// 기존회원 로그인
-	@PostMapping(value = "/login")
-	public JSONObject login(@RequestBody Map<String, Object> map) {
+	@PostMapping(value = "member/login")
+	public JSONObject MemberLogin(@RequestBody Map<String, Object> map) {
 
 		String user_id = map.get("user_id").toString();
 		String user_pw = map.get("user_pw").toString();
@@ -62,7 +62,7 @@ public class MemberController {
 		int result = memberService.userSelect(user_id, user_pw);
 		JSONObject obj = new JSONObject();
 		if (result == 1) { // 로그인 성공
-			Member member = memberService.login(user_id, user_pw);
+			Member member = memberService.MemberLogin(user_id, user_pw);
 			obj.put("loginUser", member);
 			return obj;
 		} else { // 로그인 실패
@@ -71,15 +71,15 @@ public class MemberController {
 	}
 
 	// 회원정보수정
-	@PostMapping(value = "/update")
-	public JSONObject update(@RequestBody Map<String, Object> map) {
+	@PostMapping(value = "member/update")
+	public JSONObject MemberUpdate(@RequestBody Map<String, Object> map) {
 		System.out.println(map);
 
 		String user_id = map.get("user_id").toString();
 		String user_pw = map.get("user_pw").toString();
 		String user_nick = map.get("user_nick").toString();
 		Member member = new Member(user_id, user_pw, user_nick);
-		memberService.update(member);
+		memberService.MemberUpdate(member);
 		JSONObject obj = new JSONObject();
 		obj.put("loginUser", member);
 		// System.out.println("update obj : "+obj);
@@ -89,10 +89,10 @@ public class MemberController {
 	}
 
 	// 기존회원 탈퇴
-	@PostMapping("/delete")
+	@PostMapping("member/delete")
 	public void delete(@RequestBody Map<String, Object> map) {
 		String user_id = map.get("user_id").toString();
-		memberService.delete(user_id);
+		memberService.MemberDelete(user_id);
 
 	}
 	

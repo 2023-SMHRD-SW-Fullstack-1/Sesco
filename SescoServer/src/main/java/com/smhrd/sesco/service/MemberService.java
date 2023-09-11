@@ -25,8 +25,8 @@ public class MemberService {
 	private MemberMapper memberMapper;
 
 	// 기존회원 가입
-	public void join(Member member) {
-		memberMapper.join(member);
+	public void MemberJoin(Member member) {
+		memberMapper.MemberJoin(member);
 	}
 
 	// id 중복체크
@@ -50,18 +50,18 @@ public class MemberService {
 	}
 
 	// 기존회원 로그인
-	public Member login(String user_id, String user_pw) {
-		return memberMapper.login(user_id, user_pw);
+	public Member MemberLogin(String user_id, String user_pw) {
+		return memberMapper.MemberLogin(user_id, user_pw);
 	}
 
 	// 회원정보수정
-	public void update(Member member) {
-		memberMapper.update(member);
+	public void MemberUpdate(Member member) {
+		memberMapper.MemberUpdate(member);
 	}
 
 	// 기존회원탈퇴
-	public void delete(String user_id) {
-		memberMapper.delete(user_id);
+	public void MemberDelete(String user_id) {
+		memberMapper.MemberDelete(user_id);
 	}
 	
 

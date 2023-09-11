@@ -24,7 +24,6 @@ console.log(list);
                 <GalleryImg index={list}/>
               </div>
               
-        
       </div>
     </div>
   )
