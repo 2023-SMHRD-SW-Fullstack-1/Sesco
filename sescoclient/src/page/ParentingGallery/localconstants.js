@@ -12,7 +12,6 @@ export const LOCAL ={
     CHUNGCHEONGBUK_DO : "충청북도"
 }
 
-export const localSet = ()=>{}
 // Gyeongsangnam-do
 // Gyeongsangbuk-do
 // Jeollanam-do

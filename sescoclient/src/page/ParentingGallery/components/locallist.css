@@ -1,16 +1,5 @@
-/* .local-info-container{
-    border-color: #CBCBCB;
-    height: 500px;
-    width: 300px;
-    background-color: aqua;
-} */
-
 @import url('https://fonts.googleapis.com/css?family=Heebo:400,700|Open+Sans:400,700');
 
-:root {
-  --color: #3c3163;
-  --transition-time: 0.5s;
-}
 
 * {
   box-sizing: border-box;
@@ -36,6 +25,7 @@ a {
   padding: 4rem;
   margin: 0 auto;
   width: max-content;
+  visibility: hidden;
 }
 
 .card {
@@ -54,7 +44,7 @@ a {
   background-size: cover;
   background-position: center;
   box-shadow: 0 0 5em -1em black;
-  transition: all, var(--transition-time);
+  transition: 0.5s;
   position: relative;
   overflow: hidden;
   border: 10px solid #ccc;
@@ -89,12 +79,16 @@ a {
   padding: 0 0.5em;
   margin-right: 0.5em;
   line-height: 1.5em;
-  transition: all, var(--transition-time);
+  transition: 0.5s;
 }
 
 .card:hover .tags .tag {
   background: var(--color);
   color: white;
+}
+
+.cards-wrapper:hover{
+    visibility: none;
 }
 
 .card .date {
@@ -116,7 +110,7 @@ a {
   left: -50%;
   top: -50%;
   z-index: -5;
-  transition: all, var(--transition-time);
+  transition: 0.5s;
   transition-timing-function: ease-in-out;
 }
 
@@ -133,7 +127,7 @@ a {
 }
 
 .card:hover {
-  color: var(--color);
+  color: #3c3163;
 }
 
 .card:hover:before, .card:hover:after {
