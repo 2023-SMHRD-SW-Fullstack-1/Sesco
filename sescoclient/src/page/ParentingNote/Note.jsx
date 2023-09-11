@@ -1,19 +1,22 @@
+
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import NoteList from './components/NoteList'
-import Diary from './components/Diary'
+// import Diary from './components/Diary'
 import noteBackground from './noteImg/noteBackground.png'
 import noteFind from './noteImg/noteFind.png'
 import './note.css';
 import Diarycopy from './components/Diarycopy'
 
 
-const Note = () => {
 
+const Note = () => {
   //태그 검색
-  const [searchTag, setSearchTag] = useState("")
+  const [searchTag, setSearchTag] = useState("");
   //아이 선택
+
   const [kidSelect, setKidSelect] = useState("모든 아이")
+
   //수첩
   const [notes, setNotes] = useState({});
   //수첩 표시 
@@ -24,7 +27,8 @@ const Note = () => {
   const [selectedNoteYear, setSelectedNoteYear] = useState(null);
 
   //사용자 닉네임
-  const [userNick, setUserNick] = useState("Nick")
+  const [userNick, setUserNick] = useState("Nick");
+
 
   //아이 정보
   const [kids, setKids] = useState([]);
@@ -33,17 +37,18 @@ const Note = () => {
   const [diary, setDiary] = useState(null);
 
 
-  //노트 불러오기 
+
+  //노트 불러오기
   useEffect(() => {
     const getNotes = async () => {
       try {
-        const response = await axios.get('http://localhost:8081/sesco/note');
+        const response = await axios.get("http://localhost:8081/sesco/note");
         setNotes(response.data);
         console.log("노트 불러오기", response.data);
       } catch (e) {
         console.error("노트 불러오기 실패 : ", e);
       }
-    }
+    };
     getNotes();
   }, []);
 
@@ -91,7 +96,7 @@ const Note = () => {
   //태그 검색 이벤트
   const handleSearchTagChange = (e) => {
     setSearchTag(e.target.value);
-    console.log(e.target.value)
+    console.log(e.target.value);
   };
 
   //검색 버튼 눌렀을 때
@@ -110,6 +115,7 @@ const Note = () => {
   //아이 선택 함수
   const handlekidSelectChange = (e) => {
     setKidSelect(e.target.value);
+
     console.log(e.target.value)
     //선택 시 그 아이의 수첩만 가져오게 하기
 
@@ -139,18 +145,21 @@ const Note = () => {
   }
 
 
+
   return (
     <div>
       <div class="book">
         <img class="noteBackground" src={noteBackground} />
-        <div className='note-book-text'>
-          <span class="book-span">“ {userNick} ” 님의 <br /></span>
+        <div className="note-book-text">
+          <span class="book-span">
+            “ {userNick} ” 님의 <br />
+          </span>
           <span class="book-span2">Book 캡슐 🧊 </span>
         </div>
-
-      </div >
+      </div>
 
       {/* 태그 검색 div */}
+
       <div className='noteTagAndKid-container'>
         <div className='noteTagSearch-container'>
           <input
@@ -170,11 +179,13 @@ const Note = () => {
           <option className='note-myKidSelectOption' value="모든 아이">모든 아이</option> {/* '모든 아이' 옵션 추가 */}
             {kids.map((kid) => (
               <option className='note-myKidSelectOption' value={kid.kid_seq} key={kid.kid_seq}>{kid.kid_name}</option>
+
             ))}
           </select>
 
         </div>
       </div>
+
 
 
       <div className='noteList'>
@@ -210,13 +221,16 @@ const Note = () => {
                 <Diarycopy />
               </div>
             )}
+
           </>
         ))}
 
       </div>
 
-    </div>
-  )
-}
 
-export default Note
+
+    </div>
+  );
+};
+
+export default Note;

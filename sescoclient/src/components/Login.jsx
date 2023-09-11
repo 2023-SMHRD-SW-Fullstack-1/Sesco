@@ -1,11 +1,14 @@
+
 import React from 'react'
 import './Login.css'
 import LoginImg from '../img/LoginImg.png'
+
 
 const Login = () => {
 
 
   return (
+
 
     <div className='login_container'>
       <div className='loginForm_container'>
@@ -41,4 +44,5 @@ const Login = () => {
   )
 }
 
-export default Login
+
+export default Login;
