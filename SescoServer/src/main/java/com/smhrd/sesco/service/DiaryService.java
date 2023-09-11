@@ -1,5 +1,6 @@
 package com.smhrd.sesco.service;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
@@ -19,10 +20,12 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
+
 @Service
 public class DiaryService {
 
 	@Autowired
+
 	private DiaryMapper diaryMapper;
 	
 	//해당 날짜의 게시글 조회
@@ -80,6 +83,13 @@ public class DiaryService {
 		return diaryMapper.DiaryDelete(d_date);
 	}
 
+	private DiaryMapper mapper;
+	
+	public ArrayList<Diary> getDiaryListWithImg(String user_id){
+		return mapper.getDiaryListWithImg(user_id);
+	}
+
 	
 	
+
 }

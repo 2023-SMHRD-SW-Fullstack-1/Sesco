@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smhrd.sesco.mapper.DiaryMapper">
+
 	
 	<!--해당 날짜의 게시물 조회-->
 	<select id="DiaryList">select * from t_diary where d_date=#{d_date}</select>
@@ -20,4 +21,20 @@
 	<delete id="DiaryDelete">
 		delete from t_diary where d_seq=#{d_seq} and ??
 	</delete>
+
+
+<select id="getDiaryListWithImg" resultType="com.smhrd.sesco.domain.Diary">
+	SELECT *
+	FROM t_diary A
+	INNER JOIN t_note B 
+	ON A.note_seq = B.note_seq
+	AND B.kid_seq IN (
+						SELECT kid_seq
+						FROM t_kid C
+						WHERE C.user_id = #{user_id}
+					 )
+	WHERE A.d_img_yn='Y';
+</select>
+
 </mapper>
+

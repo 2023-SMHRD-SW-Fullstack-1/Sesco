@@ -1,5 +1,6 @@
 package com.smhrd.sesco.controller;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
@@ -77,6 +78,11 @@ if (file != null) {
 		String img = diary.getImg_real_name();
 	    
 	}
+
+	@PostMapping("/diary/getdiarylist/img")
+	private ArrayList<Diary> getDiaryListWithImg(@RequestBody Member member){
+		return service.getDiaryListWithImg(member.getUser_id());
+	}
 	
 	//게시글 삭제
 //	@PostMapping(value="/delete{d_date}")
@@ -102,5 +108,6 @@ if (file != null) {
 	
 	
 	
+
 
 }

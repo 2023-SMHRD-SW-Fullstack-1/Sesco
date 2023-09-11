@@ -1,30 +1,42 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import NoteList from "./components/NoteList";
-// import Diary from "./components/Diary";
-import noteBackground from "./noteImg/noteBackground.png";
-import "./note.css";
+
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import NoteList from './components/NoteList'
+import Diary from './components/Diary'
+import noteBackground from './noteImg/noteBackground.png'
+import noteFind from './noteImg/noteFind.png'
+import './note.css';
+import Diarycopy from './components/Diarycopy'
+
+
 
 const Note = () => {
   //태그 검색
   const [searchTag, setSearchTag] = useState("");
   //아이 선택
-  const [kidSelect, setKidSelect] = useState("");
+
+  const [kidSelect, setKidSelect] = useState("모든 아이")
+
   //수첩
-  // const [diaries, setDiaries] = useState({});
   const [notes, setNotes] = useState({});
+  //수첩 표시 
   const [notesDisplay, setNotesDisplay] = useState({});
+  //수첩 선택
+  const [selectedNoteSeq, setSelectedNoteSeq] = useState(null);
+  //연도 선택
+  const [selectedNoteYear, setSelectedNoteYear] = useState(null);
 
   //사용자 닉네임
   const [userNick, setUserNick] = useState("Nick");
 
-  //더미데이터
-  //아이 리스트
-  const selectKidList = ["모든 아이", "정현", "현민", "재성", "소희", "선아"];
-  //노트 리스트
-  // const notes2023 = ['10월 추운 어느 날부터', '노트2', '노트3'];
-  // const notes2022 = ['22년 여름', '노트5', '노트6', '노트7'];
-  // const notes2021 = ['21년 어느날', '21년 가을', '노트10']
+
+  //아이 정보
+  const [kids, setKids] = useState([]);
+
+  //일기
+  const [diary, setDiary] = useState(null);
+
+
 
   //노트 불러오기
   useEffect(() => {
@@ -32,7 +44,7 @@ const Note = () => {
       try {
         const response = await axios.get("http://localhost:8081/sesco/note");
         setNotes(response.data);
-        console.log(response.data);
+        console.log("노트 불러오기", response.data);
       } catch (e) {
         console.error("노트 불러오기 실패 : ", e);
       }
@@ -40,21 +52,99 @@ const Note = () => {
     getNotes();
   }, []);
 
-  //태그 검색 함수
+  //사용자의 아이 정보 불러오기 
+  useEffect(() => {
+    const getKids = async () => {
+      try {
+        const response = await axios.post('http://localhost:8081/sesco/kid/getkidlist', { user_id: "testId" })
+        setKids(response.data)
+        console.log("아이 불러오기 성공", response.data)
+      } catch (e) {
+        console.error("아이 정보 불러오기 실패", e)
+      }
+    }
+    getKids();
+  }, [])
+
+  //아이 선택했을때
+  useEffect(() => {
+    const getNotesByKid = async () => {
+      try {
+
+        if (kidSelect === "모든 아이") { // '모든 아이'가 선택된 경우
+          const reseponse = await axios.get('http://localhost:8081/sesco/note');
+          setNotes(reseponse.data)
+          console.log("모든 아이 선택 : ", reseponse.data)
+        } else { // 특정 아이가 선택된 경우
+          console.log("kidSelect ", kidSelect)
+          const reseponse = await axios.post('http://localhost:8081/sesco/note/getnotelist', { kid_seq: kidSelect });
+          setNotes(reseponse.data)
+          console.log("특정 아이 선택", reseponse.data)
+        }
+
+      } catch (e) {
+        console.error("노트 불러오기 실패 : ", e);
+      }
+    }
+    if (kidSelect) {
+      getNotesByKid();
+    }
+  }, [kidSelect]);
+
+
+
+  //태그 검색 이벤트
   const handleSearchTagChange = (e) => {
     setSearchTag(e.target.value);
     console.log(e.target.value);
   };
 
+  //검색 버튼 눌렀을 때
+  const handleTagSearch = (e) => {
+    console.log("검색 결과는 : ", searchTag)
+    setSearchTag("")
+  }
+  // Enter 키 누를 때 검색 실행
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleTagSearch();
+      setSearchTag("")
+    }
+  }
+
   //아이 선택 함수
   const handlekidSelectChange = (e) => {
     setKidSelect(e.target.value);
-    console.log(e.target.value);
+
+    console.log(e.target.value)
+    //선택 시 그 아이의 수첩만 가져오게 하기
+
+  }
+
+  //추가 버튼 클릭했을 때
+  const handleAddNote = (year) => {
+    console.log("추가버튼클릭:", year)
+    //setNotesDisplay(prev => ({ ...prev, [year]: true }));
+    setNotesDisplay(prev => ({ ...prev, [year]: !prev[year] }));
   };
 
-  const handleAddNote = (year) => {
-    setNotesDisplay((prev) => ({ ...prev, [year]: true }));
-  };
+  //노트 클릭시 
+  const handleNoteClick = async (note_seq, year) => {
+    console.log('노트클릭,note_seq:', note_seq, year)
+    setSelectedNoteSeq(note_seq);
+    setSelectedNoteYear(year);
+
+    // 만약 이미 선택된 노트를 다시 클릭했다면
+    if (selectedNoteSeq === note_seq && selectedNoteYear === year) {
+      setSelectedNoteSeq(null);
+      setSelectedNoteYear(null);
+    } else {
+      setSelectedNoteSeq(note_seq);
+      setSelectedNoteYear(year);
+    }
+  }
+
+
 
   return (
     <div>
@@ -69,61 +159,76 @@ const Note = () => {
       </div>
 
       {/* 태그 검색 div */}
-      <div className="noteTagAndKid-container">
-        <input
-          className="noteTagFind2"
-          type="search"
-          placeholder="태그 검색"
-          value={searchTag}
-          onChange={handleSearchTagChange}
-        />
+
+      <div className='noteTagAndKid-container'>
+        <div className='noteTagSearch-container'>
+          <input
+            className='noteTagFind2'
+            type='search'
+            placeholder='태그 검색'
+            value={searchTag}
+            onChange={handleSearchTagChange}
+            onKeyDown={handleKeyPress} />
+          <img src={noteFind} alt='tagSearch ' className='noteTagFindIcon' onClick={handleTagSearch} />
+        </div>
 
         {/* 아이선택 div */}
-        <div className="noteKidSelect">
-          <select
-            className="myKidSelect"
-            onChange={handlekidSelectChange}
-            value={kidSelect}
-          >
-            {selectKidList.map((item) => (
-              <option className="myKidSelectOption" value={item} key={item}>
-                {item}
-              </option>
+        <div className='noteKidSelect'>
+          {/* value 값은 현재 선택한 아이 kid_seq값으로 설정 */}
+          <select className='note-myKidSelect' onChange={handlekidSelectChange} value={kidSelect}>
+          <option className='note-myKidSelectOption' value="모든 아이">모든 아이</option> {/* '모든 아이' 옵션 추가 */}
+            {kids.map((kid) => (
+              <option className='note-myKidSelectOption' value={kid.kid_seq} key={kid.kid_seq}>{kid.kid_name}</option>
+
             ))}
           </select>
+
         </div>
       </div>
 
-      {/* 수첩리스트 div */}
-      {/* <div className='noteList'>
-        <NoteList year={2023} notes={notes2023} onAddNote={handleAddNote} />
-        {diaries[2023] && <Diary />}
-        <NoteList year={2022} notes={notes2022} onAddNote={handleAddNote} />
-        {diaries[2022] && <Diary />}
-        <NoteList year={2021} notes={notes2021} onAddNote={handleAddNote} />
-        {diaries[2021] && <Diary />}
-      </div> */}
 
-      <div className="noteList">
-        {Object.entries(notes).map(([year, notesInYear]) => (
+
+      <div className='noteList'>
+        {/* Object.entries :
+        notes 객체에서 key, value 형태 배열들 생성하여 반환
+        객체=>배열로, map 사용하기위함 */}
+        {/*notes : 해당 연도에 해당하는 노트 정보, map 이용해 필요한 데이터 추출하여 전달  */}
+        {/* sort 함수 사용 : key(연도)에 따라 내림차순으로 
+        연도 최신순부터 정렬 */}
+
+        {Object.entries(notes).sort((a, b) => b[0] - a[0]).map(([year, notesInYear]) => (
           <>
             <NoteList
               year={year}
-              notes={notesInYear.map((note) => note.n_name)}
+              notes={notesInYear.map(note => ({
+                name: note.n_name,
+                startDate: note.n_s_date,
+                endDate: note.n_e_date,
+                seq: note.note_seq
+              }))}
               onAddNote={() => handleAddNote(year)}
+              onNoteClick={(note_seq) => handleNoteClick(note_seq, year)}
             />
-            {/* {notesDisplay[year] && (
-              <Diary
-                noteName={notes[year].n_name}
-                startDate={notes[year].n_s_date}
-                endDate={notes[year].n_e_date}
-              />
-            )} */}
+
+            {/** 선택된 연도와 노트 있을 경우 다이어리 표시 */}
+            {selectedNoteYear === year && selectedNoteSeq &&
+              <div className='diary-container'>
+                <Diarycopy />
+              </div>}
+            {/* 사용자가 추가 버튼 클릭시  */}
+            {notesDisplay[year] && (
+              <div className='diary-container'>
+                <Diarycopy />
+              </div>
+            )}
+
           </>
         ))}
+
       </div>
 
-      {/* <Diarycopy></Diarycopy> */}
+
+
     </div>
   );
 };

@@ -1,32 +1,27 @@
-
 import React from 'react'
 import './Login.css'
 import LoginImg from '../img/LoginImg.png'
 
-
-const Login = () => {
-
-
+const join = () => {
   return (
-
-
-    <div className='login_container'>
+    <div>
+         <div className='login_container'>
       <div className='loginForm_container'>
         {/* 로그인 입력 */}
-        <div className='loginInput_container'>
+        <div className='joinInput_container'>
 
-          <h2>로그인</h2>
-          <span className='email_txt'>이메일</span>
+          <h2>회원가입</h2>
+          <span className='join_txt'>이름</span>
+          <input placeholder='이름을 입력해주세요.' />
+          <span className='join_txt'>이메일</span>
           <input placeholder='이메일을 입력해주세요.' />
-          {/* 비밀번호 찾기 */}
-          <div className='password_txt'>
-            <span>비밀번호</span>
-            <a href='#'>비밀번호를 잊어버리셨나요?</a>
-          </div>
+          <span className='join_txt'>비밀번호</span>
+          <input placeholder='비밀번호를 입력해주세요.' />
+          <span className='join_txt'>비밀번호 확인</span>
           <input placeholder='비밀번호를 입력해주세요.' />
           {/* 로그인 버튼 */}
-          <button className='loginBtn'>로그인</button>
-          <p> 계정이 없으신가요? <a href='/join'>회원가입</a></p>
+          <button className='joginBtn'>회원가입</button>
+          <p> 계정이 있으신가요? <a href='/join'>로그인하러가기</a></p>
           {/* 소셜 로그인 버튼  */}
           <div className='socialBtns'>
             <button className='kakaoBtn'>카카오</button>
@@ -41,8 +36,10 @@ const Login = () => {
 
       </div>
     </div>
+
+        
+    </div>
   )
 }
 
-
-export default Login;
+export default join

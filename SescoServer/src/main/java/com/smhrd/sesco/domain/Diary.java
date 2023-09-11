@@ -2,6 +2,7 @@ package com.smhrd.sesco.domain;
 
 import java.sql.Date;
 
+
 import lombok.Data;
 
 @Data
@@ -30,5 +31,10 @@ public class Diary {
 	
 	//사진 여부
 	private char d_img_yn;
+
+	private long note_seq;
+
+	private String d_tags;
 	
+
 }
