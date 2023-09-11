@@ -4,6 +4,7 @@ package com.smhrd.sesco.controller;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.smhrd.sesco.domain.Diary;
+import com.smhrd.sesco.domain.Member;
 import com.smhrd.sesco.service.DiaryService;
 
 @RestController 
@@ -81,7 +83,7 @@ if (file != null) {
 
 	@PostMapping("/diary/getdiarylist/img")
 	private ArrayList<Diary> getDiaryListWithImg(@RequestBody Member member){
-		return service.getDiaryListWithImg(member.getUser_id());
+		return diaryService.getDiaryListWithImg(member.getUser_id());
 	}
 	
 	//게시글 삭제

@@ -4,12 +4,13 @@ import { Route, Routes } from "react-router-dom";
 import Header from "./common/Header";
 import Footer from "./common/Footer";
 import Main from "./page/Main";
-import Tip from "./page/ParentingTip/Tip";
+// import Tip from "./page/ParentingTip/Tip";
 import Note from "./page/ParentingNote/Note";
 import Gallery from "./page/ParentingGallery/Gallery";
 import Login from "./components/Login";
 import Diarycopy from "./page/ParentingNote/components/Diarycopy";
 import Tip from './page/ParentingTip/TipMain';
+import Join from "./components/Join";
 
 
 function App() {

@@ -2,7 +2,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import NoteList from './components/NoteList'
-import Diary from './components/Diary'
+// import Diary from './components/Diary'
 import noteBackground from './noteImg/noteBackground.png'
 import noteFind from './noteImg/noteFind.png'
 import './note.css';
