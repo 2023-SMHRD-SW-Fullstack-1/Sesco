@@ -175,7 +175,7 @@ const Note = () => {
 
         </div>
       </div>
-
+ 
 
       <div className='noteList'>
         {/* Object.entries :
