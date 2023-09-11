@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 public class HtSurveyTip {
 
-	private int hsvt_num;
+	private String hsvt_num;
 	private String hsvt_content;
 	private int hsv_seq;
 	
