@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
+
 import { useSearchParams } from "react-router-dom";
+ 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -23,6 +25,7 @@ const Callback = () => {
       <button onClick={loginHandler}>
           로그인
         </button>
+
       <button
         onClick={() => {
           navigate("/about");
@@ -34,4 +37,6 @@ const Callback = () => {
   );
 };
 
+
 export default Callback;
+

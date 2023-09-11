@@ -1,0 +1,25 @@
+.create-diary-container {
+    max-width: 400px;
+  }
+  
+  .create-diary-container h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .form-group {
+    margin-bottom: .75rem;
+  }
+  
+  .form-group label {
+     display: block;
+     margin-bottom: .25rem;
+  }
+  
+  .form-group input[type='text'],
+  .form-group textarea {
+     width:100%;
+     padding: .5rem;
+     border-radius: .25rem;
+     border:1px solid #ccc;
+  }
+  

@@ -1,5 +1,6 @@
+
 import React, { useState, useEffect } from 'react'
-import './Gallery.css';
+import './gallery.css';
 import Banner from './components/Banner';
 import GalleryMap from './components/GalleryMap';
 import LocalList from './components/LocalList';
@@ -12,6 +13,7 @@ const Gallery = () => {
   const [firstNameList, setFirstNameList] = useState(["전라남도"])
   const [secondNameList, setSecondNameList] = useState(["여수시"])
 
+
   // childList
   
   useEffect(() => {
@@ -19,6 +21,7 @@ const Gallery = () => {
     //1. 세션에서 회원정보 가져오기 ->? 오류처리
     // if()
     let user_id = 'weq'
+
 
     //회원정보 중 이미지가 있는 일기 정보를 다 불러옴 
     axios.post("http://localhost:8081/sesco/diary/getdiarylist/img", {
@@ -66,9 +69,16 @@ const Gallery = () => {
           <div>
             <LocalList></LocalList>
           </div>
+
         </div>
+        <div>
+          <LocalList></LocalList>
+        </div>
+      
     </>
-  )
-}
+  );
+};
+
 
 export default Gallery
+
