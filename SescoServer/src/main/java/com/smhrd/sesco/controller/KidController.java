@@ -62,6 +62,7 @@ public class KidController {
 	@PostMapping("/kid/getkidlist")
 	private ArrayList<Kid> getkidlist(@RequestBody Kid kid){
 		String user_id = kid.getUser_id();
+		System.out.println("세션아이디 : "+user_id);
 		return service.getKidList(user_id);
 	}
 

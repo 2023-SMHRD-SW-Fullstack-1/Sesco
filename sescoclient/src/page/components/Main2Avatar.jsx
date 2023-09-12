@@ -9,7 +9,7 @@ import diaryIcon from '../../img/diaryIcon.png'
 import galleryIcon from '../../img/galleryIcon.png'
 import tipIcon from '../../img/tipIcon.png'
 
-const Main2Avatar = () => {
+const Main2Avatar = ({babyList}) => {
 
     // 아이 정보 담은 객체 
     const babys = [
@@ -22,7 +22,7 @@ const Main2Avatar = () => {
         <>
 
             {/*  아이 정보를 담은 객체만큼 map */}
-            {babys?.map((item, index) =>
+            {babyList?.map((item, index) =>
 
                 <div className='avatar' key={index}>
                     <div className='avatar-container'>
@@ -30,16 +30,16 @@ const Main2Avatar = () => {
                         <div className='avatar-contents'>
                             <div className='avatar-content'>
                                 {/* 출생년도 */}
-                                <div className='avatar-context'><img src={babyAgeIcon} /> 출생년도 <br /> {item?.age}</div>
+                                <div className='avatar-context'><img src={babyAgeIcon} /> 출생년도 <br /> {item?.kid_birth}</div>
                                 {/* 성별 */}
-                                <div className='avatar-context'><img src={babyGenderIcon} />성별 <br /> {item?.gender}아</div>
+                                <div className='avatar-context'><img src={babyGenderIcon} />성별 <br /> {item?.kid_gender}아</div>
                             </div>
 
                             <div className='avatar-content'>
                                 {/* 키 */}
-                                <div className='avatar-context'><img src={babyKeyIcon} />키 <br /> {item?.key} cm</div>
+                                <div className='avatar-context'><img src={babyKeyIcon} />키 <br /> {item?.kid_height} cm</div>
                                 {/* 몸무게 */}
-                                <div className='avatar-context'><img src={babyWeightIcon} />몸무게 <br /> {item?.weight} kg</div>
+                                <div className='avatar-context'><img src={babyWeightIcon} />몸무게 <br /> {item?.kid_weight} kg</div>
                             </div>
 
                             <div className='avatar-content'>
