@@ -70,6 +70,8 @@
 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import './Survey.css'
+
 
 const SurveyResult = ({bundle}) => {
     console.log(bundle)
