@@ -1,4 +1,17 @@
 .city-img-box{
-    width: 18rem;
-    height: 180px;
+    width: 24rem;
+    height: 240px;
+}
+
+
+.slider-container{
+    width: auto;
+    height: 410px;
+    background-color: #bfe0d8e0;
+}
+.city-img-box{
+    width: 220px !important;
+    margin-right: 10px;
+}
+.city-img-box.card{
 }

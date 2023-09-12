@@ -23,14 +23,14 @@ const GalleryMap = ({firstNameList, secondNameList}) => {
   }
 
   return (
-    <div style={{ display: 'relative', width: '800px', height: '800px', marginLeft: '150px', marginTop: '100px'}}>
+    <div style={{ display: 'relative', width: '750px', height: '750px'}}>
 
    
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
         height="100%"
-        viewBox="0 0 70 70">
+        viewBox="-10 -10 60 75">
 
         <defs>
           <filter id="shadow">
@@ -148,23 +148,17 @@ const GalleryMap = ({firstNameList, secondNameList}) => {
     
       {firstNameList.has(LOCAL.GANGWON_DO) && console.log("success")}
 
-
       {firstNameList.has(LOCAL.GYEONGSANGBUK_DO) && <h4></h4>}
-
 
       {firstNameList.has(LOCAL.CHUNGCHEONGBUK_DO) && <h4></h4>}
 
-
       {firstNameList.has(LOCAL.CHUNGCHEONGNAM_DO) && <h4></h4>}
-
 
       {firstNameList.has(LOCAL.JEOLLABUK_DO) && <h4></h4>}
 
       {firstNameList.has(LOCAL.JEOLLANAM_DO) && <h4></h4>}
 
-
       {firstNameList.has(LOCAL.GYEONGSANGNAM_DO) && <h4></h4>}
-
 
       {firstNameList.has(LOCAL.JEJU_ISLAND) && <h4></h4>}
       

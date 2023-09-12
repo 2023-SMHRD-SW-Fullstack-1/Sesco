@@ -4,15 +4,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './city.css'
 
 
-function City() {
+function City({cityName}) {
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Img className='city-img-box' variant="top" src="/yeosu.jpg" />
+    <Card className='city-img-box' >
+      <Card.Img  variant="top"  src="/yeosu.jpg" />
       <Card.Body>
-        <Card.Title>Card Title</Card.Title>
+        <Card.Title>{cityName}</Card.Title>
         <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+          Some quick 
         </Card.Text>
         <Button variant="primary">Go somewhere</Button>
       </Card.Body>

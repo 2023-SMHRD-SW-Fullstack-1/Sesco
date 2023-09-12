@@ -1,11 +1,15 @@
 package com.smhrd.sesco.domain;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
-
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Diary {
 	
 	//일기 구분 번호
@@ -15,16 +19,16 @@ public class Diary {
 	private String d_title;
 	
 	//일기 날짜
-	private Date d_date;
+	private LocalDate d_date;
 	
 	//일기 내용
 	private String d_content;
 	
 	//사진 위도
-	private int img_lat;
+	private String img_do;
 	
 	//사진 경도
-	private int img_lon;
+	private String img_si;
 	
 	//실제 사진명
 	private String img_real_name;

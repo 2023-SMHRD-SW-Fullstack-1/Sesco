@@ -19,9 +19,13 @@
 } */
 
 .gallery-city-container{
-    height: 500px;
     width: 50%;
+    height: fit-content;
     margin-top: 120px;
-    background-color: brown;
-    padding: 80px;
+    background-color: rgb(226 244 237 / 67%);
+    padding: 40px 60px 50px 50px;
+    border-color: #D0E7E0;
+    border-radius: 5px;
+    border-width: 5px;
+    border-style: solid;
 }

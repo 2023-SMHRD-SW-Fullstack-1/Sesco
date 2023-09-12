@@ -33,7 +33,7 @@
 						FROM t_kid C
 						WHERE C.user_id = #{user_id}
 					 )
-	WHERE A.d_img_yn='Y';
+	WHERE A.d_img_yn='Y'
 </select>
 
 </mapper>
