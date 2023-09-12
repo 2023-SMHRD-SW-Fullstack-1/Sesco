@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import NoteList from './components/NoteList'
-// import Diary from './components/Diary'
 import noteBackground from './noteImg/noteBackground.png'
 import noteFind from './noteImg/noteFind.png'
 import './note.css';
@@ -98,7 +97,18 @@ const Note = () => {
 
       const response = await axios.get('http://localhost:8081/sesco/note/tagsearch', { params: { tag: searchTag } })
       setNotes(response.data)
-      console.log("태그 검색 데이터 불러오기 : " + response.data)
+      console.log("태그 검색 데이터 불러오기 : ", response.data)
+
+      //태그 검색 버튼 결과가 없을 때 
+      if (Object.keys(response.data).length === 0) {
+        alert("태그 검색 결과가 없습니다.😥")
+        // 모든 아이의 수첩 불러오기
+        const allNotesResponse = await axios.get('http://localhost:8081/sesco/note');
+        setNotes(allNotesResponse.data);
+
+        console.log("태그 검색 결과 없을 때 모든 수첩 데이터 불러오기 :", allNotesResponse.data);
+      }
+
     } catch (e) {
       console.error("태그 검색 실패 : ", e)
     }
@@ -127,12 +137,12 @@ const Note = () => {
     setNotesDisplay(prev => ({ ...prev, [year]: !prev[year] }));
     // 아이 선택 값 저장하기
     setKidSelect(kidSelect);
-    console.log("추가 버튼 클릭시 아이 선택, kid_seq값", kidSelect);
+    console.log("추가 버튼 클릭시 아이 선택, kid_seq값 :", kidSelect);
   };
 
   //노트 클릭시
   const handleNoteClick = async (note_seq, year) => {
-    console.log('노트클릭,note_seq:', note_seq, year)
+    console.log('노트클릭시,note_seq, year :', note_seq, year)
     setSelectedNoteSeq(note_seq);
     setSelectedNoteYear(year);
 
@@ -143,6 +153,7 @@ const Note = () => {
     } else {
       setSelectedNoteSeq(note_seq);
       setSelectedNoteYear(year);
+
     }
   }
 
@@ -153,7 +164,7 @@ const Note = () => {
   };
 
   return (
-    <div>
+    <div className='note-container'>
       <div class="book">
         <img class="noteBackground" src={noteBackground} />
         <div className="note-book-text">
@@ -220,12 +231,13 @@ const Note = () => {
             {selectedNoteYear === year && selectedNoteSeq &&
               <div className='diary-container active'>
                 <Diarycopy />
-                <button className='diary-close' onClick={() => handleDiaryClose()}>닫기</button>
+                <button className='diary-close' onClick={() => handleDiaryClose()}>X</button>
               </div>}
             {/* 사용자가 추가 버튼 클릭시  */}
             {notesDisplay[year] && (
               <div className='diary-container active'>
-                <Diarycopy selectedKid={kidSelect} />
+                {/* props로 kid_seq값과 year값 보내기  */}
+                <Diarycopy selectedKid={kidSelect} year={year} />
               </div>
             )}
 

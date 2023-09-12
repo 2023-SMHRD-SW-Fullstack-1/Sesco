@@ -5,7 +5,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,5 +44,26 @@ public class NoteController {
 		System.out.println("태그 검색 " + noteService.searchNotesByTag(tag));
 		return noteService.searchNotesByTag(tag);
 	}
+	
+	//수첩 생성
+	@PostMapping("/note/createnote")
+	public Note createNote(@RequestBody Note note) {
+		System.out.println("수첩 생성 : " + note);
+		return noteService.createNote(note);
+	}
+	
+	//수첩 수정
+	@PostMapping("/note/update")
+    public Note updateNote(@RequestBody Note updatedNote) {
+        System.out.println("수정할 수첩 정보: " + updatedNote);
+        return noteService.updateNote(updatedNote);
+    }
+	
+	//수첩 삭제
+	@DeleteMapping("/note/delete/{noteId}")
+    public void deleteNoteById(@PathVariable String noteId) {
+        System.out.println("삭제할 수첩 ID: " + noteId);
+        noteService.deleteNoteById(noteId);
+    }
 
 }

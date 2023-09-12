@@ -9,7 +9,8 @@
 		resultType="com.smhrd.sesco.domain.Note">
 		SELECT *
 		FROM t_note
-		WHERE YEAR(n_s_date) = #{year} AND note_d_yn = 'N'
+		WHERE YEAR(n_s_date) = #{year} AND
+		note_d_yn = 'N'
 		ORDER BY n_s_date DESC
 	</select>
 
@@ -18,7 +19,8 @@
 		resultType="com.smhrd.sesco.domain.Note">
 		SELECT *
 		FROM t_note
-		WHERE kid_seq = #{kidSeq} AND YEAR(n_s_date) = #{year} AND note_d_yn = 'N'
+		WHERE kid_seq = #{kidSeq} AND
+		YEAR(n_s_date) = #{year} AND note_d_yn = 'N'
 		ORDER BY n_s_date DESC
 	</select>
 
@@ -27,9 +29,29 @@
 		resultType="com.smhrd.sesco.domain.Note">
 		SELECT n.*
 		FROM t_note n
-		JOIN t_diary d ON n.note_seq = d.note_seq
-		WHERE d.d_tags LIKE CONCAT('%', #{tag}, '%') AND YEAR(n.n_s_date) = #{year}
+		JOIN t_diary d ON n.note_seq =
+		d.note_seq
+		WHERE CONCAT('#', d.d_tags, '#') LIKE CONCAT('%#', #{tag},
+		'#%')
+		AND YEAR(n.n_s_date) = #{year}
 		AND n.note_d_yn = 'N'
 	</select>
+
+	<!-- 수첩 생성 -->
+	<insert id="insert" parameterType="com.smhrd.sesco.domain.Note">
+		INSERT INTO t_note (name, start_date, end_date)
+		VALUES (#{name}, #{startDate}, #{endDate})
+	</insert>
+
+	<!-- 수첩 수정 -->
+	<update id="update" parameterType="com.smhrd.sesco.domain.Note">
+		UPDATE t_note SET name=#{name}, start_date=#{startDate}, end_date=#{endDate}
+		WHERE note_id=#{noteId}
+	</update>
+
+	<!-- 수첩 삭제 -->
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM t_note WHERE note_id= #{noteId}
+	</delete>
 
 </mapper>

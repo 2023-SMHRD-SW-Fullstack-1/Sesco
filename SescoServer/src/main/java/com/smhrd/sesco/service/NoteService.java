@@ -59,5 +59,23 @@ public class NoteService {
 
 		return groupNotes;
 	}
+	
+	//수첩 생성
+	public Note createNote(Note note) {
+		
+		return noteMapper.insert(note);
+	}
+	
+	//수첩 수정
+	public Note updateNote(Note updatedNote) {
+		
+		 return noteMapper.update(updatedNote);
+	}
+	
+	//수첩 삭제 
+	public void deleteNoteById(String noteId) {
+		return;
+		
+	}
 
 }
