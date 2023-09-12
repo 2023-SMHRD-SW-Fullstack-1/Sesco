@@ -5,7 +5,7 @@ import PreSurveyResult from './PreSurveyResult';
 import './Survey.css'
 
 
-function Survey() {
+function Survey({ user_id }) {
     const category = ['사회/정서적 영역', '언어/의사소통 영역', '인지(학습,사고,문제해결력)', '운동/신체발달 영역'];
 
     const [data, setData] = useState([]);
@@ -32,7 +32,7 @@ function Survey() {
 
 
 
-    //사회 정서 설문 항목
+    // 사회 정서 설문 항목
     const filteredData1 = data.filter((item) => item.hsvd_category === category[0]);
     // 언어 의사소통 설문 항목
     const filteredData2 = data.filter((item) => item.hsvd_category === category[1]);
@@ -87,9 +87,9 @@ function Survey() {
     const [showPreSurveyResult, setShowPreSurveyResult] = useState(false); // 이전 설문 결과 모달 열림/닫힘 상태 관리
 
     // Survey 컴포넌트에서 이전 설문 결과 모달 열기
-    const openPreSurveyResult = () => {setShowPreSurveyResult(true)};
+    const openPreSurveyResult = () => { setShowPreSurveyResult(true) };
     // Survey 컴포넌트에서 이전 설문 결과 모달 닫기
-    const closePreSurveyResult = () => {setShowPreSurveyResult(false)};
+    const closePreSurveyResult = () => { setShowPreSurveyResult(false) };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -200,9 +200,25 @@ function Survey() {
 
                     <div className='survey-bottom-container'>
                         <button className='survey_btnPreResult' onClick={openPreSurveyResult}>이전 설문 불러오기</button>
-                        {/* <button className='btnResult' onClick={() => setResultSurvey(true)}>결과보기</button> */}
                         <button className='btnResult' onClick={submitResult}>결과보기</button>
                     </div>
+
+
+                    {/* 이전 설문 결과 모달 */}
+                    {showPreSurveyResult && (
+                        <div className='pre-survey-result-modal'>
+                            <div className='survey-top-container'>
+                                <div className='survey-title-container'>
+                                    <h2 className='survey-title' id='survey_title'>{user_id}님의 이전 체크리스트</h2>
+                                </div>
+                            </div>
+                            <div>
+                                이전설문 체크리스트 내용 나오는 곳.
+                            </div>
+                            <button className='close-modal-button' onClick={closePreSurveyResult}>닫기</button>
+                        </div>
+                    )}
+
                 </div>
             }
         </div>
