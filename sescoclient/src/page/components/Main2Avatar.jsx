@@ -32,7 +32,7 @@ const Main2Avatar = ({babyList}) => {
                                 {/* 출생년도 */}
                                 <div className='avatar-context'><img src={babyAgeIcon} /> 출생년도 <br /> {item?.kid_birth}</div>
                                 {/* 성별 */}
-                                <div className='avatar-context'><img src={babyGenderIcon} />성별 <br /> {item?.kid_gender}아</div>
+                                <div className='avatar-context'><img src={babyGenderIcon} />성별 <br /> {item?.kid_gender=='M'?'남':'여'}아</div>
                             </div>
 
                             <div className='avatar-content'>
