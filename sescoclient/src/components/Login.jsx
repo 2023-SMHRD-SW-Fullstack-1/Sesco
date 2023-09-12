@@ -42,7 +42,7 @@ const Login = () => {
 
                 // 로그인 여부 : true 
                 alert('로그인성공')
-                nav('/')
+                nav('/main')
                 console.log(res.data);
                 console.log(sessionStorage.user_nick);
               } else {
