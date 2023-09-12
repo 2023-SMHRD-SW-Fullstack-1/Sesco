@@ -1,5 +1,6 @@
 /* 구글 폰트 사용 */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Akshar');
 
 /* 연도 */
 .noteList-year {
@@ -13,48 +14,75 @@
     font-size: 70px;
     font-style: normal;
     font-weight: 600;
+
     line-height: 44px;
     /* 62.857% */
+    line-height: 1.5em;
     letter-spacing: -0.64px;
 
     margin-top: 945px;
     /* margin-top: 58px; */
-    margin-left: 792px;
-    margin-right: 946px;
-    margin-bottom: 2676px;
+    margin-left: 700px;
+    margin-right: 800px;
+    /*margin-bottom: 2676px;*/
     align-items: center;
 
 }
 
+.note-arrow-left,
+.note-arrow-right {
+    width: 80px;
+    /* 적절한 너비 조정 */
+    height: 50px;
+    /* 적절한 높이 조정 */
+    cursor: pointer;
+}
+
+.note-arrow-left {
+    margin-right: 10px;
+    /* 왼쪽 여백 설정 */
+}
+
+.note-arrow-right {
+    margin-left: 10px;
+    /* 오른쪽 여백 설정 */
+}
 
 /* 수첩 영역 */
 .notes-container {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+
     margin-left: 129px;
+    /*
     margin-right: 1225px;
-    /* margin-top: 1075px; */
+    margin-top: 40px;
+    width: 88%;
+    overflow-x: scroll;*/
 }
 
 .note-item-container {
     position: relative;
     align-items: center;
     cursor: pointer;
+    margin-left: 10px;
+    margin-right: 15px;
+    margin-top: 40px;
 }
-
-
 
 .note-item-span {
     position: absolute;
-    top: 50%;
+
+    top: 62%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #000;
     font-family: Akshar;
     font-size: 20px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 400px;
+    width: 90%;
 
 }
 
