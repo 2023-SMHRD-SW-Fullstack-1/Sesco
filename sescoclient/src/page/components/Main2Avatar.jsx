@@ -12,12 +12,7 @@ import tipIcon from '../../img/tipIcon.png'
 const Main2Avatar = ({babyList}) => {
 
     // 아이 정보 담은 객체 
-    const babys = [
-        { age: '2023.01.01', gender: '남', key: '30', weight: '8' },
-        { age: '2023.03.02', gender: '여', key: '27', weight: '6.5' }
-    ]
-
-    console.log(babys);
+    const age =  - 2023
     return (
         <>
 
@@ -30,7 +25,7 @@ const Main2Avatar = ({babyList}) => {
                         <div className='avatar-contents'>
                             <div className='avatar-content'>
                                 {/* 출생년도 */}
-                                <div className='avatar-context'><img src={babyAgeIcon} /> 출생년도 <br /> {item?.kid_birth}</div>
+                                <div className='avatar-context'><img src={babyAgeIcon} /> 출생년도 <br /> 나이 {2023-item?.kid_birth.substring(0, 4)} 출생일 {item?.kid_birth}</div>
                                 {/* 성별 */}
                                 <div className='avatar-context'><img src={babyGenderIcon} />성별 <br /> {item?.kid_gender=='M'?'남':'여'}아</div>
                             </div>
