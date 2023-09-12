@@ -6,7 +6,7 @@ import './components/Tip.css'
 
 const TipMain = () => {
   
-  // const value = sessionStorage.getItem('key');
+  const user_id = sessionStorage.getItem('user_id');
 
   // 메인에서 아이를 클릭하면 {
     // 세션생성
@@ -20,8 +20,8 @@ const TipMain = () => {
   
   return (
     <>
-      <Banner/>
-      <Tip/>
+      <Banner user_id={user_id}/>
+      <Tip user_id={user_id}/>
     </>
   )
 }
