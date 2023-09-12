@@ -87,7 +87,7 @@ function Survey({ user_id }) {
     const [showPreSurveyResult, setShowPreSurveyResult] = useState(false); // 이전 설문 결과 모달 열림/닫힘 상태 관리
 
     // Survey 컴포넌트에서 이전 설문 결과 모달 열기
-    const openPreSurveyResult = () => { setShowPreSurveyResult(true) };
+    // const openPreSurveyResult = () => { setShowPreSurveyResult(true) };
     // Survey 컴포넌트에서 이전 설문 결과 모달 닫기
     const closePreSurveyResult = () => { setShowPreSurveyResult(false) };
 
@@ -123,8 +123,12 @@ function Survey({ user_id }) {
                 </div>
             </div>
             {/* 모달 화면 (설문/결과) */}
+            
             {resultBundle ?
                 <SurveyResult bundle={resultBundle} />
+                :
+                showPreSurveyResult ?
+                <PreSurveyResult setShowPreSurveyResult={setShowPreSurveyResult}></PreSurveyResult>
                 :
                 <div className='survey-middle-container'>
 
@@ -199,25 +203,12 @@ function Survey({ user_id }) {
                     </div>
 
                     <div className='survey-bottom-container'>
-                        <button className='survey_btnPreResult' onClick={openPreSurveyResult}>이전 설문 불러오기</button>
+                        <button className='survey_btnPreResult' onClick={()=>setShowPreSurveyResult(true)}>이전 설문 불러오기</button>
                         <button className='btnResult' onClick={submitResult}>결과보기</button>
                     </div>
 
 
-                    {/* 이전 설문 결과 모달 */}
-                    {showPreSurveyResult && (
-                        <div className='pre-survey-result-modal'>
-                            <div className='survey-top-container'>
-                                <div className='survey-title-container'>
-                                    <h2 className='survey-title' id='survey_title'>{user_id}님의 이전 체크리스트</h2>
-                                </div>
-                            </div>
-                            <div>
-                                이전설문 체크리스트 내용 나오는 곳.
-                            </div>
-                            <button className='close-modal-button' onClick={closePreSurveyResult}>닫기</button>
-                        </div>
-                    )}
+                    
 
                 </div>
             }

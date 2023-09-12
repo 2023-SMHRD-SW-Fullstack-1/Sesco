@@ -1,57 +1,55 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import avatarBg from '../../img/avatarBg.png'
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 
 const AvatarAddFrom = () => {
 
 
     const user_id = sessionStorage.getItem('user_id');
-    const [kid_Name, setKid_Name] = useState('');
+    const [kid_name, setKid_Name] = useState('');
     const [kid_gender, setKid_Gender] = useState('');
     const [kid_birth, setKid_Age] = useState('');
-    const [kid_Weight, setKid_Weight] = useState('');
+    const [kid_weight, setKid_Weight] = useState('');
     const [kid_height, setKid_Key] = useState('');
-    console.log('kid_name', kid_Name, 'kid_birth', kid_birth, 'kid_weight', kid_Weight, 'kid_height', kid_height, 'kid_gender', kid_gender,'user_id',user_id);
+    console.log('kid_name', kid_name, 'kid_birth', kid_birth, 'kid_weight', kid_weight, 'kid_height', kid_height, 'kid_gender', kid_gender,'user_id',user_id);
 
 
     const saveKidInfo = () => {
-    //     fetchData();
-    //     console.log('user_id:', user_id, 'pw:', user_pw);
+        fetchData();
+        console.log('kid_name', kid_name, 'kid_birth', kid_birth, 'kid_weight', kid_weight, 'kid_height', kid_height, 'kid_gender', kid_gender,'user_id',user_id);
     }
-    // const config = {
-    //     headers: { 'Content-Type': 'application/json;charset=UTF-8' }
-    // }
+    const config = {
+        headers: { 'Content-Type': 'application/json;charset=UTF-8' }
+    }
 
-    // const fetchData = () => {
-    //     const requestData = {
-    //         user_id: user_id,
-    //         user_pw: user_pw,
-    //     };
-    //     axios.post(`http://localhost:8081/sesco/member/login`, requestData, config)
-    //         .then((res) => {
+    const fetchData = () => {
+        const requestData = {
+            kid_name: kid_name,
+            kid_birth: kid_birth,
+            kid_weight: kid_weight,
+            kid_height:kid_height,
+            kid_gender:kid_gender,
+            user_id:user_id
+        };
+        axios.post(`http://localhost:8081/sesco/kid/register`, requestData, config)
+            .then((res) => {
 
-    //             try {
-    //                 // id와 pw가 로그인정보와 일치하다면
-    //                 if (res.data.loginUser.user_id == user_id && res.data.loginUser.user_pw == user_pw) {
-    //                     setUserNick(res.data.loginUser.user_nick)
-    //                     // 세션에 id, nick, sns 정보 저장
-    //                     sessionStorage.setItem('user_id', user_id)
-    //                     sessionStorage.setItem('user_nick', res.data.loginUser.user_nick)
+                try {
 
-    //                     // 로그인 여부 : true 
-    //                     alert('아이 등록 완료')
-    //                     console.log(res.data);
-    //                     console.log(sessionStorage.user_nick);
-    //                 } else {
-    //                     alert('로그인정보가 일치하지 않습니다.')
-    //                     console.log(res.data);
-    //                 }
-    //             } catch {
-    //                 alert('로그인정보가 일치하지 않음')
-    //             }
-    //         })
-    // }
+                    if(res.data){
+                        alert('아이등록 완료')
+                    }else{
+                        alert('등록 실패')
+                    }
+                   
+                } catch {
+                    
+                }
+            })
+        
+    }
 
 
     return (
@@ -73,7 +71,7 @@ const AvatarAddFrom = () => {
                                     name="group1"
                                     type="radio"
                                     id={`inline-"radio"-1`}
-                                    value='man'
+                                    value='M'
                                     onChange={(e) => setKid_Gender(e.target.value)}
                                 />
                                 <Form.Check
@@ -82,7 +80,7 @@ const AvatarAddFrom = () => {
                                     name="group1"
                                     type="radio"
                                     id={`inline-"radio"-2`}
-                                    value='woman'
+                                    value='W'
                                     onChange={(e) => setKid_Gender(e.target.value)}
                                 />
                             </div>

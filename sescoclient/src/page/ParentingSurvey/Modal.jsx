@@ -11,6 +11,7 @@ function Modal({surveyUp, closeSurveyModal}) {
   // }
 
   return (
+    
     <div className="Modal" onClick={closeSurveyModal}>
       <div className="modalBody" onClick={(e) => e.stopPropagation()}>
         <button id="modalCloseBtn" onClick={closeSurveyModal}>
