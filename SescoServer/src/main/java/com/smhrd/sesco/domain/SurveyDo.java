@@ -1,5 +1,11 @@
 package com.smhrd.sesco.domain;
 
-public class SurveyDo {
+import lombok.Data;
 
+@Data
+public class SurveyDo {
+	
+	private String hsvd_seq;
+	private String sv_seq;
+	
 }

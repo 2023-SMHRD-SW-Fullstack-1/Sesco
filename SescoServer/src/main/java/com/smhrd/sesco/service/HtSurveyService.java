@@ -1,6 +1,8 @@
 package com.smhrd.sesco.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,11 @@ public class HtSurveyService {
 	public List<HtSurveyTip> viewSurveyAgeTip(HtSurveyTip svTip) {
 		
 		return surveyMapper.viewSurveyAgeTip(svTip);
+	}
+
+	public void saveResult(String seq) {
+		surveyMapper.saveResult(seq);
+		
 	}	
 
 }
