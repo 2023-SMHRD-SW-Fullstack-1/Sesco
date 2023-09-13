@@ -1,12 +1,15 @@
 import React from "react";
 
-const ViewDiary = ({ diary }) => {
+const ViewDiary = ({ selectdate }) => {
   
 
   return (
     <div>
-      <p>{diary.title}</p>
-      <p>{diary.content}</p>
+      <p>{selectdate.title}</p>
+      <p>{selectdate.content}</p>
+      <p>{selectdate.tag}</p>
+      <p>{selectdate.img}</p>
+      
       {/* {tags.map((tag, index) => (
         <span key={index}>{tag}</span>
       ))} */}

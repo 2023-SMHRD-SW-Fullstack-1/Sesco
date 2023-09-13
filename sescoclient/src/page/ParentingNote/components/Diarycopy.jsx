@@ -140,7 +140,10 @@ const Diarycopy = () => {
         return{
           title : event.d_title,
           date : event.d_date,
-          content : event.d_content
+          content : event.d_content,
+          tag : event.d_tags,
+          img : event.img_real_name
+          
         }
       })
       setListDiary(fetchedEvents);
@@ -260,7 +263,7 @@ const Diarycopy = () => {
         
         {listClickVisible && selectedDiary && (
           <ViewDiary
-            diary={selectedDiary}
+            selectdate={selectedDiary}
           />
         )}
       </div>

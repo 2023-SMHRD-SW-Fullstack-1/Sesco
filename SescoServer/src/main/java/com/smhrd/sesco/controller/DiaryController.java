@@ -50,7 +50,7 @@ public class DiaryController {
 	
 	//전체 일기 리스트 조회
 	@PostMapping(value="/diary/selectlist")
-	public List<Diary> DiaryList(Map<String,Object> map) {
+	public JSONObject DiaryList(Map<String,Object> map) {
 		 
 		return diaryService.DiaryList();
 	}
@@ -67,7 +67,7 @@ public class DiaryController {
 	
 	//일기 등록
 		@PostMapping(value = "/diary/creatediary" , consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
-		public void DiaryRegister(@ModelAttribute Diary diary, @RequestPart("file") MultipartFile file){
+		public void DiaryRegister(@ModelAttribute Diary diary, @RequestPart(name = "file", required = false) MultipartFile file){
 			
 ////			 d_date 값을 String 타입으로 받아옴
 //	        String dateString = diary.getD_date().toString();
@@ -79,7 +79,6 @@ public class DiaryController {
 //	        // diary 객체에 설정
 //	        diary.setD_date(date);
 //					
-			
 			Tags[] tags = null;
 			
 			if (file != null) {
@@ -93,6 +92,8 @@ public class DiaryController {
             file.transferTo(destFile);
             // 저장된 파일 경로 설정
             diary.setImg_real_name("/"+destFile);
+            String isImg = diary.getImg_real_name();
+            
             System.out.println(diary.getImg_real_name());
         } catch (IllegalStateException e) {
             e.printStackTrace();
@@ -141,16 +142,5 @@ public class DiaryController {
 ////		}
 //		System.out.println(d_date);
 //	}
-	    
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 
 }

@@ -77,10 +77,43 @@ public class DiaryService {
 //		return jsonArray;
 //		
 //	}
-	public List<Diary> DiaryList(){
+	public JSONObject DiaryList(){
 		List<Diary> list = diaryMapper.DiaryList();
-		System.out.println(list.get(0).getD_date());
-		return list;
+		
+		JSONObject obj = new JSONObject();
+		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray2 = new JSONArray();
+		ImageConverter<File, String> converter = new ImageToBase64();
+
+		for (Diary diary : list) {
+
+			File uploadDir = new File("c:/uploadImage");
+			File uploadedFile = new File(uploadDir, diary.getImg_real_name());
+			String filePath = uploadedFile.getAbsolutePath();
+
+			Resource resource = new FileSystemResource(uploadedFile); // 파일의 메타데이터
+			String fileStringValue = null;
+			try {
+				fileStringValue = converter.convert(resource.getFile());
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (NullPointerException e) {
+				e.printStackTrace();
+			}
+
+			diary.setImg_real_name(fileStringValue);
+			
+			jsonArray.add(diary);
+//			boolean isLike = likesMapper.isLikes(user_id, community.getComm_idx()) > 0 ? true : false;
+//			jsonArray2.add(isLike);
+			
+		}
+		obj.put("diary", jsonArray);
+//		obj.put("isLike", jsonArray2);
+
+		return obj;
+		
+		
 	}
 	
 	//일기 등록
