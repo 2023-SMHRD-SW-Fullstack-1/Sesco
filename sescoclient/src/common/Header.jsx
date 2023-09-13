@@ -55,6 +55,7 @@ margin-top:22px;
 const HeaderLJTxt = styled.a`
 margin-right:30px;
 color: gray;
+text-decoration: none;
 `;
 
 
