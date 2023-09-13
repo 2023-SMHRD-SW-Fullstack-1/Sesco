@@ -1,17 +1,17 @@
 import React from "react";
 
-const ViewDiary = ({ dtitle, dcontent, idx, tags }) => {
-  console.log(dtitle);
-  console.log(dcontent);
-  console.log(tags);
+const ViewDiary = ({ diary }) => {
+  
 
   return (
     <div>
-      {dtitle}
-      {dcontent}
-      {tags.map((tag, index) => (
+      <p>{diary.title}</p>
+      <p>{diary.content}</p>
+      {/* {tags.map((tag, index) => (
         <span key={index}>{tag}</span>
-      ))}
+      ))} */}
+
+      
     </div>
   );
 };

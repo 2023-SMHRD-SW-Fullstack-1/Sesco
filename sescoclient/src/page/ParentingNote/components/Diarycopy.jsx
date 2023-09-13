@@ -7,18 +7,23 @@ import CreateDiary from "./CreateDiary";
 import "./diary.css";
 import ViewDiary from "./ViewDiary";
 import axios from "axios";
+import moment from 'moment';
+
 
 const Diarycopy = () => {
   //일기 추가 클릭했을 때 true로 되고 일기작성 폼 출력
   const [isClick, setIsClick] = useState(false);
 
-  const [dClick, setdClick] = useState(false);
+  //일기 리스트중 하나 눌렀을 때 화면 보이거나 안보이게 하기
+  const [listClickVisible, setListClickVisible] = useState(false);
 
+  //선택한 날짜
   const [selectedDate, setSelectedDate] = useState(null);
 
-  const [dtitle, setTitle] = useState(null);
+  //CreateDiary에서 작성한 제목 가져오기
+  const [createFormTitle, setCreateFormTitle] = useState(null);
 
-  const [dcontent, setContent] = useState(null);
+  const [createFormContent, setCreateFormContent] = useState(null);
 
   const [tags, setTags] = useState([]);
 
@@ -29,47 +34,36 @@ const Diarycopy = () => {
   const [events, setEvents] = useState([]);
 
   // 일기 리스트
-  const [diaries, setDiaries] = useState([]);
+  const [listDiary, setListDiary] = useState([]);
 
-  const [ctitle, setcTitle] = useState("");
-  const [idx, setIdx] = useState(0);
+  // 날짜마다 바뀐 일기 리스트 저장
+  const [selectedDiaryList, setSelectedDiaryList] = useState()
 
+  // 일기 리스트 상세정보를 담는 상태 변수
+  const [selectedDiary, setSelectedDiary] = useState(null);
+  
+
+
+  //"데이터 없어?"하고 다시 여기로 옴
+  // console.log(moment(selectedDate).format('YYYY-MM-DD'))
   // --------------------------------------------------------------------------------------------------------------------------------------------------------
 
+
+
   //해당 날짜의 일기 리스트 출력
-  // function handleDateClick(info) {
-  //   // 클릭한 날짜의 정보를 가져와서 처리합니다.
-  //   setSelectedDate(info.date);
-  //   //  setIsClick(true); // 일기 작성 폼 열기
-  //   console.log("handledateclick", selectedDate);
-
-  //   //이게 2023-9-9 이렇게 바뀌고
-  //   console.log("바꾸기", selectedDate?.toLocaleDateString());
-
-  //   //diary안에 있는 값이 2023-09-09로 바뀌는데
-
-  //   setdClick(false);
-  // }
   function handleDateClick(info) {
+    console.log("handleDateClick");
     setSelectedDate(info.date);
-    setdClick(false);
-
-    const localDateString = formatDate(info.date);
-
-    // 해당 날짜에 대한 일기 리스트 요청
-    axios
-      .get("http://localhost:8081/api/diaries?date=" + localDateString)
-      .then((response) => {
-        console.log("일기 리스트 요청 성공:", response.data);
-        setDiaries(response.data); // 받아온 데이터로 일기 리스트 업데이트
-      })
-      .catch((error) => {
-        console.error("일기 리스트 요청 실패:", error);
-      });
-
-    // setIsClick(true); // 일기 작성 폼 열기
+    setListClickVisible(false);
+  
+    // const localDateString = formatDate(info.date);
+    
+    
   }
 
+
+
+  //날짜 맞춰주기 : 2023-09-09
   function formatDate(date) {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0"); // getMonth()는 0부터 시작하므로 1을 더해줍니다.
@@ -78,78 +72,99 @@ const Diarycopy = () => {
     return `${year}-${month}-${day}`;
   }
 
+
+
+
   function onComplete(title, content, imageFile, tags) {
+    //작성완료 눌렀을 때 바로 여기로 옴
     console.log("데이터 보내는거니?");
-    setTitle(title);
-    setContent(content);
-    console.log(dtitle);
+    setCreateFormTitle(title);
+    setCreateFormContent(content);
+    //title에는 아직 null값 뜸 이유를 모르겠음
+    console.log(createFormTitle);
     console.log("태그", tags);
-    console.log(selectedDate.toLocaleDateString());
 
     if (selectedDate && title && content) {
       //const localDateString = ...: 선택된 날짜에서 현재 시스템의 타임존 오프셋을 빼서 UTC로부터 로컬 시간으로 변환하고, 그 결과를 'YYYY-MM-DD' 형식의 문자열로 만듭니다.
-      const localDateString = new Date(
-        selectedDate.getTime() - selectedDate.getTimezoneOffset() * 60000
-      )
-        .toISOString()
-        .split("T")[0];
+      // const localDateString = new Date(
+      //   selectedDate.getTime() - selectedDate.getTimezoneOffset() * 60000
+      // )
+      //   .toISOString()
+      //   .split("T")[0];
 
-      const newEvent = { title: title, date: localDateString };
+      //db 리스트 값 가져오기?
+      const newEvent = { title: title, date: formatDate(selectedDate) };
       setEvents([...events, newEvent]);
 
       const newDiary = {
-        date: localDateString,
+        date: formatDate(selectedDate),
         title: title,
         content: content,
         tags: tags,
       };
-      setDiaries([...diaries, newDiary]);
+
+      //현재 일기 값에서 일기작성한 값 추가해주기
+      setListDiary([...listDiary, newDiary]);
+      //한국 표준시 이렇게 나옴 초기상태
       console.log("seletedDate", selectedDate);
-      console.log("diarydate", diaries);
+      //DB값 전부 불러옴
+      console.log("diarydate", listDiary);
+      //이게 끝나면 CreateDiary로 감
     }
 
     setIsClick(false);
-    // setContent("");
   }
 
   //해당 날짜의 일기 상세정보
-  // function ClickDiary(index) {
-  //   console.log("일기 상세정보구나");
-  //   // console.log(index);
-  //   // setIdx(index);
-  //   // setdClick(!dClick);
-  //   const diary = diaries[index];
-  //   console.log(diary);
-  //   setIdx(index);
-  //   setdClick(!dClick);
-  //   setTitle(diary.title); // dtitle 상태 업데이트
-  //   setContent(diary.content); // dcontent 상태 업데이트
-  //   setTags(diary.tags); // tags 상태 업데이트
-  // }
+   function ClickDiary(index) {
+    console.log("ClickDiary");
+    console.log(selectedDiaryList)
+    const diary = selectedDiaryList[index];
+    console.log("다이어리",diary);
+    setListClickVisible(true)
+    setSelectedDiary(diary);
+    
 
-  //해당 날짜의 일기 상세정보
-  function ClickDiary(index) {
-    const diary = diaries[index];
-
-    axios
-      .post("http://localhost:8081/api/diaries/" + diary.id)
-      .then((response) => {
-        console.log("일기 상세정보 요청 성공:", response.data);
-
-        setIdx(index);
-        setdClick(!dClick);
-        setTitle(diary.title); // dtitle 상태 업데이트
-        setContent(diary.content); // dcontent 상태 업데이트
-        setTags(diary.tags); // tags 상태 업데이트
-      })
-      .catch((error) => {
-        console.error("일기 상세정보 요청 실패:", error);
-      });
   }
 
   function CreateDiaryForm() {
     setIsClick(!isClick);
   }
+
+  //DB에 저장된 일기 리스트 이벤트 처리
+  useEffect(()=>{
+    axios.post(`http://localhost:8081/sesco/diary/selectlist`)
+    .then((res)=>{
+      const fetchedEvents = res.data.map((event,idx)=>{
+        console.log("왔니",res.data);
+        return{
+          title : event.d_title,
+          date : event.d_date,
+          content : event.d_content
+        }
+      })
+      setListDiary(fetchedEvents);
+    })
+    .catch((err)=>{
+      console.log("리스트 오류",err);
+    })
+  },[])
+
+   //DB에 저장된 일기 리스트 이벤트 처리
+  useEffect(()=>{
+    setListClickVisible(!listClickVisible)
+    // setIsViewDiaryVisible(!isViewDiaryVisible)
+    setSelectedDiaryList(listDiary.filter((diary)=> diary.date == formatDate(selectedDate)))
+    console.log("필터링 완료")
+  },[selectedDate])
+
+  useEffect(() => {
+    setListClickVisible(false)
+  }, [selectedDate]);
+  
+
+
+
 
   return (
     // 수첩칸
@@ -164,27 +179,20 @@ const Diarycopy = () => {
           <div className="diary-left-calendar">
             <FullCalendar
               //풀캘린더 플러그인
+              timeZoneParam="YYYY-MM-DD"
               plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
               //클릭했을 때 날짜 가져오는 메서드
               dateClick={handleDateClick}
               //일기 작성했을 때 이벤트 추가
-              events={events}
+              // events={events}
+              events={listDiary}
               initialView="dayGridMonth"
               headerToolbar={{
                 start: "today",
                 center: "title",
                 end: "prev,next",
               }}
-              //이건 뭔데
-              eventDidMount={function (info) {
-                var gColor = "lightGreen";
-                var bColor = "lightBlue";
-                if (info.event.extendedProps.status == "done") {
-                  info.el.style.backgroundColor = "red";
-                } else if (info.event.extendedProps.status == "") {
-                  info.el.style.backgroundColor = bColor;
-                }
-              }}
+              
               eventDisplay={"block"}
               eventTextColor={"#FFF"}
               eventColor={"#F2921D"}
@@ -209,10 +217,12 @@ const Diarycopy = () => {
               border: "solid 2px red",
             }}
           >
-            {/* 일기 리스트 출력 */}
 
+
+            {/* 일기 리스트 출력 */}
+            {/* 여기서 누른 날짜의 일기리스트를 제공 */}
             <div className="c">
-              {diaries
+              {selectedDate && listDiary
                 .filter((diary) => diary.date === formatDate(selectedDate))
                 .map((diary, index) => (
                   <button
@@ -222,8 +232,6 @@ const Diarycopy = () => {
                   >
                     <div className="b">
                       <p>{diary.title}</p>
-                      <br />
-                      <p>{diary.content}</p>
                     </div>
                     <br />
                   </button>
@@ -246,15 +254,13 @@ const Diarycopy = () => {
             // CreateDiary 컴포넌트에 선택된 날짜 전달 (props로)
             // 예시: <CreateDiary selectedDate={selectedDate} />
             // 필요에 따라 선택된 날짜를 CreateDiary 컴포넌트로 전달해주세요.
-            <CreateDiary selectedDate={selectedDate} onComplete={onComplete} />
+            <CreateDiary selectedDate={selectedDate} onComplete={onComplete} date={selectedDate}  formatDate={formatDate}/>
           )}
         </div>
-        {dClick && (
+        
+        {listClickVisible && selectedDiary && (
           <ViewDiary
-            dtitle={dtitle}
-            dcontent={dcontent}
-            idx={idx}
-            tags={tags}
+            diary={selectedDiary}
           />
         )}
       </div>
