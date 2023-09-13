@@ -1,5 +1,6 @@
 package com.smhrd.sesco.domain;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
@@ -19,9 +20,9 @@ public class Note {
 	//수첩 이름
 	private String n_name;
 	//수첩 시작일
-	private LocalDate n_s_date;
+	private Date n_s_date;
 	//수첩 종료일
-	private LocalDate n_e_date;
+	private Date n_e_date;
 	//아이 구분 번호
 	private String kid_seq;
 	//수첩 삭제 여부

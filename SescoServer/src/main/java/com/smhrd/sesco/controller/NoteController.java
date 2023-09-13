@@ -24,10 +24,10 @@ public class NoteController {
 	private NoteService noteService;
 
 	// 수첩 불러오기
-	@GetMapping("/note")
-	public Map<Integer, List<Note>> getNotes() {
-		System.out.println("수첩 불러오기" + noteService.getNotesGroupByYear());
-		return noteService.getNotesGroupByYear();
+	@GetMapping("/note/{userId}")
+	public Map<Integer, List<Note>> getNotes(@PathVariable String userId) {
+		System.out.println("모든 수첩 불러오기" + noteService.getNotesByUser(userId));
+		return noteService.getNotesByUser(userId);
 	}
 
 	// 옵션에서 아이 선택시 해당 아이의 수첩 불러오기
@@ -44,26 +44,26 @@ public class NoteController {
 		System.out.println("태그 검색 " + noteService.searchNotesByTag(tag));
 		return noteService.searchNotesByTag(tag);
 	}
-	
-	//수첩 생성
+
+	// 수첩 생성
 	@PostMapping("/note/createnote")
-	public Note createNote(@RequestBody Note note) {
-		System.out.println("수첩 생성 : " + note);
-		return noteService.createNote(note);
+	public void createNote(@RequestBody Note note) {
+		System.out.println("controller 수첩 생성  : " + note);
+		noteService.createNote(note);
 	}
-	
-	//수첩 수정
+
+	// 수첩 수정
 	@PostMapping("/note/update")
-    public Note updateNote(@RequestBody Note updatedNote) {
-        System.out.println("수정할 수첩 정보: " + updatedNote);
-        return noteService.updateNote(updatedNote);
-    }
-	
-	//수첩 삭제
+	public Note updateNote(@RequestBody Note updatedNote) {
+		System.out.println("수정할 수첩 정보: " + updatedNote);
+		return noteService.updateNote(updatedNote);
+	}
+
+	// 수첩 삭제
 	@DeleteMapping("/note/delete/{noteId}")
-    public void deleteNoteById(@PathVariable String noteId) {
-        System.out.println("삭제할 수첩 ID: " + noteId);
-        noteService.deleteNoteById(noteId);
-    }
+	public void deleteNoteById(@PathVariable String noteId) {
+		System.out.println("삭제할 수첩 ID: " + noteId);
+		noteService.noteDeleteById(noteId);
+	}
 
 }
