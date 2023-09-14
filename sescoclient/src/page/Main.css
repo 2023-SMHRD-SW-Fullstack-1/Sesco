@@ -5,7 +5,7 @@
     height: 480px;
     background-color: rgb(255, 252, 223);
     border-radius: 8px;
-    margin-bottom: 150px;
+    margin-bottom: 130px;
 }
 .avatarAdd{
     display: flex;
@@ -21,7 +21,7 @@
 .main2-avatarcontainer{
     display: flex;
     justify-content: center;
-    margin-top: 250px;
+    margin-top: 200px;
     align-items: center;
     flex-direction: column;
     margin-bottom: 100px;
@@ -36,6 +36,7 @@
  display: flex;
  flex-direction: column;
  width: 49%;
+ z-index: 1;
 }
 .avatar-content{
 
@@ -146,35 +147,129 @@
     margin: 0px 15px 0px 15px;
 }
 .avatar-context img{
-    margin-right: 30px;
+    margin-right: 20px;
+}
+.avatar-context span{
+    margin-left: 5px;
 }
 
 .babyImgContent{
     display: flex;
-}
-.charImg{
+    width: 100%;
+    right: 15%;
+    justify-content: center;
     position: absolute;
-    width: 180px;
 }
+
 #charImg0{
     width: 180px;
 }
 #charImg1{
-    width: 190px;
+    width: 185px;
 }
 #charImg2{
-    width: 165px;
+    width: 160px;
 }
 #charImg3{
-    width: 165px;
+    width: 160px;
 }
 #charImg4{
-    width: 220px;
+    width: 210px;
 }
 #charImg5{
-    width: 200px;
-    height: 300px;
+    width: 275px;
 }
 #charImg6{
-    width: 250px;
+    width: 220px;
+}
+#charImg7{
+    width: 200px;
+}
+.mcharImg0,
+.wcharImg0,
+.mcharImg1,
+.wcharImg1{
+    margin-top: 250px;
+}
+.mcharImg2,
+.wcharImg2{
+    margin-top: 185px;
+}
+.mcharImg3,
+.wcharImg3{
+    margin-top: 160px;
+}
+.mcharImg4,
+.wcharImg4{
+    margin-top: 70px;
+}
+
+.wcharImg5{
+    margin-top: 110px;
+}
+.mcharImg5{
+    position: relative;
+    bottom: 50px;
+}
+.wcharImg6{
+    margin-top: 10px;
+}
+.mcharImg6{
+    margin-top: 80px;
+}
+.wcharImg7{
+    position: relative;
+    bottom: 10px;
+}
+.mcharImg7{
+    margin-top: 70px;
+}
+.babyNameTag{
+    position: relative;
+    padding: 10px 40px 10px 40px;
+    border-radius: 30PX;
+    height: 76px;
+    border: 1px solid beige;
+    background-color: rgb(197, 220, 255);
+    right: 21%;
+    top: 34px;
+    z-index: -1;
+}
+.babyCorrectBtn1{
+    position: absolute;
+    left: 60.8%;
+    margin-bottom: 95px;
+    width: 55px;
+    height: 32px;
+    border-radius: 20px;
+    font-size: 14px;
+    border: none;
+    color: rgb(212, 163, 0);
+    background-color: rgb(247, 255, 128);
+    font-weight: 600;
+}
+.babyCorrectBtn2{
+    position: absolute;
+    left: 75.5%;
+    margin-bottom: 95px;
+    border-radius: 20px;
+    width: 55px;
+    font-size: 14px;
+    height: 32px;
+    border: none;
+    color: rgb(212, 163, 0);
+    background-color: rgb(247, 255, 128);
+    font-weight: 600;
+}
+.babyCorrectBtn1:hover,
+.babyCorrectBtn2:hover{
+    background-color: rgb(251, 255, 196);
+    border: 2px solid rgb(255, 252, 76);
+}
+.babyCorrectInput1,
+.babyCorrectInput2{
+    margin: 0px 3px 0px 5px;
+    width: 44px;
+
+    text-align: center;
 }
