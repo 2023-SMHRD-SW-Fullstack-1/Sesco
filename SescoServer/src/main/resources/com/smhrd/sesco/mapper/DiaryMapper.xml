@@ -17,8 +17,8 @@
 	
 	<!--일기 작성-->
 	<insert id="DiaryRegister" parameterType="com.smhrd.sesco.domain.Diary">
-		insert into t_diary (d_title,d_date,d_content, d_tags, img_do, img_si, img_real_name,d_img_yn)
-		values(#{d_title},#{d_date},#{d_content},#{d_tags},#{img_do},#{img_si},#{img_real_name},#{d_img_yn})
+		insert into t_diary (d_title,d_date,d_content, note_seq, d_tags, img_do, img_si, img_real_name,d_img_yn)
+		values(#{d_title},#{d_date},#{d_content},#{note_seq}, #{d_tags},#{img_do},#{img_si},#{img_real_name},#{d_img_yn})
 	</insert>
 	
 	<!--일기 수정-->

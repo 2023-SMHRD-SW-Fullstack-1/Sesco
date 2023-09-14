@@ -43,7 +43,7 @@ public class Diary {
 	private String d_img_yn;
 
 	//수접 구분번호
-	private long note_seq;
+	private String note_seq;
 
 	//태그
 	private String d_tags;

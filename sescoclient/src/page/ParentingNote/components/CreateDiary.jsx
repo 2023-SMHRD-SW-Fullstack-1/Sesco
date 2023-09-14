@@ -27,7 +27,12 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate }) => {
   const [tagList, setTagList] = useState([]);
   const [tagsToSend, setTagsToSend] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [noteseq, setNoteseq] = useState('');
  
+  useEffect(()=>{
+
+    setNoteseq("100345720715870951");
+  },[])
   
 
   useEffect(() => {
@@ -168,6 +173,8 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    
+    console.log(noteseq);
     const formData = new FormData();
     formData.append("d_title", title);
     formData.append("d_date", formatDate(selectedDate));
@@ -176,6 +183,7 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate }) => {
     formData.append("img_do", province); // 도 정보
     formData.append("img_si", city);     // 시 정보
     formData.append("file", imageFile);
+    formData.append("note_seq",noteseq);
     if(imageFile){
       formData.append("d_img_yn","Y"); //이미지 있냐 없냐
     }
@@ -209,6 +217,7 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate }) => {
       setProvince('');
       setCity('');
       setIsImg('');
+      setNoteseq();
     } catch (error) {
       console.error('Error while submitting diary:', error);
     }

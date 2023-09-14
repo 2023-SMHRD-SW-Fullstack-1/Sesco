@@ -42,27 +42,25 @@ public class DiaryController {
 	private DiaryService diaryService;
 	
 	//누른 날짜의 일기 리스트 조회
+	@PostMapping(value="/diary/selectlist")
+	public @ResponseBody JSONObject DiaryList(Date d_date) {
+		System.out.println(d_date);
+		return diaryService.DiaryList(d_date);
+	}
+	
+//	//전체 일기 리스트 조회
 //	@PostMapping(value="/diary/selectlist")
-//	public @ResponseBody List DiaryList(@RequestBody Date d_date) {
-//		System.out.println(d_date);
-//		return diaryService.DiaryList(d_date);
+//	public JSONObject DiaryList(Map<String,Object> map) {
+//		 
+//		return diaryService.DiaryList();
 //	}
 	
-	//전체 일기 리스트 조회
-	@PostMapping(value="/diary/selectlist")
-	public JSONObject DiaryList(Map<String,Object> map) {
-		 
-		return diaryService.DiaryList();
-	}
-	
-	//누른 날짜의 일기 조회
-	@PostMapping(value="/diary/selectlistone")
-	public List<Diary> DiaryList(@RequestParam LocalDate d_date){
-		List<Diary> list = diaryService.DiaryListOne(d_date);
-		return list;
-	}
-	
-	
+//	//누른 날짜의 일기 조회
+//	@PostMapping(value="/diary/selectlistone")
+//	public List<Diary> DiaryList(@RequestParam LocalDate d_date){
+//		List<Diary> list = diaryService.DiaryListOne(d_date);
+//		return list;
+//	}
 	
 	
 	//일기 등록

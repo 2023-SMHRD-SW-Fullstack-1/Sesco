@@ -135,7 +135,8 @@ const Diarycopy = () => {
   useEffect(()=>{
     axios.post(`http://localhost:8081/sesco/diary/selectlist`)
     .then((res)=>{
-      const fetchedEvents = res.data.map((event,idx)=>{
+      console.log(res)
+      const fetchedEvents = res.data.diary.map((event,idx)=>{
         console.log("왔니",res.data);
         return{
           title : event.d_title,
@@ -143,7 +144,6 @@ const Diarycopy = () => {
           content : event.d_content,
           tag : event.d_tags,
           img : event.img_real_name
-          
         }
       })
       setListDiary(fetchedEvents);
