@@ -44,7 +44,7 @@ public class DiaryController {
 	//누른 날짜의 일기 리스트 조회
 	@PostMapping(value="/diary/selectlist")
 	public @ResponseBody JSONObject DiaryList(Date d_date) {
-		System.out.println(d_date);
+		System.out.println("안녕");
 		return diaryService.DiaryList(d_date);
 	}
 	

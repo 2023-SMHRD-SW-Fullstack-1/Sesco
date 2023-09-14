@@ -63,6 +63,7 @@ function updateList(){
     setImgNameList([...filteredList.map(info => info.imgName)])
     setFirstNameList([...filteredList.map(info => info.firstName)])
     setSecondNameList([...filteredList.map(info => info.secondName)])
+    console.log(imgInfoList.imgName);
  } 
 
   // 선택지역이 바뀌면 데이터가 바뀜

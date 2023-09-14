@@ -78,6 +78,7 @@ public class DiaryService {
 	//널값 허용하는 코드
 	public JSONObject DiaryList(Date d_date){
 	    List<Diary> list = diaryMapper.DiaryList(d_date);
+	    System.out.println("안녕못해");
 	    
 	    JSONObject obj = new JSONObject();
 	    JSONArray jsonArray = new JSONArray();
@@ -87,6 +88,7 @@ public class DiaryService {
 	        try {
 	            // 파일 경로 설정
 	            String filePath = diary.getImg_real_name();
+	            System.out.println(filePath);
 
 	            // filePath가 null이 아니고, "c:\\uploadImage"와 다르다면 이미지 처리 로직을 수행합니다.
 	            if(filePath != null && !filePath.equals("c:\\uploadImage")) {
@@ -132,6 +134,8 @@ public class DiaryService {
 		System.out.println(d_date);
 		return diaryMapper.DiaryDelete(d_date);
 	}
+	
+//	private DiaryMapper mapper;
 	
 	public ArrayList<Diary> getDiaryListWithImg(String user_id){
 		return diaryMapper.getDiaryListWithImg(user_id);

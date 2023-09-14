@@ -16,7 +16,7 @@ const CityGallery = ({imgInfoList, cityName}) => {
 
   const itemData = [
     {
-      img: '',
+      img: `${'data:image/;base64'},c:\\uploadImage\\315d3131-a361-4809-8ff3-fc879481b7f6누끼루.png`,
       title: 'Breakfast',
     },
     {
@@ -35,8 +35,8 @@ const CityGallery = ({imgInfoList, cityName}) => {
     {
       img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
       title: 'Hats',
-
     },
+    
     {
       img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
       title: 'Honey',
@@ -70,6 +70,8 @@ const CityGallery = ({imgInfoList, cityName}) => {
 
     },
   ];
+
+  const imgg = "c:\\uploadImage\\315d3131-a361-4809-8ff3-fc879481b7f6누끼루.png"
  
   
   return (
@@ -81,6 +83,7 @@ const CityGallery = ({imgInfoList, cityName}) => {
       cols={4}
       rowHeight={121}
     >
+      <div className="">{<img src={"data:image/;base64," + imgg} alt="" style={{width: "100px", height: "100px"}} />}</div>
       {itemData.map((item) => (
         <ImageListItem key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
           <img
