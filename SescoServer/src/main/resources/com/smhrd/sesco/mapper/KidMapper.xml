@@ -13,8 +13,8 @@
 	<!-- 아이 프로필 수정 -->
 	<update id="KidUpdate" parameterType="com.smhrd.sesco.domain.Kid">
 		update t_kid set
-		kid_height=#{kid_height},kid_weight=#{kid_weight} 
-		where user_id=#{user_id}
+		kid_height=#{kid_height},kid_weight=#{kid_weight}
+		where user_id=#{user_id} and kid_seq=#{kid_seq}
 	</update>
 	
 </mapper>

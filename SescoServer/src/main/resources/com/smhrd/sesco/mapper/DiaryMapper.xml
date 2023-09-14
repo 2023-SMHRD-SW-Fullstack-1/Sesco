@@ -5,14 +5,22 @@
 <mapper namespace="com.smhrd.sesco.mapper.DiaryMapper">
 
 
-	<!--해당 날짜의 게시물 조회 -->
-	<select id="DiaryList">select * from t_diary where d_date=#{d_date}</select>
+	
+	<!--전체 일기 리스트 조회-->
+	<select id="DiaryList" resultType="com.smhrd.sesco.domain.Diary">
+		select * from t_diary
+	</select>
+	
+	<!-- 누른 날짜의 일기 리스트 조회 -->
+	<select id="DiaryListOne" resultType="com.smhrd.sesco.domain.Diary">
+		select d_title, d_date from t_diary where d_date=#{d_date}
+	</select>
+	
+	<!--일기 작성-->
+	<insert id="DiaryRegister" parameterType="com.smhrd.sesco.domain.Diary">
+		insert into t_diary (d_title,d_date,d_content, note_seq, d_tags, img_do, img_si, img_real_name,d_img_yn)
+		values(#{d_title},#{d_date},#{d_content},#{note_seq}, #{d_tags},#{img_do},#{img_si},#{img_real_name},#{d_img_yn})
 
-	<!--일기 작성 -->
-	<insert id="DiaryRegister"
-		parameterType="com.smhrd.sesco.domain.Diary">
-		insert into t_diary (d_title,d_content,img_real_name)
-		values(#{d_title},#{d_date},#{d_content},#{img_real_name}#)
 	</insert>
 
 	<!--일기 수정 -->

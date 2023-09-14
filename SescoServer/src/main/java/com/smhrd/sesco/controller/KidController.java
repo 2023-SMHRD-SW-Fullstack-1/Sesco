@@ -39,23 +39,9 @@ public class KidController {
 	
 	//아이 프로필 수정
 	@PostMapping("/kid/update")
-	public JSONObject KidUpdate(@RequestBody Kid kid) {
-		
-		double kid_height = kid.getKid_height();
-		double kid_weight = kid.getKid_weight();
-		String user_id = kid.getUser_id();
-		
-		Kid kidVO = new Kid(kid_height, kid_weight, user_id);
-		service.KidUpdate(kidVO);
-		JSONObject result = new JSONObject();
-		result.put("result", kidVO);
-		
-		return result;
-		
+	public void KidUpdate(@RequestBody Kid kid) {
+		service.KidUpdate(kid);
 	}
-	
-	
-	
 	
 	
 //	회원ID -> 아이정보List추출

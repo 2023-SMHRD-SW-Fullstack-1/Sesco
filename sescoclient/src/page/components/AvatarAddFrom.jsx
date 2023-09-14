@@ -18,9 +18,14 @@ const AvatarAddFrom = () => {
     console.log('kid_name', kid_name, 'kid_birth', kid_birth, 'kid_weight', kid_weight, 'kid_height', kid_height, 'kid_gender', kid_gender,'user_id',user_id);
 
     const saveKidInfo = () => {
-        fetchData();
-        window.location.replace("/main")
-        console.log('kid_name', kid_name, 'kid_birth', kid_birth, 'kid_weight', kid_weight, 'kid_height', kid_height, 'kid_gender', kid_gender,'user_id',user_id);
+        if(!fetchData()){
+            alert('값을 입력 해주세요')
+        }else{
+            fetchData();
+            window.location.replace("/main")
+            console.log('kid_name', kid_name, 'kid_birth', kid_birth, 'kid_weight', kid_weight, 'kid_height', kid_height, 'kid_gender', kid_gender,'user_id',user_id);
+
+        }
     }
     const config = {
         headers: { 'Content-Type': 'application/json;charset=UTF-8' }
@@ -64,7 +69,7 @@ const AvatarAddFrom = () => {
                         {/* 이름, 성별 */}
                         <div className='saveBabyInfo'>
                             <p className='saveBabyName'>이름</p>
-                            <input id='babyInfoInput1' placeholder="아이 이름" onChange={(e) => setKid_Name(e.target.value)} />
+                            <input type='text' id='babyInfoInput1' placeholder="아이 이름" onChange={(e) => setKid_Name(e.target.value)} />
                             <p className='saveBabyGender'>성별</p>
                             <div>
                                 <Form.Check
@@ -93,9 +98,9 @@ const AvatarAddFrom = () => {
                         <div className='saveBabyInfo'>
                             {/* 출생년도,체중 */}
                             <p className='saveBabyAge'>출생년도</p>
-                            <input id='babyInfoInput2' placeholder="출생년도" onChange={(e) => setKid_Age(e.target.value)} />
+                            <input type='text' id='babyInfoInput2' placeholder="YYYY-MM-DD" onChange={(e) => setKid_Age(e.target.value)} />
                             <p className='saveBabyWeight'>체중</p>
-                            <input id='babyInfoInput3' placeholder="체중" onChange={(e) => setKid_Weight(e.target.value)} />
+                            <input type='number' id='babyInfoInput3' placeholder="체중" onChange={(e) => setKid_Weight(e.target.value)} />
                             <p className='saveBabyKg'>kg</p>
                         </div>
                     </div>
@@ -103,7 +108,7 @@ const AvatarAddFrom = () => {
                         <div className='saveBabyInfo'>
                             {/* 키 */}
                             <p className='saveBabyKey'>키</p>
-                            <input id='babyInfoInput4' placeholder="키" onChange={(e) => setKid_Key(e.target.value)} />
+                            <input type='number' id='babyInfoInput4' placeholder="키" onChange={(e) => setKid_Key(e.target.value)} />
                             <p className='saveBabyCm'>cm</p>
                         </div>
                     </div>

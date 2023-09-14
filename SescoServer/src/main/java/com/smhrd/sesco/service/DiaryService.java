@@ -4,6 +4,7 @@ package com.smhrd.sesco.service;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,47 +27,94 @@ import org.springframework.core.io.ResourceLoader;
 public class DiaryService {
 
 	@Autowired
-
 	private DiaryMapper diaryMapper;
 	
-	//해당 날짜의 게시글 조회
-	public List DiaryList(Date d_date) {
-		List<Diary> list = diaryMapper.DiaryList(d_date);
-		
-		JSONArray jsonArray = new JSONArray();
-		ImageConverter<File, String> converter = new ImageToBase64();
-		
-		for (Diary community : list) {
 
-			File uploadDir = new File("c:/uploadImage");
-			File uploadedFile = new File(uploadDir, community.getImg_real_name());
-//			System.out.println("uploadedFile 값 : " + uploadedFile);
-			String filePath = uploadedFile.getAbsolutePath();
-
-//			System.out.println("filePath : " + filePath);
-			Resource resource = new FileSystemResource(uploadedFile); // 파일의 메타데이터
-//			System.out.println(resource);
-			String fileStringValue = null;
-			try {
-				fileStringValue = converter.convert(resource.getFile());
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (NullPointerException e) {
-				e.printStackTrace();
-			}
-
-//			System.out.println(fileStringValue);
-			community.setImg_real_name(fileStringValue);
-			JSONObject obj = new JSONObject();
-
-			jsonArray.add(community);
-			
-		}
-
-		return list;
-		
-	}
+	//널값 허용하지 않는 코드
 	
+//	public JSONObject DiaryList(Date d_date){
+//	    List<Diary> list = diaryMapper.DiaryList(d_date);
+//	    
+//	    JSONObject obj = new JSONObject();
+//	    JSONArray jsonArray = new JSONArray();
+//	    JSONArray jsonArray2 = new JSONArray();
+//	    ImageConverter<File, String> converter = new ImageToBase64();
+//
+//	    for (Diary diary : list) {
+//	        try {
+//	            // 파일 경로 설정
+//	            String filePath = diary.getImg_real_name();
+//	            if(filePath != null && !filePath.equals("c:\\uploadImage")) {
+//	            	 System.out.println(filePath);
+//	 	            
+//	 	            // 파일이 실제로 존재하는지 확인
+//	 	            File uploadedFile = new File(filePath);
+//	 	            if (!uploadedFile.exists()) {
+//	 	                // 파일이 존재하지 않는 경우 처리
+//	 	                continue; // 다음 루프로 이동
+//	 	            }
+//
+//	 	            Resource resource = new FileSystemResource(uploadedFile);
+//	 	            String fileStringValue = converter.convert(resource.getFile());
+//
+//	 	            diary.setImg_real_name(fileStringValue);
+//
+//	 	            jsonArray.add(diary);
+//	            }
+//	           
+//	        } catch (IOException e) {
+//	            e.printStackTrace();
+//	            // 파일 변환 실패 시 예외 처리
+//	        } catch (NullPointerException e) {
+//	            e.printStackTrace();
+//	            // NullPointerException 처리
+//	        }
+//	    }
+//	    obj.put("diary", jsonArray);
+//
+//	    return obj;
+//	}
+	
+	//널값 허용하는 코드
+	public JSONObject DiaryList(Date d_date){
+	    List<Diary> list = diaryMapper.DiaryList(d_date);
+	    
+	    JSONObject obj = new JSONObject();
+	    JSONArray jsonArray = new JSONArray();
+	    ImageConverter<File, String> converter = new ImageToBase64();
+
+	    for (Diary diary : list) {
+	        try {
+	            // 파일 경로 설정
+	            String filePath = diary.getImg_real_name();
+
+	            // filePath가 null이 아니고, "c:\\uploadImage"와 다르다면 이미지 처리 로직을 수행합니다.
+	            if(filePath != null && !filePath.equals("c:\\uploadImage")) {
+	                File uploadedFile = new File(filePath);
+
+	                // 파일이 실제로 존재하는지 확인
+	                if (!uploadedFile.exists()) {
+	                    // 파일이 존재하지 않는 경우 처리
+	                    continue; // 다음 루프로 이동
+	                }
+
+	                Resource resource = new FileSystemResource(uploadedFile);
+	                String fileStringValue = converter.convert(resource.getFile());
+
+	                diary.setImg_real_name(fileStringValue);
+	            }
+
+	            jsonArray.add(diary);  // 이 부분은 filePath의 값에 상관없이 항상 실행됩니다.
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        } catch (NullPointerException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    obj.put("diary", jsonArray);
+
+	    return obj;
+	}
 	
 	//일기 등록
 	public int DiaryRegister(Diary diary) {
@@ -87,6 +135,12 @@ public class DiaryService {
 	
 	public ArrayList<Diary> getDiaryListWithImg(String user_id){
 		return diaryMapper.getDiaryListWithImg(user_id);
+	}
+
+	//누른날짜의 일기 리스트 조회
+	public List<Diary> DiaryListOne(LocalDate d_date) {
+		List<Diary> list = diaryMapper.DiaryListOne(d_date);
+		return list;
 	}
 
 	
