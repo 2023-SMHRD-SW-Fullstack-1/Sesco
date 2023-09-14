@@ -6,12 +6,14 @@ import tab3 from "../img/tab3.png";
 import tab4 from "../img/tab4.png";
 import styled from "styled-components";
 import { GoPerson,GoPersonAdd } from "react-icons/go";
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const nav = useNavigate();
   return (
     <div>
       <HeaderLogoContainer>
-        <HeaderImgLogo src={logo}/>
+        <HeaderImgLogo src={logo} onClick={()=>nav('/')}/>
         <HeaderLJContainer>
           <HeaderLJTxt href='/login'><GoPerson/> 로그인</HeaderLJTxt>
           <HeaderLJTxt href='/join'><GoPersonAdd/> 회원가입</HeaderLJTxt>
@@ -53,6 +55,7 @@ margin-top:22px;
 const HeaderLJTxt = styled.a`
 margin-right:30px;
 color: gray;
+text-decoration: none;
 `;
 
 

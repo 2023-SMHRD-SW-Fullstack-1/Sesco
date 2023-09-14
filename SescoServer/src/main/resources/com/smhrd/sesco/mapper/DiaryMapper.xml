@@ -4,20 +4,21 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smhrd.sesco.mapper.DiaryMapper">
 
-	
-	<!--해당 날짜의 게시물 조회-->
+
+	<!--해당 날짜의 게시물 조회 -->
 	<select id="DiaryList">select * from t_diary where d_date=#{d_date}</select>
-	
-	<!--일기 작성-->
-	<insert id="DiaryRegister" parameterType="com.smhrd.sesco.domain.Diary">
+
+	<!--일기 작성 -->
+	<insert id="DiaryRegister"
+		parameterType="com.smhrd.sesco.domain.Diary">
 		insert into t_diary (d_title,d_content,img_real_name)
 		values(#{d_title},#{d_date},#{d_content},#{img_real_name}#)
 	</insert>
-	
-	<!--일기 수정-->
+
+	<!--일기 수정 -->
 	<update id=""></update>
-	
-	<!--일기 삭제-->
+
+	<!--일기 삭제 -->
 	<delete id="DiaryDelete">
 		delete from t_diary where d_seq=#{d_seq} and ??
 	</delete>

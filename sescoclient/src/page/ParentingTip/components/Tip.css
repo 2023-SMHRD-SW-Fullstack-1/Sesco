@@ -28,6 +28,9 @@
 .Tbanner{
     height: 350px;
 }
+.Mbanner{
+    height: 350px;
+}
 .mainContent{
     display: flex;
     justify-content: center;
@@ -63,6 +66,11 @@
     position: relative;
     top: 130px;
     left: 420px;
+}
+.Mbanner_info{
+    position: relative;
+    top: 120px;
+    left: 70px;
 }
 .timeline{
     display: flex;
