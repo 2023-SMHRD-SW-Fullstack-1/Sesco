@@ -31,4 +31,7 @@ public interface HtSurveyMapper {
     @SelectKey(keyProperty = "sv_seq", resultType = Long.class, before = false, statement = "SELECT LAST_INSERT_ID() AS sv_seq")
     public void insertSurvey(Survey survey);
 
+	public void insertSurvey(Survey survey);
+	
+	
 }

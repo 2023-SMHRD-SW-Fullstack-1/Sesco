@@ -23,12 +23,15 @@ import com.smhrd.sesco.domain.SurveyDo;
 import com.smhrd.sesco.service.HtSurveyService;
 import com.smhrd.sesco.service.SurveyService;
 
+
 @RestController
 @CrossOrigin("http://localhost:3000")
 public class HtSurveyController {
 
+	
 	@Autowired
 	private HtSurveyService htsurService;
+
 	
 	@Autowired
     private SurveyService surveyService;
@@ -38,28 +41,37 @@ public class HtSurveyController {
 	@PostMapping("/survey/agechecklist")
 	public List<HtSurveyDetail> viewSurveyAgeCheckList(@RequestBody Map<String, Object> map) {
 		int hsv_seq = Integer.parseInt(map.get("hsv_seq").toString());
-		
-		
+
 		HtSurveyDetail svDetail = new HtSurveyDetail();
 		svDetail.setHsv_seq(hsv_seq);
-		
-		
+
 		return htsurService.viewSurveyDetail(svDetail);
-	
+
 	}
-	
+
 	// 체크리스트 개월 별 팁 출력
 	@PostMapping("/survey/agetip")
 	public List<HtSurveyTip> viewSurveyAgeTip(@RequestBody Map<String, Object> map) {
 		int hsv_seq = Integer.parseInt(map.get("hsv_seq").toString());
-		
+
 		HtSurveyTip svTip = new HtSurveyTip();
 		svTip.setHsv_seq(hsv_seq);
-		
+
 		return htsurService.viewSurveyAgeTip(svTip);
-		
-	
+
 	}
+
+//	// 설문결과 저장리스트
+//	@PostMapping("/survey/saveresult")
+//	public void saveResult(@RequestBody Map<String, Object> map) {
+//		System.out.println("map : " + map);
+//
+//		ArrayList<Map<String, Object>> checklist = (ArrayList<Map<String, Object>>) map.get("totalCheckList");
+//		String kidSeq = map.get("kid_seq").toString();
+//		int hsvSeq = Integer.parseInt(map.get("hsv_seq").toString());
+//
+//	}
+
 	
 	//설문결과 저장리스트
 	 @PostMapping("/survey/saveresult")
@@ -109,4 +121,20 @@ public class HtSurveyController {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 }

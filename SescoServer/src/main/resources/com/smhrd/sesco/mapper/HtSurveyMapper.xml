@@ -5,4 +5,13 @@
 
 	
 
+
+	<insert id="insertSurvey" parameterType="com.smhrd.sesco.domain.Survey">
+		<selectKey keyProperty="sv_seq" resultType="String" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO t_survey (sv_dt, hsv_seq, kid_seq)
+		VALUES (#{sv_dt}, #{hsv_seq}, #{kid_seq})
+	</insert>
+	
 </mapper>
