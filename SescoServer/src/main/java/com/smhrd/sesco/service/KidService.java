@@ -2,6 +2,7 @@ package com.smhrd.sesco.service;
 
 import java.net.http.HttpHeaders;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -31,6 +32,16 @@ public class KidService {
 //	회원ID -> 아이정보List추출
 	public ArrayList<Kid> getKidList(String user_id){
 		return mapper.getKidList(user_id);
+	}
+
+	// 아이프로필 등록
+	public Kid KidRegister(Kid kid) {
+		mapper.KidRegister(kid);
+		return kid;
+	}
+
+	public void KidUpdate(Kid kid) {
+		mapper.KidUpdate(kid);
 	}
 	
 

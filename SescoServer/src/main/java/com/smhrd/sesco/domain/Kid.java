@@ -15,11 +15,17 @@ import lombok.Setter;
 @Setter
 public class Kid {
 
-	private long kid_seq;
+	private String kid_seq;
 	private String kid_name;
 	private Date kid_birth;
 	private double kid_height;
 	private double kid_weight;
 	private String user_id;
 	private char kid_gender;
+	
+	public Kid(double kid_height, double kid_weight, String user_id) {
+		this.kid_height = kid_height;
+		this.kid_weight = kid_weight;
+		this.user_id = user_id;
+	}
 }

@@ -10,7 +10,7 @@ import com.smhrd.sesco.domain.Member;
 public interface MemberMapper {
 
 	// 기존회원 가입
-	public void join(Member member);
+	public void MemberJoin(Member member);
 
 	// id 중복체크
 	@Select("select count(*) from t_member where user_id=#{user_id} and user_d_yn='n'")
@@ -30,13 +30,13 @@ public interface MemberMapper {
 
 	// 기존회원 로그인
 	@Select("select * from t_member where user_id=#{user_id} and user_pw=#{user_pw} and user_d_yn='n'")
-	public Member login(String user_id, String user_pw);
+	public Member MemberLogin(String user_id, String user_pw);
 
 	// 회원정보수정
-	public void update(Member member);
+	public void MemberUpdate(Member member);
 
 	// 기존회원탈퇴
 	@Update("update t_member set user_d_yn='y' where user_id=#{user_id}")
-	public void delete(String user_id);
+	public void MemberDelete(String user_id);
 
 }

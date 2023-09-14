@@ -1,19 +1,23 @@
 // Modal.js
 
-import React from "react";
+import React, { useState } from "react";
+import './components/Survey.css'
+import Survey from "./components/Survey";
 
-function Modal(props) {
-  function closeModal() {
-    props.closeModal();
-  }
+function Modal({surveyUp, closeSurveyModal}) {
+  
+  // function closeModal() {
+  //   props.closeModal();
+  // }
 
   return (
-    <div className="Modal" onClick={closeModal}>
+    
+    <div className="Modal" onClick={closeSurveyModal}>
       <div className="modalBody" onClick={(e) => e.stopPropagation()}>
-        <button id="modalCloseBtn" onClick={closeModal}>
+        <button id="modalCloseBtn" onClick={closeSurveyModal}>
           ✖
         </button>
-        {props.children}
+        {surveyUp && <Survey></Survey>}
       </div>
     </div>
   );

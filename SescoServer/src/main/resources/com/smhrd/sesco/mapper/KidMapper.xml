@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smhrd.sesco.mapper.KidMapper">
+	
+	<!-- 아이 프로필 등록 -->
+   <insert id="KidRegister" parameterType="com.smhrd.sesco.domain.Kid" >
+      insert into t_kid(kid_name, kid_birth, kid_height, kid_weight, user_id, kid_gender)
+      values(#{kid_name},#{kid_birth},#{kid_height},#{kid_weight},#{user_id},#{kid_gender})
+   </insert>
+	
+	<!-- 아이 프로필 수정 -->
+	<update id="KidUpdate" parameterType="com.smhrd.sesco.domain.Kid">
+		update t_kid set
+		kid_height=#{kid_height},kid_weight=#{kid_weight}
+		where user_id=#{user_id} and kid_seq=#{kid_seq}
+	</update>
+	
+</mapper>
