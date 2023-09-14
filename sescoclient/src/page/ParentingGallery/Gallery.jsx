@@ -82,6 +82,7 @@ function updateList(){
               <div className='gallery-city-container'>
                 {/* 선택한 지역이 있으면 List출력 */}
                 <h2>{clickedLocal}</h2>
+                <br />
                 {
                   // 선택한 지역이아직 없는경우
                   clickedLocal==null ?
@@ -94,7 +95,7 @@ function updateList(){
                       selectedCity==null ?
                         <CityList secondNameList={secondNameList} setSelectedCity={setSelectedCity}></CityList>
                       :
-                        <CityGallery></CityGallery>
+                        <CityGallery imgInfoList={imgInfoList} cityName={selectedCity}></CityGallery>
                     )
                   :
                   <>없어요</>
