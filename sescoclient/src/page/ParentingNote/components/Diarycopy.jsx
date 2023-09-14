@@ -196,6 +196,9 @@ const Diarycopy = () => {
                 end: "prev,next",
               }}
               
+              //눌렀을 때 해당 날짜 칸 색깔 강조
+              selectable true
+              
               eventDisplay={"block"}
               eventTextColor={"#FFF"}
               eventColor={"#F2921D"}
@@ -205,6 +208,7 @@ const Diarycopy = () => {
 
           <div>
             <button
+            className="diaryAddBtn"
               onClick={CreateDiaryForm}
               style={{ width: "460px", height: "100px", marginTop: "10px" }}
             >
