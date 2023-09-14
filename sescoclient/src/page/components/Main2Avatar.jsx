@@ -24,6 +24,7 @@ import won4 from '../../img/main2/여2_3.png'
 import won5 from '../../img/main2/여3_4.png'
 import won6 from '../../img/main2/여4_5.png'
 import won7 from '../../img/main2/여5_.png'
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -138,6 +139,9 @@ const Main2Avatar = ({ baby }) => {
         imgNum = 7
     }
 
+    const moveToTip=()=>{
+        sessionStorage.setItem("kid_seq", baby.kid_seq)
+    }
 
     return (
         <>
@@ -185,13 +189,15 @@ const Main2Avatar = ({ baby }) => {
                                 } kg
                                 <button className='babyCorrectBtn2' onClick={() => handleCorrectClick_weight('weight')}>{kid_weightBtn}</button> 
                             </div>
-                        </div>
-                        {/* 메뉴 아이콘 */}
-                        <div className='avatar-content'>
-                            <div className='avatarIcon-context'>
-                                <img width={'100px'} src={diaryIcon} />
-                                <img width={'100px'} src={galleryIcon} />
-                                <img width={'100px'} src={tipIcon} />
+                            {/* 메뉴 아이콘 */}
+                            <div className='avatar-content'>
+                                <div className='avatarIcon-context'>
+                                    <img width={'100px'} src={diaryIcon} />
+                                    <img width={'100px'} src={galleryIcon} />
+                                    <Link to="/tip" onClick={()=>moveToTip()}>
+                                        <img width={'100px'} src={tipIcon} />
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -132,11 +132,9 @@ public class DiaryService {
 		System.out.println(d_date);
 		return diaryMapper.DiaryDelete(d_date);
 	}
-
-	private DiaryMapper mapper;
 	
 	public ArrayList<Diary> getDiaryListWithImg(String user_id){
-		return mapper.getDiaryListWithImg(user_id);
+		return diaryMapper.getDiaryListWithImg(user_id);
 	}
 
 	//누른날짜의 일기 리스트 조회

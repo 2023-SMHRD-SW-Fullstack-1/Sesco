@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import './Tip.css'
 import TipImg from '../../../img/TipImg.png'
 import { FiBookOpen } from "react-icons/fi";
@@ -20,14 +20,39 @@ const Tip = ({user_id}) => {
     const [activeButtonId, setActiveButtonId] = useState('0');
     const imgs = [babyTip0, babyTip1, babyTip2, babyTip3, babyTip4, babyTip5, babyTip6, babyTip7, babyTip8]
     const [surveyUp, setSurveyUp] = useState(false); // 모달 열림/닫힘 상태 관리
-
+    //설문에 필요한 아이정보 확인 (null인 경우에는 선택을 통해 추가해줄 것 )
+    const [kidInfoList, setKidInfoList] = useState([])
+    const [selelctedKid, setSelectedKid] = useState()
+    const kid_seq = sessionStorage.getItem("kid_seq")
+    const [sendKid, setSendKid] = useState()
+    const NONE ="아이를 선택해주세요"
     // 모달 열기 함수
     const openSurveyModal = () => {
-        // main2-> 아이정보 값을 받아와서 값이 있다면 openModal 
+        // main2-> 아이정보 값을 받아와서 값이 있다면 openModal
         // 아이정보 null  ->  user_id 의 kid 값이 있는지 확인후  있다면 -> 아이 선택 옵션 
         // null-> 아이 등록 하세요 알림 (등록하겠습니까  예 버튼 -> main2, 아니오 버튼 -> 취소 )
-        setSurveyUp(true);
+//      선택되어있는 아이의 정보를 넘겨주면 됨
+        if(selelctedKid == NONE || selelctedKid==null){
+            alert("아이를선택해야합니다")
+        }else{
+            const tempList = kidInfoList.filter((kid) => kid.kid_name == selelctedKid)
+            setSendKid(tempList[0])
+            console.log(sendKid)
+            setSurveyUp(true);
+        }
+        
     };
+
+    // 선택된 옵션 확인하기
+    const handleChange = (event) => {
+        const selectedOption = event.target.value;
+        
+        setSelectedKid(selectedOption);
+
+        console.log(selelctedKid)
+        // 선택된 아이의 이름을 가져옴
+      };
+
   
     // 모달 닫기 함수
     const closeSurveyModal = () => {
@@ -49,8 +74,14 @@ const Tip = ({user_id}) => {
 {/* 유저한테 아이가 있는지 확인 
             axios.post('http://localhost:8081/kid/'){
                 [아이1, 아이2, 아이3]
-            } */}           
-
+            } */} 
+        axios.post('http://localhost:8081/sesco/kid/getkidlist',{
+            "user_id" : user_id
+        }).then((res)=>{
+            setKidInfoList(res.data)
+        }).catch(error => {
+            console.error(error);
+        });
     }, []);
 
     const handleToggle = (buttonId) => {
@@ -144,7 +175,15 @@ const Tip = ({user_id}) => {
 
                 </div>
                 <button className="btn-4" onClick={()=>openSurveyModal()}><span>아이 설문하러 가기 <FiBookOpen /></span></button>
-                {surveyUp &&  <Modal surveyUp = {surveyUp} closeSurveyModal={closeSurveyModal}/>}
+                
+                {/* 정렬 해.줘 */}
+                <select onChange={handleChange}>
+                    <option >{NONE}</option>
+                    {kidInfoList.map((kid)=>(
+                        <option selected={kid.kid_seq === kid_seq}> {kid.kid_name} </option>
+                    ))}
+                </select>
+                {surveyUp &&  <Modal kid={sendKid} surveyUp={surveyUp} closeSurveyModal={closeSurveyModal} />}
                 
             </div>
 

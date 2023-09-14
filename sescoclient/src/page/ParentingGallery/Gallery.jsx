@@ -1,58 +1,108 @@
 
 import React, { useState, useEffect } from 'react'
-import './Gallery.css';
-import Banner from './components/Banner';
-import GalleryMap from './components/GalleryMap';
-import LocalList from './components/LocalList';
+import './Gallery.css'
+import Banner from './components/Banner'
+import GalleryMap from './components/GalleryMap'
 import axios from 'axios'
-import { LocalContext } from './localContext';
+import { LocalContext } from './localContext'
+import CityList from './components/CityList'
+import CityGallery from './components/CityGallery'
 
 const Gallery = () => {
 
-  // 사진정보리스트
-  const [imgNameList, setImgNameList] = useState()
+  //선택한 지역
   const [clickedLocal, setClickedLocal] = useState()
-  const [firstNameList, setFirstNameList] = useState(["전라남도", "전라남도"])
-  const [secondNameList, setSecondNameList] = useState(["여수시", "여수시"])
+  //도시 선택
+  const [selectedCity, setSelectedCity] = useState(null)
 
-  // childList
+
+  // 사진경로리스트
+  const [imgNameList, setImgNameList] = useState([])
+  //도 (특별시 포함)
+  const [firstNameList, setFirstNameList] = useState([])
+  //시
+  const [secondNameList, setSecondNameList] = useState([])
+
+  // 사진정보객체리스트
+  const [imgInfoList, setImgInfoList] = useState([])
   
   useEffect(() => {
     //회원정보가 있는지 확인하기
     //1. 세션에서 회원정보 가져오기 ->? 오류처리
     // if()
-    let user_id = 'weq'
+    let user_id = 'user1'
 
 
     //회원정보 중 이미지가 있는 일기 정보를 다 불러옴 
-    axios.post("http://localhost:8081/sesco/diary/getdiarylist/img", {
-      body:{
-        user_id : {user_id}
-      }
+    axios.post("http://localhost:8081/sesco/diary/getdiarylist/img",{
+        "user_id" : user_id
     }).then((res)=>{
       //이미지가 있는 일기 정보를 전부다 가져왔음
-      // res.data.img_name
-      // res.data.img_lat
-      setFirstNameList([...firstNameList])
-      setSecondNameList([...secondNameList])
-      // res.data.img_lon
-    })
+      console.log("데이터통신성공")
+      console.log(res.data)
+      res.data.map((item)=>
+          setImgInfoList([...imgInfoList, 
+            {
+              imgName : item.img_real_name,
+              firstName : item.img_do,
+              secondName : item.img_si 
+            }
+          ])
+      )
+    }).catch((err)=>console.log("데이터 불러오기 실패"+err))
   }, []) 
+
+
+  //해당 지역에 대한 정보 filtering하기 위함
+function updateList(){
+    const filteredList = imgInfoList.filter(info => info.firstName === clickedLocal)
+    setImgNameList([])
+    setFirstNameList([])
+    setSecondNameList([])
+
+    setImgNameList([...filteredList.map(info => info.imgName)])
+    setFirstNameList([...filteredList.map(info => info.firstName)])
+    setSecondNameList([...filteredList.map(info => info.secondName)])
+ } 
+
+  // 선택지역이 바뀌면 데이터가 바뀜
+  useEffect(()=>{
+    updateList()
+    setSelectedCity(null)
+  },[clickedLocal])
     
   return (
     <>
-    <Banner/>
-    <LocalContext.Provider value={{clickedLocal, setClickedLocal}}>
-        <div style={{ display: 'flex'}}>
-          <div style={{ width: "1080px", height: "800px" }}>
-            <GalleryMap firstNameList={new Set(firstNameList)} secondNameList={new Set(secondNameList)} ></GalleryMap>
-          </div>
-          <div>
-            <LocalList></LocalList>
-          </div>
-
-        </div>
-      </LocalContext.Provider>
+      <Banner/>
+        <LocalContext.Provider value={{clickedLocal, setClickedLocal}}>
+            <div style={{ display:'flex', width:"100%", height:"100%"}}>
+              <div style={{ width:"fit-content", height: "fit-content" }}>
+                <GalleryMap firstNameList={new Set(firstNameList)} secondNameList={new Set(secondNameList)} ></GalleryMap>
+              </div>
+              <div className='gallery-city-container'>
+                {/* 선택한 지역이 있으면 List출력 */}
+                <h2>{clickedLocal}</h2>
+                <br />
+                {
+                  // 선택한 지역이아직 없는경우
+                  clickedLocal==null ?
+                  <>골라봐</>
+                  : 
+                  // 선택한 지역에 사진이 없는 경우
+                  secondNameList.length>0 ?
+                    (
+                      // 지역내에서 특정 도시를 선택한 경우 
+                      selectedCity==null ?
+                        <CityList secondNameList={secondNameList} setSelectedCity={setSelectedCity}></CityList>
+                      :
+                        <CityGallery imgInfoList={imgInfoList} cityName={selectedCity}></CityGallery>
+                    )
+                  :
+                  <>없어요</>
+                }
+              </div>
+            </div>
+        </LocalContext.Provider>
     </>
   );
 };

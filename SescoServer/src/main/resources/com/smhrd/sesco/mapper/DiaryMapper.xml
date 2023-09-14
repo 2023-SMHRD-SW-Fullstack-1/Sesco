@@ -32,19 +32,18 @@
 	</delete>
 
 
-	<select id="getDiaryListWithImg"
-		resultType="com.smhrd.sesco.domain.Diary">
-		SELECT *
-		FROM t_diary A
-		INNER JOIN t_note B
-		ON A.note_seq = B.note_seq
-		AND B.kid_seq IN (
-		SELECT kid_seq
-		FROM t_kid C
-		WHERE C.user_id = #{user_id}
-		)
-		WHERE A.d_img_yn='Y';
-	</select>
+<select id="getDiaryListWithImg" resultType="com.smhrd.sesco.domain.Diary">
+	SELECT *
+	FROM t_diary A
+	INNER JOIN t_note B 
+	ON A.note_seq = B.note_seq
+	AND B.kid_seq IN (
+						SELECT kid_seq
+						FROM t_kid C
+						WHERE C.user_id = #{user_id}
+					 )
+	WHERE A.d_img_yn='Y'
+</select>
 
 </mapper>
 

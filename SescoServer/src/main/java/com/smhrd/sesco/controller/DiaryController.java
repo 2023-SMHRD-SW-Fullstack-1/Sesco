@@ -123,7 +123,18 @@ public class DiaryController {
 
 	@PostMapping("/diary/getdiarylist/img")
 	private ArrayList<Diary> getDiaryListWithImg(@RequestBody Member member){
-		return diaryService.getDiaryListWithImg(member.getUser_id());
+//		try {
+//			ArrayList<Diary> resultList = new ArrayList<Diary>();
+//			resultList.addAll(diaryService.getDiaryListWithImg(member.getUser_id()));
+//			return resultList;
+//		}catch (NullPointerException e) {
+//			System.out.println("저장된 데이터가 없습니다");;
+//		}finally {
+//			return null;
+//		}
+		ArrayList<Diary> resultList = new ArrayList<Diary>();
+		resultList.addAll(diaryService.getDiaryListWithImg(member.getUser_id()));
+		return resultList;
 	}
 	
 	//게시글 삭제
