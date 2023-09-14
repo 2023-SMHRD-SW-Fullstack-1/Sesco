@@ -10,6 +10,8 @@ const Banner = () => {
         backgroundSize: 'cover',
       }}>
         <div className='Mbanner_info'>
+          <h2>소소한 육아 TIP </h2>
+          <br/><br/>
           <h3>0세~3세까지 : 뇌의 골격이 형성되는 시기</h3>
           <br/>
           <h5>▷  다양한 감각을 자극할 수 있는 놀이를 해주세요</h5>

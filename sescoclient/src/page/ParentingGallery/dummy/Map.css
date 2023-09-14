@@ -18,7 +18,7 @@
     background-size : cover;
 }
 
-
+/* 
 .gallery-map-marker:hover {
     height: 150px;
     width: 150px;
@@ -29,8 +29,8 @@
     left: 38%;
     top: 15%;
     z-index: 0;
-}
-
+} */
+/* 
 .gallery-map-marker.gangwon{
     position: inherit;
     left: 61.4%;
@@ -78,4 +78,4 @@
     left: 11.4%;
     top : 84.7%;
     z-index: 3;
-}
+} */

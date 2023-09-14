@@ -23,11 +23,9 @@ public class Kid {
 	private String user_id;
 	private char kid_gender;
 	
-	
 	public Kid(double kid_height, double kid_weight, String user_id) {
 		this.kid_height = kid_height;
 		this.kid_weight = kid_weight;
 		this.user_id = user_id;
 	}
-	
 }

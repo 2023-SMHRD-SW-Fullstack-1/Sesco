@@ -18,6 +18,6 @@ public interface KidMapper {
 	public void KidRegister(Kid kid);
 
 	//아이 프로필 수정
-	public void KidUpdate(Kid kidVO);
-
+	public void KidUpdate(Kid kid);
+	
 }

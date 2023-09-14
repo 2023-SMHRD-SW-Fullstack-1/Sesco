@@ -65,12 +65,12 @@
 .Tbanner_info{
     position: relative;
     top: 130px;
-    left: 420px;
+    margin-left: 200px;
 }
 .Mbanner_info{
     position: relative;
-    top: 120px;
-    left: 70px;
+    top: 50px;
+    margin-left: 80px;
 }
 .timeline{
     display: flex;

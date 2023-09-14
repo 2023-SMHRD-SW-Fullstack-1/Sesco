@@ -2,6 +2,7 @@ package com.smhrd.sesco.mapper;
 
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import java.util.ArrayList;
@@ -28,6 +29,8 @@ public interface DiaryMapper {
 	public int DiaryDelete(Date d_date);
 
 	public ArrayList<Diary> getDiaryListWithImg(String user_id);
+
+	public List<Diary> DiaryListOne(LocalDate d_date);
 	
 
 

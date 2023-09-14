@@ -16,6 +16,18 @@
     }
 }
 
+.map-location-clicked{
+    z-index: 55;
+    >.location{
+        fill: #107759;
+        stroke : #D0E7E0;
+        height: 100px;
+        width: 100px;
+        stroke-width: 0.7px;
+        z-index: 5;
+    }
+}
+
 
 .map-location1{
     z-index: 3;

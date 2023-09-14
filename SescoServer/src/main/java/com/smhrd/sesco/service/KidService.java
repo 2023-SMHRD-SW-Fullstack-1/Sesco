@@ -40,8 +40,8 @@ public class KidService {
 		return kid;
 	}
 
-	public void KidUpdate(Kid kidVO) {
-		mapper.KidUpdate(kidVO);
+	public void KidUpdate(Kid kid) {
+		mapper.KidUpdate(kid);
 	}
 	
 
