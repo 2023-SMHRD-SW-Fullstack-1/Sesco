@@ -11,9 +11,11 @@ const PreSurveyResult = ({closePreSurveyResult, setShowPreSurveyResult}) => {
           <h2 className='survey-title' id='survey_title'>{user_id}님의 이전 체크리스트</h2>
         </div>
       </div>
+
       <div>
-        이전설문 체크리스트 내용 나오는 곳.
+          이전 체크리스트 불러오는 곳
       </div>
+
       <button className='close-modal-button' onClick={()=>setShowPreSurveyResult(false)}>닫기</button>
     </div>
   )
