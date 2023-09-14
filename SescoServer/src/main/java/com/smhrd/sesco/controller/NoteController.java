@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,17 +55,26 @@ public class NoteController {
 	}
 
 	// 수첩 수정
-	@PostMapping("/note/update")
-	public Note updateNote(@RequestBody Note updatedNote) {
-		System.out.println("수정할 수첩 정보: " + updatedNote);
-		return noteService.updateNote(updatedNote);
+	@PutMapping("/note/update")
+	public void updateNote(@RequestBody Map<String, String> noteData) {
+	    String noteSeq = noteData.get("note_seq");
+	    String newName = noteData.get("n_name");
+
+	    System.out.println("controller 수첩 수정:  note_seq=" + noteSeq + ", n_name=" + newName);
+
+	    Note updatedNote = new Note();
+	    updatedNote.setNote_seq(noteSeq);
+	    updatedNote.setN_name(newName);
+
+	    noteService.updateNote(updatedNote);
 	}
 
+
 	// 수첩 삭제
-	@DeleteMapping("/note/delete/{noteId}")
-	public void deleteNoteById(@PathVariable String noteId) {
-		System.out.println("삭제할 수첩 ID: " + noteId);
-		noteService.noteDeleteById(noteId);
+	@DeleteMapping("/note/delete/{note_seq}")
+	public void deleteNoteById(@PathVariable String note_seq) {
+		System.out.println("삭제할 수첩 ID: " + note_seq);
+		noteService.noteDeleteById(note_seq);
 	}
 
 }

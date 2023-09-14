@@ -57,14 +57,14 @@
 		parameterType="com.smhrd.sesco.domain.Note">
 		UPDATE t_note SET
 		n_name=#{n_name}
-		WHERE note_id=#{noteId}
+		WHERE note_seq=#{note_seq}
 	</update>
 
 	<!-- 수첩 삭제 -->
 	<delete id="noteDeleteById" parameterType="String">
 		DELETE FROM t_note
 		WHERE
-		note_id= #{noteId}
+		note_seq= #{note_seq}
 	</delete>
 
 </mapper>

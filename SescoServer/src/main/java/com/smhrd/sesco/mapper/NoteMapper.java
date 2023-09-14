@@ -24,9 +24,9 @@ public interface NoteMapper {
 	void noteInsert(Note note);
 
 	// 수첩 수정
-	Note noteUpdate(Note note);
+	void noteUpdate(Note note);
 
 	// 수첩 삭제
-	void noteDeleteById(@Param("noteId") String noteID);
+	void noteDeleteById(@Param("note_seq") String note_seq);
 
 }

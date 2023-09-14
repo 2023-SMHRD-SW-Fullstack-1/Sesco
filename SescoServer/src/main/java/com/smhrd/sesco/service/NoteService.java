@@ -101,14 +101,14 @@ public class NoteService {
 	}
 
 	// 수첩 수정
-	public Note updateNote(Note updatedNote) {
-
-		return noteMapper.noteUpdate(updatedNote);
+	public void updateNote(Note updatedNote) {
+		System.out.println("service 수첩 수정:" + updatedNote);
+		noteMapper.noteUpdate(updatedNote);
 	}
 
 	// 수첩 삭제
-	public void noteDeleteById(String noteId) {
-		return;
+	public void noteDeleteById(String note_seq) {
+		noteMapper.noteDeleteById(note_seq);
 
 	}
 

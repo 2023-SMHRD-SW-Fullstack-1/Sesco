@@ -6,13 +6,15 @@ import rightBtn from '../noteImg/noteRight.png'
 import leftBtn from '../noteImg/noteLeft.png'
 import axios from 'axios';
 
-function NoteList({ year, notes, onAddNote, onNoteClick, kidSeq }) {
+function NoteList({ year, notes, onAddNote, onNoteClick, kidSeq, allKidSeq }) {
     const [visibleNotes, setVisibleNotes] = useState(8);
     const [startIndex, setStartIndex] = useState(0);
     const [addNoteImg, setAddNoteImg] = useState(false);
     const [newNoteName, setNewNoteName] = useState("");
 
-    console.log("kidSelect : ",kidSeq)
+    console.log("**NoteList**")
+    console.log("props로 넘겨 받은 kidSelect : ", kidSeq)
+    console.log("props로 넘겨 받은 allKidSeq : ", allKidSeq)
 
     const scrollLeft = () => {
         console.log("왼쪽 화살표 클릭")
@@ -37,21 +39,23 @@ function NoteList({ year, notes, onAddNote, onNoteClick, kidSeq }) {
     // 수첩 저장 버튼 클릭 시 
     const handleSaveNewNote = () => {
         console.log("수첩 저장 버튼 클릭, 수첩 이름 :", newNoteName);
-        console.log("수첩 저장 버튼 클릭 : ", kidSeq)
-        
-        const note = {
-            n_name : newNoteName,
-            kid_seq : kidSeq 
-        }
+        console.log("수첩 저장 버튼 클릭 : ", kidSeq);
 
-        axios.post('http://localhost:8081/sesco/note/createnote',note)
-        .then(response =>{
-            console.log("백엔드 응답 : ",note)
-        })
-        .catch(e => {
-            console.log("백엔드 요청 실패 : ", e)
-        })
-    }
+        // allKidSeq 배열에서 각 아이에 대해 별도의 요청 보내기
+        allKidSeq.forEach(async (kid_seq) => {
+            const note = {
+                n_name: newNoteName,
+                kid_seq: kid_seq
+            };
+
+            try {
+                const response = await axios.post('http://localhost:8081/sesco/note/createnote', note);
+                console.log("백엔드 응답 : ", response.data);
+            } catch (e) {
+                console.log("백엔드 요청 실패 : ", e);
+            }
+        });
+    };
 
     return (
         <div>
@@ -84,13 +88,13 @@ function NoteList({ year, notes, onAddNote, onNoteClick, kidSeq }) {
                 {/* +버튼 영역 */}
                 {addNoteImg && (
                     <div className='note-item-container' style={{ width: '150px', height: '200px', backgroundImage: `url(${noteList})`, backgroundSize: 'cover' }} onClick={() => onAddNote()}>
-                       
+
 
                         {/* 수첩 이름 입력란 */}
                         <input type="text" id='newNote-nameInput' value={newNoteName} onChange={(e) => setNewNoteName(e.target.value)} placeholder="수첩 이름" />
 
                         {/* 저장 버튼 */}
-                        <button  id='newNote-saveBtn' onClick={() => handleSaveNewNote(newNoteName)}>저장</button>
+                        <button id='newNote-saveBtn' onClick={() => handleSaveNewNote(newNoteName)}>저장</button>
                     </div>
                 )}
 
