@@ -4,9 +4,6 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smhrd.sesco.mapper.NoteMapper">
 
-	<!-- 모든 노트 불러오기(연도별로 그룹화) <select id="selectNotesByYear" resultType="com.smhrd.sesco.domain.Note"> 
-		SELECT * FROM t_note WHERE user_id = #{userID} YEAR(n_s_date) = #{year} AND 
-		note_d_yn = 'N' ORDER BY n_s_date DESC </select> -->
 
 	<!-- 모든 수첩 불러오기(연도별로 그룹화) -->
 	<select id="selectNotesByYear"
@@ -14,7 +11,8 @@
 		SELECT *
 		FROM t_note
 		WHERE note_d_yn = 'N'
-		ORDER BY YEAR(n_s_date) DESC, n_s_date DESC
+		ORDER BY
+		YEAR(n_s_date) DESC, n_s_date DESC
 	</select>
 
 
@@ -33,14 +31,13 @@
 		resultType="com.smhrd.sesco.domain.Note">
 		SELECT n.*
 		FROM t_note n
-		JOIN t_diary d ON n.note_seq =
-		d.note_seq
-		WHERE CONCAT('#', d.d_tags, '#') LIKE CONCAT('%#',
-		REPLACE(#{tag}, '#',
-		''), '#%')
+		JOIN t_diary d ON n.note_seq = d.note_seq
+		WHERE
+		CONCAT('#', d.d_tags, '#') LIKE CONCAT('%#', REPLACE(#{tag}, '#',
+		''),
+		'#%')
 		AND YEAR(n.n_s_date) = #{year}
-		AND
-		n.note_d_yn = 'N'
+		AND n.note_d_yn = 'N'
 
 	</select>
 
@@ -49,8 +46,10 @@
 		parameterType="com.smhrd.sesco.domain.Note">
 		INSERT INTO t_note (n_name, n_s_date, n_e_date, kid_seq,
 		note_d_yn)
-		VALUES (#{n_name}, #{n_s_date, jdbcType=DATE, javaType=java.sql.Date},
-		#{n_e_date, jdbcType=DATE, javaType=java.sql.Date}, #{kid_seq}, 'N')
+		VALUES (#{n_name}, #{n_s_date, jdbcType=DATE,
+		javaType=java.sql.Date},
+		#{n_e_date, jdbcType=DATE,
+		javaType=java.sql.Date}, #{kid_seq}, 'N')
 	</insert>
 
 	<!-- 수첩 수정 -->

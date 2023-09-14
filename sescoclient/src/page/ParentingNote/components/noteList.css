@@ -136,3 +136,8 @@
       padding :5px ;  
       font-family:Akshar;  
   }
+
+  #newNote-nameInput{
+    margin-top: 80px;
+    width: 95px;
+  }

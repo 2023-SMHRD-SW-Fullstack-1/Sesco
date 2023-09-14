@@ -87,10 +87,10 @@ function NoteList({ year, notes, onAddNote, onNoteClick, kidSeq }) {
                        
 
                         {/* 수첩 이름 입력란 */}
-                        <input type="text" value={newNoteName} onChange={(e) => setNewNoteName(e.target.value)} placeholder="수첩 이름" />
+                        <input type="text" id='newNote-nameInput' value={newNoteName} onChange={(e) => setNewNoteName(e.target.value)} placeholder="수첩 이름" />
 
                         {/* 저장 버튼 */}
-                        <button onClick={() => handleSaveNewNote(newNoteName)}>저장</button>
+                        <button  id='newNote-saveBtn' onClick={() => handleSaveNewNote(newNoteName)}>저장</button>
                     </div>
                 )}
 

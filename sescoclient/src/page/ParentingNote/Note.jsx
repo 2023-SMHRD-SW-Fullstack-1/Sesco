@@ -236,6 +236,7 @@ const Note = () => {
               <div className='diary-container active'>
                 <Diarycopy kidSeq={kidSelect}  />
                 <button className='diary-close' onClick={() => handleDiaryClose()}>X</button>
+                
               </div>}
             {/* 사용자가 추가 버튼 클릭시  */}
             
