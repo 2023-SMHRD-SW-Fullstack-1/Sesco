@@ -24,10 +24,12 @@ import won4 from '../../img/main2/여2_3.png'
 import won5 from '../../img/main2/여3_4.png'
 import won6 from '../../img/main2/여4_5.png'
 import won7 from '../../img/main2/여5_.png'
+import { Link } from 'react-router-dom';
 
 
 const Main2Avatar = ({baby}) => {
     
+
     const manBabyimgs =[man0,man1,man2,man3,man4,man5,man6,man7]
     const womBabyimgs =[won0,won1,won2,won3,won4,won5,won6,won7]
 
@@ -56,6 +58,9 @@ const Main2Avatar = ({baby}) => {
         imgNum=7
     }
 
+    const moveToTip=()=>{
+        sessionStorage.setItem("kid_seq", baby.kid_seq)
+    }
 
     return (
         <>
@@ -87,7 +92,9 @@ const Main2Avatar = ({baby}) => {
                                 <div className='avatarIcon-context'>
                                     <img width={'100px'} src={diaryIcon} />
                                     <img width={'100px'} src={galleryIcon} />
-                                    <img width={'100px'} src={tipIcon} />
+                                    <Link to="/tip" onClick={()=>moveToTip()}>
+                                        <img width={'100px'} src={tipIcon} />
+                                    </Link>
                                 </div>
                             </div>
                         </div>

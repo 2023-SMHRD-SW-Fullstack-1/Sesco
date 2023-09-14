@@ -4,7 +4,7 @@ import SurveyResult from './SurveyResult';
 import PreSurveyResult from './PreSurveyResult';
 import './Survey.css';
 
-function Survey({ user_id }) {
+function Survey({kid, user_id }) {
     const category = ['사회/정서적 영역', '언어/의사소통 영역', '인지(학습,사고,문제해결력)', '운동/신체발달 영역'];
 
     const [data, setData] = useState([]);
@@ -15,6 +15,33 @@ function Survey({ user_id }) {
     const [brainCheckList, setBrainCheckList] = useState([]);
     const [physicalCheckList, setPhysicalCheckList] = useState([]);
     const [showPreSurveyResult, setShowPreSurveyResult] = useState(false);
+
+    console.log(kid)
+
+    //아이정보에서 아이의 개월수를 찾아옴
+    const age = new Date();
+    const month = age.getMonth()+1;
+    const year = age.getFullYear();
+    let kidMonth = '';
+    let babyAge = ((Number(year)-Number(kid.kid_birth.substring(0, 4)))*12)+((Number(month)-Number(kid.kid_birth.substring(5, 7))))
+
+    if(babyAge>=0&&babyAge<=6){
+        kidMonth=2
+    }else if(babyAge>6&&babyAge<=12){
+        kidMonth=6
+    }else if(babyAge>12&&babyAge<=18){
+        kidMonth=12
+    }else if(babyAge>18&&babyAge<=24){
+        kidMonth=18
+    }else if(babyAge>24&&babyAge<=36){
+        kidMonth=24
+    }else if(babyAge>36&&babyAge<=48){
+        kidMonth=48
+    }else{
+        kidMonth=60
+    }
+
+
 
     const config = {
         headers: { 'Content-Type': 'application/json;charset=UTF-8' }
@@ -57,7 +84,8 @@ function Survey({ user_id }) {
         ]);
         const resultsData = {
             totalCheckList: [...socialCheckList,...languageCheckList,...brainCheckList,...physicalCheckList],
-            // kid_seq:
+            kid_seq: kid.kid_seq,
+            hsv_seq: kidMonth
         };
         try {
             const response = await axios.post('http://localhost:8081/sesco/survey/saveresult', resultsData, config);
@@ -75,7 +103,7 @@ function Survey({ user_id }) {
         const fetchData = async () => {
             try {
                 const response = await axios.post('http://localhost:8081/sesco/survey/agechecklist', {
-                    hsv_seq: 6,
+                    hsv_seq: kidMonth,
                 });
                 const responseData = response.data;
                 setData(responseData);

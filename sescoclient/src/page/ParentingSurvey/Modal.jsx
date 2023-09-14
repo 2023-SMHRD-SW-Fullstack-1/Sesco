@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import './components/Survey.css'
 import Survey from "./components/Survey";
 
-function Modal({surveyUp, closeSurveyModal}) {
+function Modal({kid, surveyUp, closeSurveyModal}) {
   
   // function closeModal() {
   //   props.closeModal();
@@ -17,7 +17,7 @@ function Modal({surveyUp, closeSurveyModal}) {
         <button id="modalCloseBtn" onClick={closeSurveyModal}>
           ✖
         </button>
-        {surveyUp && <Survey></Survey>}
+        {surveyUp && <Survey kid={kid}></Survey>}
       </div>
     </div>
   );
