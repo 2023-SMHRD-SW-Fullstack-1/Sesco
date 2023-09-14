@@ -3,15 +3,42 @@
     height: 240px;
 }
 
-
-.slider-container{
-    width: auto;
-    height: 410px;
-    background-color: #bfe0d8e0;
-}
 .city-img-box{
     width: 220px !important;
     margin-right: 10px;
 }
+
 .city-img-box.card{
+}
+
+/* .slider-container{
+    width: auto;
+    height: 410px;
+    background-color: #bfe0d8e0;
+} */
+.slider-container{
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.slider-item{
+    height: 440px;
+    justify-content: center;
+    margin-left: 7%;
+    display: flex;
+    border-radius: 20px;
+    align-items: left !important;
+}
+
+.slider-item.card{
+    width: 200px !important;
+    padding: 8px;
+}
+
+.slider-item-title{
+    font-size: 24px !important;
+}
+
+.slick-list{
+    height: 430px;
 }

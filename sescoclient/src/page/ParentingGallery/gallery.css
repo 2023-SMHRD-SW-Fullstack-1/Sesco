@@ -18,7 +18,12 @@
     background-color: aliceblue;
 } */
 
-.gallery-city-container{
+
+
+
+
+
+/* .gallery-city-container{
     width: 50%;
     height: fit-content;
     margin-top: 120px;
@@ -28,4 +33,21 @@
     border-radius: 5px;
     border-width: 5px;
     border-style: solid;
+} */
+
+.gallery-city-container{
+    height: 500px;
+    margin-top: 100px;
+    width: 50%;
+    background-color: rgb(226 244 237 / 67%);
+    padding: 40px 60px 50px 50px;
+    border-color: #D0E7E0;
+    border-radius: 5px;
+    border-width: 5px;
+    border-style: solid;
+    text-align: center;
+}
+
+.gallery-city-container h2 {
+    font-size: 20px;
 }

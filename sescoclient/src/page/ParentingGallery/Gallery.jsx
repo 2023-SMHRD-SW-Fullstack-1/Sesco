@@ -6,14 +6,21 @@ import GalleryMap from './components/GalleryMap'
 import axios from 'axios'
 import { LocalContext } from './localContext'
 import CityList from './components/CityList'
+import CityGallery from './components/CityGallery'
 
 const Gallery = () => {
 
   //선택한 지역
   const [clickedLocal, setClickedLocal] = useState()
-  // 사진정보리스트
+  //도시 선택
+  const [selectedCity, setSelectedCity] = useState(null)
+
+
+  // 사진경로리스트
   const [imgNameList, setImgNameList] = useState([])
+  //도 (특별시 포함)
   const [firstNameList, setFirstNameList] = useState([])
+  //시
   const [secondNameList, setSecondNameList] = useState([])
 
   // 사진정보객체리스트
@@ -31,38 +38,18 @@ const Gallery = () => {
         "user_id" : user_id
     }).then((res)=>{
       //이미지가 있는 일기 정보를 전부다 가져왔음
-      // setImgInfoList([...imgInfoList, 
-      //   {
-      //     // imgName : {base64로 인코딩된 String문자열}
-      //     // firstName : 
-      //     // secondName : 
-      //   }])
+      console.log("데이터통신성공")
       console.log(res.data)
-    })
-    //테스트 데이터
-    setImgInfoList([{
-      imgName : "e",
-            firstName : "전라남도",
-            secondName : "광주광역시"
-    },{imgName : "e",
-      firstName : "전라남도",
-      secondName : "여수"},{
-        imgName : "e",
-            firstName : "전라남도",
-            secondName : "영광"
-      },{
-        imgName : "e",
-            firstName : "전라북도" ,
-            secondName : "익산"
-      },{
-        imgName : "e",
-            firstName : "전라북도",
-            secondName : "전주"
-      },{
-        imgName : "e",
-        firstName : "전라남도",
-        secondName :"담양"
-      }])
+      res.data.map((item)=>
+          setImgInfoList([...imgInfoList, 
+            {
+              imgName : item.img_real_name,
+              firstName : item.img_do,
+              secondName : item.img_si 
+            }
+          ])
+      )
+    }).catch((err)=>console.log("데이터 불러오기 실패"+err))
   }, []) 
 
 
@@ -73,14 +60,15 @@ function updateList(){
     setFirstNameList([])
     setSecondNameList([])
 
-    setImgNameList(prevImgNameList => [...prevImgNameList, ...filteredList.map(info => info.imgName)])
-    setFirstNameList(prevFirstNameList => [...prevFirstNameList, ...filteredList.map(info => info.firstName)])
-    setSecondNameList(prevSecondNameLIst => [...prevSecondNameLIst, ...filteredList.map(info => info.secondName)])
+    setImgNameList([...filteredList.map(info => info.imgName)])
+    setFirstNameList([...filteredList.map(info => info.firstName)])
+    setSecondNameList([...filteredList.map(info => info.secondName)])
  } 
 
   // 선택지역이 바뀌면 데이터가 바뀜
   useEffect(()=>{
     updateList()
+    setSelectedCity(null)
   },[clickedLocal])
     
   return (
@@ -93,12 +81,24 @@ function updateList(){
               </div>
               <div className='gallery-city-container'>
                 {/* 선택한 지역이 있으면 List출력 */}
-                <h4>{clickedLocal}</h4>
+                <h2>{clickedLocal}</h2>
                 {
-                  clickedLocal &&
-                  <CityList imgNameList={imgNameList} secondNameList={secondNameList}></CityList>
+                  // 선택한 지역이아직 없는경우
+                  clickedLocal==null ?
+                  <>골라봐</>
+                  : 
+                  // 선택한 지역에 사진이 없는 경우
+                  secondNameList.length>0 ?
+                    (
+                      // 지역내에서 특정 도시를 선택한 경우 
+                      selectedCity==null ?
+                        <CityList secondNameList={secondNameList} setSelectedCity={setSelectedCity}></CityList>
+                      :
+                        <CityGallery></CityGallery>
+                    )
+                  :
+                  <>없어요</>
                 }
-                
               </div>
             </div>
         </LocalContext.Provider>
