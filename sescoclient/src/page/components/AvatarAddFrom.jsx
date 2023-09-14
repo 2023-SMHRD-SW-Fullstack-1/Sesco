@@ -3,6 +3,7 @@ import avatarBg from '../../img/avatarBg.png'
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AvatarAddFrom = () => {
 
@@ -13,11 +14,12 @@ const AvatarAddFrom = () => {
     const [kid_birth, setKid_Age] = useState('');
     const [kid_weight, setKid_Weight] = useState('');
     const [kid_height, setKid_Key] = useState('');
+    
     console.log('kid_name', kid_name, 'kid_birth', kid_birth, 'kid_weight', kid_weight, 'kid_height', kid_height, 'kid_gender', kid_gender,'user_id',user_id);
-
 
     const saveKidInfo = () => {
         fetchData();
+        window.location.replace("/main")
         console.log('kid_name', kid_name, 'kid_birth', kid_birth, 'kid_weight', kid_weight, 'kid_height', kid_height, 'kid_gender', kid_gender,'user_id',user_id);
     }
     const config = {

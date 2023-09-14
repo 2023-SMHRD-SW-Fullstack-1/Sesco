@@ -8,8 +8,15 @@ import axios from 'axios';
 const Main2 = () => {
   const [babyAdd, setBabyAdd] = useState(false);
   const [babyList,setBabyList] = useState([]);
-  const user_id = sessionStorage.getItem('user_id');
+  const age = new Date();
+  const month = age.getMonth()+1;
+  const year = age.getFullYear();
+  const day = year+'0'+ month
 
+  
+  const user_id = sessionStorage.getItem('user_id');
+  babyList.forEach( (item, index) => console.log(index,item.kid_birth))
+  
   const BabyAddClicked=()=>{
     if(babyAdd){
       setBabyAdd(false)
@@ -19,6 +26,7 @@ const Main2 = () => {
   }
 
   console.log("아이 불러오기 성공 babyList: ", babyList)
+  console.log("day: ", Number(day))
 
   useEffect(() => {
     
@@ -43,7 +51,8 @@ const Main2 = () => {
       <Banner />
 
       <div className='main2-avatarcontainer'>
-        <Main2Avatar babyList={babyList}/>
+      {babyList.map((baby,index)=><Main2Avatar key={index} baby={baby}/>)}
+        
         {babyAdd &&
           <AvatarAddFrom  />
         }

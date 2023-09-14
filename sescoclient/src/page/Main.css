@@ -149,3 +149,32 @@
     margin-right: 30px;
 }
 
+.babyImgContent{
+    display: flex;
+}
+.charImg{
+    position: absolute;
+    width: 180px;
+}
+#charImg0{
+    width: 180px;
+}
+#charImg1{
+    width: 190px;
+}
+#charImg2{
+    width: 165px;
+}
+#charImg3{
+    width: 165px;
+}
+#charImg4{
+    width: 220px;
+}
+#charImg5{
+    width: 200px;
+    height: 300px;
+}
+#charImg6{
+    width: 250px;
+}
