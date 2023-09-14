@@ -15,7 +15,6 @@ const Gallery = () => {
   //도시 선택
   const [selectedCity, setSelectedCity] = useState(null)
 
-
   // 사진경로리스트
   const [imgNameList, setImgNameList] = useState([])
   //도 (특별시 포함)
@@ -32,7 +31,6 @@ const Gallery = () => {
     // if()
     let user_id = 'user1'
 
-
     //회원정보 중 이미지가 있는 일기 정보를 다 불러옴 
     axios.post("http://localhost:8081/sesco/diary/getdiarylist/img",{
         "user_id" : user_id
@@ -41,36 +39,41 @@ const Gallery = () => {
       console.log("데이터통신성공")
       console.log(res.data)
       res.data.map((item)=>
-          setImgInfoList([...imgInfoList, 
-            {
-              imgName : item.img_real_name,
-              firstName : item.img_do,
-              secondName : item.img_si 
-            }
-          ])
+      setImgInfoList([...imgInfoList, 
+        {
+          "imgName" : item.img_real_name,
+          "firstName" : item.img_do,
+          "secondName" : item.img_si 
+        }
+      ])
       )
     }).catch((err)=>console.log("데이터 불러오기 실패"+err))
   }, []) 
+  
+  
+  
+  
+  // 선택지역이 바뀌면 데이터가 바뀜
+  useEffect(()=>{
+    console.log(imgInfoList)
 
-
-  //해당 지역에 대한 정보 filtering하기 위함
-function updateList(){
-    const filteredList = imgInfoList.filter(info => info.firstName === clickedLocal)
+    //해당 지역에 대한 정보 filtering하기 위함
     setImgNameList([])
     setFirstNameList([])
     setSecondNameList([])
 
-    setImgNameList([...filteredList.map(info => info.imgName)])
-    setFirstNameList([...filteredList.map(info => info.firstName)])
-    setSecondNameList([...filteredList.map(info => info.secondName)])
- } 
-
-  // 선택지역이 바뀌면 데이터가 바뀜
-  useEffect(()=>{
-    updateList()
-    setSelectedCity(null)
-  },[clickedLocal])
+    const filteredList = imgInfoList.filter((info) => info.firstName != clickedLocal)
     
+    filteredList.map(info => (
+      setImgNameList([...imgNameList, info.imgName]),
+      setFirstNameList([...firstNameList, info.firstName]), 
+      setSecondNameList([...secondNameList,info.secondName])
+      )
+    )
+    setSelectedCity(null)
+    console.log(clickedLocal)
+  },[clickedLocal])
+  
   return (
     <>
       <Banner/>
@@ -81,7 +84,7 @@ function updateList(){
               </div>
               <div className='gallery-city-container'>
                 {/* 선택한 지역이 있으면 List출력 */}
-                <h2>{clickedLocal}</h2>
+                <h1>{selectedCity? selectedCity : clickedLocal}</h1>
                 <br />
                 {
                   // 선택한 지역이아직 없는경우
@@ -93,9 +96,9 @@ function updateList(){
                     (
                       // 지역내에서 특정 도시를 선택한 경우 
                       selectedCity==null ?
-                        <CityList secondNameList={secondNameList} setSelectedCity={setSelectedCity}></CityList>
+                      <CityList secondNameList={secondNameList} setSelectedCity={setSelectedCity}></CityList>
                       :
-                        <CityGallery imgInfoList={imgInfoList} cityName={selectedCity}></CityGallery>
+                      <CityGallery imgInfoList={imgInfoList} cityName={selectedCity}></CityGallery>
                     )
                   :
                   <>없어요</>

@@ -1,6 +1,7 @@
 import React from 'react'
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import './citygallery.css'
 
 const CityGallery = ({imgInfoList, cityName}) => {
 
@@ -18,6 +19,10 @@ const CityGallery = ({imgInfoList, cityName}) => {
     {
       img: '',
       title: 'Breakfast',
+    },
+    {
+      img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
+      title: 'Burger',
     },
     {
       img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
@@ -76,7 +81,7 @@ const CityGallery = ({imgInfoList, cityName}) => {
     <>
     <ImageList
       className='gallery-img-list'
-      sx={{ width: 800, height: 400 }}
+      sx={{ width: "100%", height: "85%" }}
       variant="quilted"
       cols={4}
       rowHeight={121}
