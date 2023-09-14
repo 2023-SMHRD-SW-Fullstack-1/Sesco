@@ -1,43 +1,36 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 
 const ViewDiary = ({ selectdate }) => {
 
   const [tags, setTags] = useState([]);
 
-useEffect(() => {
-  if (selectdate.tag) {
-    const tagArray = selectdate.tag.split('#').filter(tag => tag);
-    setTags(tagArray);
-  }
-}, [selectdate]);
-  
+  useEffect(() => {
+    if (selectdate.tag) {
+      const tagArray = selectdate.tag.split('#').filter(tag => tag);
+      setTags(tagArray);
+    }
+  }, [selectdate]);
+
   console.log(tags);
 
   selectdate.tag.split()
   return (
-    <div>
-      <p>{selectdate.title}</p>
-      <p>{selectdate.content}</p>
-      
-      {selectdate.img && <p><img src={"data:image/;base64,"+selectdate.img} alt="" style={{width : "100px", height: "100px"}} /></p>}
-      
-      <TagBox>
-        
-          
-      {tags.map((tag, index) => (
-    <TagItem key={index} >
-      <Button>{tag}</Button>
-    </TagItem>
-  ))}
-    
-      </TagBox>
-      {/* {tags.map((tag, index) => (
-        <span key={index}>{tag}</span>
-      ))} */}
+    <Container>
+    <Title>{selectdate.title}</Title>
+    <Content>{selectdate.content}</Content>
 
-      
-    </div>
+    
+    {selectdate.img && <img src={"data:image/;base64," + selectdate.img} alt="" style={{width: "100px", height: "100px"}} />}
+    
+    <TagBox>
+      {tags.map((tag, index) => (
+        <TagItem key={index} >
+          {tag}
+        </TagItem>
+      ))}
+    </TagBox>
+  </Container>
   );
 };
 
@@ -69,7 +62,6 @@ const TagItem = styled.div`
   font-size: 13px;
 `;
 
-const Text = styled.span``;
 
 const Button = styled.button`
   display: flex;
@@ -83,18 +75,31 @@ const Button = styled.button`
   color: tomato;
 `;
 
-const TagInput = styled.input`
-  display: inline-flex;
-  min-width: 150px;
-  background: transparent;
-  border: none;
-  outline: none;
-  cursor: text;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
 `;
 
-const ErrorMessage = styled.div`
-  color: red;
-  font-size: 12px;
+const Title = styled.p`
+  font-size: 24px;
+  font-weight: bold;
 `;
+
+const Content = styled.p`
+  margin-top: 10px;
+`;
+
+const ImageContainer = styled.p`
+   width: "50px";
+   height:"50px";
+`;
+
+const Image = styled.img`
+  width: 100px;
+  height: 100px;
+`;
+
 
 export default ViewDiary;
