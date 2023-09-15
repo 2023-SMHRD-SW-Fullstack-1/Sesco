@@ -8,9 +8,7 @@
     border-color: rgb(215, 200, 197);
     
 }
-.tipDiv{
-    
-}
+
 .tip-mainContent{
     display: flex;
     justify-content: center;
@@ -27,9 +25,13 @@
 }
 .Tbanner{
     height: 350px;
+    position: relative;
+    z-index: 1;
 }
 .Mbanner{
-    height: 350px;
+    height: 380px;
+    position: relative;
+    z-index: 1;
 }
 .mainContent{
     display: flex;
@@ -78,8 +80,17 @@
     justify-content: center;
     margin-top: 85px;
     margin-bottom: 130px;
-    
-    
+}
+.kidSelect{
+position: relative;
+bottom: 300px;
+left: 58.5%;
+width: 190px;
+height: 35px;
+text-align: center;
+padding: 3px;
+border-radius: 6px;
+
 }
 
 nav ul {
