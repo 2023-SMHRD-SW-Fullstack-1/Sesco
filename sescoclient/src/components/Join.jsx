@@ -4,9 +4,11 @@ import LoginImg from '../img/LoginImg.png';
 import { MDBInput } from 'mdb-react-ui-kit';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const Join = () => {
+    const nav= useNavigate();
 
     const [user_name, setNameValue] = useState('');
     const [user_id, setIdValue] = useState('');
@@ -58,6 +60,7 @@ const Join = () => {
             alert('이메일 중복입니다. 이메일을 확인하세요')
         }else if(loginResult==='success'){
             alert('🎺회원가입 성공🎺')
+            nav('/login')
         }
         fetchData();
         console.log('name:', user_name, 'nick:', user_nick, 'id:', user_id, 'email:', user_email, 'pw:', user_pw, 'pwCheck:', pwCheckValue);

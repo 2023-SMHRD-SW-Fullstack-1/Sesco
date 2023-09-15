@@ -47,7 +47,6 @@ border-top: 1px solid rgb(	255, 253, 236);;
 width: 100%;
 background-color : rgb(	255, 253, 236);
 position: relative;
-z-index: 5;
 
 @media (max-width: 769px) {
 padding: 20px 20px;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import logo from "../img/babyslogo.png";
+import logo2 from "../img/main1/babyslogo2.png"
 import tab1 from "../img/tab1.png";
 import tab2 from "../img/tab2.png";
 import tab3 from "../img/tab3.png";
@@ -15,6 +15,7 @@ const Header = () => {
   const [clickTip, setClickTip] = useState(false);
   const [clickNote, setClickNote] = useState(false);
   const [clickGallery, setClickGallery] = useState(false);
+  const [main1_header,setMain2_header] = useState(true);
 
   const nav = useNavigate();
   const user_id = sessionStorage.getItem('user_id');
@@ -22,8 +23,10 @@ const Header = () => {
   const handleClickLogo = () => {
     if (!user_id) {
       nav('/')
+      setMain2_header(true)
     } else {
       nav('/main')
+      setMain2_header(false)
       setClickHome(true)
       setClickTip(false)
       setClickNote(false)
@@ -77,8 +80,8 @@ const Header = () => {
 
   return (
     <div>
-      <HeaderLogoContainer>
-        <HeaderImgLogo src={logo} onClick={() => handleClickLogo()} />
+      <HeaderLogoContainer >
+        <HeaderImgLogo onClick={() => handleClickLogo()} />
         <HeaderLJContainer>
           {!user_id ?
             <div>
@@ -156,6 +159,8 @@ const HeaderLogoContainer = styled.div`
 display: flex;
 justify-content: space-between;
 position: relative;
+z-index: 2;
+
 `;
 const HeaderTabContainer = styled.div`
 display: flex;
@@ -163,9 +168,9 @@ justify-content: start;
 position: relative;
 top:2px;
 `;
-const HeaderImgLogo = styled.img`
-width:65px;
-margin:10px;
+const HeaderImgLogo = styled.img.attrs({src:  `${logo2}`})`
+width:85px;
+margin:10px 10px 10px 20px;
 cursor:pointer;
 `;
 const HeaderTabImgLogo = styled.img`
