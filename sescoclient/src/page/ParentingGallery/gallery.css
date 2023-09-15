@@ -8,6 +8,8 @@
 }
 .banner{
     height: 30vh;
+    position: relative;
+    z-index: 1;
 }
 /* .galleryMap{
     width: auto;

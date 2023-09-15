@@ -13,7 +13,7 @@ const Footer = () => {
                         <FooterLink href="/">
                             박정현
                         </FooterLink>
-                        <FooterLink href="/">
+                        <FooterLink href="https://github.com/kimsohee12">
                             김소희
                         </FooterLink>
                         <FooterLink href="/">
@@ -47,7 +47,7 @@ border-top: 1px solid rgb(	255, 253, 236);;
 width: 100%;
 background-color : rgb(	255, 253, 236);
 position: relative;
-z-index: 100;
+z-index: 5;
 
 @media (max-width: 769px) {
 padding: 20px 20px;
@@ -105,7 +105,8 @@ margin-bottom: 21px;
 text-decoration: none;
 
 &:hover {
-text-decoration: underline;
+text-decoration: none;
+color: rgb(40, 40, 40);;
 }
 
 @media (max-width: 768px) {
