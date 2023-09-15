@@ -40,9 +40,18 @@ public class NoteController {
 	// kid_seq값을 받음
 	@PostMapping("/note/getnotelist")
 	public List<Note> getNoteList(@RequestBody Map<String, Integer> kidSeqMap) {
-		System.out.println("아이 선택시 수첩 불러오기" + noteService.getNotesByKid(kidSeqMap.get("kid_seq")));
-		return noteService.getNotesByKid(kidSeqMap.get("kid_seq"));
+	    Integer kidSeq = kidSeqMap.get("kid_seq");
+	    
+	    if (kidSeq != null) {
+	        // kid_seq 값이 유효한 경우에만 해당 아이의 수첩을 가져옴
+	        System.out.println("아이 선택시 수첩 불러오기: " + noteService.getNotesByKid(kidSeq));
+	        return noteService.getNotesByKid(kidSeq);
+	    } else {
+	        // kid_seq 값이 없거나 유효하지 않은 경우 빈 목록 반환
+	        return new ArrayList<>();
+	    }
 	}
+
 
 	// 태그 검색
 	@GetMapping("/note/tagsearch")
