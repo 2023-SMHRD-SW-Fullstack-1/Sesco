@@ -25,7 +25,7 @@ const Diarycopy = () => {
 
   const [createFormContent, setCreateFormContent] = useState(null);
 
-  const [tags, setTags] = useState([]);
+
 
   //이미지 저장
   const [image, setImage] = useState("");
@@ -153,7 +153,8 @@ const Diarycopy = () => {
     })
   },[])
 
-   //DB에 저장된 일기 리스트 이벤트 처리
+  //  DB에 저장된 일기 리스트 이벤트 처리
+  //  
   useEffect(()=>{
     setListClickVisible(!listClickVisible)
     // setIsViewDiaryVisible(!isViewDiaryVisible)
@@ -212,6 +213,7 @@ const Diarycopy = () => {
               onClick={CreateDiaryForm}
               style={{ width: "460px", height: "100px", marginTop: "10px" }}
             >
+              
               일기추가
             </button>
           </div>
