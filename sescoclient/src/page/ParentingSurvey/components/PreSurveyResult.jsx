@@ -77,20 +77,14 @@ const PreSurveyResult = ({ closePreSurveyResult, setShowPreSurveyResult, kid, ki
 
 
   return (
-    <div className='pre-survey-result-modal'>
-      <div className='survey-top-container'>
-        <div className='survey-title-container'>
-          <h2 className='survey-title' id='survey_title'>{user_id}님의 이전 체크리스트</h2>
-        </div>
-      </div>
+    <div className="survey">
 
-      <div>
-        이전 체크리스트 불러오는 곳
+      <div className='survey-middle-container'>
         <div className="surBox-container">
           {/* 사회/정서 */}
           <div className="surBox1">
             <div className="sur_category">
-              <h4>{category[0]}</h4>
+              <h5>{category[0]}</h5>
             </div>
             <div className="sur_content_detail">
               {filteredData1.map((item) => (
@@ -104,8 +98,8 @@ const PreSurveyResult = ({ closePreSurveyResult, setShowPreSurveyResult, kid, ki
           </div>
           {/* 언어/의사소통 */}
           <div className="surBox1">
-            <div className="sur_category">
-              <h4>{category[1]}</h4>
+            <div className="sur_category2">
+              <h5>{category[1]}</h5>
             </div>
             <div className="sur_content_detail">
               {filteredData2.map((item) => (
@@ -119,8 +113,8 @@ const PreSurveyResult = ({ closePreSurveyResult, setShowPreSurveyResult, kid, ki
           </div>
           {/* 인지 */}
           <div className="surBox1">
-            <div className="sur_category">
-              <h4>{category[2]}</h4>
+            <div className="sur_category3">
+              <h5>{category[2]}</h5>
             </div>
             <div className="sur_content_detail">
               {filteredData3.map((item) => (
@@ -134,8 +128,8 @@ const PreSurveyResult = ({ closePreSurveyResult, setShowPreSurveyResult, kid, ki
           </div>
           {/* 운동신체발달 */}
           <div className="surBox1">
-            <div className="sur_category">
-              <h4>{category[3]}</h4>
+            <div className="sur_category4">
+              <h5>{category[3]}</h5>
             </div>
             <div className="sur_content_detail">
               {filteredData4.map((item) => (
@@ -147,10 +141,9 @@ const PreSurveyResult = ({ closePreSurveyResult, setShowPreSurveyResult, kid, ki
               ))}
             </div>
           </div>
+          <button className='close-modal-button' onClick={() => setShowPreSurveyResult(false)}>닫기</button>
         </div>
       </div>
-
-      <button className='close-modal-button' onClick={() => setShowPreSurveyResult(false)}>닫기</button>
     </div>
   )
 }

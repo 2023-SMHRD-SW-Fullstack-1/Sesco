@@ -3,8 +3,9 @@ import axios from 'axios';
 import SurveyResult from './SurveyResult';
 import PreSurveyResult from './PreSurveyResult';
 import './Survey.css';
+import {FaCheckCircle} from 'react-icons/fa'
 
-function Survey({kid, user_id }) {
+function Survey({ kid, user_id }) {
     const category = ['사회/정서적 영역', '언어/의사소통 영역', '인지(학습,사고,문제해결능력)', '운동/신체발달 영역'];
 
     const [data, setData] = useState([]);
@@ -20,28 +21,33 @@ function Survey({kid, user_id }) {
 
     //아이정보에서 아이의 개월수를 찾아옴
     const age = new Date();
-    const month = age.getMonth()+1;
+    const month = age.getMonth() + 1;
     const year = age.getFullYear();
     let kidMonth = '';
-    let babyAge = ((Number(year)-Number(kid.kid_birth.substring(0, 4)))*12)+((Number(month)-Number(kid.kid_birth.substring(5, 7))))
+    let babyAge = ((Number(year) - Number(kid.kid_birth.substring(0, 4))) * 12) + ((Number(month) - Number(kid.kid_birth.substring(5, 7))))
 
-    if(babyAge>=0&&babyAge<=6){
-        kidMonth=2
-    }else if(babyAge>6&&babyAge<=12){
-        kidMonth=6
-    }else if(babyAge>12&&babyAge<=18){
-        kidMonth=12
-    }else if(babyAge>18&&babyAge<=24){
-        kidMonth=18
-    }else if(babyAge>24&&babyAge<=36){
-        kidMonth=24
-    }else if(babyAge>36&&babyAge<=48){
-        kidMonth=48
-    }else{
-        kidMonth=60
+    if (babyAge >= 0 && babyAge <= 6) {
+        kidMonth = 2
+    } else if (babyAge > 6 && babyAge <= 12) {
+        kidMonth = 6
+    } else if (babyAge > 12 && babyAge <= 18) {
+        kidMonth = 12
+    } else if (babyAge > 18 && babyAge <= 24) {
+        kidMonth = 18
+    } else if (babyAge > 24 && babyAge <= 36) {
+        kidMonth = 24
+    } else if (babyAge > 36 && babyAge <= 48) {
+        kidMonth = 48
+    } else {
+        kidMonth = 60
     }
 
-
+    let ageShow ='';
+    if(kidMonth>18){
+        ageShow = (kidMonth/12)+'세 설문지'
+    } else {
+        ageShow = '만 '+kidMonth+'개월 설문지'
+    }
 
     const config = {
         headers: { 'Content-Type': 'application/json;charset=UTF-8' }
@@ -83,7 +89,7 @@ function Survey({kid, user_id }) {
             { total: filteredData4.length, check: physicalCheckList.length, checkList: physicalCheckList }
         ]);
         const resultsData = {
-            totalCheckList: [...socialCheckList,...languageCheckList,...brainCheckList,...physicalCheckList],
+            totalCheckList: [...socialCheckList, ...languageCheckList, ...brainCheckList, ...physicalCheckList],
             kid_seq: kid.kid_seq,
             hsv_seq: kidMonth
         };
@@ -131,7 +137,9 @@ function Survey({kid, user_id }) {
         <div className="survey">
             <div className="survey-top-container">
                 <div className="survey-title-container">
-                    <h2 className="survey-title" id="survey_title">2세</h2>
+
+                    <h3 className="survey-title" id="survey_title">{ageShow}</h3>
+
                 </div>
             </div>
             {/* 모달 화면 (설문/결과) */}
@@ -146,13 +154,13 @@ function Survey({kid, user_id }) {
                             {/* 사회/정서 */}
                             <div className="surBox1">
                                 <div className="sur_category">
-                                    <h4>{category[0]}</h4>
+                                    <h5>{category[0]}</h5>
                                 </div>
                                 <div className="sur_content_detail">
                                     {filteredData1.map((item) => (
                                         <div className="survey_btncheck" key={item.id}>
                                             <li>{item.hsvd_content}</li>
-                                            <button type="checkbox" className="survey_oBtn" id="socialObtn" onClick={() => addCheckList(item)}>o</button>
+                                            <button type="checkbox" className="survey_oBtn" id="socialObtn" onClick={() => addCheckList(item)}><FaCheckCircle/></button>
                                             <button type="checkbox" className="survey_xBtn" id="socialXbtn" onClick={() => removeCheckList(item)}>x</button>
                                         </div>
                                     ))}
@@ -160,8 +168,8 @@ function Survey({kid, user_id }) {
                             </div>
                             {/* 언어/의사소통 */}
                             <div className="surBox1">
-                                <div className="sur_category">
-                                    <h4>{category[1]}</h4>
+                                <div className="sur_category2">
+                                    <h5>{category[1]}</h5>
                                 </div>
                                 <div className="sur_content_detail">
                                     {filteredData2.map((item) => (
@@ -175,8 +183,8 @@ function Survey({kid, user_id }) {
                             </div>
                             {/* 인지 */}
                             <div className="surBox1">
-                                <div className="sur_category">
-                                    <h4>{category[2]}</h4>
+                                <div className="sur_category3">
+                                    <h5>{category[2]}</h5>
                                 </div>
                                 <div className="sur_content_detail">
                                     {filteredData3.map((item) => (
@@ -190,8 +198,8 @@ function Survey({kid, user_id }) {
                             </div>
                             {/* 운동신체발달 */}
                             <div className="surBox1">
-                                <div className="sur_category">
-                                    <h4>{category[3]}</h4>
+                                <div className="sur_category4">
+                                    <h5>{category[3]}</h5>
                                 </div>
                                 <div className="sur_content_detail">
                                     {filteredData4.map((item) => (
@@ -203,10 +211,10 @@ function Survey({kid, user_id }) {
                                     ))}
                                 </div>
                             </div>
-                        </div>
-                        <div className="survey-bottom-container">
-                            <button className="survey_btnPreResult" onClick={() => setShowPreSurveyResult(true)}>이전 설문 불러오기</button>
-                            <button className="btnResult" onClick={submitResult}>결과보기</button>
+                            <div className="survey-bottom-container">
+                                <button className="survey_btnPreResult" onClick={() => setShowPreSurveyResult(true)}>이전 설문 불러오기</button>
+                                <button className="btnResult" onClick={submitResult}>결과보기</button>
+                            </div>
                         </div>
                     </div>
                 )
