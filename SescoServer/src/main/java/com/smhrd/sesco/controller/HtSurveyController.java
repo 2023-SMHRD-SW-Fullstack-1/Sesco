@@ -32,7 +32,6 @@ public class HtSurveyController {
 	@Autowired
 	private HtSurveyService htsurService;
 
-	
 	@Autowired
     private SurveyService surveyService;
 
@@ -45,7 +44,9 @@ public class HtSurveyController {
 		HtSurveyDetail svDetail = new HtSurveyDetail();
 		svDetail.setHsv_seq(hsv_seq);
 
-		return htsurService.viewSurveyDetail(svDetail);
+		System.out.println("디테일 : " + htsurService.viewSurveyAgeCheckList(svDetail));
+		
+		return htsurService.viewSurveyAgeCheckList(svDetail);
 
 	}
 
@@ -60,18 +61,6 @@ public class HtSurveyController {
 		return htsurService.viewSurveyAgeTip(svTip);
 
 	}
-
-//	// 설문결과 저장리스트
-//	@PostMapping("/survey/saveresult")
-//	public void saveResult(@RequestBody Map<String, Object> map) {
-//		System.out.println("map : " + map);
-//
-//		ArrayList<Map<String, Object>> checklist = (ArrayList<Map<String, Object>>) map.get("totalCheckList");
-//		String kidSeq = map.get("kid_seq").toString();
-//		int hsvSeq = Integer.parseInt(map.get("hsv_seq").toString());
-//
-//	}
-
 	
 	//설문결과 저장리스트
 	 @PostMapping("/survey/saveresult")
@@ -92,39 +81,20 @@ public class HtSurveyController {
 	 // 이전설문 불러오기
 	 @PostMapping("/survey/presurveylist")
 	 public List<HtSurveyDetail> preSurveyList(@RequestBody Map<String,Object> map){
-		 List<HtSurveyDetail> presurveylist = new ArrayList<HtSurveyDetail>();
+		 System.out.println("preSurveyList : "+map);
 		 
+		 String kidSeq = map.get("kid_seq").toString();
+		 int hsvSeq = Integer.parseInt(map.get("hsv_seq").toString());
+		 
+		 
+		 List<HtSurveyDetail> presurveylist = new ArrayList<HtSurveyDetail>();
+		 presurveylist.addAll(htsurService.preSurveyList(kidSeq,hsvSeq));
+		 System.out.println("똑똑똑 "+presurveylist);
+		
 		 return presurveylist;
 	 }
 	 
 	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-
-		
-		
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

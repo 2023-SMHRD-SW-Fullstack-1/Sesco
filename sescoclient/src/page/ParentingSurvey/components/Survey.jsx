@@ -5,7 +5,7 @@ import PreSurveyResult from './PreSurveyResult';
 import './Survey.css';
 
 function Survey({kid, user_id }) {
-    const category = ['사회/정서적 영역', '언어/의사소통 영역', '인지(학습,사고,문제해결력)', '운동/신체발달 영역'];
+    const category = ['사회/정서적 영역', '언어/의사소통 영역', '인지(학습,사고,문제해결능력)', '운동/신체발달 영역'];
 
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -139,7 +139,7 @@ function Survey({kid, user_id }) {
                 <SurveyResult bundle={resultBundle} />
             ) : (
                 showPreSurveyResult ? (
-                    <PreSurveyResult kid={kid} setShowPreSurveyResult={setShowPreSurveyResult} />
+                    <PreSurveyResult kid={kid} kidMonth={kidMonth} setShowPreSurveyResult={setShowPreSurveyResult} />
                 ) : (
                     <div className="survey-middle-container">
                         <div className="surBox-container">

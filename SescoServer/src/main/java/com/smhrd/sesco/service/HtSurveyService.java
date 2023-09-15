@@ -24,7 +24,7 @@ public class HtSurveyService implements SurveyService {
 	@Autowired
 	private HtSurveyMapper surveyMapper;
 
-	public List<HtSurveyDetail> viewSurveyDetail(HtSurveyDetail svDetail) {
+	public List<HtSurveyDetail> viewSurveyAgeCheckList(HtSurveyDetail svDetail) {
 
 		return surveyMapper.viewSurveyAgeCheckList(svDetail);
 	}
@@ -37,19 +37,27 @@ public class HtSurveyService implements SurveyService {
 	@Override
 	@Transactional
 	public void saveSurvey(Survey survey) {
-		// 1. 설문 결과 저장
+		// 설문 결과 저장
 		String insertSurveySql = "INSERT INTO t_survey (sv_dt, hsv_seq, kid_seq) VALUES (NOW(), ?, ?)";
 		jdbcTemplate.update(insertSurveySql, survey.getHsv_seq(), survey.getKid_seq());
 
-		// 2. 저장된 설문 결과의 sv_seq 가져오기
+		// 저장된 설문 결과의 sv_seq 가져오기
 		String selectSvSeqSql = "SELECT sv_seq FROM t_survey WHERE kid_seq = ? ORDER BY sv_dt DESC LIMIT 1";
 		String svSeq = jdbcTemplate.queryForObject(selectSvSeqSql, String.class, survey.getKid_seq());
 
-		// 3. SurveyDo 저장
+		// SurveyDo 저장
 		for (String value : survey.getTotalCheckList()) {
 			String insertSurveyDoSql = "INSERT INTO t_survey_do (hsvd_seq, sv_seq) VALUES (?, ?)";
 			jdbcTemplate.update(insertSurveyDoSql, value, svSeq);
 		}
 	}
+
+
+	public List<HtSurveyDetail> preSurveyList(String kidSeq, int hsvSeq) {
+		
+		return surveyMapper.preSurveyList(kidSeq,hsvSeq);
+	}
+
+	
 
 }
