@@ -154,11 +154,11 @@ const Diarycopy = () => {
   },[])
 
   //  DB에 저장된 일기 리스트 이벤트 처리
-  //  
+  //  해당 날짜 누르면 밑에 버튼으로 리스트 나오는 함수
   useEffect(()=>{
     setListClickVisible(!listClickVisible)
     // setIsViewDiaryVisible(!isViewDiaryVisible)
-    setSelectedDiaryList(listDiary.filter((diary)=> diary.date == formatDate(selectedDate)))
+    setSelectedDiaryList(listDiary.filter((diary)=> diary.date == formatDate(selectedDate)))  
     console.log("필터링 완료")
   },[selectedDate])
 

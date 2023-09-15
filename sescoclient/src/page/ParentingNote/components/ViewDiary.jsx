@@ -14,7 +14,7 @@ const ViewDiary = ({ selectdate }) => {
 
   console.log(tags);
 
-  selectdate.tag.split()
+  
   return (
     <Container>
     <Title>{selectdate.title}</Title>
@@ -23,13 +23,15 @@ const ViewDiary = ({ selectdate }) => {
     
     {selectdate.img && <img src={"data:image/;base64," + selectdate.img} alt="" style={{width: "100px", height: "100px"}} />}
     
-    <TagBox>
-      {tags.map((tag, index) => (
-        <TagItem key={index} >
-          {tag}
-        </TagItem>
-      ))}
-    </TagBox>
+    {tags && (
+        <TagBox>
+          {tags.map((tag, index) => (
+            <TagItem key={index} >
+              {tag}
+            </TagItem>
+          ))}
+        </TagBox>
+      )}
   </Container>
   );
 };
