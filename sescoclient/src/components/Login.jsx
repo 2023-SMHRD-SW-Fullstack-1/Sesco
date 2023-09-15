@@ -65,7 +65,7 @@ const Login = () => {
           {/* 이메일 입력 */}
           <span className='email_txt'>아이디</span>
          
-            <input className='loginInputId' placeholder='이메일' type='text' onChange={(e)=>setUserId(e.target.value)} value={user_id}/>
+            <input className='loginInputId' placeholder='아이디를 입력해주세요' type='text' onChange={(e)=>setUserId(e.target.value)} value={user_id}/>
             
         
           {/* 비밀번호 찾기 */}

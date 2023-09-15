@@ -37,9 +37,9 @@ const Main2Avatar = ({ baby }) => {
     const [corrext1, setCorrect1] = useState('');
     const [corrext2, setCorrect2] = useState('');
     // 키 입력값
-    const [kid_height, setKid_height] = useState(baby?.kid_height); 
+    const [kid_height, setKid_height] = useState(baby?.kid_height);
     // 몸무게 입력값
-    const [kid_weight, setKid_weight] = useState(baby?.kid_weight); 
+    const [kid_weight, setKid_weight] = useState(baby?.kid_weight);
     // 키 수정버튼
     const [kid_heightBtn, setKid_heightBtn] = useState('수정');
     // 몸무게 수정버튼
@@ -53,7 +53,7 @@ const Main2Avatar = ({ baby }) => {
     const fetchData = () => {
 
         const requestData = {
-            "kid_seq" : baby.kid_seq,
+            "kid_seq": baby.kid_seq,
             "kid_height": kid_height,
             "kid_weight": kid_weight,
             "user_id": user_id
@@ -65,22 +65,22 @@ const Main2Avatar = ({ baby }) => {
 
                 try {
 
-                    
+
                 } catch {
-                    
+
                 }
             })
-            .catch((err)=>{
+            .catch((err) => {
                 console.log(err);
             })
-        
+
     }
     // 키 수정 버튼 클릭시 input , 버튼 이름 바꿈 
     const handleCorrectClick_height = (clickBtn) => {
         fetchData();
-        if(kid_heightBtn==='수정'){
+        if (kid_heightBtn === '수정') {
             setKid_heightBtn('완료')
-        }else {
+        } else {
             setKid_heightBtn('수정')
         }
         if (corrext1 === clickBtn) {
@@ -88,14 +88,14 @@ const Main2Avatar = ({ baby }) => {
         } else {
             setCorrect1(clickBtn)
         }
-        console.log('Kid_heightBtn:',kid_heightBtn);
+        console.log('Kid_heightBtn:', kid_heightBtn);
     }
-     // 몸무게 수정 버튼 클릭시 input , 버튼 이름 바꿈 
+    // 몸무게 수정 버튼 클릭시 input , 버튼 이름 바꿈 
     const handleCorrectClick_weight = (clickBtn) => {
         fetchData();
-        if(kid_weightBtn==='수정'){
+        if (kid_weightBtn === '수정') {
             setKid_weightBtn('완료')
-        }else {
+        } else {
             setKid_weightBtn('수정')
         }
         if (corrext2 === clickBtn) {
@@ -104,7 +104,7 @@ const Main2Avatar = ({ baby }) => {
             setCorrect2(clickBtn)
         }
     }
-    
+
 
 
     const handleChange1 = (event) => {
@@ -139,7 +139,7 @@ const Main2Avatar = ({ baby }) => {
         imgNum = 7
     }
 
-    const moveToTip=()=>{
+    const moveToTip = () => {
         sessionStorage.setItem("kid_seq", baby.kid_seq)
     }
 
@@ -173,7 +173,7 @@ const Main2Avatar = ({ baby }) => {
                             <div className='avatar-context'>
                                 <img src={babyKeyIcon} />키
                                 {corrext1 === 'height' ?
-                                    <input className='babyCorrectInput1' type='number' placeholder={baby?.kid_height} value={kid_height} onChange={(e)=>handleChange1(e)} />
+                                    <input className='babyCorrectInput1' type='number' placeholder={baby?.kid_height} value={kid_height} onChange={(e) => handleChange1(e)} />
                                     :
                                     <span> {kid_height}</span>
                                 } cm
@@ -181,23 +181,23 @@ const Main2Avatar = ({ baby }) => {
                             </div>
 
                             <div className='avatar-context'>
-                                <img src={babyWeightIcon} />몸무게 
+                                <img src={babyWeightIcon} />몸무게
                                 {corrext2 === 'weight' ?
-                                    <input className='babyCorrectInput1' type='number' placeholder={baby?.kid_weight} value={kid_weight} onChange={(e)=>handleChange2(e)} />
+                                    <input className='babyCorrectInput1' type='number' placeholder={baby?.kid_weight} value={kid_weight} onChange={(e) => handleChange2(e)} />
                                     :
                                     <span>{kid_weight}</span>
                                 } kg
-                                <button className='babyCorrectBtn2' onClick={() => handleCorrectClick_weight('weight')}>{kid_weightBtn}</button> 
+                                <button className='babyCorrectBtn2' onClick={() => handleCorrectClick_weight('weight')}>{kid_weightBtn}</button>
                             </div>
-                            {/* 메뉴 아이콘 */}
-                            <div className='avatar-content'>
-                                <div className='avatarIcon-context'>
-                                    <img width={'100px'} src={diaryIcon} />
-                                    <img width={'100px'} src={galleryIcon} />
-                                    <Link to="/tip" onClick={()=>moveToTip()}>
-                                        <img width={'100px'} src={tipIcon} />
-                                    </Link>
-                                </div>
+                        </div>
+                        {/* 메뉴 아이콘 */}
+                        <div className='avatar-content'>
+                            <div className='avatarIcon-context'>
+                                <img width={'100px'} src={diaryIcon} />
+                                <img width={'100px'} src={galleryIcon} />
+                                <Link to="/tip" onClick={() => moveToTip()}>
+                                    <img width={'100px'} src={tipIcon} />
+                                </Link>
                             </div>
                         </div>
                     </div>
