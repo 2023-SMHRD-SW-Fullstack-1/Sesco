@@ -13,15 +13,12 @@ const CityList = ({secondNameList, setSelectedCity}) => {
 
   //지역별 데이터 개수
   
+
   //지역업데이트에 따른 
   const {clickedLocal} = useContext(LocalContext)
 
 
   const sliderRef = useRef(0);
-  //슬라이드 시작위치 초기화
-  useEffect(() => {
-  }, []);
-
 
   //슬라이드 위치 초기화
   useEffect(() => {

@@ -17,19 +17,22 @@ const Gallery = () => {
 
   // 사진경로리스트
   const [imgNameList, setImgNameList] = useState([])
+  
   //도 (특별시 포함)
   const [firstNameList, setFirstNameList] = useState([])
   //시
   const [secondNameList, setSecondNameList] = useState([])
 
-  // 사진정보객체리스트
+  // 사진정보객체리스트(noteInfo랑 인덱스 공유)
   const [imgInfoList, setImgInfoList] = useState([])
+  // 이미지정보객체 리스트 
   
   useEffect(() => {
     //회원정보가 있는지 확인하기
     //1. 세션에서 회원정보 가져오기 ->? 오류처리
     // if()
     let user_id = 'user1'
+
 
     //회원정보 중 이미지가 있는 일기 정보를 다 불러옴 
     axios.post("http://localhost:8081/sesco/diary/getdiarylist/img",{
@@ -38,40 +41,43 @@ const Gallery = () => {
       //이미지가 있는 일기 정보를 전부다 가져왔음
       console.log("데이터통신성공")
       console.log(res.data)
-      res.data.map((item)=>
-      setImgInfoList([...imgInfoList, 
+      var imgTempList = []
+      res.data.map((item)=>(
+      imgTempList.push(
         {
-          "imgName" : item.img_real_name,
-          "firstName" : item.img_do,
-          "secondName" : item.img_si 
+          imgName : item.img_real_name,
+          firstName : item.img_do,
+          secondName : item.img_si,
+          d_title : item.d_title,
+          d_date : item.d_date, 
+          d_content : item.d_content,
+          d_tags : item.d_tags,
+          note_seq : item.note_seq,
         }
-      ])
       )
+      ))
+      setImgInfoList([...imgTempList])
     }).catch((err)=>console.log("데이터 불러오기 실패"+err))
   }, []) 
   
   
-  
+  //해당 지역에 대한 정보 filtering하기 위함
+  function updateList(){
+    const filteredList = imgInfoList.filter(info => info.firstName == clickedLocal)
+    
+    setImgNameList([...filteredList.map(info => info.imgName)])
+    setFirstNameList([...filteredList.map(info => info.firstName)])
+    setSecondNameList([...filteredList.map(info => info.secondName)])
+  } 
   
   // 선택지역이 바뀌면 데이터가 바뀜
   useEffect(()=>{
-    console.log(imgInfoList)
-
-    //해당 지역에 대한 정보 filtering하기 위함
-    setImgNameList([])
-    setFirstNameList([])
-    setSecondNameList([])
-
-    const filteredList = imgInfoList.filter((info) => info.firstName != clickedLocal)
-    
-    filteredList.map(info => (
-      setImgNameList([...imgNameList, info.imgName]),
-      setFirstNameList([...firstNameList, info.firstName]), 
-      setSecondNameList([...secondNameList,info.secondName])
-      )
-    )
+    updateList()
     setSelectedCity(null)
-    console.log(clickedLocal)
+    console.log(secondNameList)
+    //현민
+    console.log(imgInfoList);
+    
   },[clickedLocal])
   
   return (
@@ -98,7 +104,7 @@ const Gallery = () => {
                       selectedCity==null ?
                       <CityList secondNameList={secondNameList} setSelectedCity={setSelectedCity}></CityList>
                       :
-                      <CityGallery imgInfoList={imgInfoList} cityName={selectedCity}></CityGallery>
+                      <CityGallery imgInfoList={imgInfoList} localName={clickedLocal} cityName={selectedCity}></CityGallery>
                     )
                   :
                   <>없어요</>
