@@ -1,5 +1,6 @@
 package com.smhrd.sesco.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.smhrd.sesco.domain.Kid;
 import com.smhrd.sesco.domain.Note;
+import com.smhrd.sesco.service.KidService;
 import com.smhrd.sesco.service.NoteService;
 
 @RestController
@@ -24,18 +27,19 @@ public class NoteController {
 
 	@Autowired
 	private NoteService noteService;
-
+	
 	// 수첩 불러오기
 	@GetMapping("/note/{userId}")
-	public Map<Integer, List<Note>> getNotes(@PathVariable String userId) {
-		System.out.println("모든 수첩 불러오기" + noteService.getNotesByUser(userId));
-		return noteService.getNotesByUser(userId);
+	public List<Note> getNotes(@PathVariable String userId) {
+	    System.out.println("첫 접속 수첩 불러오기:" + noteService.getNotesByUser(userId));
+	    return noteService.getNotesByUser(userId);
 	}
+	   
 
 	// 옵션에서 아이 선택시 해당 아이의 수첩 불러오기
 	// kid_seq값을 받음
 	@PostMapping("/note/getnotelist")
-	public Map<Integer, List<Note>> getNoteList(@RequestBody Map<String, Integer> kidSeqMap) {
+	public List<Note> getNoteList(@RequestBody Map<String, Integer> kidSeqMap) {
 		System.out.println("아이 선택시 수첩 불러오기" + noteService.getNotesByKid(kidSeqMap.get("kid_seq")));
 		return noteService.getNotesByKid(kidSeqMap.get("kid_seq"));
 	}
@@ -48,33 +52,33 @@ public class NoteController {
 	}
 
 	// 수첩 생성
-	@PostMapping("/note/createnote")
-	public void createNote(@RequestBody Note note) {
-		System.out.println("controller 수첩 생성  : " + note);
-		noteService.createNote(note);
-	}
+//	@PostMapping("/note/createnote")
+//	public void createNote(@RequestBody Note note) {
+//		System.out.println("controller 수첩 생성  : " + note);
+//		noteService.createNote(note);
+//	}
 
 	// 수첩 수정
-	@PutMapping("/note/update")
-	public void updateNote(@RequestBody Map<String, String> noteData) {
-	    String noteSeq = noteData.get("note_seq");
-	    String newName = noteData.get("n_name");
-
-	    System.out.println("controller 수첩 수정:  note_seq=" + noteSeq + ", n_name=" + newName);
-
-	    Note updatedNote = new Note();
-	    updatedNote.setNote_seq(noteSeq);
-	    updatedNote.setN_name(newName);
-
-	    noteService.updateNote(updatedNote);
-	}
+//	@PutMapping("/note/update")
+//	public void updateNote(@RequestBody Map<String, String> noteData) {
+//	    String noteSeq = noteData.get("note_seq");
+//	    String newName = noteData.get("n_name");
+//
+//	    System.out.println("controller 수첩 수정:  note_seq=" + noteSeq + ", n_name=" + newName);
+//
+//	    Note updatedNote = new Note();
+//	    updatedNote.setNote_seq(noteSeq);
+//	    updatedNote.setN_name(newName);
+//
+//	    noteService.updateNote(updatedNote);
+//	}
 
 
 	// 수첩 삭제
-	@DeleteMapping("/note/delete/{note_seq}")
-	public void deleteNoteById(@PathVariable String note_seq) {
-		System.out.println("삭제할 수첩 ID: " + note_seq);
-		noteService.noteDeleteById(note_seq);
-	}
+//	@DeleteMapping("/note/delete/{note_seq}")
+//	public void deleteNoteById(@PathVariable String note_seq) {
+//		System.out.println("삭제할 수첩 ID: " + note_seq);
+//		noteService.noteDeleteById(note_seq);
+//	}
 
 }
