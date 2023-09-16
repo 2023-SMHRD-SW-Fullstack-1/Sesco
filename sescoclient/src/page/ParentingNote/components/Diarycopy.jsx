@@ -18,7 +18,7 @@ const Diarycopy = () => {
   const [listClickVisible, setListClickVisible] = useState(false);
 
   //선택한 날짜
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   //CreateDiary에서 작성한 제목 가져오기
   const [createFormTitle, setCreateFormTitle] = useState(null);
@@ -49,20 +49,6 @@ const Diarycopy = () => {
   // --------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-
-  //해당 날짜의 일기 리스트 출력
-  function handleDateClick(info) {
-    console.log("handleDateClick");
-    setSelectedDate(info.date);
-    setListClickVisible(false);
-  
-    // const localDateString = formatDate(info.date);
-    
-    
-  }
-
-
-
   //날짜 맞춰주기 : 2023-09-09
   function formatDate(date) {
     const year = date.getFullYear();
@@ -73,9 +59,38 @@ const Diarycopy = () => {
   }
 
 
+  //해당 날짜의 일기 리스트 출력
+  function handleDateClick(info, index) {
+    console.log("handleDateClick");
+    setSelectedDate(info.date);
+    console.log(info.date);
+    
+    console.log(info);
+    setListClickVisible(true);
+    console.log("인덱스",index)
+    console.log("너도 오니?",selectedDiaryList[0])
+    const diary = selectedDiaryList[0];
+    console.log("다이어리",diary);
+    setSelectedDiary(diary);
+
+     
+
+  
+    // const localDateString = formatDate(info.date);
+    
+    
+  }
+
+  
 
 
-  function onComplete(title, content, imageFile, tags) {
+
+  
+
+
+
+
+  function onComplete(title, content,tags) {
     //작성완료 눌렀을 때 바로 여기로 옴
     console.log("데이터 보내는거니?");
     setCreateFormTitle(title);
@@ -116,16 +131,16 @@ const Diarycopy = () => {
   }
 
   //해당 날짜의 일기 상세정보
-   function ClickDiary(index) {
-    console.log("ClickDiary");
-    console.log(selectedDiaryList)
-    const diary = selectedDiaryList[index];
-    console.log("다이어리",diary);
-    setListClickVisible(true)
-    setSelectedDiary(diary);
+  //버튼 누를떄 실행되는 메서드
+  //  function ClickDiary(index) {
+  //   console.log("ClickDiary");
+  //   console.log("너도 없니?",selectedDiaryList[0])
+  //   const diary = selectedDiaryList[index];
+  //   console.log("다이어리",diary);
+  //   setListClickVisible(true)
+  //   setSelectedDiary(diary);
     
-
-  }
+  // }
 
   function CreateDiaryForm() {
     setIsClick(!isClick);
@@ -148,7 +163,7 @@ const Diarycopy = () => {
       })
       setListDiary(fetchedEvents);
     })
-    .catch((err)=>{
+    .catch((err)=>{                                                                                                                                        
       console.log("리스트 오류",err);
     })
   },[])
@@ -156,15 +171,15 @@ const Diarycopy = () => {
   //  DB에 저장된 일기 리스트 이벤트 처리
   //  해당 날짜 누르면 밑에 버튼으로 리스트 나오는 함수
   useEffect(()=>{
-    setListClickVisible(!listClickVisible)
+    setListClickVisible(listClickVisible)
     // setIsViewDiaryVisible(!isViewDiaryVisible)
     setSelectedDiaryList(listDiary.filter((diary)=> diary.date == formatDate(selectedDate)))  
     console.log("필터링 완료")
   },[selectedDate])
 
-  useEffect(() => {
-    setListClickVisible(false)
-  }, [selectedDate]);
+  // useEffect(() => {
+  //   setListClickVisible(false)
+  // }, [selectedDate]);
   
 
 
@@ -231,7 +246,7 @@ const Diarycopy = () => {
             {/* 일기 리스트 출력 */}
             {/* 여기서 누른 날짜의 일기리스트를 제공 */}
             <div className="c">
-              {selectedDate && listDiary
+              {/* {selectedDate && listDiary
                 .filter((diary) => diary.date === formatDate(selectedDate))
                 .map((diary, index) => (
                   <button
@@ -244,8 +259,11 @@ const Diarycopy = () => {
                     </div>
                     <br />
                   </button>
-                ))}
+                ))} */}
+
+                
             </div>
+            
           </div>
         </div>
       </div>
