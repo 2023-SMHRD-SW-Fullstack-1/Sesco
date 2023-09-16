@@ -1,7 +1,6 @@
 package com.smhrd.sesco.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -66,7 +65,14 @@ public class NoteController {
 //		System.out.println("controller 수첩 생성  : " + note);
 //		noteService.createNote(note);
 //	}
+	// 수첩 생성
+	@PostMapping("/note/createnote")
+	public void createNotes(@RequestBody Kid kid) {
+	    System.out.println("Controller 수첩 생성: " + kid);
+	    noteService.createNotes(kid);
+	}
 
+	
 	// 수첩 수정
 //	@PutMapping("/note/update")
 //	public void updateNote(@RequestBody Map<String, String> noteData) {

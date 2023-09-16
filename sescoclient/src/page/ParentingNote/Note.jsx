@@ -24,6 +24,7 @@ const Note = () => {
   //연도 선택
   const [selectedNoteYear, setSelectedNoteYear] = useState(null);
 
+
   //사용자 닉네임
   const userNick = sessionStorage.getItem("user_nick");
   const userId = sessionStorage.getItem("user_id");
@@ -33,6 +34,7 @@ const Note = () => {
   //아이 정보
   const [kids, setKids] = useState([]);
   console.log("아이 정보 : ", kids)
+  const [isNoteCreated, setIsNoteCreated] = useState(false);
 
 
   //노트 불러오기
@@ -50,23 +52,70 @@ const Note = () => {
   }, []);
 
 
-  //사용자의 아이 정보 불러오기
-  useEffect(() => {
-    const getKids = async () => {
-      try {
-        const response = await axios.post('http://localhost:8081/sesco/kid/getkidlist', { user_id: userId })
-        setKids(response.data)
-        console.log("사용자 아이 불러오기 성공", response.data)
-        const allKidSeq = response.data.map((kid) => kid.kid_seq);
-        setGetMoveKidSeq(allKidSeq)
-        console.log("모든아이 kid_seq값 배열1 : ", allKidSeq);
-      } catch (e) {
-        console.error("아이 정보 불러오기 실패", e)
-      }
-    }
-    getKids();
-  }, [])
+// 사용자 아이 정보 불러오기
+useEffect(() => {
+  const getKids = async () => {
+    try {
+      const response = await axios.post('http://localhost:8081/sesco/kid/getkidlist', { user_id: userId })
+      setKids(response.data)
+      console.log("사용자 아이 불러오기 성공", response.data)
 
+      // 각 아이에 대해 노트를 생성하거나 확인
+      for (const kid of response.data) {
+        const kidNotesResponse = await axios.get(`http://localhost:8081/sesco/note/${kid.kid_seq}`);
+        const kidNotes = kidNotesResponse.data;
+        console.log("아이의 노트 정보:", kidNotes.length);
+
+        // 아이의 노트가 없으면 노트 생성
+        if (kidNotes.length === 0) {
+          console.log(`아이의 노트가 없으므로 노트 생성: ${kid.kid_name}`);
+          await axios.post('http://localhost:8081/sesco/note/createnote', kid);
+          
+          // isNoteCreated 값을 true로 설정하여 한 번만 실행되도록 함
+          setIsNoteCreated(true);
+        }
+      }
+
+      const allKidSeq = response.data.map((kid) => kid.kid_seq);
+      setGetMoveKidSeq(allKidSeq)
+      console.log("모든아이 kid_seq값 배열1 : ", allKidSeq);
+    } catch (e) {
+      console.error("아이 정보 불러오기 실패", e)
+    }
+  }
+
+  // 사용자 아이 정보 불러오기 함수 호출
+  getKids();
+}, [userId, setIsNoteCreated]); // 의존성 배열에 setIsNoteCreated 추가
+
+//노트 상태 업데이트 후 실행할 코드 추가
+useEffect(() => {
+  if (isNoteCreated) { 
+    // isNoteCreated 값에 따라 추가 작업 수행
+    
+    const getUpdatedNotesByKid = async () => {
+      try{
+         // 이전에 생성한 note와 동일한 방식으로 해당 아이의 업데이트된 note를 가져옴
+
+         for(const updatedKid of kids){
+           const updatedKidNotesResponse = await axios.get(`http://localhost:8081/sesco/note/${updatedKid.kid_seq}`);
+           const updatedKidNotes = updatedKidNotesResponse.data;
+           console.log(`업데이트된 ${updatedKid.kid_name}의 note 정보`, updatedKidNotes);
+           
+           // 업데이트된 note 상태를 업데이트함 
+           setSelectedNoteSeq(updatedSelectedNoteSeq=>({
+             ...updatedSelectedNoteSeq,
+             [updatedKid.kid_seq]: updatedKidNotes,
+           }));
+         }
+       }catch(e){
+         console.error("업데이트된 note 가져오기 실패:", e);
+       }
+     };
+    
+     getUpdatedNotesByKid();
+   }
+ }, [isNoteCreated, kids]);
 
   //아이 선택했을때
   useEffect(() => {

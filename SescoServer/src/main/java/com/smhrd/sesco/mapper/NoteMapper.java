@@ -20,7 +20,7 @@ public interface NoteMapper {
 	List<Note> selectNotesByTagAndYear(String tag, int year);
 
 	// 수첩 생성
-	//void noteInsert(Note note);
+	void noteInsert(Note note);
 
 	// 수첩 수정
 	//void noteUpdate(Note note);

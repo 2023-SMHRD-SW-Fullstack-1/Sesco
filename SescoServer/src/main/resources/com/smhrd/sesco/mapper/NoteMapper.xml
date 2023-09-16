@@ -10,10 +10,12 @@
 		resultType="com.smhrd.sesco.domain.Note">
 		SELECT n.*
 		FROM t_note n
-		JOIN t_kid k ON n.kid_seq = k.kid_seq
+		JOIN t_kid k ON n.kid_seq =
+		k.kid_seq
 		WHERE n.note_d_yn = 'N'
 		AND k.user_id = #{userId}
-		ORDER BY k.kid_seq ASC
+		ORDER BY
+		k.kid_seq ASC
 	</select>
 
 
@@ -22,7 +24,7 @@
 		resultType="com.smhrd.sesco.domain.Note">
 		SELECT *
 		FROM t_note
-		WHERE kid_seq = #{kidSeq} 
+		WHERE kid_seq = #{kidSeq}
 		AND note_d_yn = 'N'
 	</select>
 
@@ -48,6 +50,15 @@
 		INSERT INTO t_note (n_name, n_s_date, n_e_date, kid_seq, note_d_yn) VALUES 
 		(#{n_name}, #{n_s_date, jdbcType=DATE, javaType=java.sql.Date}, #{n_e_date, 
 		jdbcType=DATE, javaType=java.sql.Date}, #{kid_seq}, 'N') </insert> -->
+	<!-- 수첩 생성 -->
+	<insert id="noteInsert"
+		parameterType="com.smhrd.sesco.domain.Note">
+		INSERT INTO t_note (n_name, n_s_date, n_e_date, kid_seq, note_d_yn)
+		VALUES (#{n_name}, #{n_s_date, jdbcType=DATE},
+		#{n_e_date, jdbcType=DATE}, #{kid_seq}, 'N')
+	</insert>
+
+
 
 	<!-- 수첩 수정 <update id="noteUpdate" parameterType="com.smhrd.sesco.domain.Note"> 
 		UPDATE t_note SET n_name=#{n_name} WHERE note_seq=#{note_seq} </update> -->
