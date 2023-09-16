@@ -3,7 +3,7 @@ import axios from 'axios';
 import SurveyResult from './SurveyResult';
 import PreSurveyResult from './PreSurveyResult';
 import './Survey.css';
-import {FaCheckCircle} from 'react-icons/fa'
+import { FaCheckCircle } from 'react-icons/fa'
 
 function Survey({ kid, user_id }) {
     const category = ['사회/정서적 영역', '언어/의사소통 영역', '인지(학습,사고,문제해결능력)', '운동/신체발달 영역'];
@@ -42,11 +42,11 @@ function Survey({ kid, user_id }) {
         kidMonth = 60
     }
 
-    let ageShow ='';
-    if(kidMonth>18){
-        ageShow = (kidMonth/12)+'세 설문지'
+    let ageShow = '';
+    if (kidMonth > 18) {
+        ageShow = (kidMonth / 12) + '세 체크리스트'
     } else {
-        ageShow = '만 '+kidMonth+'개월 설문지'
+        ageShow = '만 ' + kidMonth + '개월 체크리스트'
     }
 
     const config = {
@@ -65,6 +65,20 @@ function Survey({ kid, user_id }) {
         }
     }
 
+    function toggleCheckList(item) {
+        if (item.hsvd_category === category[0]) {
+            setSocialCheckList(prevList => prevList.includes(item.hsvd_seq) ? prevList.filter(id => id !== item.hsvd_seq) : [...prevList, item.hsvd_seq]);
+        } else if (item.hsvd_category === category[1]) {
+            setLanguageCheckList(prevList => prevList.includes(item.hsvd_seq) ? prevList.filter(id => id !== item.hsvd_seq) : [...prevList, item.hsvd_seq]);
+        } else if (item.hsvd_category === category[2]) {
+            setBrainCheckList(prevList => prevList.includes(item.hsvd_seq) ? prevList.filter(id => id !== item.hsvd_seq) : [...prevList, item.hsvd_seq]);
+        } else if (item.hsvd_category === category[3]) {
+            setPhysicalCheckList(prevList => prevList.includes(item.hsvd_seq) ? prevList.filter(id => id !== item.hsvd_seq) : [...prevList, item.hsvd_seq]);
+        }
+    }
+
+    
+
     function removeCheckList(item) {
         if (item.hsvd_category === category[0]) {
             const tempList = socialCheckList.filter(id => id !== item.hsvd_seq);
@@ -80,6 +94,8 @@ function Survey({ kid, user_id }) {
             physicalCheckList.includes(item.hsvd_seq) && setPhysicalCheckList(tempList);
         }
     }
+
+
 
     const submitResult = async () => {
         setResultBundle([
@@ -160,8 +176,14 @@ function Survey({ kid, user_id }) {
                                     {filteredData1.map((item) => (
                                         <div className="survey_btncheck" key={item.id}>
                                             <li>{item.hsvd_content}</li>
-                                            <button type="checkbox" className="survey_oBtn" id="socialObtn" onClick={() => addCheckList(item)}><FaCheckCircle/></button>
-                                            <button type="checkbox" className="survey_xBtn" id="socialXbtn" onClick={() => removeCheckList(item)}>x</button>
+                                            <label>
+                                                <input className="survey-oBtn" type="checkbox" checked={socialCheckList.includes(item.hsvd_seq) && item.hsvd_category == category[0]} onChange={() => toggleCheckList(item)} />
+                                                O
+                                            </label>
+                                            <label>
+                                                <input className="survey-xBtn" type="checkbox" checked={!socialCheckList.includes(item.hsvd_seq) && item.hsvd_category == category[0]} onChange={() => toggleCheckList(item)} />
+                                                X
+                                            </label>
                                         </div>
                                     ))}
                                 </div>
@@ -175,8 +197,14 @@ function Survey({ kid, user_id }) {
                                     {filteredData2.map((item) => (
                                         <div className="survey_btncheck" key={item.id}>
                                             <li>{item.hsvd_content}</li>
-                                            <button type="checkbox" className="survey_oBtn" id="cmuObtn" onClick={() => addCheckList(item)}>o</button>
-                                            <button type="checkbox" className="survey_xBtn" id="cmuXbtn" onClick={() => removeCheckList(item)}>x</button>
+                                            <label>
+                                                <input className="survey-oBtn" type="checkbox" checked={languageCheckList.includes(item.hsvd_seq) && item.hsvd_category == category[1]} onChange={() => toggleCheckList(item)} />
+                                                O
+                                            </label>
+                                            <label>
+                                                <input className="survey-xBtn" type="checkbox" checked={!languageCheckList.includes(item.hsvd_seq) && item.hsvd_category == category[1]} onChange={() => toggleCheckList(item)} />
+                                                X
+                                            </label>
                                         </div>
                                     ))}
                                 </div>
@@ -190,8 +218,14 @@ function Survey({ kid, user_id }) {
                                     {filteredData3.map((item) => (
                                         <div className="survey_btncheck" key={item.id}>
                                             <li>{item.hsvd_content}</li>
-                                            <button type="checkbox" className="survey_oBtn" id="brainObtn" onClick={() => addCheckList(item)}>o</button>
-                                            <button type="checkbox" className="survey_xBtn" id="brainXbtn" onClick={() => removeCheckList(item)}>x</button>
+                                            <label>
+                                                <input className="survey-oBtn" type="checkbox" checked={brainCheckList.includes(item.hsvd_seq) && item.hsvd_category == category[2]} onChange={() => toggleCheckList(item)} />
+                                                O
+                                            </label>
+                                            <label>
+                                                <input className="survey-xBtn" type="checkbox" checked={!brainCheckList.includes(item.hsvd_seq) && item.hsvd_category == category[2]} onChange={() => toggleCheckList(item)} />
+                                                X
+                                            </label>
                                         </div>
                                     ))}
                                 </div>
@@ -205,8 +239,14 @@ function Survey({ kid, user_id }) {
                                     {filteredData4.map((item) => (
                                         <div className="survey_btncheck" key={item.id}>
                                             <li>{item.hsvd_content}</li>
-                                            <button type="checkbox" className="survey_oBtn" id="pysObtn" onClick={() => addCheckList(item)}>o</button>
-                                            <button type="checkbox" className="survey_xBtn" id="pysXbtn" onClick={() => removeCheckList(item)}>x</button>
+                                            <label>
+                                                <input className="survey-oBtn" type="checkbox" checked={physicalCheckList.includes(item.hsvd_seq) && item.hsvd_category == category[3]} onChange={() => toggleCheckList(item)} />
+                                                O
+                                            </label>
+                                            <label>
+                                                <input className="survey-xBtn" type="checkbox" checked={!physicalCheckList.includes(item.hsvd_seq) && item.hsvd_category == category[3]} onChange={() => toggleCheckList(item)} />
+                                                X
+                                            </label>
                                         </div>
                                     ))}
                                 </div>

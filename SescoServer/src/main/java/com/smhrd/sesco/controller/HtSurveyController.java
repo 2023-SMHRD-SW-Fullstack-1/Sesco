@@ -44,8 +44,6 @@ public class HtSurveyController {
 		HtSurveyDetail svDetail = new HtSurveyDetail();
 		svDetail.setHsv_seq(hsv_seq);
 
-		System.out.println("디테일 : " + htsurService.viewSurveyAgeCheckList(svDetail));
-		
 		return htsurService.viewSurveyAgeCheckList(svDetail);
 
 	}

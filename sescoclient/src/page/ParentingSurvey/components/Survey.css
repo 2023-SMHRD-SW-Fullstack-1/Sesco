@@ -69,7 +69,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 30px 0 30px 0 ;
+  padding: 30px 0 30px 0;
 }
 
 .surBox-container {
@@ -80,7 +80,7 @@
   flex-direction: column;
 }
 
-.survey-bottom-container{
+.survey-bottom-container {
   display: flex;
   justify-content: center;
   margin-top: 10px;
@@ -110,39 +110,42 @@
   width: 100%;
   height: auto;
   background-color: #1ab0ca;
-  color :rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
   font-weight: 100;
-  border-top-left-radius : 9px;
+  border-top-left-radius: 9px;
   border-top-right-radius: 9px;
 }
-.sur_category2{
+
+.sur_category2 {
   padding-top: 20px;
   padding-bottom: 13px;
   width: 100%;
   height: auto;
   background-color: #fc9d21;
-  color :rgb(255, 255, 255);
-  border-top-left-radius : 9px;
+  color: rgb(255, 255, 255);
+  border-top-left-radius: 9px;
   border-top-right-radius: 9px;
 }
-.sur_category3{
+
+.sur_category3 {
   padding-top: 20px;
   padding-bottom: 13px;
   width: 100%;
   height: auto;
   background-color: #f34444;
-  color :rgb(255, 255, 255);
-  border-top-left-radius : 9px;
+  color: rgb(255, 255, 255);
+  border-top-left-radius: 9px;
   border-top-right-radius: 9px;
 }
-.sur_category4{
+
+.sur_category4 {
   padding-top: 20px;
   padding-bottom: 13px;
   width: 100%;
   height: auto;
   background-color: #a373fc;
-  color :rgb(255, 255, 255);
-  border-top-left-radius : 9px;
+  color: rgb(255, 255, 255);
+  border-top-left-radius: 9px;
   border-top-right-radius: 9px;
 }
 
@@ -172,23 +175,6 @@
   padding: 10px;
 }
 
-.survey_oBtn{
-  margin-right: 10px;
-  height: 30px;
-  margin-bottom: 10px;
-  border-width: 0px; 
-  background: none;
-}
-
-.survey_oBtn:focus{
-  background: #1ab0ca;
-}
-
-.survey_xBtn {
-  margin-right: 10px;
-  height: 30px;
-  margin-bottom: 10px;
-}
 
 .survey_btncheck {
   display: flex;
@@ -210,11 +196,11 @@
 
 
 
-.survey_btnPreResult{
+.survey_btnPreResult {
   margin-right: 60px;
 }
 
-.survey-result-Table-container{
+.survey-result-Table-container {
   display: flex;
   justify-content: center;
   margin-top: 20px;
@@ -222,14 +208,31 @@
 }
 
 .survey-result-Table {
-  border-collapse: collapse; /* 테이블 셀 경계를 병합 */
-  
+  border-collapse: collapse;
+  /* 테이블 셀 경계를 병합 */
+
 }
 
 .survey-result-Table tr,
 .survey-result-Table td {
-  border: 1px solid black; /* 각 셀에 경계선 스타일 적용 */
-  padding : 15px;
+  border: 1px solid black;
+  /* 각 셀에 경계선 스타일 적용 */
+  padding: 15px;
   padding-left: 50px;
   padding-right: 50px;
+}
+
+
+.survey-oBtn{
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  margin-top: 3px;
+}
+
+.survey-xBtn{
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+  margin-top: 3px;
 }

@@ -66,5 +66,8 @@ public class NoteController {
 		System.out.println("삭제할 수첩 ID: " + noteId);
 		noteService.noteDeleteById(noteId);
 	}
+	
+	
+	
 
 }
