@@ -2,9 +2,12 @@ package com.smhrd.sesco.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,65 +21,33 @@ public class NoteService {
 
 	@Autowired
 	private NoteMapper noteMapper;
+	
 
 	@Autowired
 	private KidService kidService;
 
-	// 수첩 불러오기(연도별로 그룹화)
-	// public Map<Integer, List<Note>> getNotesGroupByYear(String userId) {
-	// Map<Integer, List<Note>> groupNotes = new LinkedHashMap<>();
+	// 사용자 ID로 첫번째 아이 수첩 조회
+	public List<Note> getNotesByUser(String userId) {
+		// 회원ID에 해당하는 아이들의 정보 목록 가져오기
+		ArrayList<Kid> kids = kidService.getKidList(userId);
 
-	// 현재 연도부터 2000년까지 역순
-	// for (int year = LocalDate.now().getYear(); year >= 2000; year--) {
-	// List<Note> notesInYear = noteMapper.selectNotesByYear(year);
-	// if (!notesInYear.isEmpty()) { // 해당 연도에 수첩 있으면 추가
-	// groupNotes.put(year, notesInYear);
-	// }
-	// }
-	// return groupNotes;
-	// }
-	// 사용자 ID로 모든 수첩 조회
-	public Map<Integer, List<Note>> getNotesByUser(String userId) {
-		// 회원ID에 해당하는 모든 아이들의 정보 목록 가져오기
-		List<Kid> kids = kidService.getKidList(userId);
-
-		Map<Integer, List<Note>> groupNotes = new LinkedHashMap<>();
-
-		// 각 아이(kid)에 대해
-		for (Kid kid : kids) {
-			try {
-				int kidSeq = Integer.parseInt(kid.getKid_seq());
-				// 해당 아이의 수첩을 연도별로 그룹화
-				Map<Integer, List<Note>> notesForKid = getNotesByKid(kidSeq);
-
-				// 각 연도에 대해
-				for (Map.Entry<Integer, List<Note>> entry : notesForKid.entrySet()) {
-					int year = entry.getKey();
-					if (!groupNotes.containsKey(year)) {
-						groupNotes.put(year, new ArrayList<>());
-					}
-					groupNotes.get(year).addAll(entry.getValue());
-				}
-			} catch (NumberFormatException e) {
-				// kid_seq 값이 숫자로 변환할 수 없는 경우 처리할 내용 추가 가능
-			}
+		if (!kids.isEmpty()) {
+			int firstKidSeq = Integer.parseInt(kids.get(0).getKid_seq());
+			return getNotesByKid(firstKidSeq);
 		}
 
-		return groupNotes;
+		return new ArrayList<>(); // 아이가 없으면 빈 리스트 반환
 	}
 
 	// 아이 선택했을때 수첩 불러오기
-	public Map<Integer, List<Note>> getNotesByKid(int kidSeq) {
-		Map<Integer, List<Note>> groupNotes = new LinkedHashMap<>();
+	public List<Note> getNotesByKid(int kidSeq) {
+		List<Note> notes = noteMapper.selectNotesByKid(kidSeq);
 
-		// 현재 연도부터 2000년까지 역순
-		for (int year = LocalDate.now().getYear(); year >= 2000; year--) {
-			List<Note> notesInYear = noteMapper.selectNotesByKid(kidSeq, year);
-			if (!notesInYear.isEmpty()) { // 해당 연도에 수첩 있으면 추가
-				groupNotes.put(year, notesInYear);
-			}
+		if (notes.size() > 6) {
+			notes = notes.subList(0, 6); // 최대 6개의 노트만 유지
 		}
-		return groupNotes;
+
+		return notes;
 	}
 
 	// 태그 검색
@@ -95,21 +66,67 @@ public class NoteService {
 	}
 
 	// 수첩 생성
-	public void createNote(Note note) {
-		System.out.println("service 수첩 생성:" + note);
-		noteMapper.noteInsert(note);
+//	public void createNote(Note note) {
+//		System.out.println("service 수첩 생성:" + note);
+//		noteMapper.noteInsert(note);
+//	}
+
+	// 아이 추가 시 초기 노트 생성 또는 확인
+	public void createNotes(Kid kid) {
+	    
+
+	    // 아이의 노트 목록을 가져옵니다.
+	    List<Note> existingNotes = noteMapper.selectNotes();
+
+	    // 만약 아이의 노트가 없으면 노트 생성
+	    if (existingNotes.isEmpty()) {
+	        int kidAge = calculateKidAge(kid);
+	        if (kidAge >= 0 && kidAge <= 5) {
+	            for (int age = 0; age <= 5; age++) {
+	                Note note = new Note();
+	                note.setN_name(kid.getKid_name() + "의 " + age + "살 수첩");
+	                Date currentDate = new Date();
+	                note.setN_s_date(currentDate); // 현재 날짜로 설정
+	                // 현재 날짜에 1년을 더한 후 하루를 뺌
+	                long oneYearMillis = 365L * 24 * 60 * 60 * 1000;
+	                long oneDayMillis = 24L * 60 * 60 * 1000;
+	                long endDateMillis = currentDate.getTime() + oneYearMillis - oneDayMillis;
+	                Date endDate = new Date(endDateMillis);
+	                note.setN_e_date(endDate);
+	                note.setKid_seq(kid.getKid_seq());
+	                note.setNote_d_yn("N");
+
+	                // 노트 생성
+	                noteMapper.noteInsert(note);
+	            }
+	        }
+	    }
+	}
+
+
+
+
+	// 아이의 나이 계산
+	private int calculateKidAge(Kid kid) {
+		Date today = new Date();
+		Date birthDate = kid.getKid_birth();
+		long ageInMillis = today.getTime() - birthDate.getTime();
+		// 밀리초를 연도로 변환 (밀리초 / 년의 밀리초)
+		long oneYearInMillis = 365L * 24 * 60 * 60 * 1000;
+		int age = (int) (ageInMillis / oneYearInMillis);
+		return age;
 	}
 
 	// 수첩 수정
-	public Note updateNote(Note updatedNote) {
-
-		return noteMapper.noteUpdate(updatedNote);
-	}
+//	public void updateNote(Note updatedNote) {
+//		System.out.println("service 수첩 수정:" + updatedNote);
+//		noteMapper.noteUpdate(updatedNote);
+//	}
 
 	// 수첩 삭제
-	public void noteDeleteById(String noteId) {
-		return;
-
-	}
+//	public void noteDeleteById(String note_seq) {
+//		noteMapper.noteDeleteById(note_seq);
+//
+//	}
 
 }

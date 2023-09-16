@@ -308,6 +308,114 @@
 .babyCorrectInput2 {
     margin: 0px 3px 0px 5px;
     width: 44px;
-
+    
     text-align: center;
+}
+.main1_infoContainer{
+    display: flex;
+    flex-direction: column;
+    margin-top: 950px;
+    height: 1200px;
+}
+.main1banner{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    height: 965px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    
+}
+.M2banner_info{
+    width: 100%;
+    height: 400px;
+    color: rgb(66, 66, 66);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    z-index: 8;
+}
+.M2banner_info h1{
+    margin-bottom: 100px;
+    font-size: 48px;
+    font-weight: 800;
+}
+.M2banner_info h4{
+    margin-bottom: 100px;
+    font-size: 36px;
+    text-align: center;
+}
+.mainImg_loginBtn,
+.mainImg_joinBtn{
+    margin-bottom: 100px;
+    font-size: 22px;
+    margin-left: 25px;
+    text-align: center;
+}
+.mainImg_scrollBtn{
+    border: none;
+    position: relative;
+    background:none;
+    top: 85px;
+    width: 200px;
+    font-size: 60px;
+    margin-left: 25px;
+    text-align: center;
+}
+.main1Icons{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+
+}
+.main1Icons img{
+    display: flex;
+    justify-content: center;
+    
+}
+.diaryIcon,
+.galleryIcon,
+.tipIcon{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-left: 80px;
+}
+.main1_avatarContainer{
+    display: flex;
+    flex-direction: row;
+}
+.main1_avatarContent{
+    height: 550px;
+    padding: 15px;
+    background-color: rgb(230, 243, 255);
+    border-radius:6px;
+    box-shadow:3px 3px 3px 3px #cfcfcf;
+    width: 47.5%;
+    margin: 80px 100px 100px 100px;
+}
+.main1_avatarContent img{
+    border-radius : 6px;
+}
+.main1_avatarContext{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.main1_avatarContext h2{
+    margin-bottom: 100px;
+}
+.detailBtn{
+    border: none;
+    background: none;
+    color: rgb(255, 115, 1);
+    font-weight: 700;
+}
+.testt{
+    height: 950px;
+    border: 1px solid black;
+    margin-bottom: 15px;
 }

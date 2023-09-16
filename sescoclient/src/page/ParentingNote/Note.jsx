@@ -10,8 +10,9 @@ const Note = () => {
   //태그 검색
   const [searchTag, setSearchTag] = useState("");
   //아이 선택
-
   const [kidSelect, setKidSelect] = useState("모든 아이")
+  // kid_seq 값을 배열로 저장하는 상태 변수 추가 
+  const [getMoveKidSeq, setGetMoveKidSeq] = useState([]);
 
   //수첩
   const [notes, setNotes] = useState([]);
@@ -19,18 +20,22 @@ const Note = () => {
   const [notesDisplay, setNotesDisplay] = useState({});
   //수첩 선택
   const [selectedNoteSeq, setSelectedNoteSeq] = useState(null);
+
   //연도 선택
   const [selectedNoteYear, setSelectedNoteYear] = useState(null);
+
 
   //사용자 닉네임
   const userNick = sessionStorage.getItem("user_nick");
   const userId = sessionStorage.getItem("user_id");
+  const kidSeq = sessionStorage.getItem("kid_seq")
   console.log("사용자 닉네임 : ", userNick)
   console.log("사용자 Id :", userId)
   //아이 정보
   const [kids, setKids] = useState([]);
-  //일기
-  const [diary, setDiary] = useState(null);
+  console.log("아이 정보 : ", kids)
+  const [isNoteCreated, setIsNoteCreated] = useState(false);
+
 
   //노트 불러오기
   useEffect(() => {
@@ -46,34 +51,94 @@ const Note = () => {
     getNotes();
   }, []);
 
-  //사용자의 아이 정보 불러오기
-  useEffect(() => {
-    const getKids = async () => {
-      try {
-        const response = await axios.post('http://localhost:8081/sesco/kid/getkidlist', { user_id: userId })
-        setKids(response.data)
-        console.log("아이 불러오기 성공", response.data)
-      } catch (e) {
-        console.error("아이 정보 불러오기 실패", e)
+
+// 사용자 아이 정보 불러오기
+useEffect(() => {
+  const getKids = async () => {
+    try {
+      const response = await axios.post('http://localhost:8081/sesco/kid/getkidlist', { user_id: userId })
+      setKids(response.data)
+      console.log("사용자 아이 불러오기 성공", response.data)
+
+      // 각 아이에 대해 노트를 생성하거나 확인
+      for (const kid of response.data) {
+        const kidNotesResponse = await axios.get(`http://localhost:8081/sesco/note/${kid.kid_seq}`);
+        const kidNotes = kidNotesResponse.data;
+        console.log("아이의 노트 정보:", kidNotes.length);
+
+        // 아이의 노트가 없으면 노트 생성
+        if (kidNotes.length === 0) {
+          console.log(`아이의 노트가 없으므로 노트 생성: ${kid.kid_name}`);
+          await axios.post('http://localhost:8081/sesco/note/createnote', kid);
+          
+          // isNoteCreated 값을 true로 설정하여 한 번만 실행되도록 함
+          setIsNoteCreated(true);
+        }
       }
+
+      const allKidSeq = response.data.map((kid) => kid.kid_seq);
+      setGetMoveKidSeq(allKidSeq)
+      console.log("모든아이 kid_seq값 배열1 : ", allKidSeq);
+    } catch (e) {
+      console.error("아이 정보 불러오기 실패", e)
     }
-    getKids();
-  }, [])
+  }
+
+  // 사용자 아이 정보 불러오기 함수 호출
+  getKids();
+}, [userId, setIsNoteCreated]); // 의존성 배열에 setIsNoteCreated 추가
+
+//노트 상태 업데이트 후 실행할 코드 추가
+useEffect(() => {
+  if (isNoteCreated) { 
+    // isNoteCreated 값에 따라 추가 작업 수행
+    
+    const getUpdatedNotesByKid = async () => {
+      try{
+         // 이전에 생성한 note와 동일한 방식으로 해당 아이의 업데이트된 note를 가져옴
+
+         for(const updatedKid of kids){
+           const updatedKidNotesResponse = await axios.get(`http://localhost:8081/sesco/note/${updatedKid.kid_seq}`);
+           const updatedKidNotes = updatedKidNotesResponse.data;
+           console.log(`업데이트된 ${updatedKid.kid_name}의 note 정보`, updatedKidNotes);
+           
+           // 업데이트된 note 상태를 업데이트함 
+           setSelectedNoteSeq(updatedSelectedNoteSeq=>({
+             ...updatedSelectedNoteSeq,
+             [updatedKid.kid_seq]: updatedKidNotes,
+           }));
+         }
+       }catch(e){
+         console.error("업데이트된 note 가져오기 실패:", e);
+       }
+     };
+    
+     getUpdatedNotesByKid();
+   }
+ }, [isNoteCreated, kids]);
 
   //아이 선택했을때
   useEffect(() => {
     const getNotesByKid = async () => {
       try {
+        //받아온 시퀀스 값이 있으면 해당 시퀀스 값을 설정
 
-        if (kidSelect === "모든 아이") { // '모든 아이'가 선택된 경우
+        if (kidSeq == null && kidSelect == null) {
+          setKidSelect("모든 아이")
+        } else if (kidSelect === "모든 아이") { // '모든 아이'가 선택된 경우
           const reseponse = await axios.get(`http://localhost:8081/sesco/note/${userId}`);
           setNotes(reseponse.data)
+          const allKidSeq = kids.map((kid) => kid.kid_seq);
+          console.log("출력", allKidSeq)
+          setGetMoveKidSeq(allKidSeq)
           console.log("모든 아이 선택 : ", reseponse.data)
         } else { // 특정 아이가 선택된 경우
           console.log("kidSelect ", kidSelect)
           const reseponse = await axios.post('http://localhost:8081/sesco/note/getnotelist', { kid_seq: kidSelect });
           setNotes(reseponse.data)
           console.log("특정 아이 선택", reseponse.data)
+          setGetMoveKidSeq(kidSelect)
+          console.log("특정 아이의 kid_seq 값: ", kidSelect)
         }
 
       } catch (e) {
@@ -133,19 +198,32 @@ const Note = () => {
     //선택 시 그 아이의 수첩만 가져오게 하기
   }
 
-  //추가 버튼 클릭했을 때
-  const handleAddNote = (year) => {
-    console.log("추가버튼클릭:", year)
-    //setNotesDisplay(prev => ({ ...prev, [year]: true }));
-    setNotesDisplay(prev => ({ ...prev, [year]: !prev[year] }));
-    // 아이 선택 값 저장하기
-    setKidSelect(kidSelect);
-    console.log("추가 버튼 클릭시 아이 선택, kid_seq값 :", kidSelect);
-  };
+
+  // 다이어리 컴포넌트에 전달할 수첩 객체
+  let noteData = null;
 
   //노트 클릭시
   const handleNoteClick = async (note_seq, year) => {
-    console.log('노트클릭시,note_seq, year :', note_seq, year)
+
+    try {
+      // notes에서 선택한 note_seq 값과 일치하는 노트 찾기
+      const selectedNote = notes[year].find(note => note.note_seq === note_seq);
+
+      if (selectedNote) {
+        console.log('노트클릭시, note_seq, year, selectedNote:', note_seq, year, selectedNote);
+
+        // 다이어리 컴포넌트에 전달할 객체 생성
+        const noteData = {
+          kidSeq: kidSelect,
+          ...selectedNote
+        };
+
+        console.log("다이어리 컴포넌트에 전달 : ", noteData)
+      }
+    } catch (error) {
+      console.error('노트 상세 정보 가져오기 실패:', error);
+    }
+
     setSelectedNoteSeq(note_seq);
     setSelectedNoteYear(year);
 
@@ -164,17 +242,19 @@ const Note = () => {
   const handleDiaryClose = () => {
     setSelectedNoteSeq(null);
     setSelectedNoteYear(null);
+    console.log("일기 닫기 버튼 클릭 ")
   };
+
 
   return (
     <div className='note-container'>
-      <div class="book">
-        <img class="noteBackground" src={noteBackground} />
+      <div className="book">
+        <img className="noteBackground" src={noteBackground} />
         <div className="note-book-text">
-          <span class="book-span">
+          <span className="book-span">
             “ {userNick} ” 님의 <br />
           </span>
-          <span class="book-span2">Book 캡슐 🧊 </span>
+          <span className="book-span2">Book 캡슐 🧊 </span>
         </div>
       </div>
 
@@ -195,11 +275,10 @@ const Note = () => {
         {/* 아이선택 div */}
         <div className='noteKidSelect'>
           {/* value 값은 현재 선택한 아이 kid_seq값으로 설정 */}
-          <select className='note-myKidSelect' onChange={handlekidSelectChange} value={kidSelect}>
+          <select className='note-myKidSelect' title="아이 선택" onChange={handlekidSelectChange} value={kidSelect}>
             <option className='note-myKidSelectOption' value="모든 아이">모든 아이</option> {/* '모든 아이' 옵션 추가 */}
             {kids.map((kid) => (
               <option className='note-myKidSelectOption' value={kid.kid_seq} key={kid.kid_seq}>{kid.kid_name}</option>
-
             ))}
           </select>
 
@@ -207,43 +286,26 @@ const Note = () => {
       </div>
 
       <div className='noteList'>
-        {/* Object.entries :
-    notes 객체에서 key, value 형태 배열들 생성하여 반환
-    객체=>배열로, map 사용하기위함 */}
-        {/*notes : 해당 연도에 해당하는 노트 정보, map 이용해 필요한 데이터 추출하여 전달  */}
-        {/* sort 함수 사용 : key(연도)에 따라 내림차순으로 
-    연도 최신순부터 정렬 */}
+        <NoteList
+          notes={notes.slice(0, 6).map(note => ({
+            name: note.n_name,
+            startDate: note.n_s_date,
+            endDate: note.n_e_date,
+            seq: note.note_seq
+          }))}
+          onNoteClick={(note_seq) => handleNoteClick(note_seq)}
+          kidSeq={kidSelect}
+          kids = {kids}
+          allKidSeq={getMoveKidSeq}
+        />
 
-        {Object.entries(notes).sort((a, b) => b[0] - a[0]).map(([year, notesInYear]) => (
-          <React.Fragment key={year}>
-            <NoteList
-              year={year}
-              notes={notesInYear.map(note => ({
-                name: note.n_name,
-                startDate: note.n_s_date,
-                endDate: note.n_e_date,
-                seq: note.note_seq
-              }))}
-              onAddNote={() => handleAddNote(year)}
-              onNoteClick={(note_seq) => handleNoteClick(note_seq, year)}
-              kidSeq = {kidSelect}
-              key={year}
-
-            />
-
-            {/** 선택된 연도와 노트 있을 경우 다이어리 표시 */}
-            {selectedNoteYear === year && selectedNoteSeq &&
-              <div className='diary-container active'>
-                <Diarycopy kidSeq={kidSelect}  />
-                <button className='diary-close' onClick={() => handleDiaryClose()}>X</button>
-                
-              </div>}
-            {/* 사용자가 추가 버튼 클릭시  */}
-            
-
-          </React.Fragment>
-        ))}
-
+        {/** 선택된 연도와 노트 있을 경우 다이어리 표시 */}
+        {selectedNoteSeq && (
+          <div className='diary-container active'>
+            <Diarycopy kidSeq={kidSelect} noteData={noteData} />
+            <button className='diary-close' onClick={() => handleDiaryClose()}>X</button>
+          </div>
+        )}
       </div>
 
     </div>

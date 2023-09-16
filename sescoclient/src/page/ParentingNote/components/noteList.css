@@ -55,7 +55,8 @@
     flex-direction: row;
     justify-content: flex-start;
 
-    margin-left: 129px;
+    margin-left: 300px;
+    
     /*
     margin-right: 1225px;
     margin-top: 40px;
@@ -75,7 +76,7 @@
 .note-item-span {
     position: absolute;
 
-    top: 62%;
+    top: 65%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #000;
