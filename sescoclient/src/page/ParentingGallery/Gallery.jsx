@@ -102,7 +102,7 @@ const Gallery = () => {
                     (
                       // 지역내에서 특정 도시를 선택한 경우 
                       selectedCity==null ?
-                      <CityList secondNameList={secondNameList} setSelectedCity={setSelectedCity}></CityList>
+                      <CityList imgNameList={imgNameList}secondNameList={secondNameList} setSelectedCity={setSelectedCity}></CityList>
                       :
                       <CityGallery imgInfoList={imgInfoList} localName={clickedLocal} cityName={selectedCity}></CityGallery>
                     )

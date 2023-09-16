@@ -6,17 +6,15 @@ import "slick-carousel/slick/slick-theme.css";
 import './city.css'
 import { LocalContext } from '../localContext';
 
-const CityList = ({secondNameList, setSelectedCity}) => {
+const CityList = ({imgNameList, secondNameList, setSelectedCity}) => {
 
   //지역 종류
   const secondNameSet = Array.from(new Set(secondNameList))
 
   //지역별 데이터 개수
-  
 
   //지역업데이트에 따른 
   const {clickedLocal} = useContext(LocalContext)
-
 
   const sliderRef = useRef(0);
 
@@ -24,9 +22,7 @@ const CityList = ({secondNameList, setSelectedCity}) => {
   useEffect(() => {
     sliderRef.current.slickGoTo(0) // 0 페이지로 이동
   }, [clickedLocal]);
-
-
- 
+  
 
   const settings = {
     
@@ -55,11 +51,11 @@ const CityList = ({secondNameList, setSelectedCity}) => {
     <>
     <div className='slider-container'>
         <Slider ref={sliderRef} {...settings}>
-          {/* 중복x 지역들 card로 표시 */}
+          {/* 중복x 지역들 card로 표시 이미지도 하나는 넘겨야함*/}
           {secondNameSet.map((name)=>
-          <div key={name} className='slider-item'>
-              <City key={name} cityName={name} cityList={secondNameList} setSelectedCity={setSelectedCity}/>
-          </div>
+            <div key={name} className='slider-item'>
+                <City key={name} imgNameList={imgNameList} cityName={name} cityList={secondNameList} setSelectedCity={setSelectedCity}/>
+            </div>
           )}
         </Slider>
     </div>

@@ -1,21 +1,26 @@
 import ImageGallery from "react-image-gallery";
-import React from 'react'
+import React, { useEffect } from 'react'
 
-const ImgSlider = () => {
+const ImgSlider = ({imgInfo}) => {
+    console.log(imgInfo)
     const images = [
-        {
-          original: "https://picsum.photos/id/1018/1000/600/",
-          thumbnail: "https://picsum.photos/id/1018/250/150/",
-        },
-        {
-          original: "https://picsum.photos/id/1015/1000/600/",
-          thumbnail: "https://picsum.photos/id/1015/250/150/",
-        },
-        {
-          original: "https://picsum.photos/id/1019/1000/600/",
-          thumbnail: "https://picsum.photos/id/1019/250/150/",
-        },
+        // {
+        //   original : imgInfo[2].img,
+        //   thumbnail : imgInfo[2].img
+        // },
+    
       ];
+
+      //이미지 정보 바인딩
+      useEffect(()=>{
+        const info= []
+        imgInfo.map((name)=>
+          images.push({
+            original : name.img,
+            thumbnail : name.img
+          })
+        )
+      },{})
   return (
    <ImageGallery items={images} />
   )

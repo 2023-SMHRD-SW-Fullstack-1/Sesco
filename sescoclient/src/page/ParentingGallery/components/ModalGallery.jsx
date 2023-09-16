@@ -4,16 +4,16 @@ import React, { useState } from "react";
 import './gallerymap.css'
 import ImgSlider from "./ImgSlider";
 
-function ModalGallery({closeModal}) {
+function ModalGallery({closeModal, imgInfo}) {
 
   return (
     
     <div className="gallery-modal" onClick={()=>closeModal(false)}>
       <div className="gallery-modal-body" onClick={(e) => e.stopPropagation()}>
-        <button className="gallery-modal-close-btn" onClick={()=>closeModal(false)}>
+        {/* <button className="gallery-modal-close-btn" onClick={()=>closeModal(false)}>
           ✖
-        </button>
-        <ImgSlider />
+        </button> */}
+        <ImgSlider imgInfo={imgInfo}/>
       </div>
     </div>
   );

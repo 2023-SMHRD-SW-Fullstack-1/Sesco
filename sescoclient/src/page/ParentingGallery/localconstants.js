@@ -9,7 +9,10 @@ export const LOCAL ={
     JEOLLABUK_DO : "전라북도",
     JEJU_ISLAND : "제주도",
     CHUNGCHEONGNAM_DO : "충청남도",
-    CHUNGCHEONGBUK_DO : "충청북도"
+    CHUNGCHEONGBUK_DO : "충청북도",
+    GWANGJU : "광주광역시",
+    BUSAN : "부산광역시",
+    ULSAN : "울산광역시"
 }
 
 export const JEOLLANAM_DO = {

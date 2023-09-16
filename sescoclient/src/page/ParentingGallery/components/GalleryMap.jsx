@@ -141,6 +141,36 @@ const GalleryMap = ({firstNameList, secondNameList}) => {
             d='M 7 53 C 9 53 11 53 13 53 C 13.6667 53.6667 14.3333 54.3333 15 55 C 14 56 13 57 12 58 C 9.6667 58 7.3333 58 5 58 C 4.3333 57.3333 3.6667 56.6667 3 56 C 3.6667 55.6667 4.3333 55.3333 5 55 C 5.3333 54.3333 5.6667 53.6667 6 53 C 6.6667 53 7.3333 53 8 53'
           ></path>
         </g>
+
+
+        {/*~~특별시~~ */}
+          {/* 광주 */}
+        <g className={`map-location${clickedLocal ==LOCAL.GWANGJU ? "-clicked":"" }`} onClick={()=>clickLocal(LOCAL.GWANGJU)} onMouseEnter={()=>handleMouseEnter(LOCAL.GWANGJU)} onMouseLeave={handleMouseLeave}>
+          <path
+            fill='#11C893' className='location' strokeLinejoin="round" stroke='green' strokeWidth={0.1}
+            d=' M 13 40 C 13.3333 40.3333 13.6667 40.6667 14 41 C 14.6667 40.6667 15.3333 40.3333 16 40 C 16.3333 40.6667 16.6667 41.3333 17 42 C 17.3333 42 17.6667 42 18 42 C 17.3333 42.6667 16.6667 43.3333 16 44 C 15.3333 44 14.6667 44 14 44 C 13.6667 44 13.3333 44 13 44 C 12.6667 43.6667 12.3333 43.3333 12 43 C 11.6667 43 11.3333 43 11 43 C 11.3333 42.3333 11.6667 41.6667 12 41 C 12.3333 40.6667 12.6667 40.3333 13 40'
+          ></path>
+        </g> 
+
+
+          {/* 울산 */}
+        <g className={`map-location${clickedLocal ==LOCAL.ULSAN ? "-clicked":"" }`} onClick={()=>clickLocal(LOCAL.ULSAN)} onMouseEnter={()=>handleMouseEnter(LOCAL.ULSAN)} onMouseLeave={handleMouseLeave}>  
+          <path
+            fill='#11C893' className='location' strokeLinejoin="round" stroke='green' strokeWidth={0.1}
+            d='M 39 38 C 38.6667 38.3333 38.3333 38.6667 38 39 C 38.3333 39.3333 38.6667 39.6667 39 40 C 39.6667 40.3333 40.3333 40.6667 41 41 C 41.3333 41.3333 41.6667 41.6667 42 42 C 42.3333 41.6667 42.6667 41.3333 43 41 C 43.3333 40 43.6667 39 44 38 C 42.6667 37.6667 41.3333 37.3333 40 37 C 39.3333 37.6667 38.6667 38.3333 38 39 '
+          ></path>
+       </g>
+
+        {/* 부산 */}
+       <g className={`map-location${clickedLocal ==LOCAL.BUSAN ? "-clicked":"" }`} onClick={()=>clickLocal(LOCAL.BUSAN)} onMouseEnter={()=>handleMouseEnter(LOCAL.BUSAN)} onMouseLeave={handleMouseLeave}>
+          <path
+            fill='#11C893' className='location' strokeLinejoin="round" stroke='green' strokeWidth={0.1}
+            d='M 36 45 C 35.6667 44.6667 35.3333 44.3333 35 44 C 35.3333 43.6667 35.6667 43.3333 36 43 C 36.6667 43 37.3333 43 38 43 C 38.3333 42.6667 38.6667 42.3333 39 42 C 39 41.6667 39 41.3333 39 41 C 39.3333 41 39.6667 41 40 41 C 40.3333 41 40.6667 41 41 41 C 41.3333 41.3333 41.6667 41.6667 42 42 C 40.6667 43.3333 39.3333 44.6667 38 46 C 37.3333 45.6667 36.6667 45.3333 36 45 C 35.6667 44.6667 35.3333 44.3333 35 44'
+          ></path>
+        </g>
+
+
+
       </svg>
     <>
     

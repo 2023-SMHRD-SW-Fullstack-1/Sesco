@@ -67,7 +67,7 @@ const CityGallery = ({imgInfoList, cityName}) => {
       ))}
     </ImageList>
     }
-    {isFocus && <ModalGallery closeModal={setIsFocus} />}
+    {isFocus && <ModalGallery closeModal={setIsFocus} imgInfo={itemData}/>}
     </>
     
   )
