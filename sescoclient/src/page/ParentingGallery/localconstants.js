@@ -12,7 +12,11 @@ export const LOCAL ={
     CHUNGCHEONGBUK_DO : "충청북도",
     GWANGJU : "광주광역시",
     BUSAN : "부산광역시",
-    ULSAN : "울산광역시"
+    ULSAN : "울산광역시",
+    DAEGU : "대구광역시",
+    DAEJEON : "대전광역시",
+    SEOUL :"서울특별시",
+    INCHEON :"인천광역시"
 }
 
 export const JEOLLANAM_DO = {
