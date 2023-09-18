@@ -41,6 +41,8 @@ const Diarycopy = () => {
 
   // 일기 리스트 상세정보를 담는 상태 변수
   const [selectedDiary, setSelectedDiary] = useState(null);
+
+  
   
 
 
@@ -51,43 +53,12 @@ const Diarycopy = () => {
 
   //날짜 맞춰주기 : 2023-09-09
   function formatDate(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0"); // getMonth()는 0부터 시작하므로 1을 더해줍니다.
-    const day = String(date.getDate()).padStart(2, "0");
-
-    return `${year}-${month}-${day}`;
+    console.log(date);
+    return moment(date).format('YYYY-MM-DD');
   }
 
 
-  //해당 날짜의 일기 리스트 출력
-  function handleDateClick(info, index) {
-    console.log("handleDateClick");
-    setSelectedDate(info.date);
-    console.log(info.date);
-    
-    console.log(info);
-    setListClickVisible(true);
-    console.log("인덱스",index)
-    console.log("너도 오니?",selectedDiaryList[0])
-    const diary = selectedDiaryList[0];
-    console.log("다이어리",diary);
-    setSelectedDiary(diary);
-
-     
-
-  
-    // const localDateString = formatDate(info.date);
-    
-    
-  }
-
-  
-
-
-
-  
-
-
+ 
 
 
   function onComplete(title, content,tags) {
@@ -128,6 +99,9 @@ const Diarycopy = () => {
     }
 
     setIsClick(false);
+    if( selectedDate != null){
+      setSelectedDate();
+    }
   }
 
   //해당 날짜의 일기 상세정보
@@ -151,9 +125,10 @@ const Diarycopy = () => {
     axios.post(`http://localhost:8081/sesco/diary/selectlist`)
     .then((res)=>{
       console.log(res)
+      console.log("왔니",res.data);
       const fetchedEvents = res.data.diary.map((event,idx)=>{
-        console.log("왔니",res.data);
         return{
+          d_seq : event.d_seq,
           title : event.d_title,
           date : event.d_date,
           content : event.d_content,
@@ -171,15 +146,32 @@ const Diarycopy = () => {
   //  DB에 저장된 일기 리스트 이벤트 처리
   //  해당 날짜 누르면 밑에 버튼으로 리스트 나오는 함수
   useEffect(()=>{
-    setListClickVisible(listClickVisible)
     // setIsViewDiaryVisible(!isViewDiaryVisible)
-    setSelectedDiaryList(listDiary.filter((diary)=> diary.date == formatDate(selectedDate)))  
+    console.log("확인",listDiary);
+
+    const tempDiaryList = listDiary.filter((diary)=> diary.date == formatDate(selectedDate))
+    setSelectedDiaryList(tempDiaryList)  
     console.log("필터링 완료")
+
+    setSelectedDiary(tempDiaryList);
+    console.log(selectedDiaryList)
+    setListClickVisible(true);
+
   },[selectedDate])
 
   // useEffect(() => {
   //   setListClickVisible(false)
   // }, [selectedDate]);
+
+   //해당 날짜의 일기 리스트 출력
+   function handleDateClick(info, index) {
+    console.log("handleDateClick");
+    // const parsedDate = moment(info.date).format('YYYY-MM-DD');
+    setSelectedDate(formatDate(info.date));
+    setSelectedDiaryList()  
+    // console.log(info.date);
+    // console.log(info);
+  }
   
 
 
@@ -273,7 +265,7 @@ const Diarycopy = () => {
         <div className="diary-page-inner">
           {/* 선택된 날짜 출력 */}
           {selectedDate && (
-            <p>선택된 날짜: {selectedDate.toLocaleDateString()}</p>
+            <p>선택된 날짜: </p>
           )}
 
           {/* 일기 작성 폼 */}
@@ -285,11 +277,12 @@ const Diarycopy = () => {
           )}
         </div>
         
-        {listClickVisible && selectedDiary && (
-          <ViewDiary
-            selectdate={selectedDiary}
-          />
-        )}
+        {listClickVisible && selectedDiaryList && selectedDiaryList.length > 0 && (
+  <ViewDiary
+    selectdate={selectedDiaryList}
+  />  
+)}
+
       </div>
     </div>
   );

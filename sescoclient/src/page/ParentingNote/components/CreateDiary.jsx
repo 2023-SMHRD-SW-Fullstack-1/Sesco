@@ -30,7 +30,7 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate }) => {
   const [noteseq, setNoteseq] = useState('');
  
   useEffect(()=>{
-
+console.log(selectedDate);
     setNoteseq("100345720715870951");
   },[])
   

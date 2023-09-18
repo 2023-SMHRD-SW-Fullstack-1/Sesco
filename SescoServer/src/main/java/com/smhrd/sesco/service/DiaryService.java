@@ -130,9 +130,8 @@ public class DiaryService {
 	
 	
 	//일기 삭제
-	public int DiaryDelete(Date d_date) {
-		System.out.println(d_date);
-		return diaryMapper.DiaryDelete(d_date);
+	public void DiaryDelete(Diary diary) {
+		diaryMapper.DiaryDelete(diary);
 	}
 	
 //	private DiaryMapper mapper;

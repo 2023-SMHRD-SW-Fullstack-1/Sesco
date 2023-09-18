@@ -23,11 +23,13 @@
 	</insert>
 	
 	<!--일기 수정 -->
-	<update id=""></update>
+	 <update id="DiaryUpdate" parameterType="com.smhrd.sesco.domain.Diary">
+	 	update t_diary set d_title=#{d_title}, d_date=#{d_date}, d_content=#{d_content}, img_do=#{img_do}, img_si=#{img_si}, img_real_name=#{img_real_name}, d_img_yn=#{d_img_yn}, note_seq=#{note_seq}, d_tags=#{d_tags} where d_seq=#{d_seq}
+	 </update>
 
 	<!--일기 삭제 -->
-	<delete id="DiaryDelete">
-		delete from t_diary where d_seq=#{d_seq} and ??
+	<delete id="DiaryDelete" parameterType="com.smhrd.sesco.domain.Diary">
+		delete from t_diary where d_seq=#{d_seq}
 	</delete>
 
 
