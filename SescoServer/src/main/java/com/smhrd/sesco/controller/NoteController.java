@@ -29,11 +29,11 @@ public class NoteController {
 	private NoteService noteService;
 	
 	// 수첩 불러오기
-	@GetMapping("/note/{userId}")
-	public List<Note> getNotes(@PathVariable String userId) {
-	    System.out.println("첫 접속 수첩 불러오기:" + noteService.getNotesByUser(userId));
-	    return noteService.getNotesByUser(userId);
-	}
+//	@GetMapping("/note/{userId}")
+//	public List<Note> getNotes(@PathVariable String userId) {
+//	    System.out.println("첫 접속 수첩 불러오기:" + noteService.getNotesByUser(userId));
+//	    return noteService.getNotesByUser(userId);
+//	}
 	   
 
 	// 옵션에서 아이 선택시 해당 아이의 수첩 불러오기
@@ -54,11 +54,18 @@ public class NoteController {
 
 
 	// 태그 검색
+//	@GetMapping("/note/tagsearch")
+//	public Map<Integer, List<Note>> getNotesByTag(@RequestParam String tag) {
+//		System.out.println("태그 검색 " + noteService.searchNotesByTag(tag));
+//		return noteService.searchNotesByTag(tag);
+//	}
+	
 	@GetMapping("/note/tagsearch")
-	public Map<Integer, List<Note>> getNotesByTag(@RequestParam String tag) {
-		System.out.println("태그 검색 " + noteService.searchNotesByTag(tag));
-		return noteService.searchNotesByTag(tag);
+	public List<Note> getNotesByTag(@RequestParam String tag) {
+		System.out.println("태그 검색 결과 : "+ noteService.searchNotesByTag(tag));
+	    return noteService.searchNotesByTag(tag);
 	}
+
 
 	// 수첩 생성
 //	@PostMapping("/note/createnote")

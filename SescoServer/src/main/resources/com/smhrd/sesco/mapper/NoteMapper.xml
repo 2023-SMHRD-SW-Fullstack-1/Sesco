@@ -29,7 +29,7 @@
 	</select>
 
 	<!-- 태그 검색 -->
-	<select id="selectNotesByTagAndYear"
+	<select id="selectNotesByTag"
 		resultType="com.smhrd.sesco.domain.Note">
 		SELECT n.*
 		FROM t_note n
@@ -40,7 +40,7 @@
 		REPLACE(#{tag}, '#',
 		''),
 		'#%')
-		AND YEAR(n.n_s_date) = #{year}
+
 		AND
 		n.note_d_yn = 'N'
 
@@ -109,7 +109,6 @@
 	<select id="LoadNote" resultType="com.smhrd.sesco.domain.Note">
 		select * from t_note where kid_seq=#{kid_seq}
 	</select>
-	
 	
 
 

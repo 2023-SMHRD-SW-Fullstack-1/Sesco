@@ -43,26 +43,29 @@ public class NoteService {
 	public List<Note> getNotesByKid(int kidSeq) {
 		List<Note> notes = noteMapper.selectNotesByKid(kidSeq);
 
-		if (notes.size() > 6) {
-			notes = notes.subList(0, 6); // 최대 6개의 노트만 유지
-		}
+//		if (notes.size() > 6) {
+//			notes = notes.subList(0, 6); // 최대 6개의 노트만 유지
+//		}
 
 		return notes;
 	}
 
 	// 태그 검색
-	public Map<Integer, List<Note>> searchNotesByTag(String tag) {
-		Map<Integer, List<Note>> groupNotes = new LinkedHashMap<>();
-
-		// 현재 연도부터 2000년까지 역순
-		for (int year = LocalDate.now().getYear(); year >= 2000; year--) {
-			List<Note> notesInYear = noteMapper.selectNotesByTagAndYear(tag, year);
-			if (!notesInYear.isEmpty()) { // 해당 연도에 태그가 있는 노트가 있으면 추가
-				groupNotes.put(year, notesInYear);
-			}
-		}
-
-		return groupNotes;
+//	public Map<Integer, List<Note>> searchNotesByTag(String tag) {
+//		Map<Integer, List<Note>> groupNotes = new LinkedHashMap<>();
+//
+//		// 현재 연도부터 2000년까지 역순
+//		for (int year = LocalDate.now().getYear(); year >= 2000; year--) {
+//			List<Note> notesInYear = noteMapper.selectNotesByTagAndYear(tag, year);
+//			if (!notesInYear.isEmpty()) { // 해당 연도에 태그가 있는 노트가 있으면 추가
+//				groupNotes.put(year, notesInYear);
+//			}
+//		}
+//
+//		return groupNotes;
+//	}
+	public List<Note> searchNotesByTag(String tag) {
+	    return noteMapper.selectNotesByTag(tag);
 	}
 
 	// 수첩 생성
