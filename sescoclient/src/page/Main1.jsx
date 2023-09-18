@@ -92,7 +92,7 @@ const Main1 = () => {
             <div className='diaryIcon'>
               <img src={bookIcon} style={{ width: '170px', height: '150px', marginTop: '15px', marginBottom: '10px' }} />
               <span>다이어리</span>
-              <Link to="diaryDetail" spy={true} smooth={true}>
+              <Link to="diaryDetail" spy={true} smooth={false}>
                 <p variant="btntoggle">⇓</p>
                 <button className='detailBtn' >자세히보기</button>
               </Link>
@@ -101,7 +101,7 @@ const Main1 = () => {
             <div className='galleryIcon'>
               <img src={galleryIcon} style={{ width: '160px', height: '150px', marginTop: '25px' }} />
               <span>갤러리</span>
-              <Link to="galleryDetail" spy={true} smooth={true}>
+              <Link to="galleryDetail" spy={true} smooth={false}>
                 <p variant="btntoggle">⇓</p>
                 <button className='detailBtn' variant="btntoggle">자세히보기</button>
               </Link>
@@ -110,7 +110,7 @@ const Main1 = () => {
             <div className='tipIcon'>
               <img src={tipIcon} style={{ width: '170px', height: '175px' }} />
               <span>육아TIP</span>
-              <Link to="tipDetail" spy={true} smooth={true}>
+              <Link to="tipDetail" spy={true} smooth={false}>
                 <p variant="btntoggle">⇓</p>
                 <button className='detailBtn' variant="btntoggle">자세히보기</button>
               </Link>
