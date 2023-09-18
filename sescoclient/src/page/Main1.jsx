@@ -1,5 +1,5 @@
 import React from 'react'
-import main1Img from '../img/main1/main1Img.png'
+import main3Img from '../img/main1/maintest2.jpg'
 import bookIcon from '../img/main1/main1_bookIcon.png'
 import tipIcon from '../img/main1/main1_TipIcon.png'
 import galleryIcon from '../img/main1/main1_galleryIcon.png'
@@ -66,7 +66,7 @@ const Main1 = () => {
     <div>
       {/* 메인 사진 */}
       <div className='main1banner' style={{
-        backgroundImage: `url("${main1Img}")`,
+        backgroundImage: `url("${main3Img}")`,
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
@@ -183,10 +183,15 @@ const Main1 = () => {
                 </HTMLFlipBook>
 
               </div>
+
               <div className="main1_book_title">
                 <h2 className=''>나의 아이 캐릭터를 등록 하면 아이의 상태와 정보를  <br /> 한눈에 볼 수 있어요 !</h2>
                 <br />
                 <h5><br />  - 나의 아이가 성장 할수록 아이 캐릭터도 조금씩 성장해요</h5>
+              </div>
+              <div className='main1_diaryBoxlogin'>
+                <h6><br /> 로그인 하러가기 ⇒</h6>
+                <button className='mainBox_loginBtn' onClick={() => nav('/login')}>로그인</button>
               </div>
             </div>
 
@@ -228,9 +233,9 @@ const Main1 = () => {
             </div>
           </div>
           <div className='main1_boxlogin'>
-                <h6><br /> 로그인 하러가기 ⇒</h6>
-                <button className='mainBox_loginBtn' onClick={() => nav('/login')}>로그인</button>
-              </div>
+            <h6><br /> 로그인 하러가기 ⇒</h6>
+            <button className='mainBox_loginBtn' onClick={() => nav('/login')}>로그인</button>
+          </div>
         </div>
       </Box>
       {/* 팁 설명란 */}
@@ -254,6 +259,7 @@ const Main1 = () => {
             </Link>
           </div>
           <div className='main1_tipContainer'>
+            <div className='main1_tipContainer_border'></div>
             <div className='main1_tipContext'>
               <h4>나의 아이 캐릭터를 등록 하면 아이의 상태와 <br /> 정보를 한눈에 볼 수 있어요 !</h4>
               <h5><br />  - 나의 아이가 성장 할수록 아이 캐릭터도 조금씩 성장해요</h5>
@@ -263,16 +269,16 @@ const Main1 = () => {
                 <button className='mainBox_loginBtn' onClick={() => nav('/login')}>로그인</button>
               </div>
             </div>
-            <Slider {...settings} style={{ width: '500px', height:'600px', marginLeft: '7%', marginTop: '50px' }}>
+            <Slider {...settings} style={{ width: '500px', height: '600px', marginLeft: '7%', marginTop: '50px' }}>
               <div>
 
-                <img className='main1_tipContextImg' src={testImg}  />
+                <img className='main1_tipContextImg' src={testImg} />
               </div>
               <div>
-                <img className='main1_tipContextImg'src={testImg} />
+                <img className='main1_tipContextImg' src={testImg} />
               </div>
               <div>
-                <img className='main1_tipContextImg'src={testImg} />
+                <img className='main1_tipContextImg' src={testImg} />
               </div>
 
             </Slider>
