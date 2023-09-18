@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 
 import com.google.gson.JsonObject;
 import com.smhrd.sesco.domain.HtSurveyDetail;
 import com.smhrd.sesco.domain.HtSurveyTip;
+import com.smhrd.sesco.domain.Survey;
 
 @Mapper
 public interface HtSurveyMapper {
@@ -23,5 +26,13 @@ public interface HtSurveyMapper {
 	public List<HtSurveyTip> viewSurveyAgeTip(HtSurveyTip svTip);
 
 	public void saveResult(String seq);
+	
+	@Insert("INSERT INTO t_survey (sv_dt, hsv_seq, kid_seq) VALUES (NOW(), #{hsv_seq}, #{kid_seq})")
+    @SelectKey(keyProperty = "sv_seq", resultType = Long.class, before = false, statement = "SELECT LAST_INSERT_ID() AS sv_seq")
+    public void insertSurvey(Survey survey);
 
+	public List<HtSurveyDetail> preSurveyList(String kidSeq, int hsvSeq);
+
+	
+	
 }
