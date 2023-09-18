@@ -10,10 +10,10 @@ const GoogleLog = () => {
          <GoogleOAuthProvider clientId={clientId}>
                 <GoogleLogin
                     useOneTap = {false}
-                    isSignedIn={false}
                     onSuccess={(res) => {
                         console.log("성공")
                         console.log(res);
+                        
                     }}
                     onFailure={(err) => {
                         console.log("실패")

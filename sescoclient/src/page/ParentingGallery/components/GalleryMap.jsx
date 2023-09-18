@@ -23,14 +23,14 @@ const GalleryMap = ({firstNameList, secondNameList}) => {
   }
 
   return (
-    <div style={{ display: 'relative', width: '750px', height: '750px'}}>
+    <div style={{display: 'flex', width: '600px', height: '600px'}}>
 
    
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
         height="100%"
-        viewBox="-10 -10 60 75">
+        viewBox="0 0 60 60">
 
         <defs>
           <filter id="shadow">
@@ -171,10 +171,16 @@ const GalleryMap = ({firstNameList, secondNameList}) => {
         </g>
 
         {/* 대구 */}
-        <g className={`map-location${clickedLocal ==LOCAL.DAEGU ? "-clicked":"" }`} onClick={()=>clickLocal(LOCAL.DAEGU)} onMouseEnter={()=>handleMouseEnter(LOCAL.DAEGU)} onMouseLeave={handleMouseLeave}>
+        {/* <g className={`map-location${clickedLocal ==LOCAL.DAEGU ? "-clicked":"" }`} onClick={()=>clickLocal(LOCAL.DAEGU)} onMouseEnter={()=>handleMouseEnter(LOCAL.DAEGU)} onMouseLeave={handleMouseLeave}>
         <path
             fill='#11C893' className='location' strokeLinejoin="round" stroke='green' strokeWidth={0.1}
             d=' M 32 37 C 32 37 32 37 32 37 C 31.6667 36.6667 31.3333 36.3333 31 36 C 31.6667 35.6667 32.3333 35.3333 33 35 C 32.6667 34.6667 32.3333 34.3333 32 34 C 33.3333 33.3333 34.6667 32.6667 36 32 C 36.3333 32.6667 36.6667 33.3333 37 34 C 36.3333 34.6667 35.6667 35.3333 35 36 C 34.6667 36 34.3333 36 34 36 C 34 36.6667 34 37.3333 34 37 C 33.3333 37.6667 32.6667 37.3333 32 37  C 31.6667 36.6667 31.3333 36.3333 31 36'
+          ></path> 
+        </g> */}
+        <g className={`map-location${clickedLocal ==LOCAL.DAEGU ? "-clicked":"" }`} onClick={()=>clickLocal(LOCAL.DAEGU)} onMouseEnter={()=>handleMouseEnter(LOCAL.DAEGU)} onMouseLeave={handleMouseLeave}>
+        <path
+            fill='#11C893' className='location' strokeLinejoin="round" stroke='green' strokeWidth={0.1}
+            d='  M 31 37 C 31.3333 37 31.6667 37 32 37 C 32.3333 36.6667 32.6667 36.3333 33 36 C 33.3333 36 33.6667 36 34 36 C 34 35.6667 34 35.3333 34 35 C 34.3333 34.6667 34.6667 34.3333 35 34 C 34.6667 33.6667 34.3333 33.3333 34 33 C 34 32.6667 34 32.3333 34 32 C 34.6667 31.6667 35.3333 31.3333 36 31 C 35 30.6667 34 30.3333 33 30 C 32.3333 30 31.6667 30 31 30 C 31.3333 30.3333 31.6667 30.6667 32 31 C 32.3333 31.6667 32.6667 32.3333 33 33 C 32.6667 33.3333 32.3333 33.6667 32 34 C 31.6667 34 31.3333 34 31 34 C 31.3333 34.3333 31.6667 34.6667 32 35 C 31.6667 35.3333 31.3333 35.6667 31 36 C 30.6667 36 30.3333 36 30 36 C 30.3333 36.3333 30.6667 36.6667 31 37 C 31.3333 37 31.6667 37 32 37'
           ></path> 
         </g>
 

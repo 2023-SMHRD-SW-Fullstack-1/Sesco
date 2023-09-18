@@ -7,6 +7,9 @@ import axios from 'axios'
 import { LocalContext } from './localContext'
 import CityList from './components/CityList'
 import CityGallery from './components/CityGallery'
+import GalleryGuide from './components/GalleryGuide'
+import Footer from '../../common/Footer'
+import GallerySearchFail from './components/GallerySearchFail'
 
 const Gallery = () => {
 
@@ -84,8 +87,8 @@ const Gallery = () => {
     <>
       <Banner/>
         <LocalContext.Provider value={{clickedLocal, setClickedLocal}}>
-            <div style={{ display:'flex', width:"100%", height:"100%"}}>
-              <div style={{ width:"fit-content", height: "fit-content" }}>
+            <div className="gallery-top-container" style={{ display:'flex', width:"100%", height:"100%" }}>
+              <div style={{ width:"fit-content", height: "fit-content", marginTop:"100px" }}>
                 <GalleryMap firstNameList={new Set(firstNameList)} secondNameList={new Set(secondNameList)} ></GalleryMap>
               </div>
               <div className='gallery-city-container'>
@@ -95,7 +98,7 @@ const Gallery = () => {
                 {
                   // 선택한 지역이아직 없는경우
                   clickedLocal==null ?
-                  <>골라봐</>
+                  <GalleryGuide></GalleryGuide>
                   : 
                   // 선택한 지역에 사진이 없는 경우
                   secondNameList.length>0 ?
@@ -107,11 +110,12 @@ const Gallery = () => {
                       <CityGallery imgInfoList={imgInfoList} localName={clickedLocal} cityName={selectedCity}></CityGallery>
                     )
                   :
-                  <>없어요</>
+                  <GallerySearchFail></GallerySearchFail>
                 }
               </div>
             </div>
         </LocalContext.Provider>
+        <Footer></Footer>
     </>
   );
 };
