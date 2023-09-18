@@ -1,10 +1,12 @@
 package com.smhrd.sesco.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -16,5 +18,6 @@ public class HtSurveyDetail {
 	private int hsvd_num;
 	private String hsvd_content;
 	private int hsv_seq;
+
 	
 }
