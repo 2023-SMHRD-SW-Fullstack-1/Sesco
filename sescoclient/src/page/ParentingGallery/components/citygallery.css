@@ -30,6 +30,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 4999;
 }
 
 /* modal창 */
@@ -41,6 +42,7 @@
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
   box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+  z-index: 5000;
 }
 
 .gallery-modal-close-btn {
@@ -55,4 +57,13 @@
 
 .gallery-modal-close-btn:hover {
   cursor: pointer;
+}
+
+.gallery-close-btn{
+  position: absolute;
+  border-width: 0px;
+  background :none;
+  text-size-adjust:50px;
+  margin-left: 530px;
+  margin-top : -60px;
 }

@@ -16,6 +16,14 @@
     }
 }
 
+.gallerymap-total-container{
+    border : 5px solid cadetblue;
+    background-color: rgb(165, 247, 250);
+    margin-right: 10px;
+    
+}
+
+
 .map-location-clicked{
     z-index: 55;
     >.location{
@@ -27,7 +35,6 @@
         z-index: 5;
     }
 }
-
 
 .map-location1{
     z-index: 3;

@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { LocalContext } from '../localContext';
+import City from './City'
+import './city.css'
 
 const CityList = ({imgNameList, secondNameList, setSelectedCity}) => {
 
@@ -6,14 +9,16 @@ const CityList = ({imgNameList, secondNameList, setSelectedCity}) => {
   //지역 종류
   const secondNameSet = Array.from(new Set(secondNameList))
 
+  //지역업데이트에 따른 
+  const {clickedLocal} = useContext(LocalContext)
 
   return (
-    <div>
-   
-        <input class="toggle-box" id="header2" type="checkbox"/>
-        <label for="header2">Salads</label>
-        <div class="myBlock">14" Medium Cheese Pizza $9.75 --- Extra Topping $1.75<br/> 16" Large Cheese Pizza $11.25 ---- Extra Topping $2.50</div>
-
+    <div className='toggle-list-item'>
+        {secondNameSet.map((name)=>
+            <div key={name}>
+                <City key={name} imgNameList={imgNameList} cityName={name} cityList={secondNameList} setSelectedCity={setSelectedCity}/>
+            </div>
+          )}
     </div>
   )
 }

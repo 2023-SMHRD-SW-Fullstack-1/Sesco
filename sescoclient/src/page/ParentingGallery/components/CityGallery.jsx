@@ -6,7 +6,7 @@ import ImgSlider from './ImgSlider';
 import ModalGallery from './ModalGallery';
 
 
-const CityGallery = ({imgInfoList, cityName}) => {
+const CityGallery = ({imgInfoList, cityName, setSelectedCity}) => {
 
   const [itemData, setItemData] = useState()
   const [filteredImgInfo, setFilteredImgInfo] = useState()
@@ -44,6 +44,9 @@ const CityGallery = ({imgInfoList, cityName}) => {
   
   return (
     <>
+    <button className="gallery-close-btn" onClick={()=>setSelectedCity(null)}>
+          ✖
+    </button>
     {itemData != null && 
     <ImageList
       className='gallery-img-list'

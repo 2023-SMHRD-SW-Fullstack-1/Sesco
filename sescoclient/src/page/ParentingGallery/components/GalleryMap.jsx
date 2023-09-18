@@ -1,31 +1,39 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import './gallerymap.css'
 import { useState } from 'react'
 import {LOCAL} from '../localconstants'
 import { LocalContext } from '../localContext'
-// import {map} from '../../../img/map.png'
 
-const GalleryMap = ({firstNameList, secondNameList}) => {
 
+
+const GalleryMap = ({hasCity}) => {
+
+  //지역 설정 함수 
   const {clickedLocal, setClickedLocal} = useContext(LocalContext)
-  const [isHovered, setIsHovered] = useState(false);
+  //hover 감지 함수
+  const [isHovered, setIsHovered] = useState(false)
+  console.log("ee",hasCity)
 
+  //마커 오작동 방지 (빈 값 랜더링 막기 위함)
+
+  //마우스 hover이벤트
   const handleMouseEnter = (it) => {
     console.log(it)
   };
 
+  //마우스 hover종료
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
 
+  //지역 클릭이벤트 ( 지역 설정하기 )
   const clickLocal = (region) =>{
     setClickedLocal(region)
   }
 
   return (
-    <div style={{display: 'flex', width: '600px', height: '600px'}}>
+    <div className='gallerymap-total-container' style={{display: 'flex', width: '600px', height: '600px'}}>
 
-   
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
@@ -33,13 +41,15 @@ const GalleryMap = ({firstNameList, secondNameList}) => {
         viewBox="0 0 60 60">
 
         <defs>
+        {/* 그림자 필터 */}
           <filter id="shadow">
             <feDropShadow dx="1" dy="1" stdDeviation="0.2" floodColor="#03714E" />
           </filter>
 
-          <filter id="shadow-island">
-            <feDropShadow dx="0.3" dy="0.3" stdDeviation="0.1" floodColor="#03714E" />
-          </filter>
+        {/* 섬지역 그림자 필터  */}
+        <filter id="shadow-island">
+          <feDropShadow dx="0.3" dy="0.3" stdDeviation="0.1" floodColor="#03714E" />
+        </filter>
 
         </defs>
 
@@ -121,6 +131,8 @@ const GalleryMap = ({firstNameList, secondNameList}) => {
 
         {/* 전남 */}
         <g className={`map-location${clickedLocal ==LOCAL.JEOLLANAM_DO ? "-clicked":"" }`} onClick={()=>clickLocal(LOCAL.JEOLLANAM_DO)} onMouseEnter={()=>handleMouseEnter(LOCAL.JEOLLANAM_DO)} onMouseLeave={handleMouseLeave}>
+          
+         
           <path
             fill='#10B88D' className='location' strokeLinejoin="round" stroke='green' strokeWidth={0.1}
             d='M 23 40 C 23.3333 41.6667 23.6667 43.3333 24 45 C 23.6667 45 23.3333 45 23 45 C 23.3333 45.6667 23.6667 46.3333 24 47 C 23.3333 47.3333 22.6667 47.6667 22 48 C 21.3333 47.3333 20.6667 46.6667 20 46 C 20 46.3333 20 46.6667 20 47 C 20.3333 47.3333 20.6667 47.6667 21 48 C 20 48.6667 19 49.3333 18 50 C 17.3333 49.3333 16.6667 48.6667 16 48 C 16.6667 47.3333 17.3333 46.6667 18 46 C 17 46.3333 16 46.6667 15 47 C 14.6667 47.6667 14.3333 48.3333 14 49 C 12.6667 49.3333 11.3333 49.6667 10 50 C 9.3333 49.3333 8.6667 48.6667 8 48 C 7.3333 48.3333 6.6667 48.6667 6 49 C 5.6667 48.6667 5.3333 48.3333 5 48 C 5.6667 47.3333 6.3333 46.6667 7 46 C 7.3333 45.3333 7.6667 44.6667 8 44 C 8.3333 43.6667 8.6667 43.3333 9 43 C 9.3333 42 9.6667 41 10 40 C 10 39.3333 10 38.6667 10 38 C 10.3333 37.6667 10.6667 37.3333 11 37 C 11.3333 37.3333 11.6667 37.6667 12 38 C 12.6667 38 12.3333 38 13 38 C 13.3333 37.3333 14.6667 36.6667 15 36 C 15.6667 36.3333 16.3333 36.6667 17 37 C 17.3333 37.6667 17.6667 38.3333 18 39 C 19.3333 39 20.6667 39 22 39 C 22.3333 39.3333 22.6667 39.6667 23 40 C 23.3333 41.6667 23.6667 43.3333 24 45'
@@ -193,13 +205,12 @@ const GalleryMap = ({firstNameList, secondNameList}) => {
         </g>
 
         {/* 세종 */}
-        <g className={`map-location${clickedLocal ==LOCAL.DAEJEON ? "-clicked":"" }`} onClick={()=>clickLocal(LOCAL.DAEJEON)} onMouseEnter={()=>handleMouseEnter(LOCAL.DAEJEON)} onMouseLeave={handleMouseLeave}>
+        <g className={`map-location${clickedLocal ==LOCAL.SEJONG ? "-clicked":"" }`} onClick={()=>clickLocal(LOCAL.SEJONG)} onMouseEnter={()=>handleMouseEnter(LOCAL.SEJONG)} onMouseLeave={handleMouseLeave}>
           <path
               fill='#11C893' className='location' strokeLinejoin="round" stroke='green' strokeWidth={0.1}
               d='M 23.5 26 C 23.3333 26 22.6667 26 22 26 C 22 25.6667 22 25.3333 22 25 C 22.3333 24.444 22.444 24 22.5 24 C 22.5 24 22.3333 23.3333 22 23 C 22 22.6667 22 22.3333 22 22 C 21.6667 21.6667 21.3333 21.3333 21.2 21 C 22 21.3333 23 21.6667 24 22 C 24 22.3333 23.8 22.6667 23.9 22.48 C 22.4 23.2 23.3333 23 23 23 C 23.6667 23.6667 24.3333 24.3333 25 25 C 24.6667 25.333 24 25.777 23.5 26 C 23.5 26 22.6667 26 22 26 '
           ></path>
         </g>
-
 
           {/* 인천 */}
         <g className={`map-location${clickedLocal ==LOCAL.INCHEON ? "-clicked":"" }`} onClick={()=>clickLocal(LOCAL.INCHEON)} onMouseEnter={()=>handleMouseEnter(LOCAL.INCHEON)} onMouseLeave={handleMouseLeave}>
@@ -209,7 +220,6 @@ const GalleryMap = ({firstNameList, secondNameList}) => {
           ></path>
         </g>
 
-
           {/* 서울 */}
         <g className={`map-location${clickedLocal ==LOCAL.SEOUL ? "-clicked":"" }`} onClick={()=>clickLocal(LOCAL.SEOUL)} onMouseEnter={()=>handleMouseEnter(LOCAL.SEOUL)} onMouseLeave={handleMouseLeave}>
           <path
@@ -217,30 +227,63 @@ const GalleryMap = ({firstNameList, secondNameList}) => {
               d='M 20 13 C 20.3333 12.6667 20.6667 12.3333 21 12 C 21.3333 12.3333 21.6667 12.6667 22 13 C 22.3333 12.3333 22.6667 11.6667 23 11 C 23.3333 11 23.6667 11 24 11 C 24.3333 11.6667 24.6667 12.3333 25 13 C 24.6667 13.6667 24.3333 14.3333 24 15 C 23.3333 15 22.6667 15 22 15 C 21.6667 14.6667 21.3333 14.3333 21 14 C 21 13.6667 21 13.3333 21 13 C 20.6667 13 20.3333 13 20 13 C 20.3333 12.6667 20.6667 12.3333 21 12'
           ></path>
         </g>
-
         
       </svg>
-    <>
     
-      {firstNameList.has(LOCAL.GEYONGGI_DO) && console.log("")}
+    {/* 지역별 마커 표시여부  */}
     
-      {firstNameList.has(LOCAL.GANGWON_DO) && console.log("success")}
+        {hasCity.has(LOCAL.GWANGJU) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}}/>}
+  
+        
+        {hasCity?.has(LOCAL.GANGWON_DO) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
 
-      {firstNameList.has(LOCAL.GYEONGSANGBUK_DO) && <h4></h4>}
+         {hasCity.has(LOCAL.GYEONGSANGBUK_DO) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
 
-      {firstNameList.has(LOCAL.CHUNGCHEONGBUK_DO) && <h4></h4>}
+         {hasCity.has(LOCAL.CHUNGCHEONGBUK_DO) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
 
-      {firstNameList.has(LOCAL.CHUNGCHEONGNAM_DO) && <h4></h4>}
+        {hasCity.has(LOCAL.CHUNGCHEONGNAM_DO) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
 
-      {firstNameList.has(LOCAL.JEOLLABUK_DO) && <h4></h4>}
+        {hasCity.has(LOCAL.JEOLLABUK_DO) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
 
-      {firstNameList.has(LOCAL.JEOLLANAM_DO) && <h4></h4>}
+        {hasCity.has(LOCAL.JEOLLANAM_DO) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}}/>}
 
-      {firstNameList.has(LOCAL.GYEONGSANGNAM_DO) && <h4></h4>}
+        {hasCity.has(LOCAL.GYEONGSANGNAM_DO) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
 
-      {firstNameList.has(LOCAL.JEJU_ISLAND) && <h4></h4>}
-      
-    </>
+        {hasCity.has(LOCAL.JEJU_ISLAND) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
+
+        {hasCity.has(LOCAL.JEJU_ISLAND) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
+
+        {hasCity.has(LOCAL.JEJU_ISLAND) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
+
+        {hasCity.has(LOCAL.JEJU_ISLAND) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
+
+        {hasCity.has(LOCAL.JEJU_ISLAND) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
+
+        {hasCity.has(LOCAL.JEJU_ISLAND) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
+
+        {hasCity.has(LOCAL.JEJU_ISLAND) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
+
+        {hasCity.has(LOCAL.JEJU_ISLAND) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />} 
+
+
+        {/* GANGWON_DO : "강원도",
+    GEYONGGI_DO : "경기도",
+    GYEONGSANGNAM_DO : "경상남도",
+    GYEONGSANGBUK_DO : "경상북도",
+    JEOLLANAM_DO : "전라남도",
+    JEOLLABUK_DO : "전라북도",
+    JEJU_ISLAND : "제주도",
+    CHUNGCHEONGNAM_DO : "충청남도",
+    CHUNGCHEONGBUK_DO : "충청북도",
+    GWANGJU : "광주광역시",
+    BUSAN : "부산광역시",
+    ULSAN : "울산광역시",
+    DAEGU : "대구광역시",
+    DAEJEON : "대전광역시",
+    SEOUL :"서울특별시",
+    INCHEON :"인천광역시",
+    SEJONG :"세종특별자치시" */}
+    
     </div>
   )
 }
