@@ -25,13 +25,13 @@ public interface NoteMapper {
 
 	
 	// 작성자 : 홍재성 // 기능:수첩 조회 및 생성
-	public List<Note> noteSelectAndCreate(Note note);
+	public void noteSelectAndCreate(Note note);
 
 	// 작성자 : 홍재성 // 기능:수첩 조회 및 생성
 	public int noteSelect(Note note);
 
 	// 작성자 : 홍재성 // 기능:수첩 조회 및 생성
-	public List<Note> LoadNote(Note note);
+	public ArrayList<Note> LoadNote(Note note);
 
 	// 수첩 수정
 	//void noteUpdate(Note note);

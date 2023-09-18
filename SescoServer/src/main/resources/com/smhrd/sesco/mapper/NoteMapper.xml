@@ -60,7 +60,7 @@
 	-->
 	
 	 <!-- 다섯 개의 노트를 현재 날짜를 기준으로 생성 -->
- <insert id="noteSelectAndCreate" parameterType="com.smhrd.sesco.domain.Note">
+ <insert id="noteSelectAndCreate" parameterType="com.smhrd.sesco.domain.Note" >
   INSERT INTO t_note (n_name, n_s_date, n_e_date, kid_seq, note_d_yn)
   VALUES
     ('0세',

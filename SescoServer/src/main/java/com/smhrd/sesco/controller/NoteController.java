@@ -99,26 +99,24 @@ public class NoteController {
 	
 	// 작성자 : 홍재성 // 기능:수첩 조회 및 생성 
 	@PostMapping("/note/createnotev2")
-	public List<Note> noteSelectAndCreate(@RequestBody Note note) {
+	public ArrayList<Note> noteSelectAndCreate(@RequestBody Note note) {
+		System.out.println("아이번호:"+note.getKid_seq());
+//		Note selectNote = new Note();
+//		selectNote.setKid_seq(kidSeq);
 		
-		String kidSeq = note.getKid_seq();
-		
-		Note selectNote = new Note();
-		selectNote.setKid_seq(kidSeq);
-		
-		int result = noteService.noteSelect(selectNote);
+		int result = noteService.noteSelect(note);
 		System.out.println("resutl:"+result);
 		
+		ArrayList<Note> noteList = new ArrayList<>();
 		if(result == 0) { // 해당아이의 노트가 없을 때
-			List<Note> createList = new ArrayList<>();
-			createList.addAll(noteSelectAndCreate(note));
-			return createList;
-		}else { //해당 아이의 노트가 있을 때
-			List<Note> noteList = new ArrayList<>();
+			noteService.noteSelectAndCreate(note);
+		}
 			noteList = noteService.LoadNote(note);
 			return noteList;
-		}
+		
 		
 	}
+	
+	 
 
 }

@@ -142,8 +142,9 @@ const handlekidSelectChange = (e) => {
 //선택한 아이의 노트 정보를 불러옴 (다시)
 useEffect(() => {
   const getNotesByKid = async () => {
+    console.log("선택한 아이 : ", kidSelect)
     try {
-        const reseponse = await axios.get(`http://localhost:8081/sesco/note/${userId}`);
+        const reseponse = await axios.post('http://localhost:8081/sesco/note/createnotev2', { "kid_seq": kidSelect });
         setNotes(reseponse.data)
         console.log("노트 설정완료 : ", reseponse.data)
     } catch (e) {
@@ -152,7 +153,7 @@ useEffect(() => {
   }
   
   getNotesByKid();
-}, []);
+}, [kidSelect]);
 
 ///-------------------------Kid end -----------------------//
 
@@ -204,7 +205,7 @@ const handleKeyPress = (e) => {
   }
 }
 
-console.log("notes : ", notes)
+
 
 ///-------------------------TAG end ---------------------//
 
