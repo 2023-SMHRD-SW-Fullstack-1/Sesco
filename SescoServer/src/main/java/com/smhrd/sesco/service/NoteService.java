@@ -117,6 +117,27 @@ public class NoteService {
 		return age;
 	}
 
+	
+	
+	// 작성자 : 홍재성 // 기능:수첩 조회 및 생성 
+	public List<Note> noteSelectAndCreate(Note note) {
+		// select 결과 노트가 없다면 0세~6세까지 노트 생성 후 List 반환
+		return noteMapper.noteSelectAndCreate(note);
+	}
+	
+	// 작성자 : 홍재성 // 기능:수첩 조회 및 생성
+	public int noteSelect(Note note) {
+		// 해당아이의 시퀀스번호로 노트가 있는지 없는지 반환
+		return noteMapper.noteSelect(note);
+	}
+
+	// 작성자 : 홍재성 // 기능:수첩 조회 및 생성
+	public List<Note> LoadNote(Note note) {
+		// select 결과 노트가 있다면 List 반환
+		return noteMapper.LoadNote(note);
+	}
+
+
 	// 수첩 수정
 //	public void updateNote(Note updatedNote) {
 //		System.out.println("service 수첩 수정:" + updatedNote);

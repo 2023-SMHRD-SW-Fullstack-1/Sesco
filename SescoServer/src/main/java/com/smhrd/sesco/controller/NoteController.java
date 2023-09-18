@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -95,5 +96,29 @@ public class NoteController {
 //		System.out.println("삭제할 수첩 ID: " + note_seq);
 //		noteService.noteDeleteById(note_seq);
 //	}
+	
+	// 작성자 : 홍재성 // 기능:수첩 조회 및 생성 
+	@PostMapping("/note/createnotev2")
+	public List<Note> noteSelectAndCreate(@RequestBody Note note) {
+		
+		String kidSeq = note.getKid_seq();
+		
+		Note selectNote = new Note();
+		selectNote.setKid_seq(kidSeq);
+		
+		int result = noteService.noteSelect(selectNote);
+		System.out.println("resutl:"+result);
+		
+		if(result == 0) { // 해당아이의 노트가 없을 때
+			List<Note> createList = new ArrayList<>();
+			createList.addAll(noteSelectAndCreate(note));
+			return createList;
+		}else { //해당 아이의 노트가 있을 때
+			List<Note> noteList = new ArrayList<>();
+			noteList = noteService.LoadNote(note);
+			return noteList;
+		}
+		
+	}
 
 }
