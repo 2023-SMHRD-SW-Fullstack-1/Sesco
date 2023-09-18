@@ -1,6 +1,6 @@
 package com.smhrd.sesco.domain;
 
-import java.sql.Date;
+import java.util.Date; 
 import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;

@@ -14,16 +14,16 @@ const AvatarAddFrom = () => {
     const [kid_birth, setKid_Age] = useState('');
     const [kid_weight, setKid_Weight] = useState('');
     const [kid_height, setKid_Key] = useState('');
-    
-    console.log('kid_name', kid_name, 'kid_birth', kid_birth, 'kid_weight', kid_weight, 'kid_height', kid_height, 'kid_gender', kid_gender,'user_id',user_id);
+
+    console.log('kid_name', kid_name, 'kid_birth', kid_birth, 'kid_weight', kid_weight, 'kid_height', kid_height, 'kid_gender', kid_gender, 'user_id', user_id);
 
     const saveKidInfo = () => {
-        if(!fetchData()){
+        if (!fetchData()) {
             alert('값을 입력 해주세요')
-        }else{
+        } else {
             fetchData();
             window.location.replace("/main")
-            console.log('kid_name', kid_name, 'kid_birth', kid_birth, 'kid_weight', kid_weight, 'kid_height', kid_height, 'kid_gender', kid_gender,'user_id',user_id);
+            console.log('kid_name', kid_name, 'kid_birth', kid_birth, 'kid_weight', kid_weight, 'kid_height', kid_height, 'kid_gender', kid_gender, 'user_id', user_id);
 
         }
     }
@@ -36,26 +36,26 @@ const AvatarAddFrom = () => {
             kid_name: kid_name,
             kid_birth: kid_birth,
             kid_weight: kid_weight,
-            kid_height:kid_height,
-            kid_gender:kid_gender,
-            user_id:user_id
+            kid_height: kid_height,
+            kid_gender: kid_gender,
+            user_id: user_id
         };
         axios.post(`http://localhost:8081/sesco/kid/register`, requestData, config)
             .then((res) => {
 
                 try {
 
-                    if(res.data){
+                    if (res.data) {
                         alert('아이등록 완료')
-                    }else{
+                    } else {
                         alert('등록 실패')
                     }
-                   
+
                 } catch {
-                    
+
                 }
             })
-        
+
     }
 
 
@@ -113,7 +113,7 @@ const AvatarAddFrom = () => {
                         </div>
                     </div>
 
-                    <button className='saveBabyInfoBtn' onClick={()=>saveKidInfo()}>등록하기</button>
+                    <button className='saveBabyInfoBtn' onClick={() => saveKidInfo()}>등록하기</button>
 
 
                 </div>

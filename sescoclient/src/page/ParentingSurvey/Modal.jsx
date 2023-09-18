@@ -18,6 +18,7 @@ function Modal({kid, surveyUp, closeSurveyModal}) {
           ✖
         </button>
         {surveyUp && <Survey kid={kid}></Survey>}
+        
       </div>
     </div>
   );
