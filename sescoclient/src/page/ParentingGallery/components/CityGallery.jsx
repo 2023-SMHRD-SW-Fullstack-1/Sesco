@@ -1,100 +1,76 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import './citygallery.css'
+import ImgSlider from './ImgSlider';
+import ModalGallery from './ModalGallery';
+
 
 const CityGallery = ({imgInfoList, cityName}) => {
 
-  function srcset(image, size, rows = 1, cols = 1) {
-    return {
-      src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
-      srcSet: `${image}?w=${size * cols}&h=${
-        size * rows
-      }&fit=crop&auto=format&dpr=2 2x`,
-    };
+  const [itemData, setItemData] = useState()
+  const [filteredImgInfo, setFilteredImgInfo] = useState()
+  const [isFocus, setIsFocus] = useState(false)
+  
+  console.log(imgInfoList)
+
+  useEffect(()=>{
+    
+    const imgTemp = imgInfoList.filter((info)=> info.secondName == cityName)
+    setFilteredImgInfo([...imgTemp])
+
+
+    const temp=[]
+    imgTemp.map((info)=>(
+      temp.push(
+        {
+          img : `data:image/jpeg;base64,${info.imgName}`,
+          // title : 
+        }
+      )
+    ))
+    setItemData([...temp])
+
+
+  },[]) 
+
+  
+
+  const imgClickEvent=(e)=>{
+    console.log(e.target.alt)
+    setIsFocus(true)
+
   }
 
-
-  const itemData = [
-    {
-      img: `${'data:image/;base64'},c:\\uploadImage\\315d3131-a361-4809-8ff3-fc879481b7f6누끼루.png`,
-      title: 'Breakfast',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
-      title: 'Burger',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
-      title: 'Camera',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
-      title: 'Coffee',
-
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
-      title: 'Hats',
-    },
-    
-    {
-      img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
-      title: 'Honey',
-      author: '@arwinneil',
-
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
-      title: 'Basketball',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f',
-      title: 'Fern',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1597645587822-e99fa5d45d25',
-      title: 'Mushrooms',
-
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1567306301408-9b74779a11af',
-      title: 'Tomato basil',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1471357674240-e1a485acb3e1',
-      title: 'Sea star',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1589118949245-7d38baf380d6',
-      title: 'Bike',
-
-    },
-  ];
-
-  const imgg = "c:\\uploadImage\\315d3131-a361-4809-8ff3-fc879481b7f6누끼루.png"
- 
   
   return (
     <>
+    {itemData != null && 
     <ImageList
       className='gallery-img-list'
-      sx={{ width: 800, height: 400 }}
+      sx={{ width: "100%", height: "85%" }}
       variant="quilted"
       cols={4}
       rowHeight={121}
-    >
-      <div className="">{<img src={"data:image/;base64," + imgg} alt="" style={{width: "100px", height: "100px"}} />}</div>
-      {itemData.map((item) => (
-        <ImageListItem key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
+
+      >
+      {itemData.map((item, index) => (
+        <ImageListItem key={index} cols={item.cols || 1} rows={item.rows || 1}>
+
           <img
             className='gallery-img-item'
-            {...srcset(item.img, 121, item.rows, item.cols)}
-            alt={item.title}
+            src = {item.img}
+            width={121}
+            height={121}
+            alt={index}
             loading="lazy"
+            onClick={(e)=>imgClickEvent(e)}
           />
         </ImageListItem>
       ))}
     </ImageList>
+    }
+    {isFocus && <ModalGallery closeModal={setIsFocus} imgInfo={itemData}/>}
     </>
     
   )

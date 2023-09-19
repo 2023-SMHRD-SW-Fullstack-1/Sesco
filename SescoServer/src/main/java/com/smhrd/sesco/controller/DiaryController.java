@@ -158,26 +158,22 @@ public class DiaryController {
 			diaryService.DiaryUpdate(diary);
 		}
 
+	
+	//이미지가 있는 다이어리 리스트 조회
 	@PostMapping("/diary/getdiarylist/img")
 	private ArrayList<Diary> getDiaryListWithImg(@RequestBody Member member){
-//		try {
-//			ArrayList<Diary> resultList = new ArrayList<Diary>();
-//			resultList.addAll(diaryService.getDiaryListWithImg(member.getUser_id()));
-//			return resultList;
-//		}catch (NullPointerException e) {
-//			System.out.println("저장된 데이터가 없습니다");;
-//		}finally {
-//			return null;
-//		}
 		ArrayList<Diary> resultList = new ArrayList<Diary>();
 		resultList.addAll(diaryService.getDiaryListWithImg(member.getUser_id()));
+		System.out.println("ee"+resultList);
 		return resultList;
 	}
 	
+
 //	게시글 삭제
 	@PostMapping(value="/diary/delete")
 	public void DiaryDelete(@RequestBody Diary diary) {
 		diaryService.DiaryDelete(diary);
 	}
+
 
 }

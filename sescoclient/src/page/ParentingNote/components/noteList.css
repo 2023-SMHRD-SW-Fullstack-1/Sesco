@@ -17,37 +17,16 @@
     font-weight: 600;
 
     line-height: 44px;
-    /* 62.857% */
     line-height: 1.5em;
     letter-spacing: -0.64px;
 
     margin-top: 945px;
-    /* margin-top: 58px; */
-    margin-left: 700px;
+    margin-left: 150px;
     margin-right: 800px;
-    /*margin-bottom: 2676px;*/
     align-items: center;
 
 }
 
-.note-arrow-left,
-.note-arrow-right {
-    width: 80px;
-    /* 적절한 너비 조정 */
-    height: 50px;
-    /* 적절한 높이 조정 */
-    cursor: pointer;
-}
-
-.note-arrow-left {
-    margin-right: 10px;
-    /* 왼쪽 여백 설정 */
-}
-
-.note-arrow-right {
-    margin-left: 10px;
-    /* 오른쪽 여백 설정 */
-}
 
 /* 수첩 영역 */
 .notes-container {
@@ -55,12 +34,8 @@
     flex-direction: row;
     justify-content: flex-start;
 
-    margin-left: 129px;
-    /*
-    margin-right: 1225px;
-    margin-top: 40px;
-    width: 88%;
-    overflow-x: scroll;*/
+    margin-left: 300px;
+
 }
 
 .note-item-container {
@@ -69,13 +44,19 @@
     cursor: pointer;
     margin-left: 10px;
     margin-right: 15px;
-    margin-top: 40px;
+    margin-top: 100px;
+    display: flex;
+    /* note-item-container를 flex 컨테이너로 만듭니다. */
+    flex-direction: row;
+    /* 자식 요소를 수평으로 정렬합니다. */
+    align-items: center;
+
 }
 
 .note-item-span {
     position: absolute;
 
-    top: 62%;
+    top: 65%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #000;
@@ -87,57 +68,59 @@
 
 }
 
-/* 노트 추가 버튼 */
-.noteList-addBtn {
-    width: 70.439px;
-    height: 71.887px;
+
+
+
+/*수첩 밑 연령 표시 **/
+
+.noteAge-container {
+    width: 336.069px;
+    height: 69px;
     flex-shrink: 0;
-    margin-top: 56.5px;
-    margin-left: 32.7px;
-    margin-right: 26.9;
-    margin-bottom: 53.5px;
-
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out;
+    margin-top: 500px;
+    padding-left: 50px;
 }
 
-.noteList-addBtn:hover {
-    transform: scale(1.3);
+.noteList-age {
+
+    color: #000;
+    text-align: center;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Playfair Display;
+    font-size: 70px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 44px;
+    /* 62.857% */
+    letter-spacing: -0.64px;
 }
 
-/*추가 버튼 클릭 시 영역*/
-
-.add-note-img-container {
-    position: relative;
-    width: 150px;
-    height: 200px;
-    margin-left: 10px;
-    margin-right: 15px;
-    margin-top: 40px;
-    background-size: contain;
-}
-
- 
- .add-note-input-container {
+.noteKid-container {
+    width: 91px;
+    height: 154px;
+    flex-shrink: 0;
+    z-index: 2;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
- }
- 
- .add-note-input {
-     width: 100%;
-     padding: 5px;
-     font-family:Akshar; 
-  }
- 
-  .add-note-button{
-      width:auto; 
-      padding :5px ;  
-      font-family:Akshar;  
-  }
-
-  #newNote-nameInput{
-    margin-top: 80px;
-    width: 95px;
-  }
+    margin-top: 130px;
+}
+.tagResultItem {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    /*background-color: #FF5733;
+        color: white;
+    */
+    font-family: 'Akshar', sans-serif; 
+    font-size: 26px; 
+    border-radius: 50%; 
+    width: 40px; 
+    height: 40px; 
+    
+    
+    /*margin-top: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    */
+    
+}

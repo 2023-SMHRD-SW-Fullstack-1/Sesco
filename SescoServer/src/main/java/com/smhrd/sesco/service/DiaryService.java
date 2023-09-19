@@ -134,10 +134,33 @@ public class DiaryService {
 		diaryMapper.DiaryDelete(diary);
 	}
 	
-//	private DiaryMapper mapper;
-	
+
+	//이미지가 있는 다이어리 리스트
+
 	public ArrayList<Diary> getDiaryListWithImg(String user_id){
-		return diaryMapper.getDiaryListWithImg(user_id);
+		ArrayList<Diary> list = diaryMapper.getDiaryListWithImg(user_id);
+		ImageConverter<File, String> converter = new ImageToBase64();
+		for (Diary diary : list) {
+	        try {
+	            String filePath = diary.getImg_real_name();
+	            File uploadedFile = new File(filePath);
+	            if (!uploadedFile.exists()) {
+                    // 파일이 존재하지 않는 경우 처리
+                    continue; // 다음 루프로 이동
+                }
+	            System.out.println("넘어옴");
+	            Resource resource = new FileSystemResource(uploadedFile);
+	            String fileStringValue = converter.convert(resource.getFile());
+	            diary.setImg_real_name(fileStringValue);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        } catch (NullPointerException e) {
+	            e.printStackTrace();
+	        }
+	        
+	    }
+		
+		return list;
 	}
 
 	//누른날짜의 일기 리스트 조회

@@ -1,104 +1,108 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './noteList.css';
-import noteList from '../noteImg/noteList.png'
-import addNoteBtn from '../noteImg/addNoteBtn.png'
-import rightBtn from '../noteImg/noteRight.png'
-import leftBtn from '../noteImg/noteLeft.png'
-import axios from 'axios';
+import noteClose from '../noteImg/noteClose.png'
+import noteOpen from '../noteImg/noteOpen.png'
+import noteKid from '../noteImg/noteKid.png'
 
-function NoteList({ year, notes, onAddNote, onNoteClick, kidSeq }) {
-    const [visibleNotes, setVisibleNotes] = useState(8);
-    const [startIndex, setStartIndex] = useState(0);
-    const [addNoteImg, setAddNoteImg] = useState(false);
-    const [newNoteName, setNewNoteName] = useState("");
+const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults }) => {
+    const [noteOpenStatus, setNoteOpenStatus] = useState(Array(notes.length).fill(false));
 
-    console.log("kidSelect : ",kidSeq)
+    const [noteKidStatus, setNoteKidStatus] = useState(Array(notes.length).fill(false));
+    console.log("******props start*******")
+    console.log("notes : ", notes)
+    console.log("kidSeq : ", kidSeq)
+    console.log("kids : ", kids)
+    console.log("tagSearchResults : ", tagSearchResults)
 
-    const scrollLeft = () => {
-        console.log("왼쪽 화살표 클릭")
-        setStartIndex(prev => Math.max(prev - 1, 0));
-    }
+    console.log("******props end*******")
 
-    const scrollRight = () => {
-        console.log("오른쪽 화살표 클릭")
-        setStartIndex(prev => Math.min(prev + 1, notes.length - visibleNotes));
+    // kidSeq 값이 변경될 때 noteOpenStatus 초기화
+    useEffect(() => {
+        setNoteOpenStatus(Array(notes.length).fill(false));
+        setNoteKidStatus(Array(notes.length).fill(false));
+    }, [kidSeq]);
+
+    const handleNoteItemClick = (index) => {
+        const newNoteOpenStatus = Array(notes.length).fill(false);
+        newNoteOpenStatus[index] = true;
+        setNoteOpenStatus(newNoteOpenStatus);
+
+        const newNoteKidStatus = Array(notes.length).fill(false);
+        newNoteKidStatus[index] = true;
+        setNoteKidStatus(newNoteKidStatus);
+        // 노트 클릭했을때 note_seq값을 Note 컴포넌트로 전달
+        onNoteClick(notes[index].note_seq);
     };
-
-    // +버튼 클릭 시
-    const handleAddNoteImageClick = () => {
-        console.log("추가 버튼 이미지 클릭");
-
-        setVisibleNotes(prev => prev + 1);
-        // 버튼을 클릭하면 setAddNoteImg true로 설정
-        // 이미지를 조건부로 렌더링
-        setAddNoteImg(true);
-    };
-
-    // 수첩 저장 버튼 클릭 시 
-    const handleSaveNewNote = () => {
-        console.log("수첩 저장 버튼 클릭, 수첩 이름 :", newNoteName);
-        console.log("수첩 저장 버튼 클릭 : ", kidSeq)
-        
-        const note = {
-            n_name : newNoteName,
-            kid_seq : kidSeq 
-        }
-
-        axios.post('http://localhost:8081/sesco/note/createnote',note)
-        .then(response =>{
-            console.log("백엔드 응답 : ",note)
-        })
-        .catch(e => {
-            console.log("백엔드 요청 실패 : ", e)
-        })
-    }
+    // const handleNoteItemClick = (index) => {
+    //      // 현재 노트의 상태 가져오기
+    //      const currentOpenStatus = noteOpenStatus[index];
+    //      const currentKidStatus = noteKidStatus[index];
+ 
+    //      // 현재 노트의 상태를 토글 (반대로 변경)
+    //      const newNoteOpenStatus = [...noteOpenStatus];
+    //      newNoteOpenStatus[index] = !currentOpenStatus;
+ 
+    //      const newNoteKidStatus = [...noteKidStatus];
+    //      newNoteKidStatus[index] = !currentKidStatus;
+ 
+    //      // 상태 업데이트
+    //      setNoteOpenStatus(newNoteOpenStatus);
+    //      setNoteKidStatus(newNoteKidStatus);
+ 
+    //      // 노트 클릭했을때 note_seq값을 Note 컴포넌트로 전달
+    //      onNoteClick(notes[index].note_seq);
+    // };
 
     return (
         <div>
             {/* 연도 div */}
-            <div className='noteList-year-container'>
-
+            <div className='noteList-container'>
                 <span className='noteList-year'>
-                    <img src={leftBtn} onClick={scrollLeft} className='note-arrow-left' />
-                    {year}
-
-                    <img src={rightBtn} onClick={scrollRight} className='note-arrow-right' />
+                    {kidSeq ? kids.find((kid) => kid.kid_seq === kidSeq)?.kid_name : ""}
                 </span>
-
             </div>
 
             {/* 노트 감싸는 큰 영역 */}
-            <div className="notes-container" >
-                {notes.slice(startIndex, startIndex + visibleNotes).map((note, index) => (
-                    // 노트 제목 + 일자 등등 영역
-                    <div key={index} className='note-item-container'
-                        onClick={() => onNoteClick(note.seq)} style={{ width: '150px', height: '200px', backgroundImage: `url(${noteList})`, backgroundSize: 'cover' }}>
-                        {/*<img src={noteList} className="note-background" style={{width:'150px', height:'50px' ,marginRight:'20px'}}/>*/}
-                        <span className='note-item-span'>
-                            <span>{`${note.name}`}</span>
-                            <br />
-                            <span>{`(${note.startDate} ~ ${note.endDate})`}</span>
-                        </span>
+            <div className="notes-container">
+                {notes.map((note, index) => (
+                    <div
+                        className="note-item-container"
+                        key={index}
+                        onClick={() => handleNoteItemClick(index)}
+                        style={{
+                            width: '200px',
+                            height: '200px',
+                            backgroundImage: noteOpenStatus[index] ? `url(${noteOpen})` : `url(${noteClose})`,
+                            backgroundSize: 'cover',
+                        }}
+                    >
+
+                        {/* 연령대 표시 */}
+                        <div className='noteAge-container'>
+                            <span className='noteList-age'>
+                                {`${index}세`}
+                            </span>
+                        </div>
+
+                        {/* noteKid 이미지 표시 */}
+                        <div className='noteKid-container'>
+                            {noteKidStatus[index] && (
+                                <img src={noteKid} alt="Note Kid" className="noteKid-image" />
+                            )}
+
+                            {/* 태그 검색 결과 숫자 표시 */}
+                            {tagSearchResults[note.note_seq] > 0 && (
+                                <div className='tagResultItem'>
+                                    {tagSearchResults[note.note_seq]}
+                                </div>
+                            )}
+
+                        </div>
                     </div>
                 ))}
-                {/* +버튼 영역 */}
-                {addNoteImg && (
-                    <div className='note-item-container' style={{ width: '150px', height: '200px', backgroundImage: `url(${noteList})`, backgroundSize: 'cover' }} onClick={() => onAddNote()}>
-                       
-
-                        {/* 수첩 이름 입력란 */}
-                        <input type="text" id='newNote-nameInput' value={newNoteName} onChange={(e) => setNewNoteName(e.target.value)} placeholder="수첩 이름" />
-
-                        {/* 저장 버튼 */}
-                        <button  id='newNote-saveBtn' onClick={() => handleSaveNewNote(newNoteName)}>저장</button>
-                    </div>
-                )}
-
-                <img src={addNoteBtn} onClick={() => handleAddNoteImageClick()} className='noteList-addBtn' alt='Add Note'></img>
-
             </div>
-
         </div>
     );
 }
+
 export default NoteList;

@@ -12,6 +12,8 @@ import Diarycopy from "./page/ParentingNote/components/Diarycopy";
 import Tip from './page/ParentingTip/TipMain';
 import Join from "./components/Join";
 import Main2 from "./page/Main2";
+import Diarycopy from "./page/ParentingNote/components/Diarycopy";
+import GoogleLog from "./page/components/GoogleLog"
 
 
 
@@ -31,6 +33,7 @@ function App() {
       <Route path="/login" element={<Login/>}></Route>
       <Route path="/join" element={<Join/>}></Route>
       <Route path="/diary" element={<Diarycopy/>}></Route>
+      <Route path="/google" element={<GoogleLog/>}></Route>
 
 
     </Routes>

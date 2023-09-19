@@ -5,66 +5,117 @@
 <mapper namespace="com.smhrd.sesco.mapper.NoteMapper">
 
 
-	<!-- 모든 수첩 불러오기(연도별로 그룹화) -->
-	<select id="selectNotesByYear"
+	<!-- 처음 첫번째 아이 수첩 불러오기 -->
+	<select id="selectNotes"
 		resultType="com.smhrd.sesco.domain.Note">
-		SELECT *
-		FROM t_note
-		WHERE note_d_yn = 'N'
+		SELECT n.*
+		FROM t_note n
+		JOIN t_kid k ON n.kid_seq =
+		k.kid_seq
+		WHERE n.note_d_yn = 'N'
+		AND k.user_id = #{userId}
 		ORDER BY
-		YEAR(n_s_date) DESC, n_s_date DESC
+		k.kid_seq ASC
 	</select>
 
 
-	<!-- 아이 옵션 선택 했을 때 특정 아이, 연도에 따라 조회 -->
+	<!-- 아이 옵션 선택 했을 때 특정 아이 수첩 조회 -->
 	<select id="selectNotesByKid"
 		resultType="com.smhrd.sesco.domain.Note">
 		SELECT *
 		FROM t_note
-		WHERE kid_seq = #{kidSeq} AND
-		YEAR(n_s_date) = #{year} AND note_d_yn = 'N'
-		ORDER BY n_s_date DESC
+		WHERE kid_seq = #{kidSeq}
+		AND note_d_yn = 'N'
 	</select>
 
 	<!-- 태그 검색 -->
-	<select id="selectNotesByTagAndYear"
+	<select id="selectNotesByTag"
 		resultType="com.smhrd.sesco.domain.Note">
 		SELECT n.*
 		FROM t_note n
-		JOIN t_diary d ON n.note_seq = d.note_seq
+		JOIN t_diary d ON n.note_seq =
+		d.note_seq
 		WHERE
-		CONCAT('#', d.d_tags, '#') LIKE CONCAT('%#', REPLACE(#{tag}, '#',
+		CONCAT('#', d.d_tags, '#') LIKE CONCAT('%#',
+		REPLACE(#{tag}, '#',
 		''),
 		'#%')
-		AND YEAR(n.n_s_date) = #{year}
-		AND n.note_d_yn = 'N'
+
+		AND
+		n.note_d_yn = 'N'
 
 	</select>
 
-	<!-- 수첩 생성 -->
+	<!-- 수첩 생성 <insert id="noteInsert" parameterType="com.smhrd.sesco.domain.Note"> 
+		INSERT INTO t_note (n_name, n_s_date, n_e_date, kid_seq, note_d_yn) VALUES 
+		(#{n_name}, #{n_s_date, jdbcType=DATE, javaType=java.sql.Date}, #{n_e_date, 
+		jdbcType=DATE, javaType=java.sql.Date}, #{kid_seq}, 'N') </insert> -->
+	<!-- 수첩 생성 
 	<insert id="noteInsert"
 		parameterType="com.smhrd.sesco.domain.Note">
-		INSERT INTO t_note (n_name, n_s_date, n_e_date, kid_seq,
-		note_d_yn)
-		VALUES (#{n_name}, #{n_s_date, jdbcType=DATE,
-		javaType=java.sql.Date},
-		#{n_e_date, jdbcType=DATE,
-		javaType=java.sql.Date}, #{kid_seq}, 'N')
+		INSERT INTO t_note (n_name, n_s_date, n_e_date, kid_seq, note_d_yn)
+		VALUES (#{n_name}, #{n_s_date, jdbcType=DATE},
+		#{n_e_date, jdbcType=DATE}, #{kid_seq}, 'N')
 	</insert>
+	-->
+	
+	 <!-- 다섯 개의 노트를 현재 날짜를 기준으로 생성 -->
+ <insert id="noteSelectAndCreate" parameterType="com.smhrd.sesco.domain.Note" >
+  INSERT INTO t_note (n_name, n_s_date, n_e_date, kid_seq, note_d_yn)
+  VALUES
+    ('0세',
+     DATE_ADD((SELECT kid_birth FROM t_kid WHERE kid_seq = #{kid_seq}), INTERVAL 0 YEAR),
+     DATE_ADD(DATE_ADD((SELECT kid_birth FROM t_kid WHERE kid_seq = #{kid_seq}), INTERVAL 0 YEAR), INTERVAL 1 YEAR),
+     #{kid_seq},
+     'N'),
+    ('1세',
+     DATE_ADD(DATE_ADD((SELECT kid_birth FROM t_kid WHERE kid_seq = #{kid_seq}), INTERVAL 1 YEAR), INTERVAL 1 DAY),
+     DATE_ADD(DATE_ADD(DATE_ADD((SELECT kid_birth FROM t_kid WHERE kid_seq = #{kid_seq}), INTERVAL 1 YEAR), INTERVAL 1 DAY), INTERVAL 1 YEAR),
+     #{kid_seq},
+     'N'),
+    ('2세',
+     DATE_ADD(DATE_ADD((SELECT kid_birth FROM t_kid WHERE kid_seq = #{kid_seq}), INTERVAL 2 YEAR), INTERVAL 2 DAY),
+     DATE_ADD(DATE_ADD(DATE_ADD((SELECT kid_birth FROM t_kid WHERE kid_seq = #{kid_seq}), INTERVAL 2 YEAR), INTERVAL 2 DAY), INTERVAL 1 YEAR),
+     #{kid_seq},
+     'N'),
+    ('3세',
+     DATE_ADD(DATE_ADD((SELECT kid_birth FROM t_kid WHERE kid_seq = #{kid_seq}), INTERVAL 3 YEAR), INTERVAL 3 DAY),
+     DATE_ADD(DATE_ADD(DATE_ADD((SELECT kid_birth FROM t_kid WHERE kid_seq = #{kid_seq}), INTERVAL 3 YEAR), INTERVAL 3 DAY), INTERVAL 1 YEAR),
+     #{kid_seq},
+     'N'),
+    ('4세',
+     DATE_ADD(DATE_ADD((SELECT kid_birth FROM t_kid WHERE kid_seq = #{kid_seq}), INTERVAL 4 YEAR), INTERVAL 4 DAY),
+     DATE_ADD(DATE_ADD(DATE_ADD((SELECT kid_birth FROM t_kid WHERE kid_seq = #{kid_seq}), INTERVAL 4 YEAR), INTERVAL 4 DAY), INTERVAL 1 YEAR),
+     #{kid_seq},
+     'N'),
+     ('5세',
+     DATE_ADD(DATE_ADD((SELECT kid_birth FROM t_kid WHERE kid_seq = #{kid_seq}), INTERVAL 5 YEAR), INTERVAL 5 DAY),
+     DATE_ADD(DATE_ADD(DATE_ADD((SELECT kid_birth FROM t_kid WHERE kid_seq = #{kid_seq}), INTERVAL 5 YEAR), INTERVAL 5 DAY), INTERVAL 1 YEAR),
+     #{kid_seq},
+     'N')
+</insert>
 
-	<!-- 수첩 수정 -->
-	<update id="noteUpdate"
-		parameterType="com.smhrd.sesco.domain.Note">
-		UPDATE t_note SET
-		n_name=#{n_name}
-		WHERE note_id=#{noteId}
-	</update>
 
-	<!-- 수첩 삭제 -->
-	<delete id="noteDeleteById" parameterType="String">
-		DELETE FROM t_note
-		WHERE
-		note_id= #{noteId}
-	</delete>
+	<select id="noteSelect" resultType="int">
+		SELECT COUNT(*)
+ 		  FROM t_note
+ 		 WHERE kid_seq = (
+ 							SELECT kid_seq
+ 						  	FROM t_kid
+ 						 	WHERE kid_seq = #{kid_seq} 
+ 						 )										
+	</select>
+	
+	<select id="LoadNote" resultType="com.smhrd.sesco.domain.Note">
+		select * from t_note where kid_seq=#{kid_seq}
+	</select>
+	
+
+
+	<!-- 수첩 수정 <update id="noteUpdate" parameterType="com.smhrd.sesco.domain.Note"> 
+		UPDATE t_note SET n_name=#{n_name} WHERE note_seq=#{note_seq} </update> -->
+
+	<!-- 수첩 삭제 <delete id="noteDeleteById" parameterType="String"> DELETE FROM 
+		t_note WHERE note_seq= #{note_seq} </delete> -->
 
 </mapper>
