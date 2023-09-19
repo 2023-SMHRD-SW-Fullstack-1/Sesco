@@ -6,7 +6,7 @@ import moment from "moment";
 import EXIF from 'exif-js';
 import styled from 'styled-components';
 
-const CreateDiary = ({ onComplete, selectedDate, formatDate }) => {
+const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [imageFile, setImageFile] = useState(null);
@@ -29,10 +29,7 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [noteseq, setNoteseq] = useState('');
  
-  useEffect(()=>{
-
-    setNoteseq("100345720715870951");
-  },[])
+  
   
 
   useEffect(() => {
@@ -132,6 +129,7 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate }) => {
     let updatedTagList = [...tagList];
     updatedTagList.push(tagItem);
     setTagList(updatedTagList);
+    setNoteseq(noteData.noteSeq)
     setTagItem('');
     
   };

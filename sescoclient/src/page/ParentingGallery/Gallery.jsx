@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react'
-import './gallery.css'
+import './Gallery.css'
 import Banner from './components/Banner'
 import GalleryMap from './components/GalleryMap'
 import axios from 'axios'
@@ -80,8 +80,10 @@ const Gallery = () => {
     setImgNameList([...filteredList.map(info => info.imgName)])
     setFirstNameList([...filteredList.map(info => info.firstName)])
     setSecondNameList([...filteredList.map(info => info.secondName)])
+
   } 
   
+
   // 선택지역이 바뀌면 데이터가 바뀜
   useEffect(()=>{
     updateList()

@@ -40,6 +40,7 @@ const CityGallery = ({imgInfoList, cityName, setSelectedCity}) => {
     setIsFocus(true)
 
   }
+
   
   return (
     <>
@@ -53,9 +54,11 @@ const CityGallery = ({imgInfoList, cityName, setSelectedCity}) => {
       variant="quilted"
       cols={4}
       rowHeight={121}
+
       >
       {itemData.map((item, index) => (
         <ImageListItem key={index} cols={item.cols || 1} rows={item.rows || 1}>
+
           <img
             className='gallery-img-item'
             src = {item.img}

@@ -10,7 +10,7 @@ import axios from "axios";
 import moment from 'moment';
 
 
-const Diarycopy = () => {
+const Diarycopy = ({noteData}) => {
   //일기 추가 클릭했을 때 true로 되고 일기작성 폼 출력
   const [isClick, setIsClick] = useState(false);
 
@@ -18,14 +18,17 @@ const Diarycopy = () => {
   const [listClickVisible, setListClickVisible] = useState(false);
 
   //선택한 날짜
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   //CreateDiary에서 작성한 제목 가져오기
   const [createFormTitle, setCreateFormTitle] = useState(null);
 
   const [createFormContent, setCreateFormContent] = useState(null);
 
-  const [tags, setTags] = useState([]);
+  //검색한 태그 일기장
+  const [selectTag, setSelectTag] = useState(null);
+
+
 
   //이미지 저장
   const [image, setImage] = useState("");
@@ -41,6 +44,8 @@ const Diarycopy = () => {
 
   // 일기 리스트 상세정보를 담는 상태 변수
   const [selectedDiary, setSelectedDiary] = useState(null);
+
+  
   
 
 
@@ -49,33 +54,17 @@ const Diarycopy = () => {
   // --------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-
-  //해당 날짜의 일기 리스트 출력
-  function handleDateClick(info) {
-    console.log("handleDateClick");
-    setSelectedDate(info.date);
-    setListClickVisible(false);
-  
-    // const localDateString = formatDate(info.date);
-    
-    
-  }
-
-
-
   //날짜 맞춰주기 : 2023-09-09
   function formatDate(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0"); // getMonth()는 0부터 시작하므로 1을 더해줍니다.
-    const day = String(date.getDate()).padStart(2, "0");
-
-    return `${year}-${month}-${day}`;
+    console.log(date);
+    return moment(date).format('YYYY-MM-DD');
   }
 
 
+ 
 
 
-  function onComplete(title, content, imageFile, tags) {
+  function onComplete(title, content,tags) {
     //작성완료 눌렀을 때 바로 여기로 옴
     console.log("데이터 보내는거니?");
     setCreateFormTitle(title);
@@ -113,58 +102,127 @@ const Diarycopy = () => {
     }
 
     setIsClick(false);
+    if( selectedDate != null){
+      setSelectedDate();
+    }
   }
 
   //해당 날짜의 일기 상세정보
-   function ClickDiary(index) {
-    console.log("ClickDiary");
-    console.log(selectedDiaryList)
-    const diary = selectedDiaryList[index];
-    console.log("다이어리",diary);
-    setListClickVisible(true)
-    setSelectedDiary(diary);
+  //버튼 누를떄 실행되는 메서드
+  //  function ClickDiary(index) {
+  //   console.log("ClickDiary");
+  //   console.log("너도 없니?",selectedDiaryList[0])
+  //   const diary = selectedDiaryList[index];
+  //   console.log("다이어리",diary);
+  //   setListClickVisible(true)
+  //   setSelectedDiary(diary);
     
-
-  }
+  // }
 
   function CreateDiaryForm() {
     setIsClick(!isClick);
   }
 
   //DB에 저장된 일기 리스트 이벤트 처리
-  useEffect(()=>{
-    axios.post(`http://localhost:8081/sesco/diary/selectlist`)
-    .then((res)=>{
-      console.log(res)
-      const fetchedEvents = res.data.diary.map((event,idx)=>{
-        console.log("왔니",res.data);
-        return{
-          title : event.d_title,
-          date : event.d_date,
-          content : event.d_content,
-          tag : event.d_tags,
-          img : event.img_real_name
-        }
+  const fetchDiaryList = () => {
+    axios.post(`http://localhost:8081/sesco/diary/selectlist`, {
+      note_seq : noteData.noteSeq
+    })
+      .then((res) => {
+        const fetchedEvents = res.data.diary.map((event, idx) => {
+          return {
+            d_seq: event.d_seq,
+            title: event.d_title,
+            date: event.d_date,
+            content: event.d_content,
+            tags: event.d_tags,
+            img: event.img_real_name
+            
+          }
+        });
+        setListDiary(fetchedEvents);
+        console.log("노트에서 불러옴", noteData);
       })
-      setListDiary(fetchedEvents);
-    })
-    .catch((err)=>{
-      console.log("리스트 오류",err);
-    })
-  },[])
+      .catch((err) => {
+        console.log("리스트 오류", err);
+      });
+  }
 
-   //DB에 저장된 일기 리스트 이벤트 처리
-  useEffect(()=>{
-    setListClickVisible(!listClickVisible)
-    // setIsViewDiaryVisible(!isViewDiaryVisible)
-    setSelectedDiaryList(listDiary.filter((diary)=> diary.date == formatDate(selectedDate)))
-    console.log("필터링 완료")
-  },[selectedDate])
-
+  // 일기 리스트 초기화
   useEffect(() => {
-    setListClickVisible(false)
-  }, [selectedDate]);
+    fetchDiaryList();
+  }, []);
+
+ 
+
+  //  DB에 저장된 일기 리스트 이벤트 처리
+  //  해당 날짜 누르면 밑에 버튼으로 리스트 나오는 함수
+  useEffect(()=>{
+    // setIsViewDiaryVisible(!isViewDiaryVisible)
+    console.log("확인",listDiary);
+    
+
+    const tempDiaryList = listDiary.filter((diary)=> diary.date == formatDate(selectedDate))
+    setSelectedDiaryList(tempDiaryList)  
+    console.log("필터링 완료")
+
+    setSelectedDiary(tempDiaryList);
+    console.log(selectedDiaryList)
+    setListClickVisible(true);
+
+  },[selectedDate])
+  // 태그 검색 시 필터링
+  useEffect(() => {
+    // noteData.tagSearchText와 일치하는 요소만 포함하는 새로운 배열을 생성
+    const filteredDiary = listDiary.filter((diary) => {
+      // 이 부분에서 태그 검색을 어떻게 처리할지에 따라 로직을 수정해야 할 수도 있습니다.
+      // 현재 코드는 diary.tags가 noteData.tagSearchText와 일치해야 필터링됩니다.
+      return diary.tags === noteData.tagSearchText;
+    });
   
+    // 필터링된 배열을 setSelectedDiaryList로 설정
+    setSelectedDiaryList(filteredDiary);
+    setListClickVisible(true);
+  }, [noteData.tagSearchText]);
+
+
+  // useEffect(() => {
+  //   setListClickVisible(false)
+  // }, [selectedDate]);
+
+   //해당 날짜의 일기 리스트 출력
+   function handleDateClick(info, index) {
+    console.log("handleDateClick");
+    // const parsedDate = moment(info.date).format('YYYY-MM-DD');
+    setSelectedDate(formatDate(info.date));
+    setSelectedDiaryList()  
+    // console.log(info.date);
+    // console.log(info);
+  }
+  
+  // if(noteData.tagSearchText){
+  //   const fetchDiaryList = () => {
+  //     axios.post(`http://localhost:8081/sesco/diary/selectlist`) 
+  //       .then((res) => {
+  //         const fetchedEvents = res.data.diary.map((event, idx) => {
+  //           return {
+  //             d_seq: event.d_seq,
+  //             title: event.d_title,
+  //             date: event.d_date,
+  //             content: event.d_content,
+  //             tags: event.d_tags,
+  //             img: event.img_real_name,
+  //             note_seq : noteData.noteSeq
+  //           }
+  //         });
+  //         setListDiary(fetchedEvents);
+  //         console.log("노트에서 불러옴", noteData);
+  //       })
+  //       .catch((err) => {
+  //         console.log("리스트 오류", err);
+  //       });
+  //   }
+  // }
 
 
 
@@ -173,7 +231,7 @@ const Diarycopy = () => {
     // 수첩칸
     <div className="diary-whole-container">
       <div className="diary-kids-tag">
-        <div className="diary-kid-name">현민이</div>
+        <div className="diary-kid-name">{noteData.kidName}</div>
       </div>
 
       {/* 왼쪽칸 */}
@@ -196,6 +254,9 @@ const Diarycopy = () => {
                 end: "prev,next",
               }}
               
+              //눌렀을 때 해당 날짜 칸 색깔 강조
+              selectable true
+              
               eventDisplay={"block"}
               eventTextColor={"#FFF"}
               eventColor={"#F2921D"}
@@ -205,9 +266,11 @@ const Diarycopy = () => {
 
           <div>
             <button
+            className="diaryAddBtn"
               onClick={CreateDiaryForm}
               style={{ width: "460px", height: "100px", marginTop: "10px" }}
             >
+              
               일기추가
             </button>
           </div>
@@ -225,7 +288,7 @@ const Diarycopy = () => {
             {/* 일기 리스트 출력 */}
             {/* 여기서 누른 날짜의 일기리스트를 제공 */}
             <div className="c">
-              {selectedDate && listDiary
+              {/* {selectedDate && listDiary
                 .filter((diary) => diary.date === formatDate(selectedDate))
                 .map((diary, index) => (
                   <button
@@ -238,8 +301,11 @@ const Diarycopy = () => {
                     </div>
                     <br />
                   </button>
-                ))}
+                ))} */}
+
+                
             </div>
+            
           </div>
         </div>
       </div>
@@ -249,7 +315,7 @@ const Diarycopy = () => {
         <div className="diary-page-inner">
           {/* 선택된 날짜 출력 */}
           {selectedDate && (
-            <p>선택된 날짜: {selectedDate.toLocaleDateString()}</p>
+            <p>선택된 날짜: </p>
           )}
 
           {/* 일기 작성 폼 */}
@@ -257,15 +323,16 @@ const Diarycopy = () => {
             // CreateDiary 컴포넌트에 선택된 날짜 전달 (props로)
             // 예시: <CreateDiary selectedDate={selectedDate} />
             // 필요에 따라 선택된 날짜를 CreateDiary 컴포넌트로 전달해주세요.
-            <CreateDiary selectedDate={selectedDate} onComplete={onComplete} date={selectedDate}  formatDate={formatDate}/>
+            <CreateDiary selectedDate={selectedDate} onComplete={onComplete} date={selectedDate}  formatDate={formatDate} noteData={noteData}/>
           )}
         </div>
         
-        {listClickVisible && selectedDiary && (
-          <ViewDiary
-            selectdate={selectedDiary}
-          />
-        )}
+        {listClickVisible && selectedDiaryList && selectedDiaryList.length > 0 && (
+  <ViewDiary
+    selectdate={selectedDiaryList}
+  />  
+)}
+
       </div>
     </div>
   );

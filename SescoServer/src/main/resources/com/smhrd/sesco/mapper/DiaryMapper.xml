@@ -7,8 +7,8 @@
 
 	
 	<!--전체 일기 리스트 조회-->
-	<select id="DiaryList" resultType="com.smhrd.sesco.domain.Diary">
-		select * from t_diary
+	<select id="diaryList" parameterType="com.smhrd.sesco.domain.Diary" resultType="com.smhrd.sesco.domain.Diary">
+		select * from t_diary where note_seq=#{note_seq}
 	</select>
 	
 	<!-- 누른 날짜의 일기 리스트 조회 -->
@@ -20,15 +20,16 @@
 	<insert id="DiaryRegister" parameterType="com.smhrd.sesco.domain.Diary">
 		insert into t_diary (d_title,d_date,d_content, note_seq, d_tags, img_do, img_si, img_real_name,d_img_yn)
 		values(#{d_title},#{d_date},#{d_content},#{note_seq}, #{d_tags},#{img_do},#{img_si},#{img_real_name},#{d_img_yn})
-
 	</insert>
-
+	
 	<!--일기 수정 -->
-	<update id=""></update>
+	 <update id="DiaryUpdate" parameterType="com.smhrd.sesco.domain.Diary">
+	 	update t_diary set d_title=#{d_title}, d_date=#{d_date}, d_content=#{d_content}, img_do=#{img_do}, img_si=#{img_si}, img_real_name=#{img_real_name}, d_img_yn=#{d_img_yn}, note_seq=#{note_seq}, d_tags=#{d_tags} where d_seq=#{d_seq}
+	 </update>
 
 	<!--일기 삭제 -->
-	<delete id="DiaryDelete">
-		delete from t_diary where d_seq=#{d_seq} and ??
+	<delete id="DiaryDelete" parameterType="com.smhrd.sesco.domain.Diary">
+		delete from t_diary where d_seq=#{d_seq}
 	</delete>
 
 

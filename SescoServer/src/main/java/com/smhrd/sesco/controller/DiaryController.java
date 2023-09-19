@@ -43,9 +43,9 @@ public class DiaryController {
 	
 	//누른 날짜의 일기 리스트 조회
 	@PostMapping(value="/diary/selectlist")
-	public @ResponseBody JSONObject DiaryList(Date d_date) {
-		System.out.println(d_date);
-		return diaryService.DiaryList(d_date);
+	public JSONObject diaryList(@RequestBody Diary diary) {
+		System.out.println("안녕");
+		return diaryService.diaryList(diary);
 	}
 	
 //	//전체 일기 리스트 조회
@@ -111,15 +111,52 @@ public class DiaryController {
 
 	
 	//일기 수정
-	@PostMapping(value="/update",consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
-	 public @ResponseBody void DiaryUpdate(@RequestPart("data") Diary diary, @RequestPart(value="img_file") MultipartFile file) {
-		
-//		int seq = diary.getD_seq();
-		String title = diary.getD_title();
-		String content = diary.getD_content();
-		String img = diary.getImg_real_name();
-	    
-	}
+		@PostMapping(value="/diary/update", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+		public void DiaryUpdate(@ModelAttribute Diary diary, @RequestPart(name="file", required = false) MultipartFile file) {
+
+		    // 파일 업로드 관련 로직
+			if (file != null) {
+			    String newFileName = UUID.randomUUID().toString() + file.getOriginalFilename();
+			    System.out.println("파일이름 :"+newFileName);
+			    String uploadPath = "c:\\uploadImage";
+			    
+			    try {
+			    // 파일 저장
+			    File destFile = new File(uploadPath, newFileName);
+			    file.transferTo(destFile);
+			    // 저장된 파일 경로 설정
+			    diary.setImg_real_name("/"+destFile);
+			    String isImg = diary.getImg_real_name();
+			    
+			    System.out.println(diary.getImg_real_name());
+			} catch (IllegalStateException e) {
+			    e.printStackTrace();
+			} catch (IOException e) {
+			        e.printStackTrace();
+			    }
+			}
+			try {
+				diary.getD_seq();
+				diaryService.DiaryUpdate(diary);
+			} catch(NullPointerException error) {
+//			    	diaryService.commRegister(diary);
+				System.out.println(error);
+			}
+			
+			// Set default values for properties that can be null or undefined
+			if (diary.getImg_do() == null) {
+			    diary.setImg_do(null);
+			}
+			if (diary.getImg_si() == null) {
+			    diary.setImg_si(null);
+			}
+			if(diary.getD_tags() == null) {
+				diary.setD_tags(null);
+			}
+			
+			// DiaryService를 사용하여 일기 정보 업데이트
+			diaryService.DiaryUpdate(diary);
+		}
 
 	
 	//이미지가 있는 다이어리 리스트 조회
@@ -131,20 +168,12 @@ public class DiaryController {
 		return resultList;
 	}
 	
-	
-	//게시글 삭제
-//	@PostMapping(value="/delete{d_date}")
-//	public @ResponseBody void commDelete(@PathVariable("d_date") String d_date) {
-////		int result = diaryService.idxCommSelect(d_date);
-//		//System.out.println(result);
-////		
-////		if(result==1) {
-////			//System.out.println("삭제성공");
-////			diaryService.commDelete(d_date);
-////		}else {
-////			//System.out.println("삭제실패");
-////		}
-//		System.out.println(d_date);
-//	}
+
+//	게시글 삭제
+	@PostMapping(value="/diary/delete")
+	public void DiaryDelete(@RequestBody Diary diary) {
+		diaryService.DiaryDelete(diary);
+	}
+
 
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Update;
 
 import com.smhrd.sesco.domain.Diary;
 
@@ -17,16 +18,17 @@ public interface DiaryMapper {
 
 
 	//전체 게시글 조회
-	public List<Diary> DiaryList(Date d_date);
+	public List<Diary> diaryList(Diary diary);
 	
 	//일기 등록
 	public int DiaryRegister(Diary diary);
 	
 	//일기 수정
+	
 	public void DiaryUpdate(Diary diary);
 	
 	//일기 삭제
-	public int DiaryDelete(Date d_date);
+	public void DiaryDelete(Diary diary);
 
 	public ArrayList<Diary> getDiaryListWithImg(String user_id);
 
