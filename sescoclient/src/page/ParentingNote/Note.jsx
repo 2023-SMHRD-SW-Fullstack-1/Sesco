@@ -71,6 +71,7 @@ const Note = () => {
             kids: kids,
             kidName: selectedKid ? selectedKid.kid_name : '',
             noteSeq: note_seq,
+            tagSearchText : currentSearchTag,
             tagSearchResult: { tagResultNumbers },
             tagSearchResult: tagSearchResult[note_seq] || []
           };
@@ -190,6 +191,8 @@ const Note = () => {
   // 각 노트에 대한 태그 검색 결과 수를 계산하여 저장할 상태 변수
   const [tagResultNumbers, setTagResultNumbers] = useState({});
 
+  const [currentSearchTag, setCurrentSearchTag] = useState(null);
+
   //태그 입력창 이벤트
   const handleSearchTagChange = (e) => {
     setSearchTag(e.target.value);
@@ -198,8 +201,9 @@ const Note = () => {
 
   //태그 검색 버튼 눌렀을 때 이벤트
   const handleTagSearch = async () => {
-    console.log("검색 결과는 : ", searchTag)
-    setSearchTag("")
+    
+    console.log("검색 결과는 : ", currentSearchTag)
+    
     try {
       if (searchTag.trim() === "") return;
 
@@ -244,6 +248,8 @@ const Note = () => {
 
         console.log("태그 검색 결과 없을때 다시 첫째 아이 : ", reseponse.data);
       }
+      setSearchTag("")
+    setCurrentSearchTag(searchTag);
 
     } catch (e) {
       console.error("태그 검색 실패 : ", e)
