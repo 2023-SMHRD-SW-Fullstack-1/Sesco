@@ -10,7 +10,7 @@ import axios from "axios";
 import moment from 'moment';
 
 
-const Diarycopy = () => {
+const Diarycopy = ({noteData}) => {
   //일기 추가 클릭했을 때 true로 되고 일기작성 폼 출력
   const [isClick, setIsClick] = useState(false);
 
@@ -137,6 +137,7 @@ const Diarycopy = () => {
         }
       })
       setListDiary(fetchedEvents);
+      console.log("노트에서 불러옴",noteData);
     })
     .catch((err)=>{                                                                                                                                        
       console.log("리스트 오류",err);
@@ -181,7 +182,7 @@ const Diarycopy = () => {
     // 수첩칸
     <div className="diary-whole-container">
       <div className="diary-kids-tag">
-        <div className="diary-kid-name">현민이</div>
+        <div className="diary-kid-name">{noteData.kidName}</div>
       </div>
 
       {/* 왼쪽칸 */}
