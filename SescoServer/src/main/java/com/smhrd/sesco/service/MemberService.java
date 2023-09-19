@@ -63,6 +63,18 @@ public class MemberService {
 	public void MemberDelete(String user_id) {
 		memberMapper.MemberDelete(user_id);
 	}
+
+	// 구글 회원가입 여부
+	public int GoogleUserCheck(Member member) {
+		
+		return memberMapper.GoogleUserCheck(member);
+	}
+	
+	//구글 로그인
+	public Member GoogleLogin(Member member) {
+		return memberMapper.GoogleLogin(member);
+	}
+	
 	
 
 }
