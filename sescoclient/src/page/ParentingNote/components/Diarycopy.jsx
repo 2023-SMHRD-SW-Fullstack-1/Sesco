@@ -125,7 +125,9 @@ const Diarycopy = ({noteData}) => {
 
   //DB에 저장된 일기 리스트 이벤트 처리
   const fetchDiaryList = () => {
-    axios.post(`http://localhost:8081/sesco/diary/selectlist`)
+    axios.post(`http://localhost:8081/sesco/diary/selectlist`, {
+      note_seq : noteData.noteSeq
+    })
       .then((res) => {
         const fetchedEvents = res.data.diary.map((event, idx) => {
           return {
@@ -135,6 +137,7 @@ const Diarycopy = ({noteData}) => {
             content: event.d_content,
             tags: event.d_tags,
             img: event.img_real_name
+            
           }
         });
         setListDiary(fetchedEvents);
@@ -197,28 +200,29 @@ const Diarycopy = ({noteData}) => {
     // console.log(info);
   }
   
-  if(noteData.tagSearchText){
-    const fetchDiaryList = () => {
-      axios.post(`http://localhost:8081/sesco/diary/selectlist`) 
-        .then((res) => {
-          const fetchedEvents = res.data.diary.map((event, idx) => {
-            return {
-              d_seq: event.d_seq,
-              title: event.d_title,
-              date: event.d_date,
-              content: event.d_content,
-              tags: event.d_tags,
-              img: event.img_real_name
-            }
-          });
-          setListDiary(fetchedEvents);
-          console.log("노트에서 불러옴", noteData);
-        })
-        .catch((err) => {
-          console.log("리스트 오류", err);
-        });
-    }
-  }
+  // if(noteData.tagSearchText){
+  //   const fetchDiaryList = () => {
+  //     axios.post(`http://localhost:8081/sesco/diary/selectlist`) 
+  //       .then((res) => {
+  //         const fetchedEvents = res.data.diary.map((event, idx) => {
+  //           return {
+  //             d_seq: event.d_seq,
+  //             title: event.d_title,
+  //             date: event.d_date,
+  //             content: event.d_content,
+  //             tags: event.d_tags,
+  //             img: event.img_real_name,
+  //             note_seq : noteData.noteSeq
+  //           }
+  //         });
+  //         setListDiary(fetchedEvents);
+  //         console.log("노트에서 불러옴", noteData);
+  //       })
+  //       .catch((err) => {
+  //         console.log("리스트 오류", err);
+  //       });
+  //   }
+  // }
 
 
 
