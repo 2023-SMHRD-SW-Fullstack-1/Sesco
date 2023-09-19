@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react'
-import './Gallery.css'
+import './galleryroot.css'
 import Banner from './components/Banner'
 import GalleryMap from './components/GalleryMap'
 import axios from 'axios'
