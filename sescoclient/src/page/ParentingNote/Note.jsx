@@ -71,7 +71,7 @@ const Note = () => {
             kids: kids,
             kidName: selectedKid ? selectedKid.kid_name : '',
             noteSeq: note_seq,
-            tagSearchText : currentSearchTag,
+            tagSearchText: currentSearchTag,
             tagSearchResult: { tagResultNumbers },
             tagSearchResult: tagSearchResult[note_seq] || []
           };
@@ -169,6 +169,10 @@ const Note = () => {
         const reseponse = await axios.post('http://localhost:8081/sesco/note/createnotev2', { "kid_seq": kidSelect });
         setNotes(reseponse.data)
         console.log("노트 설정완료 : ", reseponse.data)
+        //아이를 선택했을때 태그 검색 값 초기화 되도록 !
+        setTagSearchResult({});
+        setTagResultNumbers({});
+        setCurrentSearchTag(null);
       } catch (e) {
         console.error("노트 불러오기 실패 : ", e);
       }
@@ -196,18 +200,18 @@ const Note = () => {
   //태그 입력창 이벤트
   const handleSearchTagChange = (e) => {
     setSearchTag(e.target.value);
-    
+
   };
 
   //태그 검색 버튼 눌렀을 때 이벤트
   const handleTagSearch = async () => {
-    
+
     console.log("검색 결과는 : ", currentSearchTag)
-    
+
     try {
       if (searchTag.trim() === "") return;
-      console.log("사용자 아이디값  : ",userId)
-      const response = await axios.get('http://localhost:8081/sesco/note/tagsearch', { params: { tag: searchTag, userId:userId } })
+      console.log("사용자 아이디값  : ", userId)
+      const response = await axios.get('http://localhost:8081/sesco/note/tagsearch', { params: { tag: searchTag, userId: userId } })
       setNotes(response.data)
       console.log("태그 검색 데이터 불러오기 : ", response.data)
       setTagSearchResult(response.data);
@@ -237,7 +241,7 @@ const Note = () => {
         newTagSearchResult[noteSeq].push(note); // 노트마다 검색 결과를 배열에 추가
       });
       setTagSearchResult(newTagSearchResult);
-    console.log("태그검색! 결과!!!!!!!: ", newTagSearchResult);
+      console.log("태그검색! 결과!!!!!!!: ", newTagSearchResult);
 
       //태그 검색 버튼 결과가 없을 때 
       if (Object.keys(response.data).length === 0) {
@@ -249,7 +253,7 @@ const Note = () => {
         console.log("태그 검색 결과 없을때 다시 첫째 아이 : ", reseponse.data);
       }
       setSearchTag("")
-    setCurrentSearchTag(searchTag);
+      setCurrentSearchTag(searchTag);
 
     } catch (e) {
       console.error("태그 검색 실패 : ", e)
@@ -313,12 +317,14 @@ const Note = () => {
             n_name: note.n_name,
             n_s_date: note.n_s_date,
             n_e_date: note.n_e_date,
-            note_seq: note.note_seq
+            note_seq: note.note_seq,
+            tagSearchResults: tagResultNumbers
           }))}
           onNoteClick={(note_seq) => handleNoteClick(note_seq)}
           kidSeq={kidSelect}
           kids={kids}
           tagSearchResults={tagResultNumbers}
+          newTagSearchResult={tagSearchResult}
         />
 
         {/** 선택된 연도와 노트 있을 경우 다이어리 표시 */}

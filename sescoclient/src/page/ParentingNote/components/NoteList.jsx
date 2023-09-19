@@ -8,9 +8,9 @@ const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults }) => {
     const [noteOpenStatus, setNoteOpenStatus] = useState(Array(notes.length).fill(false));
 
     const [noteKidStatus, setNoteKidStatus] = useState(Array(notes.length).fill(false));
-    
-    // console.log("******props start*******")
-    // console.log("notes : ", notes)
+
+    console.log("******props start*******")
+    console.log("notes : ", notes)
     // console.log("kidSeq : ", kidSeq)
     // console.log("kids : ", kids)
     // console.log("tagSearchResults : ", tagSearchResults)
@@ -38,18 +38,18 @@ const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults }) => {
     //      // 현재 노트의 상태 가져오기
     //      const currentOpenStatus = noteOpenStatus[index];
     //      const currentKidStatus = noteKidStatus[index];
- 
+
     //      // 현재 노트의 상태를 토글 (반대로 변경)
     //      const newNoteOpenStatus = [...noteOpenStatus];
     //      newNoteOpenStatus[index] = !currentOpenStatus;
- 
+
     //      const newNoteKidStatus = [...noteKidStatus];
     //      newNoteKidStatus[index] = !currentKidStatus;
- 
+
     //      // 상태 업데이트
     //      setNoteOpenStatus(newNoteOpenStatus);
     //      setNoteKidStatus(newNoteKidStatus);
- 
+
     //      // 노트 클릭했을때 note_seq값을 Note 컴포넌트로 전달
     //      onNoteClick(notes[index].note_seq);
     // };
@@ -81,7 +81,7 @@ const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults }) => {
                         {/* 연령대 표시 */}
                         <div className='noteAge-container'>
                             <span className='noteList-age'>
-                                {`${index}세`}
+                                {tagSearchResults[note.note_seq] ? `${note.n_name}` : `${index}세`}
                             </span>
                         </div>
 
@@ -91,16 +91,14 @@ const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults }) => {
                                 <img src={noteKid} alt="Note Kid" className="noteKid-image" />
                             )}
 
-                            
-
                         </div>
                         {/* 태그 검색 결과 숫자 표시 */}
                         {tagSearchResults[note.note_seq] > 0 && (
-                                <div className='tagResultItem'>
-                                    검색결과 : 
-                                    {tagSearchResults[note.note_seq]}
-                                </div>
-                            )}
+                            <div className='tagResultItem'>
+                                검색결과 :
+                                {tagSearchResults[note.note_seq]}
+                            </div>
+                        )}
                     </div>
                 ))}
             </div>
