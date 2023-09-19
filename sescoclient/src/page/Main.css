@@ -5,6 +5,7 @@
     font-weight: bolder;
     font-style: normal;
 }
+
 /* 얇은글씨 */
 @font-face {
     font-family: 'GangwonEduSaeeum_OTFMediumA';
@@ -12,7 +13,18 @@
     font-weight: normal;
     font-style: normal;
 }
-
+@font-face {
+    font-family: 'Minhye';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Minhye.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Saying_tobe_strong';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/naverfont_09@1.0/Saying_tobe_strong.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 /* 메인 타이틀 글꼴 */
 @font-face {
     font-family: 'KCCMurukmuruk';
