@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import './citygallery.css'
-import ImgSlider from './ImgSlider';
 import ModalGallery from './ModalGallery';
 
 

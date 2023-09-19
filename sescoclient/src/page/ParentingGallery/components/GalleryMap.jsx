@@ -31,6 +31,10 @@ const GalleryMap = ({hasCity}) => {
     setClickedLocal(region)
   }
 
+  const clickMarker = (local) =>{
+    clickLocal(local)
+  }
+
   return (
     <div className='gallerymap-total-container' style={{display: 'flex', width: '600px', height: '600px'}}>
 
@@ -231,59 +235,144 @@ const GalleryMap = ({hasCity}) => {
       </svg>
     
     {/* 지역별 마커 표시여부  */}
-    
-        {hasCity.has(LOCAL.GWANGJU) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}}/>}
-  
+
+
+        {/* 강원도 */}
+        {hasCity.has(LOCAL.GANGWON_DO) && 
+          <img src='galleryimg/marked.png' 
+            className='gallery-marker'
+            onClick={()=>clickMarker(LOCAL.GANGWON_DO)} 
+            style={{marginLeft:"18%", marginTop:"5%", position:"absolute"}}
+          />}
         
-        {hasCity?.has(LOCAL.GANGWON_DO) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
+        {/* 경기도 */}
+        {hasCity?.has(LOCAL.GEYONGGI_DO) && 
+          <img src='galleryimg/marked.png'
+            className='gallery-marker'
+            onClick={()=>clickMarker(LOCAL.GEYONGGI_DO)} 
+            style={{marginLeft:"12%", marginTop:"2.7%", position:"absolute"}}
+          />}
 
-         {hasCity.has(LOCAL.GYEONGSANGBUK_DO) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
+        {/* 경상남도 */}
+        {hasCity.has(LOCAL.GYEONGSANGNAM_DO) && 
+          <img src='galleryimg/marked.png'
+            className='gallery-marker'
+            onClick={()=>clickMarker(LOCAL.GYEONGSANGNAM_DO)} 
+            style={{marginLeft:"14.9%", marginTop:"19.2%", position:"absolute"}} 
+          />}
 
-         {hasCity.has(LOCAL.CHUNGCHEONGBUK_DO) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
+        {/* 경상북도 */}
+        {hasCity.has(LOCAL.GYEONGSANGBUK_DO) && 
+          <img src='galleryimg/marked.png'
+            className='gallery-marker'
+            onClick={()=>clickMarker(LOCAL.GYEONGSANGBUK_DO)} 
+            style={{marginLeft:"20%", marginTop:"12.4%", position:"absolute"}} 
+          />}
 
-        {hasCity.has(LOCAL.CHUNGCHEONGNAM_DO) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
+        {/* 전라남도 */}
+        {hasCity.has(LOCAL.JEOLLANAM_DO) && 
+          <img src='galleryimg/marked.png'
+            className='gallery-marker'
+            onClick={()=>clickMarker(LOCAL.JEOLLANAM_DO)} 
+            style={{marginLeft:"9.2%", marginTop:"20.5%", position:"absolute"}} 
+          />}
 
-        {hasCity.has(LOCAL.JEOLLABUK_DO) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
+        {/* 전라북도 */}
+        {hasCity.has(LOCAL.JEOLLABUK_DO) && 
+          <img src='galleryimg/marked.png'
+            className='gallery-marker'
+            onClick={()=>clickMarker(LOCAL.JEOLLABUK_DO)} 
+            style={{marginLeft:"9.6%", marginTop:"15.7%", position:"absolute"}} 
+          />}
 
-        {hasCity.has(LOCAL.JEOLLANAM_DO) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}}/>}
+        {/* 제주도 */}
+        {hasCity.has(LOCAL.JEJU_ISLAND) && 
+          <img src='galleryimg/marked.png'
+            className='gallery-marker'
+            onClick={()=>clickMarker(LOCAL.JEJU_ISLAND)} 
+            style={{marginLeft:"4%", marginTop:"26.2%", position:"absolute"}}
+          />}
 
-        {hasCity.has(LOCAL.GYEONGSANGNAM_DO) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
+        {/* 충청남도 */}
+        {hasCity.has(LOCAL.CHUNGCHEONGNAM_DO) && 
+          <img src='galleryimg/marked.png'
+            className='gallery-marker'
+            onClick={()=>clickMarker(LOCAL.CHUNGCHEONGNAM_DO)} 
+            style={{marginLeft:"8.2%", marginTop:"10.7%", position:"absolute"}} 
+          />}
 
-        {hasCity.has(LOCAL.JEJU_ISLAND) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
+        {/* 충청북도 */}
+        {hasCity.has(LOCAL.CHUNGCHEONGBUK_DO) && 
+          <img src='galleryimg/marked.png' 
+            className='gallery-marker'
+            onClick={()=>clickMarker(LOCAL.CHUNGCHEONGBUK_DO)} 
+            style={{marginLeft:"13%", marginTop:"10%", position:"absolute"}} 
+          />}
 
-        {hasCity.has(LOCAL.JEJU_ISLAND) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
+        {/* 광주광역시 */}
+        {hasCity.has(LOCAL.GWANGJU) && 
+          <img src='galleryimg/marked.png'
+            className='gallery-marker'
+            onClick={()=>clickMarker(LOCAL.GWANGJU)} 
+            style={{marginLeft:"6.3%", marginTop:"19.4%", position:"absolute"}} 
+          />}
 
-        {hasCity.has(LOCAL.JEJU_ISLAND) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
+        {/* 부산광역시 */}
+        {hasCity.has(LOCAL.BUSAN) && 
+          <img src='galleryimg/marked.png'
+            className='gallery-marker'
+            onClick={()=>clickMarker(LOCAL.BUSAN)} 
+            style={{marginLeft:"18.9%", marginTop:"20.2%", position:"absolute"}} 
+          />}
 
-        {hasCity.has(LOCAL.JEJU_ISLAND) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
+        {/* 울산광역시 */}
+        {hasCity.has(LOCAL.ULSAN) && 
+          <img src='galleryimg/marked.png'
+            className='gallery-marker'
+            onClick={()=>clickMarker(LOCAL.ULSAN)} 
+            style={{marginLeft:"19.9%", marginTop:"18.2%", position:"absolute"}} 
+          />}
 
-        {hasCity.has(LOCAL.JEJU_ISLAND) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
+        {/* 대구광역시 */}
+        {hasCity.has(LOCAL.DAEGU) && 
+          <img src='galleryimg/marked.png' 
+            className='gallery-marker'
+            onClick={()=>clickMarker(LOCAL.DAEGU)} 
+            style={{marginLeft:"16.3%", marginTop:"15.7%", position:"absolute"}} 
+          />}
 
-        {hasCity.has(LOCAL.JEJU_ISLAND) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
+        {/* 대전광역시 */}
+        {hasCity.has(LOCAL.DAEJEON) && 
+          <img src='galleryimg/marked.png'
+            className='gallery-marker'
+            onClick={()=>clickMarker(LOCAL.DAEJEON)} 
+            style={{marginLeft:"11.3%", marginTop:"11.7%", position:"absolute"}} 
+          />}
 
-        {hasCity.has(LOCAL.JEJU_ISLAND) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />}
+        {/* 서울특별시 */}
+        {hasCity.has(LOCAL.SEOUL) && 
+          <img src='galleryimg/marked.png'
+            className='gallery-marker'
+            onClick={()=>clickMarker(LOCAL.SEOUL)} 
+            style={{marginLeft:"11%", marginTop:"4.7%", position:"absolute"}} 
+          />}
 
-        {hasCity.has(LOCAL.JEJU_ISLAND) && <img src='galleryimg/marked.png' style={{width:"50px", height:"50px", position:"absolute"}} />} 
+        {/* 인천광역시 */}
+        {hasCity.has(LOCAL.INCHEON) && 
+          <img src='galleryimg/marked.png'
+            className='gallery-marker'
+            onClick={()=>clickMarker(LOCAL.INCHEON)} 
+            style={{marginLeft:"7.9%", marginTop:"3.7%", position:"absolute"}} 
+          />} 
 
+        {/* 세종특별자치시 */}
+        {hasCity.has(LOCAL.SEJONG) && 
+          <img src='galleryimg/marked.png'
+            className='gallery-marker'
+            onClick={()=>clickMarker(LOCAL.SEJONG)} 
+            style={{marginLeft:"11%", marginTop:"9.7%", position:"absolute"}} 
+          />} 
 
-        {/* GANGWON_DO : "강원도",
-    GEYONGGI_DO : "경기도",
-    GYEONGSANGNAM_DO : "경상남도",
-    GYEONGSANGBUK_DO : "경상북도",
-    JEOLLANAM_DO : "전라남도",
-    JEOLLABUK_DO : "전라북도",
-    JEJU_ISLAND : "제주도",
-    CHUNGCHEONGNAM_DO : "충청남도",
-    CHUNGCHEONGBUK_DO : "충청북도",
-    GWANGJU : "광주광역시",
-    BUSAN : "부산광역시",
-    ULSAN : "울산광역시",
-    DAEGU : "대구광역시",
-    DAEJEON : "대전광역시",
-    SEOUL :"서울특별시",
-    INCHEON :"인천광역시",
-    SEJONG :"세종특별자치시" */}
-    
     </div>
   )
 }

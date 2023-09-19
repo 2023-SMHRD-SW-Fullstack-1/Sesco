@@ -87,14 +87,13 @@ const Gallery = () => {
     updateList()
     setSelectedCity(null)
     console.log(secondNameList)
-    console.log("qweqwewq", hasCity.has("광주광역시"))
   },[clickedLocal])
   
   return (
     <>
-      <Banner/>
+      <Banner />
         <LocalContext.Provider value={{clickedLocal, setClickedLocal}}>
-            <div className="gallery-top-container" style={{ display:'flex', width:"100%", height:"900px", marginTop:'20px'}}>
+            <div className="gallery-top-container">
               <div style={{height: "fit-content"}}>
                 {hasCity && <GalleryMap hasCity={hasCity} ></GalleryMap>}
               </div>

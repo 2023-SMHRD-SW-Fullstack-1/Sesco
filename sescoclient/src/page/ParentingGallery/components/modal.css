@@ -1,0 +1,62 @@
+
+.gallery-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 30;
+  }
+  
+  /* modal창 */
+  .gallery-modal-body {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    width: 50%;
+    height: auto;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+    z-index: 31;
+    justify-content: center;
+  }
+  
+  .gallery-modal-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border: none;
+    color: rgba(0, 0, 0, 0.7);
+    background-color: transparent;
+    font-size: 20px;
+  }
+  
+  .gallery-modal-close-btn:hover {
+    cursor: pointer;
+  }
+
+  .modal-info-btn{
+    position:absolute;
+    margin-top: 30;
+    margin-left: 500;
+    background-color: aqua;
+    height:30px;
+    z-index: 32;
+  }
+
+  .image-gallery-content .image-gallery-slide .image-gallery-image{
+    max-height : calc(90vh - 80px);
+    margin-top: 30px;
+  }
+
+  .image-gallery-image{
+    height: 100%;
+    width: 100%;
+    margin-bottom: 10px;
+  }

@@ -20,6 +20,8 @@
     border : 5px solid cadetblue;
     background-color: rgb(165, 247, 250);
     margin-right: 10px;
+    display: flex;
+    flex-wrap: wrap;
     
 }
 
@@ -51,5 +53,27 @@
         width: 100px;
         stroke-width: 0.7px;
         z-index: 5;
+    }
+}
+
+.gallery-marker{
+    width:40px; height:40px;
+}
+
+.gallery-marker:hover{
+    animation-name: spinner;
+    animation-duration: 3s;
+}
+
+@keyframes spinner {
+    from{
+      width: 40px;
+      height: 40px;
+      transform: rotateY( 10deg )
+    }
+    to{
+      width: 40px;
+      height: 40px;
+      transform: rotateY( 360deg )
     }
 }
