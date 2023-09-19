@@ -11,166 +11,44 @@ import moment from 'moment';
 
 
 const Diarycopy = ({noteData}) => {
-  //일기 추가 클릭했을 때 true로 되고 일기작성 폼 출력
-  const [isClick, setIsClick] = useState(false);
+  //noteData에는 kid_seq, note_seq, kid_name... 노트 객체 전달받음
 
-  //일기 리스트중 하나 눌렀을 때 화면 보이거나 안보이게 하기
-  const [listClickVisible, setListClickVisible] = useState(false);
+
+  // -------------------------fullcalendar start-------------------------------------//
 
   //선택한 날짜
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  //CreateDiary에서 작성한 제목 가져오기
-  const [createFormTitle, setCreateFormTitle] = useState(null);
-
-  const [createFormContent, setCreateFormContent] = useState(null);
-
-  //검색한 태그 일기장
-  const [selectTag, setSelectTag] = useState(null);
-
-
-
-  //이미지 저장
-  const [image, setImage] = useState("");
-
-  //일기 추가 시 이벤트 처리
-  const [events, setEvents] = useState([]);
-
-  // 일기 리스트
-  const [listDiary, setListDiary] = useState([]);
-
   // 날짜마다 바뀐 일기 리스트 저장
   const [selectedDiaryList, setSelectedDiaryList] = useState()
 
-  // 일기 리스트 상세정보를 담는 상태 변수
-  const [selectedDiary, setSelectedDiary] = useState(null);
+
+  //날짜변경 시 일기를 해당 날짜 기준으로 필터링
+  useEffect(()=>{
+
+    const tempDiaryList = listDiary.filter((diary)=> diary.date == formatDate(selectedDate))
+    setSelectedDiaryList(tempDiaryList)  
+
+    setListClickVisible(true);
+
+  },[selectedDate])
 
   
-  
-
-
-  //"데이터 없어?"하고 다시 여기로 옴
-  // console.log(moment(selectedDate).format('YYYY-MM-DD'))
-  // --------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-  //날짜 맞춰주기 : 2023-09-09
+  //날짜 맞춰주는 함수 : 2023-09-09
   function formatDate(date) {
     console.log(date);
     return moment(date).format('YYYY-MM-DD');
   }
+  
+  // -------------------------------fullcalendar End ---------------------------------//
 
 
- 
+  // --------------------tag start------------------//
 
+  
+  //검색한 태그 일기장
+  const [searchedTag, setSearchedTag] = useState(null);
 
-  function onComplete(title, content,tags) {
-    //작성완료 눌렀을 때 바로 여기로 옴
-    console.log("데이터 보내는거니?");
-    setCreateFormTitle(title);
-    setCreateFormContent(content);
-    //title에는 아직 null값 뜸 이유를 모르겠음
-    console.log(createFormTitle);
-    console.log("태그", tags);
-
-    if (selectedDate && title && content) {
-      //const localDateString = ...: 선택된 날짜에서 현재 시스템의 타임존 오프셋을 빼서 UTC로부터 로컬 시간으로 변환하고, 그 결과를 'YYYY-MM-DD' 형식의 문자열로 만듭니다.
-      // const localDateString = new Date(
-      //   selectedDate.getTime() - selectedDate.getTimezoneOffset() * 60000
-      // )
-      //   .toISOString()
-      //   .split("T")[0];
-
-      //db 리스트 값 가져오기?
-      const newEvent = { title: title, date: formatDate(selectedDate) };
-      setEvents([...events, newEvent]);
-
-      const newDiary = {
-        date: formatDate(selectedDate),
-        title: title,
-        content: content,
-        tags: tags,
-      };
-
-      //현재 일기 값에서 일기작성한 값 추가해주기
-      setListDiary([...listDiary, newDiary]);
-      //한국 표준시 이렇게 나옴 초기상태
-      console.log("seletedDate", selectedDate);
-      //DB값 전부 불러옴
-      console.log("diarydate", listDiary);
-      //이게 끝나면 CreateDiary로 감
-    }
-
-    setIsClick(false);
-    if( selectedDate != null){
-      setSelectedDate();
-    }
-  }
-
-  //해당 날짜의 일기 상세정보
-  //버튼 누를떄 실행되는 메서드
-  //  function ClickDiary(index) {
-  //   console.log("ClickDiary");
-  //   console.log("너도 없니?",selectedDiaryList[0])
-  //   const diary = selectedDiaryList[index];
-  //   console.log("다이어리",diary);
-  //   setListClickVisible(true)
-  //   setSelectedDiary(diary);
-    
-  // }
-
-  function CreateDiaryForm() {
-    setIsClick(!isClick);
-  }
-
-  //DB에 저장된 일기 리스트 이벤트 처리
-  const fetchDiaryList = () => {
-    axios.post(`http://localhost:8081/sesco/diary/selectlist`, {
-      note_seq : noteData.noteSeq
-    })
-      .then((res) => {
-        const fetchedEvents = res.data.diary.map((event, idx) => {
-          return {
-            d_seq: event.d_seq,
-            title: event.d_title,
-            date: event.d_date,
-            content: event.d_content,
-            tags: event.d_tags,
-            img: event.img_real_name
-            
-          }
-        });
-        setListDiary(fetchedEvents);
-        console.log("노트에서 불러옴", noteData);
-      })
-      .catch((err) => {
-        console.log("리스트 오류", err);
-      });
-  }
-
-  // 일기 리스트 초기화
-  useEffect(() => {
-    fetchDiaryList();
-  }, []);
-
- 
-
-  //  DB에 저장된 일기 리스트 이벤트 처리
-  //  해당 날짜 누르면 밑에 버튼으로 리스트 나오는 함수
-  useEffect(()=>{
-    // setIsViewDiaryVisible(!isViewDiaryVisible)
-    console.log("확인",listDiary);
-    
-
-    const tempDiaryList = listDiary.filter((diary)=> diary.date == formatDate(selectedDate))
-    setSelectedDiaryList(tempDiaryList)  
-    console.log("필터링 완료")
-
-    setSelectedDiary(tempDiaryList);
-    console.log(selectedDiaryList)
-    setListClickVisible(true);
-
-  },[selectedDate])
   // 태그 검색 시 필터링
   useEffect(() => {
     // noteData.tagSearchText와 일치하는 요소만 포함하는 새로운 배열을 생성
@@ -186,47 +64,97 @@ const Diarycopy = ({noteData}) => {
   }, [noteData.tagSearchText]);
 
 
-  // useEffect(() => {
-  //   setListClickVisible(false)
-  // }, [selectedDate]);
 
-   //해당 날짜의 일기 리스트 출력
-   function handleDateClick(info, index) {
-    console.log("handleDateClick");
-    // const parsedDate = moment(info.date).format('YYYY-MM-DD');
-    setSelectedDate(formatDate(info.date));
-    setSelectedDiaryList()  
-    // console.log(info.date);
-    // console.log(info);
-  }
+
+  // --------------------tag   end------------------//
+
+
+
+  // --------------------------------------일기 start-----------------------------------//
+
   
-  // if(noteData.tagSearchText){
-  //   const fetchDiaryList = () => {
-  //     axios.post(`http://localhost:8081/sesco/diary/selectlist`) 
-  //       .then((res) => {
-  //         const fetchedEvents = res.data.diary.map((event, idx) => {
-  //           return {
-  //             d_seq: event.d_seq,
-  //             title: event.d_title,
-  //             date: event.d_date,
-  //             content: event.d_content,
-  //             tags: event.d_tags,
-  //             img: event.img_real_name,
-  //             note_seq : noteData.noteSeq
-  //           }
-  //         });
-  //         setListDiary(fetchedEvents);
-  //         console.log("노트에서 불러옴", noteData);
-  //       })
-  //       .catch((err) => {
-  //         console.log("리스트 오류", err);
-  //       });
-  //   }
-  // }
+  // 전체 일기 리스트 관리
+  const [listDiary, setListDiary] = useState([]);
 
+  // 일기 리스트 초기화
+  useEffect(() => {
+    fetchDiaryList();
+  }, []);
 
+  
+  //일기 작성화면으로 전환 
+  const [isClick, setIsClick] = useState(false);
+  
+  
+  //일기View 페이지로 전환
+  const [listClickVisible, setListClickVisible] = useState(false);
 
+  function CreateDiaryForm() {
+    setIsClick(!isClick);
+  }
 
+  
+  //DB에 저장된 일기 리스트 불러오기
+  const fetchDiaryList = () => {
+    axios.post(`http://localhost:8081/sesco/diary/selectlist`, {
+      note_seq : noteData.noteSeq
+    })
+      .then((res) => {
+        const fetchedEvents = res.data.diary.map((event, idx) => {
+          return {
+            d_seq: event.d_seq,
+            title: event.d_title,
+            date: event.d_date,
+            content: event.d_content,
+            tags: event.d_tags,
+            img: event.img_real_name,
+            note_seq : noteData.noteSeq
+          }
+        });
+        setListDiary(fetchedEvents);
+        console.log("노트에서 불러옴", noteData);
+      })
+      .catch((err) => {
+        console.log("리스트 오류", err);
+      });
+    }
+
+    //일기 작성 완료 처리 함수
+    function onComplete(title, content,tags) {
+      
+    if (selectedDate && title && content) {
+
+      const newDiary = {
+        date: formatDate(selectedDate),
+        title: title,
+        content: content,
+        tags: tags,
+      };
+      
+      //현재 일기 값에서 일기작성한 값 추가해주기
+      setListDiary([...listDiary, newDiary]);
+      //한국 표준시 이렇게 나옴 초기상태
+      console.log("seletedDate", selectedDate);
+      //DB값 전부 불러옴
+      console.log("diarydate", listDiary);
+      //이게 끝나면 CreateDiary로 감
+    }
+
+    setIsClick(false);
+    if( selectedDate != null){
+      setSelectedDate();
+    }
+    }
+
+    //해당 날짜의 일기 리스트 출력
+    function handleDateClick(info, index) {
+      console.log("handleDateClick");
+      setSelectedDate(formatDate(info.date));
+      setSelectedDiaryList()  
+    }
+  // --------------------------------------일기 end-----------------------------------//
+
+  
   return (
     // 수첩칸
     <div className="diary-whole-container">
@@ -288,21 +216,6 @@ const Diarycopy = ({noteData}) => {
             {/* 일기 리스트 출력 */}
             {/* 여기서 누른 날짜의 일기리스트를 제공 */}
             <div className="c">
-              {/* {selectedDate && listDiary
-                .filter((diary) => diary.date === formatDate(selectedDate))
-                .map((diary, index) => (
-                  <button
-                    key={index}
-                    className="oval-button"
-                    onClick={() => ClickDiary(index)}
-                  >
-                    <div className="b">
-                      <p>{diary.title}</p>
-                    </div>
-                    <br />
-                  </button>
-                ))} */}
-
                 
             </div>
             
@@ -335,6 +248,7 @@ const Diarycopy = ({noteData}) => {
 
       </div>
     </div>
-  );
-};
-export default Diarycopy;
+  )
+}
+
+export default Diarycopy
