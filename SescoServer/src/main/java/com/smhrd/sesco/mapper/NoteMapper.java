@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import com.smhrd.sesco.domain.Note;
 
@@ -19,7 +18,7 @@ public interface NoteMapper {
 
 	// 태그 검색
 	//List<Note> selectNotesByTagAndYear(String tag, int year);
-	List<Note> selectNotesByTag(String tag);
+	List<Note> selectNotesByTag(String tag, String userId);
 	// 수첩 생성
 	void noteInsert(Note note);
 
