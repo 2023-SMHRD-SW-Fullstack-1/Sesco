@@ -7,7 +7,6 @@ import Main1 from "./page/Main1";
 import Note from "./page/ParentingNote/Note";
 import Gallery from "./page/ParentingGallery/Gallery";
 import Login from "./components/Login";
-import Diarycopy from "./page/ParentingNote/components/Diarycopy";
 
 import Tip from './page/ParentingTip/TipMain';
 import Join from "./components/Join";
@@ -35,9 +34,9 @@ function App() {
       <Route path="/diary" element={<Diarycopy/>}></Route>
       <Route path="/google" element={<GoogleLog/>}></Route>
 
-
     </Routes>
 
+    <Footer/>
 
       {/* <Footer /> */}
     </>
