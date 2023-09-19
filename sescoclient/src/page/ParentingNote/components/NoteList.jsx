@@ -8,13 +8,13 @@ const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults }) => {
     const [noteOpenStatus, setNoteOpenStatus] = useState(Array(notes.length).fill(false));
 
     const [noteKidStatus, setNoteKidStatus] = useState(Array(notes.length).fill(false));
-    console.log("******props start*******")
-    console.log("notes : ", notes)
-    console.log("kidSeq : ", kidSeq)
-    console.log("kids : ", kids)
-    console.log("tagSearchResults : ", tagSearchResults)
+    // console.log("******props start*******")
+    // console.log("notes : ", notes)
+    // console.log("kidSeq : ", kidSeq)
+    // console.log("kids : ", kids)
+    // console.log("tagSearchResults : ", tagSearchResults)
 
-    console.log("******props end*******")
+    // console.log("******props end*******")
 
     // kidSeq 값이 변경될 때 noteOpenStatus 초기화
     useEffect(() => {
