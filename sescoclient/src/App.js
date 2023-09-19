@@ -7,13 +7,12 @@ import Main1 from "./page/Main1";
 import Note from "./page/ParentingNote/Note";
 import Gallery from "./page/ParentingGallery/Gallery";
 import Login from "./components/Login";
-
-
 import Tip from './page/ParentingTip/TipMain';
 import Join from "./components/Join";
 import Main2 from "./page/Main2";
-import Diarycopy from "./page/ParentingNote/components/Diarycopy";
+
 import GoogleLog from "./page/components/GoogleLog"
+import Diarycopy from "./page/ParentingNote/components/Diarycopy";
 
 
 

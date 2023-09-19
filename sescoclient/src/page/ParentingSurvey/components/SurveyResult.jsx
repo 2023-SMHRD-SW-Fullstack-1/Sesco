@@ -40,6 +40,9 @@ const SurveyResult = ({ bundle }) => {
             <div>
                 <div>
                     <div className='survey-result-Table-container'>
+                        <div className='we-kid'>
+                            <p>우리 아이는</p>
+                        </div>
                         <table className='survey-result-Table'>
                             <tbody>
                                 <tr>

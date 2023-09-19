@@ -21,7 +21,7 @@ const ViewDiary = ({ selectdate }) => {
 
   const [tagItem, setTagItem] = useState('');
   const [tagList, setTagList] = useState([]);
-  const [tagsToSend, setTagsToSend] = useState('');
+  const [tagsToSend,  setTagsToSend] = useState('');
   const [noteseq, setNoteseq] = useState(''); 
   useEffect(()=>{
 console.log(selectdate);

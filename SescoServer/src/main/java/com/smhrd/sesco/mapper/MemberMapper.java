@@ -39,4 +39,12 @@ public interface MemberMapper {
 	@Update("update t_member set user_d_yn='y' where user_id=#{user_id}")
 	public void MemberDelete(String user_id);
 
+	//구글계정 중복확인
+	@Select("select count(*) from t_member where user_id=#{user_id} and user_name=#{user_name} and login_type=#{login_type}")
+	public int GoogleUserCheck(Member member);
+	
+	// 구글 로그인 
+	@Select("select * from t_member where user_id=#{user_id} and user_name=#{user_name} and login_type=#{login_type}")
+	public Member GoogleLogin(Member member);
+
 }
