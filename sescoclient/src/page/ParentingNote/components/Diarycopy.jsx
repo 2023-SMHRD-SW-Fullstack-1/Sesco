@@ -13,6 +13,11 @@ import moment from 'moment';
 const Diarycopy = ({noteData}) => {
   //noteData에는 kid_seq, note_seq, kid_name... 노트 객체 전달받음
 
+  
+  // 전체 일기 리스트 관리
+  const [listDiary, setListDiary] = useState([]);
+  
+  // const [searchResult, setSearchResult] = useState()
 
   // -------------------------fullcalendar start-------------------------------------//
 
@@ -45,26 +50,12 @@ const Diarycopy = ({noteData}) => {
 
   // --------------------tag start------------------//
 
-  
-  //검색한 태그 일기장
-  const [searchedTag, setSearchedTag] = useState(null);
-
-  // 태그 검색 시 필터링
-  useEffect(() => {
-    // noteData.tagSearchText와 일치하는 요소만 포함하는 새로운 배열을 생성
-    const filteredDiary = listDiary.filter((diary) => {
-      // 이 부분에서 태그 검색을 어떻게 처리할지에 따라 로직을 수정해야 할 수도 있습니다.
-      // 현재 코드는 diary.tags가 noteData.tagSearchText와 일치해야 필터링됩니다.
-      return diary.tags === noteData.tagSearchText;
-    });
-  
-    // 필터링된 배열을 setSelectedDiaryList로 설정
-    setSelectedDiaryList(filteredDiary);
-    setListClickVisible(true);
-  }, [noteData.tagSearchText]);
 
 
-
+  // useEffect(()=>{
+  //   console.log("tjlclflcujwmx", searchResult)
+   
+  // }, [listDiary])
 
   // --------------------tag   end------------------//
 
@@ -72,14 +63,14 @@ const Diarycopy = ({noteData}) => {
 
   // --------------------------------------일기 start-----------------------------------//
 
-  
-  // 전체 일기 리스트 관리
-  const [listDiary, setListDiary] = useState([]);
+
 
   // 일기 리스트 초기화
   useEffect(() => {
-    fetchDiaryList();
-  }, []);
+    console.log("fqiwhoqwifhjowiq", noteData[0].note_seq)
+    fetchDiaryList(noteData.tagSearchText);
+  }, [noteData[0].note_seq, noteData]);
+
 
   
   //일기 작성화면으로 전환 
@@ -95,8 +86,8 @@ const Diarycopy = ({noteData}) => {
 
   
   //DB에 저장된 일기 리스트 불러오기
-  const fetchDiaryList = () => {
-    axios.post(`http://localhost:8081/sesco/diary/selectlist`, {
+  const fetchDiaryList = (tag) => {
+    axios.post(`http://localhost:8081/sesco/diary/selectlist`,{
       note_seq : noteData.noteSeq
     })
       .then((res) => {
@@ -106,12 +97,29 @@ const Diarycopy = ({noteData}) => {
             title: event.d_title,
             date: event.d_date,
             content: event.d_content,
-            tags: event.d_tags,
-            img: event.img_real_name,
-            note_seq : noteData.noteSeq
+            tags: event.d_tags.split("#"),
+            img: event.img_real_name
           }
-        });
-        setListDiary(fetchedEvents);
+        }) 
+        if(tag){
+          const temp = []
+          console.log(tag)
+          const filterList = fetchedEvents.filter((item) => 
+            item.tags.includes(tag) 
+          )
+    
+          filterList.map((item)=>temp.push({
+            d_seq : item.d_seq, 
+            title : item.title,
+            date : item.date,
+            content : item.content,
+            tags : item.tags,
+            img : item.img,
+          }))
+          setListDiary([...temp])
+        }else{
+          setListDiary(fetchedEvents);
+        }
         console.log("노트에서 불러옴", noteData);
       })
       .catch((err) => {
