@@ -4,14 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -60,11 +56,18 @@ public class NoteController {
 //		return noteService.searchNotesByTag(tag);
 //	}
 	
+//	@GetMapping("/note/tagsearch")
+//	public List<Note> getNotesByTag(@RequestParam String tag) {
+//		System.out.println("태그 검색 결과 : "+ noteService.searchNotesByTag(tag));
+//	    return noteService.searchNotesByTag(tag);
+//	}
+	
 	@GetMapping("/note/tagsearch")
-	public List<Note> getNotesByTag(@RequestParam String tag) {
-		System.out.println("태그 검색 결과 : "+ noteService.searchNotesByTag(tag));
-	    return noteService.searchNotesByTag(tag);
+	public List<Note> getNotesByTag(@RequestParam String tag, @RequestParam String userId) {
+	    System.out.println("태그 검색 결과 : " + noteService.searchNotesByTag(tag, userId));
+	    return noteService.searchNotesByTag(tag, userId);
 	}
+
 
 
 	// 수첩 생성

@@ -1,11 +1,10 @@
-/* 구글폰트 사용 */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap');
 
 .note-container {
-  width: 1920px;
-  height: 3700px;
+  width: 1900px;
+  height: auto;
 
 }
+
 
 .book {
   position: relative;
@@ -29,9 +28,9 @@
 .book-span,
 .book-span2 {
   color: #000000;
-  font: 600 50px/50px "Playfair Display", sans-serif;
-  font-feature-settings: 'clig' off, 'liga' off;
-  font-family: "Playfair Display", sans-serif;
+  font: 600 50px/50px ;
+  /* font-feature-settings: 'clig' off, 'liga' off;
+  font-family: "Playfair Display", sans-serif; */
   font-size: 50px;
   font-style: normal;
   font-weight: 600;
@@ -64,6 +63,8 @@
   display: flex;
   justify-content: space-between;
   height: 200px;
+  width: auto;
+  margin-top: 100px;
 }
 
 .noteTagSearch-container {
@@ -87,7 +88,7 @@
 
 /* 태그검색 */
 .noteTagFind2 {
-  width: 502px;
+  width: 480px;
   height: 54px;
   flex-shrink: 0;
   border-radius: 100px;
@@ -103,7 +104,7 @@
 
 /* 아이 선택 옵션 */
 .note-myKidSelect {
-  width: 240px;
+  width: 190px;
   height: 51px;
   flex-shrink: 0;
   border-radius: 14px;
@@ -116,6 +117,7 @@
   margin-right: 509px;
   color: #505050;
   cursor: pointer;
+  outline: none;
 }
 
 .note-myKidSelectOption {
@@ -129,6 +131,9 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  border: 2px solid #FFA842;
+  background: #FCFCFC;
+  outline: none;
 }
 
 /*일기 보여지는 영역*/

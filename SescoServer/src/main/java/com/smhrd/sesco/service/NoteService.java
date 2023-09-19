@@ -64,8 +64,8 @@ public class NoteService {
 //
 //		return groupNotes;
 //	}
-	public List<Note> searchNotesByTag(String tag) {
-	    return noteMapper.selectNotesByTag(tag);
+	public List<Note> searchNotesByTag(String tag,String userId) {
+	    return noteMapper.selectNotesByTag(tag,userId);
 	}
 
 	// 수첩 생성

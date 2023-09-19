@@ -196,7 +196,7 @@ const Note = () => {
   //태그 입력창 이벤트
   const handleSearchTagChange = (e) => {
     setSearchTag(e.target.value);
-    console.log(e.target.value);
+    
   };
 
   //태그 검색 버튼 눌렀을 때 이벤트
@@ -206,8 +206,8 @@ const Note = () => {
     
     try {
       if (searchTag.trim() === "") return;
-
-      const response = await axios.get('http://localhost:8081/sesco/note/tagsearch', { params: { tag: searchTag } })
+      console.log("사용자 아이디값  : ",userId)
+      const response = await axios.get('http://localhost:8081/sesco/note/tagsearch', { params: { tag: searchTag, userId:userId } })
       setNotes(response.data)
       console.log("태그 검색 데이터 불러오기 : ", response.data)
       setTagSearchResult(response.data);

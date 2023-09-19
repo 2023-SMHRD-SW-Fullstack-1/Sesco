@@ -28,7 +28,7 @@
 		AND note_d_yn = 'N'
 	</select>
 
-	<!-- 태그 검색 -->
+	<!-- 태그 검색 
 	<select id="selectNotesByTag"
 		resultType="com.smhrd.sesco.domain.Note">
 		SELECT n.*
@@ -44,7 +44,25 @@
 		AND
 		n.note_d_yn = 'N'
 
-	</select>
+	</select>-->
+	<!-- 태그 검색 -->
+	<select id="selectNotesByTag"
+   
+    resultType="com.smhrd.sesco.domain.Note">
+    SELECT n.*
+    FROM t_note n
+    JOIN t_diary d ON n.note_seq = d.note_seq
+    WHERE
+    CONCAT('#', d.d_tags, '#') LIKE CONCAT('%#', REPLACE(#{tag}, '#', ''), '#%')
+    AND
+    n.note_d_yn = 'N'
+    AND
+    n.kid_seq IN (
+       
+        SELECT kid_seq FROM t_kid WHERE user_id = #{userId}
+    )
+</select>
+	
 
 	<!-- 수첩 생성 <insert id="noteInsert" parameterType="com.smhrd.sesco.domain.Note"> 
 		INSERT INTO t_note (n_name, n_s_date, n_e_date, kid_seq, note_d_yn) VALUES 

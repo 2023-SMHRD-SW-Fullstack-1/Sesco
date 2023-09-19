@@ -8,6 +8,7 @@ const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults }) => {
     const [noteOpenStatus, setNoteOpenStatus] = useState(Array(notes.length).fill(false));
 
     const [noteKidStatus, setNoteKidStatus] = useState(Array(notes.length).fill(false));
+    
     // console.log("******props start*******")
     // console.log("notes : ", notes)
     // console.log("kidSeq : ", kidSeq)
@@ -90,14 +91,16 @@ const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults }) => {
                                 <img src={noteKid} alt="Note Kid" className="noteKid-image" />
                             )}
 
-                            {/* 태그 검색 결과 숫자 표시 */}
-                            {tagSearchResults[note.note_seq] > 0 && (
+                            
+
+                        </div>
+                        {/* 태그 검색 결과 숫자 표시 */}
+                        {tagSearchResults[note.note_seq] > 0 && (
                                 <div className='tagResultItem'>
+                                    검색결과 : 
                                     {tagSearchResults[note.note_seq]}
                                 </div>
                             )}
-
-                        </div>
                     </div>
                 ))}
             </div>
