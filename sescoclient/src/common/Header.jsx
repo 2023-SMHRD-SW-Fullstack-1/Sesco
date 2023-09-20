@@ -87,11 +87,7 @@ const Header = () => {
         <HeaderImgLogo onClick={() => handleClickLogo()} />
         <HeaderLJContainer>
           {!user_id ?
-            <div>
-
-              <HeaderLJTxt href='/login'><GoPerson />로그인 </HeaderLJTxt>
-              <HeaderLJTxt href='/join'><GoPersonAdd /> 회원가입</HeaderLJTxt>
-            </div>
+            ""
             :
             <HeaderLJTxt href='/' onClick={()=>onLogout()}><GoPerson />로그아웃 </HeaderLJTxt>
 
