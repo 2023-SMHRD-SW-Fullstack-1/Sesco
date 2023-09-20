@@ -83,7 +83,7 @@
 .survey-bottom-container {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 60px;
 }
 
 .surBox1-container {
@@ -314,21 +314,18 @@
   align-items: flex-start;
   text-align: justify;
 }
-.survey_xBtn{
-  background-color: red;
+
+.OXselect{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: flex-end;
+  padding-top: 10px;
+  padding-right: 53px;
+  margin-top: 10px;
 }
 
-.survey_oBtn::before{
-  background-color: green;
+.oselect{
+  padding-right: 8px;
 }
-
-.survey_oBtn:hover{
-  background-color: #1ab0ca;
-}
-.survey_oBtn.active{
-  background-color: #1ab0ca;
-}
-.survey_oBtn::after{
-  background-color: #1ab0ca;
-}
-
