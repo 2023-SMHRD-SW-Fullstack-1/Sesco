@@ -232,9 +232,9 @@ console.log("너 뭐들었니?",selectedDiaryList);
       <div className="diary-right-container">
         <div className="diary-page-inner">
           {/* 선택된 날짜 출력 */}
-          {selectedDate && (
+          {/* {selectedDate && (
             <p>선택된 날짜: </p>
-          )}
+          )} */}
 
           {/* 일기 작성 폼 */}
           {isClick && (
@@ -243,13 +243,13 @@ console.log("너 뭐들었니?",selectedDiaryList);
             // 필요에 따라 선택된 날짜를 CreateDiary 컴포넌트로 전달해주세요.
             <CreateDiary selectedDate={selectedDate} onComplete={onComplete} date={selectedDate}  formatDate={formatDate} noteData={noteData}/>
           )}
-        </div>
-        
         {listClickVisible && selectedDiaryList && selectedDiaryList.length > 0 && (
   <ViewDiary
     selectdate={selectedDiaryList} noteData={noteData}
   />  
 )}
+        </div>
+        
 
       </div>
     </div>

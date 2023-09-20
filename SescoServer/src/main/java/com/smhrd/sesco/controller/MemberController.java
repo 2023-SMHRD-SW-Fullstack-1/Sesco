@@ -145,7 +145,7 @@ public class MemberController {
         	System.out.println("로그인성공" + Object );
         	return Object;
         }else { // 미가입된 유저
-        	Object.put("null", null);
+        	Object.put("Member", null);
         	System.out.println("로그인실패"+Object);
         	return Object;
         }
@@ -190,7 +190,7 @@ public class MemberController {
 	        	System.out.println("로그인성공" + Object );
 	        	return Object;
 	        }else {
-	        	Object.put("null", null);
+	        	Object.put("Member", null);
 	        	System.out.println("로그인실패"+Object);
 	        	return Object;
 	        }

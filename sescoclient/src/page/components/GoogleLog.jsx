@@ -28,9 +28,9 @@ const GoogleLog = () => {
       res : memberToken,
       user_nick : inputValue
     }).then((res)=>{
-      if(res){
-        sessionStorage.setItem("user_nick",res.data.user_nick)
-        sessionStorage.setItem("user_id",res.data.user_id)
+      if(res.data.Member){
+        sessionStorage.setItem("user_nick",res.data.Member.user_nick)
+        sessionStorage.setItem("user_id",res.data.Member.user_id)
         navigate('/main');
       }else{
         setIsError(!isError)
@@ -59,8 +59,8 @@ const GoogleLog = () => {
                   if(response.data.Member==null){
                     setIsJoin(!isJoin)
                   }else{
-                    sessionStorage.setItem("user_nick",response.data.user_nick)
-                    sessionStorage.setItem("user_id",response.data.user_id)
+                    sessionStorage.setItem("user_nick",response.data.Member.user_nick)
+                    sessionStorage.setItem("user_id",response.data.Member.user_id)
                     navigate('/main');
                   }
                 }
