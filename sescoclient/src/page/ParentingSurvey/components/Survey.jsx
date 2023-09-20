@@ -3,7 +3,7 @@ import axios from 'axios';
 import SurveyResult from './SurveyResult';
 import PreSurveyResult from './PreSurveyResult';
 import './Survey.css';
-import { FaCheckCircle } from 'react-icons/fa'
+import './Main1.scss'
 
 function Survey({ kid, user_id }) {
     const category = ['사회/정서적 영역', '언어/의사소통 영역', '인지(학습,사고,문제해결능력)', '운동/신체발달 영역'];
@@ -16,6 +16,7 @@ function Survey({ kid, user_id }) {
     const [brainCheckList, setBrainCheckList] = useState([]);
     const [physicalCheckList, setPhysicalCheckList] = useState([]);
     const [showPreSurveyResult, setShowPreSurveyResult] = useState(false);
+
 
     console.log(kid)
 
@@ -65,6 +66,7 @@ function Survey({ kid, user_id }) {
         }
     }
 
+    // O 체크박스
     function toggleCheckList(item) {
         if (item.hsvd_category === category[0]) {
             setSocialCheckList(prevList => prevList.includes(item.hsvd_seq) ? prevList.filter(id => id !== item.hsvd_seq) : [...prevList, item.hsvd_seq]);
@@ -77,7 +79,20 @@ function Survey({ kid, user_id }) {
         }
     }
 
-    
+    // X 체크박스
+    function toggleCheckList2(item) {
+        if (item.hsvd_category === category[0]) {
+            setSocialCheckList(prevList => prevList.includes(item.hsvd_seq) ? prevList.filter(id => id !== item.hsvd_seq) : [...prevList, item.hsvd_seq]);
+        } else if (item.hsvd_category === category[1]) {
+            setLanguageCheckList(prevList => prevList.includes(item.hsvd_seq) ? prevList.filter(id => id !== item.hsvd_seq) : [...prevList, item.hsvd_seq]);
+        } else if (item.hsvd_category === category[2]) {
+            setBrainCheckList(prevList => prevList.includes(item.hsvd_seq) ? prevList.filter(id => id !== item.hsvd_seq) : [...prevList, item.hsvd_seq]);
+        } else if (item.hsvd_category === category[3]) {
+            setPhysicalCheckList(prevList => prevList.includes(item.hsvd_seq) ? prevList.filter(id => id !== item.hsvd_seq) : [...prevList, item.hsvd_seq]);
+        }
+    }
+
+
 
     function removeCheckList(item) {
         if (item.hsvd_category === category[0]) {
@@ -177,11 +192,14 @@ function Survey({ kid, user_id }) {
                                         <div className="survey_btncheck" key={item.id}>
                                             <li>{item.hsvd_content}</li>
                                             <label>
-                                                <input className="survey-oBtn" type="checkbox" checked={socialCheckList.includes(item.hsvd_seq) && item.hsvd_category == category[0]} onChange={() => toggleCheckList(item)} />
+                                                {/* 수정된 부분: 초기에 체크되지 않도록 변경 */}
+                                                <input className="survey-oBtn" type="checkbox" checked={socialCheckList.includes(item.hsvd_seq) && item.hsvd_category === category[0]} onChange={() => toggleCheckList(item)} />
                                                 O
                                             </label>
                                             <label>
-                                                <input className="survey-xBtn" type="checkbox" checked={!socialCheckList.includes(item.hsvd_seq) && item.hsvd_category == category[0]} onChange={() => toggleCheckList(item)} />
+                                                {/* 수정된 부분: X 체크박스의 checked를 socialCheckList가 포함되었으면 true로 변경 */}
+                                                {/* item.hsvd_category === category[0] 조건 제거 */}
+                                                <input className="survey-xBtn" type="checkbox" checked={!socialCheckList.includes(item.hsvd_seq)} onChange={() => toggleCheckList(item)} />
                                                 X
                                             </label>
                                         </div>

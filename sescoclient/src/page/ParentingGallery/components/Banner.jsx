@@ -1,6 +1,6 @@
 import React from 'react'
 import gimg from '../../../img/cimg.png'
-import '../gallery.css';
+import '../galleryroot.css';
 
 const Gallery = () => {
   return (
