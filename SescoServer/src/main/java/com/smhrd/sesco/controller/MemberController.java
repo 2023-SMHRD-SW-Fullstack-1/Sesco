@@ -126,13 +126,14 @@ public class MemberController {
         org.json.JSONObject jsonObject = new org.json.JSONObject(decodedPayload);
         String user_id = jsonObject.getString("email");
         String user_name = jsonObject.getString("name");
-        String login_type = map.get("login_type").toString();
+        //String login_type = map.get("login_type").toString();
+        
         
         // Member 객체 저장
         Member member = new Member();
         member.setUser_id(user_id);
         member.setUser_name(user_name);
-        member.setLogin_type(login_type);
+        //member.setLogin_type(login_type);
         
         // 회원가입 여부 판단
         int googleCheck = memberService.GoogleUserCheck(member);

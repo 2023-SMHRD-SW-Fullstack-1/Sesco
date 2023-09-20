@@ -3,7 +3,7 @@ import axios from 'axios';
 import SurveyResult from './SurveyResult';
 import PreSurveyResult from './PreSurveyResult';
 import './Survey.css';
-import './Main1.scss'
+import '../../Main1.scss'
 
 function Survey({ kid, user_id }) {
     const category = ['사회/정서적 영역', '언어/의사소통 영역', '인지(학습,사고,문제해결능력)', '운동/신체발달 영역'];

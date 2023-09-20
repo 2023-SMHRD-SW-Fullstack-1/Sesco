@@ -1,21 +1,47 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { GoogleLogin } from "@react-oauth/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import axios from 'axios';
 import { useEffect } from 'react';
+import styled from 'styled-components'
+import { keyframes } from 'styled-components';
+import { Button, Alert} from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const GoogleLog = () => {
   const clientId = '620860754662-apr8p8bcdhhs98e8ug6iugr30rsv4l3d.apps.googleusercontent.com'
-  const login_type = "G";
-  const [member, setMember] = useState(null);
+  const [memberToken, setMemberToken] = useState(0);
+  const [isJoin, setIsJoin] = useState(false);
+  const [isError,setIsError] = useState(false);
+  const inputRef = useRef(null);
 
   const config = {
     headers: { 'Content-Type': 'application/json;charset=UTF-8' }
   };
 
+  const navigate = useNavigate();
+
+  const submitNick=()=>{
+    const inputValue = inputRef.current.value;
+    setIsError(false)
+    axios.post('http://localhost:8081/sesco/member/googlejoin', {
+      res : memberToken,
+      user_nick : inputValue
+    }).then((res)=>{
+      if(res){
+        sessionStorage.setItem("user_nick",res.data.user_nick)
+        sessionStorage.setItem("user_id",res.data.user_id)
+        navigate('/main');
+      }else{
+        setIsError(!isError)
+      }
+    })
+  }
+
  
   return (
-    <>
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "80vh" }}>
+      <div>
       <GoogleOAuthProvider clientId={clientId}>
         <GoogleLogin
           useOneTap={false}
@@ -25,23 +51,23 @@ const GoogleLog = () => {
             const googleLogResult = async () => {
               try {
                 const response = await axios.post('http://localhost:8081/sesco/member/googlelogin', {
-                   res: res.credential,
-                   login_type : login_type
-                   }, config);
-                   if (response.status === 200) {
-                    console.log('결과가 성공적으로 저장되었습니다.');
-                    console.log('요청데이터 결과', res);
-                    setMember(response.data.Member);
-                    console.log("응답",member);
-                    if(member==null){
-                      // 회원가입 폼 해.줘!
-                    }
+                   res: res.credential
+                }, config);
+
+                if (response.status === 200) {
+                setMemberToken(res.credential);
+                  if(response.data.Member==null){
+                    setIsJoin(!isJoin)
+                  }else{
+                    sessionStorage.setItem("user_nick",response.data.user_nick)
+                    sessionStorage.setItem("user_id",response.data.user_id)
+                    navigate('/main');
+                  }
                 }
               } catch (error) {
                 console.error('결과 저장 중 오류 발생:', error);
               }
             };
-          
             googleLogResult();
           }}
           onFailure={(err) => {
@@ -50,8 +76,58 @@ const GoogleLog = () => {
           }}
         />
       </GoogleOAuthProvider>
-    </>
+      </div>
+      {isJoin && <GoogleJoinContainer>
+          <GoogleJoinBox>
+            <h2> 회원가입 </h2>
+            <Input  ref={inputRef} placeholder= "닉네임을 입력해주세요"></Input>
+            {isError && <Alert style={{fontSize:"13px", marginTop:"10px"}} key="danger" variant="danger">닉네임 중복 : 다른 닉네임을 입력해주세요 </Alert>}
+            <Button onClick={()=>submitNick()} variant="primary">완료</Button>{' '}
+          </GoogleJoinBox> 
+        </GoogleJoinContainer>}
+    </div>
   )
 }
+
+const createJoin = keyframes`
+  from {
+    padding: 100px;
+  }
+  to {
+    padding: 50px;
+  }
+`
+
+const GoogleJoinContainer = styled.div`
+  padding:50px;
+  position:absolute;
+  width:500px; 
+  height:400px; 
+  animation:${createJoin} 0.7s
+`
+const GoogleJoinBox = styled.div`
+  background-color:white;
+  width:100%; 
+  height:100%;
+  // border : 3px solid #ff7f00;
+  border-radius : 10px;
+  display : flex;
+  justify-content : space-between;
+  align-items : center;
+  flex-direction : column;
+  padding : 50px;
+  overflow: hidden;
+  border: 2px solid rgba(194, 194, 194, 0.8);
+  box-shadow: 0 5px 20px rgba(194, 194, 194, 0.7);
+`
+
+const Input = styled.input`
+  border-radius : 10px;
+  padding : 3px;
+  height : 25%;
+  width : 100%;
+  text-align : center;
+  border: 2px solid rgba(194, 194, 194, 0.8);
+`
 
 export default GoogleLog

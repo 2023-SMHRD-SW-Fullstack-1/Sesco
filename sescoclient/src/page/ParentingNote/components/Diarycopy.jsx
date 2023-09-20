@@ -190,7 +190,6 @@ console.log("너 뭐들었니?",selectedDiaryList);
               
               //눌렀을 때 해당 날짜 칸 색깔 강조
               selectable true
-              
               eventDisplay={"block"}
               eventTextColor={"#FFF"}
               eventColor={"#F2921D"}

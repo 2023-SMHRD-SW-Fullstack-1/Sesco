@@ -304,28 +304,30 @@ const ViewDiary = ({ selectdate, noteData}) => {
       ) : (
         // View mode
         <ViewContainer>
-          <Title>{selectdate[current].title}</Title>
-          <Content>{selectdate[current].content}</Content>
-          {selectdate[current].img && (
-            <ImageContainer>
-              <Image src={"data:image/;base64," + selectdate[current].img} alt="" />
-            </ImageContainer>
-          )}
-          {tags.length > 0 && (
-            <TagBox>
-              {tags.map((tag, index) => (
-                <TagItem key={index}>{tag}</TagItem>
-              ))}
-            </TagBox>
-          )}
+          <ViewBox>
+            <Title>{selectdate[current].title}</Title>
+            <Content>{selectdate[current].content}</Content>
+            {selectdate[current].img && (
+              <ImageContainer>
+                <Image src={"data:image/;base64," + selectdate[current].img} alt="" />
+              </ImageContainer>
+            )}
+            {tags.length > 0 && (
+              <TagBox>
+                {tags.map((tag, index) => (
+                  <TagItem key={index}>{tag}</TagItem>
+                ))}
+              </TagBox>
+            )}
 
-<div>
-        <button onClick={getPrevious}>이전</button>
-        <button onClick={getNext}>다음</button>
-      </div>
+              <div>
+                <button onClick={getPrevious}>이전</button>
+                <button onClick={getNext}>다음</button>
+              </div>
 
-          <EditButton onClick={handleEditClick}>수정하기</EditButton>
-          <DeleteButton onClick={handleDeleteDiary}>일기 삭제</DeleteButton>
+            <EditButton onClick={handleEditClick}>수정하기</EditButton>
+            <DeleteButton onClick={handleDeleteDiary}>일기 삭제</DeleteButton>
+          </ViewBox>
         </ViewContainer>
       )}
     </Container>
@@ -374,12 +376,12 @@ const Button = styled.button`
 `;
 
 const Container = styled.div`
-position: relative;
+  // position: relative;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  // flex-direction: column;
+  // align-items: center;
   margin-top: 20px;
-  z-index:6
+  // z-index:6
 `;
 const DeleteButton = styled.button`
   /* 삭제 버튼 스타일을 정의하세요 */
@@ -437,8 +439,19 @@ const CancelButton = styled.button`
 `;
 
 const ViewContainer = styled.div`
-  /* Define your styles for the view container here */
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 40px;
+  background-color: rgba(255,0,0,0.6);
 `;
+
+const ViewBox = styled.div`
+  height: 100%;
+  background-image: repeating-linear-gradient(white 0px, white 22.5px, teal 25px);
+`
 
 const EditButton = styled.button`
   /* Define your styles for the edit button here */
