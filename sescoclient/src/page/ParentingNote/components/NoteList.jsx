@@ -10,17 +10,17 @@ const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults, isDiaryO
 
     const [noteKidStatus, setNoteKidStatus] = useState(Array(notes.length).fill(false));
     const [selectedNoteIndex, setSelectedNoteIndex] = useState(null);
-    console.log("******props start*******")
+    //console.log("******props start*******")
     // console.log("notes : ", notes)
     // console.log("kidSeq : ", kidSeq)
     // console.log("kids : ", kids)
     // console.log("tagSearchResults : ", tagSearchResults)
-    console.log("태그 검색 결과 텍스트 : ", tagSearchText)
-    console.log("다이어리 오픈 상태 props : ", isDiaryOpen)
-    console.log("클릭 가능2 : ", clickableNotes)
-    console.log("클릭 불가3 : ", lockedNotes)
+    // console.log("태그 검색 결과 텍스트 : ", tagSearchText)
+    // console.log("다이어리 오픈 상태 props : ", isDiaryOpen)
+    // console.log("클릭 가능2 : ", clickableNotes)
+    // console.log("클릭 불가3 : ", lockedNotes)
 
-    console.log("******props end*******")
+    //console.log("******props end*******")
 
     // 다이어리를 닫을 때 선택된 노트 초기화
 
@@ -31,17 +31,7 @@ const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults, isDiaryO
         setSelectedNoteIndex(null);
     }, [kidSeq]);
 
-    // const handleNoteItemClick = (index) => {
-    //     const newNoteOpenStatus = Array(notes.length).fill(false);
-    //     newNoteOpenStatus[index] = true;
-    //     setNoteOpenStatus(newNoteOpenStatus);
-
-    //     const newNoteKidStatus = Array(notes.length).fill(false);
-    //     newNoteKidStatus[index] = true;
-    //     setNoteKidStatus(newNoteKidStatus);
-    //     // 노트 클릭했을때 note_seq값을 Note 컴포넌트로 전달
-    //     onNoteClick(notes[index].note_seq);
-    // };
+ 
 
     //노트 클릭했을 때 
     const handleNoteItemClick = (index) => {
@@ -73,86 +63,68 @@ const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults, isDiaryO
         }
     };
 
-    // const handleNoteItemClick = (index) => {
-    //      // 현재 노트의 상태 가져오기
-    //      const currentOpenStatus = noteOpenStatus[index];
-    //      const currentKidStatus = noteKidStatus[index];
-
-    //      // 현재 노트의 상태를 토글 (반대로 변경)
-    //      const newNoteOpenStatus = [...noteOpenStatus];
-    //      newNoteOpenStatus[index] = !currentOpenStatus;
-
-    //      const newNoteKidStatus = [...noteKidStatus];
-    //      newNoteKidStatus[index] = !currentKidStatus;
-
-    //      // 상태 업데이트
-    //      setNoteOpenStatus(newNoteOpenStatus);
-    //      setNoteKidStatus(newNoteKidStatus);
-
-    //      // 노트 클릭했을때 note_seq값을 Note 컴포넌트로 전달
-    //      onNoteClick(notes[index].note_seq);
-    // };
 
     return (
         <div>
-            {/* 연도 div */}
-            <div className='noteList-container'>
-                <span className='noteList-year'>
-                    {kidSeq ? kids.find((kid) => kid.kid_seq === kidSeq)?.kid_name : ""}
-                </span>
-            </div>
-
-            {/*태그 검색한 텍스트 표시 */}
-            {tagSearchText ? (
-                <div className='tagResultText'>
-                    <span className="tag-text">태그 검색 : {tagSearchText}</span>
+            <div className='allNoteList-container'>
+                {/* 연도 div */}
+                <div className='noteList-container'>
+                    <span className='noteList-year'>
+                        {kidSeq ? kids.find((kid) => kid.kid_seq === kidSeq)?.kid_name : ""}
+                    </span>
                 </div>
-            ) : null}
-            {/* 노트 감싸는 큰 영역 */}
-            <div className="notes-container">
 
-                {notes.map((note, index) => (
-                    <div
-                        className="note-item-container"
-                        key={index}
-                        onClick={() => handleNoteItemClick(index)}
-                        style={{
-                            width: '200px',
-                            height: '200px',
-                            backgroundImage: noteOpenStatus[index] ? `url(${noteOpen})` : `url(${noteClose})`,
-                            backgroundSize: 'cover',
-                        }}
-                    >
-                        <div className='noteLock-container'>
-                            {lockedNotes.some(lockedNote => lockedNote.note_seq === note.note_seq) && (
-                                <img src={noteLock} alt="NoteLock" className="noteLock-image"></img>)}
-                        </div>
-
-                        {/* 연령대 표시 */}
-                        <div className='noteAge-container'>
-                            <span className={`noteList-age ${selectedNoteIndex === index ? 'selected-note-text' : ''}`}>
-                                {tagSearchResults[note.note_seq] ? `${note.n_name}` : `${index}세`}
-                            </span>
-                        </div>
-
-
-
-                        {/* noteKid 이미지 표시 */}
-                        <div className='noteKid-container'>
-                            {noteKidStatus[index] && (
-                                <img src={noteKid} alt="Note Kid" className="noteKid-image" />
-                            )}
-
-                        </div>
-                        {/* 태그 검색 결과 숫자 표시 */}
-                        {tagSearchResults[note.note_seq] > 0 && (
-                            <div className='tagResultItem'>
-                                검색결과 :
-                                {tagSearchResults[note.note_seq]}
-                            </div>
-                        )}
+                {/*태그 검색한 텍스트 표시 */}
+                {tagSearchText ? (
+                    <div className='tagResultText'>
+                        <span className="tag-text">태그 검색 : {tagSearchText}</span>
                     </div>
-                ))}
+                ) : null}
+                {/* 노트 감싸는 큰 영역 */}
+                <div className="notes-container">
+
+                    {notes.map((note, index) => (
+                        <div
+                            className="note-item-container"
+                            key={index}
+                            onClick={() => handleNoteItemClick(index)}
+                            style={{
+                                width: '200px',
+                                height: '200px',
+                                backgroundImage: isDiaryOpen ? (noteOpenStatus[index] ? `url(${noteOpen})` : `url(${noteClose})`) : `url(${noteClose})`,
+                                backgroundSize: 'cover',
+                            }}
+                        >
+                            <div className='noteLock-container'>
+                                {lockedNotes.some(lockedNote => lockedNote.note_seq === note.note_seq) && (
+                                    <img src={noteLock} alt="NoteLock" className="noteLock-image"></img>)}
+                            </div>
+
+                            {/* 연령대 표시 */}
+                            <div className='noteAge-container'>
+                                <span className={`noteList-age ${isDiaryOpen &&selectedNoteIndex === index ? 'selected-note-text' : ''}`}>
+                                    {tagSearchResults[note.note_seq] ? `${note.n_name}` : `${index}세`}
+                                </span>
+                            </div>
+
+
+                            {/* noteKid 이미지 표시 */}
+                            <div className='noteKid-container'>
+                                {isDiaryOpen && noteKidStatus[index] && (
+                                    <img src={noteKid} alt="Note Kid" className="noteKid-image" />
+                                )}
+
+                            </div>
+                            {/* 태그 검색 결과 숫자 표시 */}
+                            {tagSearchResults[note.note_seq] > 0 && (
+                                <div className='tagResultItem'>
+                                    검색결과 :
+                                    {tagSearchResults[note.note_seq]}
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );

@@ -65,9 +65,9 @@ console.log("너 뭐들었니?",selectedDiaryList);
 
   // 일기 리스트 초기화
   useEffect(() => {
-    console.log("fqiwhoqwifhjowiq", noteData[0].note_seq)
+    console.log("fqiwhoqwifhjowiq", noteData.noteSeq)
     fetchDiaryList(noteData.tagSearchText);
-  }, [noteData[0].note_seq, noteData]);
+  }, [noteData]);
 
 
   
