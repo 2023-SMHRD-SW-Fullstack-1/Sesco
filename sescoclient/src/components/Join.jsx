@@ -75,7 +75,7 @@ const Join = () => {
 
                 <div className='join_img_container'>
                     {/* 회원가입 이미지 */}
-                    <img src={LoginImg} style={{ borderRadius: '0px 10px 10px 0px', height: '770px' }} />
+                    <img src={LoginImg} style={{ borderRadius: '0px 10px 10px 0px', height: '720px' }} />
                 </div>
                 {/* 회원가입 입력 */}
                 <div className='joinInput_container'>
@@ -117,12 +117,12 @@ const Join = () => {
                     }
                     {/* 로그인 버튼 */}
                     <button className='joginBtn' onClick={() => saveUserInfo()} >회원가입</button>
-                    <p className='login_jointxt'> 계정이 있으신가요? <a href='/login'>로그인하러가기</a></p>
+
                     {/* 소셜 로그인 버튼  */}
-                    <div className='socialBtns'>
-                        <button className='kakaoBtn'>카카오</button>
-                        <button className='googleBtn'>구글</button>
+                    <div className='login_socialBtns'>
+                        <button className='login_googleBtn'>소셜 로그인</button>
                     </div>
+
 
                 </div>
 
