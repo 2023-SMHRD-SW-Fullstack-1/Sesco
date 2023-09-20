@@ -76,18 +76,18 @@ public class DiaryService {
 //	}
 	
 	//널값 허용하는 코드
-	public JSONObject DiaryList(Date d_date){
-	    List<Diary> list = diaryMapper.DiaryList(d_date);
+	public JSONObject diaryList(Diary diary){
+	    List<Diary> list = diaryMapper.diaryList(diary);
 	    System.out.println("안녕못해");
 	    
 	    JSONObject obj = new JSONObject();
 	    JSONArray jsonArray = new JSONArray();
 	    ImageConverter<File, String> converter = new ImageToBase64();
 
-	    for (Diary diary : list) {
+	    for (Diary diaryItem : list) {
 	        try {
 	            // 파일 경로 설정
-	            String filePath = diary.getImg_real_name();
+	            String filePath = diaryItem.getImg_real_name();
 	            System.out.println(filePath);
 
 	            // filePath가 null이 아니고, "c:\\uploadImage"와 다르다면 이미지 처리 로직을 수행합니다.
@@ -103,10 +103,10 @@ public class DiaryService {
 	                Resource resource = new FileSystemResource(uploadedFile);
 	                String fileStringValue = converter.convert(resource.getFile());
 
-	                diary.setImg_real_name(fileStringValue);
+	                diaryItem.setImg_real_name(fileStringValue);
 	            }
 
-	            jsonArray.add(diary);  // 이 부분은 filePath의 값에 상관없이 항상 실행됩니다.
+	            jsonArray.add(diaryItem);  // 이 부분은 filePath의 값에 상관없이 항상 실행됩니다.
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        } catch (NullPointerException e) {

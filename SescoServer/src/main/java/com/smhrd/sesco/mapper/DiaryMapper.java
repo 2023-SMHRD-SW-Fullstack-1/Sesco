@@ -18,7 +18,7 @@ public interface DiaryMapper {
 
 
 	//전체 게시글 조회
-	public List<Diary> DiaryList(Date d_date);
+	public List<Diary> diaryList(Diary diary);
 	
 	//일기 등록
 	public int DiaryRegister(Diary diary);

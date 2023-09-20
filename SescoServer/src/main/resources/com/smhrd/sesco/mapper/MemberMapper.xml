@@ -17,5 +17,11 @@
 		user_pw=#{user_pw},user_nick=#{user_nick} where
 		user_id=#{user_id} and user_d_yn='n'
 	</update>
+	
+	 <!-- 구글회원가입 -->
+   <insert id="GoogleJoin" parameterType="com.smhrd.sesco.domain.Member">
+      insert into t_member(user_id, user_nick, user_name, login_type)
+      values(#{user_id},#{user_nick},#{user_name},"G")
+   </insert>
 
 </mapper>

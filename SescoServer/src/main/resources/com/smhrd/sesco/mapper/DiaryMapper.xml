@@ -7,8 +7,8 @@
 
 	
 	<!--전체 일기 리스트 조회-->
-	<select id="DiaryList" resultType="com.smhrd.sesco.domain.Diary">
-		select * from t_diary
+	<select id="diaryList" parameterType="com.smhrd.sesco.domain.Diary" resultType="com.smhrd.sesco.domain.Diary">
+		select * from t_diary where note_seq=#{note_seq}
 	</select>
 	
 	<!-- 누른 날짜의 일기 리스트 조회 -->

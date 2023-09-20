@@ -156,7 +156,45 @@ public class MemberController {
 		
     }
 	
-	
+	// 구글 회원가입
+	@PostMapping("/member/googlejoin")
+	public JSONObject GoogleJoin(@RequestBody Map<String, Object> map) {
+	    
+	        // JWT 데이터 추출
+	        String jwtData = map.get("res").toString();
+	        String[] payload = jwtData.split("\\.");
+	        String value = payload[1];     
+	        Base64.Decoder decoder = Base64.getUrlDecoder();
+	        String decodedPayload = new String(decoder.decode(value));
+	        
+	        // JSON 파싱
+	        org.json.JSONObject jsonObject = new org.json.JSONObject(decodedPayload);
+	        String user_id = jsonObject.getString("email");
+	        String user_name = jsonObject.getString("name");
+	        String user_nick = map.get("user_nick").toString();
+	        
+	        // Member 객체 저장
+	        Member member = new Member();
+	        member.setUser_id(user_id);
+	        member.setUser_name(user_name);
+	        member.setUser_nick(user_nick);
+	             
+	        // 닉네임 중복판별
+	        int nick_Check = memberService.nick_Check(user_nick);
+	        
+	        JSONObject Object = new JSONObject();
+	        if(nick_Check==0) { 
+	        	memberService.GoogleJoin(member);
+	        	Object.put("Member", member);
+	        	System.out.println("로그인성공" + Object );
+	        	return Object;
+	        }else {
+	        	Object.put("null", null);
+	        	System.out.println("로그인실패"+Object);
+	        	return Object;
+	        }
+	    
+	}
 	
 	
 	

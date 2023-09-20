@@ -83,7 +83,7 @@
 .survey-bottom-container {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 60px;
 }
 
 .surBox1-container {
@@ -194,7 +194,10 @@
   solid: black;
 }
 
-
+.survey-all{
+  height: 1000px;
+  overflow-y: scroll;
+}
 
 .survey_btnPreResult {
   margin-right: 60px;
@@ -203,6 +206,7 @@
 .survey-result-Table-container {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -210,20 +214,25 @@
 .survey-result-Table {
   border-collapse: collapse;
   /* 테이블 셀 경계를 병합 */
-
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .survey-result-Table tr,
 .survey-result-Table td {
-  border: 1px solid black;
+  
   /* 각 셀에 경계선 스타일 적용 */
   padding: 15px;
   padding-left: 50px;
   padding-right: 50px;
+  padding-top: 20px;
+  
 }
 
 
 .survey-oBtn{
+  
   width: 20px;
   height: 20px;
   margin-right: 5px;
@@ -231,8 +240,92 @@
 }
 
 .survey-xBtn{
+  
   width: 20px;
   height: 20px;
   margin-left: 5px;
   margin-top: 3px;
+}
+
+.table-social-category{
+  background-color: #3ACBA5;
+  color: #FBFBFB;
+}
+
+.table-language-category{
+  background-color: #C6F2B2;
+  color:#2FB894;
+}
+
+.table-brain-category{
+  background-color: #70E7C9;
+  color: #FBFBFB;
+}
+
+.table-physical-category{
+  background-color: #70D2E7;
+  color: #FBFBFB;
+}
+
+.table-result{
+  background-color: #F4F4F4E8;
+  border-bottom: #0074516B solid 2px;
+  padding-left: 50%;
+
+}
+
+.we-kid{
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.Survey-tip{
+  display: flex;
+  justify-content: center;
+}
+
+.surveyTip-container{
+  
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.surveyTip-img{
+  margin-bottom: -115px;
+  position : relative;
+}
+
+.surveyTip-content{
+  border: 3px solid;
+  border-radius: 20px;
+  border-color: rgb(215, 200, 197);
+  padding-top: 100px;
+  padding-left: 35px;
+  padding-right: 35px;
+  padding-bottom: 20px;
+  margin-top: 40px;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  text-align: justify;
+}
+
+.OXselect{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: flex-end;
+  padding-top: 10px;
+  padding-right: 53px;
+  margin-top: 10px;
+}
+
+.oselect{
+  padding-right: 8px;
 }
