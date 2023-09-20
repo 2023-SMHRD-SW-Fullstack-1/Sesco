@@ -20,36 +20,36 @@ const PreSurveyResult = ({ closePreSurveyResult, setShowPreSurveyResult, kid, ki
   function addCheckList(item) {
     if (item.hsvd_category === category[0]) {
       !socialCheckList.includes(item.hsvd_seq) && setSocialCheckList([...socialCheckList, item.hsvd_seq]);
-      
+
     } else if (item.hsvd_category === category[1]) {
       !languageCheckList.includes(item.hsvd_seq) && setLanguageCheckList([...languageCheckList, item.hsvd_seq]);
-      
+
     } else if (item.hsvd_category === category[2]) {
       !brainCheckList.includes(item.hsvd_seq) && setBrainCheckList([...brainCheckList, item.hsvd_seq]);
-      
+
     } else if (item.hsvd_category === category[3]) {
       !physicalCheckList.includes(item.hsvd_seq) && setPhysicalCheckList([...physicalCheckList, item.hsvd_seq]);
-      
+
     }
   }
-  
+
   function removeCheckList(item) {
     if (item.hsvd_category === category[0]) {
       const tempList = socialCheckList.filter(id => id !== item.hsvd_seq);
       socialCheckList.includes(item.hsvd_seq) && setSocialCheckList(tempList);
-      
+
     } else if (item.hsvd_category === category[1]) {
       const tempList = languageCheckList.filter(id => id !== item.hsvd_seq);
       languageCheckList.includes(item.hsvd_seq) && setLanguageCheckList(tempList);
-      
+
     } else if (item.hsvd_category === category[2]) {
       const tempList = brainCheckList.filter(id => id !== item.hsvd_seq);
       brainCheckList.includes(item.hsvd_seq) && setBrainCheckList(tempList);
-      
+
     } else if (item.hsvd_category === category[3]) {
       const tempList = physicalCheckList.filter(id => id !== item.hsvd_seq);
       physicalCheckList.includes(item.hsvd_seq) && setPhysicalCheckList(tempList);
-      
+
     }
   }
 
@@ -97,8 +97,6 @@ const PreSurveyResult = ({ closePreSurveyResult, setShowPreSurveyResult, kid, ki
               {filteredData1.map((item) => (
                 <div className="survey_btncheck" key={item.id}>
                   <li>{item.hsvd_content}</li>
-                  <button type="checkbox" className="survey_oBtn" id="socialObtn" onClick={() => addCheckList(item)} >o</button>
-                  <button type="checkbox" className="survey_xBtn" id="socialXbtn" onClick={() => removeCheckList(item)}>x</button>
                 </div>
               ))}
             </div>
@@ -112,8 +110,6 @@ const PreSurveyResult = ({ closePreSurveyResult, setShowPreSurveyResult, kid, ki
               {filteredData2.map((item) => (
                 <div className="survey_btncheck" key={item.id}>
                   <li>{item.hsvd_content}</li>
-                  <button type="checkbox" className="survey_oBtn" id="cmuObtn" onClick={() => addCheckList(item)}>o</button>
-                  <button type="checkbox" className="survey_xBtn" id="cmuXbtn" onClick={() => removeCheckList(item)}>x</button>
                 </div>
               ))}
             </div>
@@ -127,8 +123,6 @@ const PreSurveyResult = ({ closePreSurveyResult, setShowPreSurveyResult, kid, ki
               {filteredData3.map((item) => (
                 <div className="survey_btncheck" key={item.id}>
                   <li>{item.hsvd_content}</li>
-                  <button type="checkbox" className="survey_oBtn" id="brainObtn" onClick={() => addCheckList(item)}>o</button>
-                  <button type="checkbox" className="survey_xBtn" id="brainXbtn" onClick={() => removeCheckList(item)}>x</button>
                 </div>
               ))}
             </div>
@@ -142,13 +136,19 @@ const PreSurveyResult = ({ closePreSurveyResult, setShowPreSurveyResult, kid, ki
               {filteredData4.map((item) => (
                 <div className="survey_btncheck" key={item.id}>
                   <li>{item.hsvd_content}</li>
-                  <button type="checkbox" className="survey_oBtn" id="pysObtn" onClick={() => addCheckList(item)}>o</button>
-                  <button type="checkbox" className="survey_xBtn" id="pysXbtn" onClick={() => removeCheckList(item)}>x</button>
                 </div>
               ))}
             </div>
+          </div >
+          <div className="survey-bottom-container">
+            <button id='mainloginBtn' className="main1_loginBtn" onClick={() => setShowPreSurveyResult(false)}>
+              <span className="circle" aria-hidden="true">
+                <span className="icon arrow"></span>
+              </span>
+              <span className="button-text">닫기</span>
+            </button>
           </div>
-          <button className='close-modal-button' onClick={() => setShowPreSurveyResult(false)}>닫기</button>
+
         </div>
       </div>
     </div>
