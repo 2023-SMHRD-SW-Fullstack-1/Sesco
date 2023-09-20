@@ -7,8 +7,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +19,6 @@ public class NoteService {
 
 	@Autowired
 	private NoteMapper noteMapper;
-	
 
 	@Autowired
 	private KidService kidService;
@@ -64,8 +61,8 @@ public class NoteService {
 //
 //		return groupNotes;
 //	}
-	public List<Note> searchNotesByTag(String tag) {
-	    return noteMapper.selectNotesByTag(tag);
+	public List<Note> searchNotesByTag(String tag, String userId) {
+		return noteMapper.selectNotesByTag(tag, userId);
 	}
 
 	// 수첩 생성
@@ -76,38 +73,34 @@ public class NoteService {
 
 	// 아이 추가 시 초기 노트 생성 또는 확인
 	public void createNotes(Kid kid) {
-	    
 
-	    // 아이의 노트 목록을 가져옵니다.
-	    List<Note> existingNotes = noteMapper.selectNotes();
+		// 아이의 노트 목록을 가져옵니다.
+		List<Note> existingNotes = noteMapper.selectNotes();
 
-	    // 만약 아이의 노트가 없으면 노트 생성
-	    if (existingNotes.isEmpty()) {
-	        int kidAge = calculateKidAge(kid);
-	        if (kidAge >= 0 && kidAge <= 5) {
-	            for (int age = 0; age <= 5; age++) {
-	                Note note = new Note();
-	                note.setN_name(kid.getKid_name() + "의 " + age + "살 수첩");
-	                Date currentDate = new Date();
-	                note.setN_s_date(currentDate); // 현재 날짜로 설정
-	                // 현재 날짜에 1년을 더한 후 하루를 뺌
-	                long oneYearMillis = 365L * 24 * 60 * 60 * 1000;
-	                long oneDayMillis = 24L * 60 * 60 * 1000;
-	                long endDateMillis = currentDate.getTime() + oneYearMillis - oneDayMillis;
-	                Date endDate = new Date(endDateMillis);
-	                note.setN_e_date(endDate);
-	                note.setKid_seq(kid.getKid_seq());
-	                note.setNote_d_yn("N");
+		// 만약 아이의 노트가 없으면 노트 생성
+		if (existingNotes.isEmpty()) {
+			int kidAge = calculateKidAge(kid);
+			if (kidAge >= 0 && kidAge <= 5) {
+				for (int age = 0; age <= 5; age++) {
+					Note note = new Note();
+					note.setN_name(kid.getKid_name() + "의 " + age + "살 수첩");
+					Date currentDate = new Date();
+					note.setN_s_date(currentDate); // 현재 날짜로 설정
+					// 현재 날짜에 1년을 더한 후 하루를 뺌
+					long oneYearMillis = 365L * 24 * 60 * 60 * 1000;
+					long oneDayMillis = 24L * 60 * 60 * 1000;
+					long endDateMillis = currentDate.getTime() + oneYearMillis - oneDayMillis;
+					Date endDate = new Date(endDateMillis);
+					note.setN_e_date(endDate);
+					note.setKid_seq(kid.getKid_seq());
+					note.setNote_d_yn("N");
 
-	                // 노트 생성
-	                noteMapper.noteInsert(note);
-	            }
-	        }
-	    }
+					// 노트 생성
+					noteMapper.noteInsert(note);
+				}
+			}
+		}
 	}
-
-
-
 
 	// 아이의 나이 계산
 	private int calculateKidAge(Kid kid) {
@@ -120,14 +113,12 @@ public class NoteService {
 		return age;
 	}
 
-	
-	
-	// 작성자 : 홍재성 // 기능:수첩 조회 및 생성 
+	// 작성자 : 홍재성 // 기능:수첩 조회 및 생성
 	public void noteSelectAndCreate(Note note) {
 		// select 결과 노트가 없다면 0세~6세까지 노트 생성 후 List 반환
 		noteMapper.noteSelectAndCreate(note);
 	}
-	
+
 	// 작성자 : 홍재성 // 기능:수첩 조회 및 생성
 	public int noteSelect(Note note) {
 		// 해당아이의 시퀀스번호로 노트가 있는지 없는지 반환
@@ -139,7 +130,6 @@ public class NoteService {
 		// select 결과 노트가 있다면 List 반환
 		return noteMapper.LoadNote(note);
 	}
-
 
 	// 수첩 수정
 //	public void updateNote(Note updatedNote) {
