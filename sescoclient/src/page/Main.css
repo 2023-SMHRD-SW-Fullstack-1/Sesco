@@ -366,13 +366,15 @@
 
 .M2banner_info {
     width: 100%;
-    height: 400px;
     color: rgb(66, 66, 66);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: start;
+    justify-content: center;
     z-index: 8;
+}
+.main1Infocontainer{
+    width: 80%;
 }
 .main1_infoBackground{
     position: absolute;
@@ -389,6 +391,7 @@
     font-size: 84px;
     font-weight: 600;
     color: #ffa600;
+    text-align: center;
     font-family: 'KCCMurukmuruk';
     text-shadow: 2px 3px rgb(247, 247, 247);
 }

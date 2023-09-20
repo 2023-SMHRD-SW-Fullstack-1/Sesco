@@ -14,6 +14,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Button from 'react-bootstrap/Button';
 import './Main1.scss'
+import LoginFrom from '../components/LoginFrom'
 
 
 // 메인 갤러리 설명란 책 클래스
@@ -67,10 +68,13 @@ const Main1 = () => {
   };
 
   const nav = useNavigate();
-  // 미니 아이콘 클릭 체크 함수
+  // 미니 아이콘 클릭 체크 
   const [bookIconClick,setBookIconClick] =useState(false);
   const [galleryIconClick,setGalleryIconClick] =useState(false);
   const [tipIconClick,setTipIconClick] =useState(false);
+
+  // 로그인 버튼 클릭 체크 
+  const [loginClick,setLoginClick]=useState(false);
 
 
 const handleMiniIconsClicked=(item)=>{
@@ -93,7 +97,13 @@ const handleMiniIconsClicked=(item)=>{
   }
 }
 
+const handleLoginBtnClick =()=>{
+  setLoginClick(!loginClick);
+  console.log('로그인 버튼' , loginClick);
+}
+
 console.log('book',bookIconClick, 'gallery',galleryIconClick,'tip',tipIconClick);
+// console.log('로그인 버튼' , loginClick);
   return (
     <div>
       {/* 메인 사진 */}
@@ -105,17 +115,25 @@ console.log('book',bookIconClick, 'gallery',galleryIconClick,'tip',tipIconClick)
       }}>
         <div className='main1_infoBackground'>
           <div className='M2banner_info'>
-            <h1>Baby's</h1>
-
-            <h4>내 아이의 상태와 정보를 한눈에 <br />확인할 수 있어요 !</h4>
+            <div className='main1Infocontainer'>
+              {!loginClick? 
+              <div>
+                <h1>Baby's</h1>
+                <h4>내 아이의 상태와 정보를 한눈에 <br />확인할 수 있어요 !</h4>
+              </div>
+              :
+              <LoginFrom/>
+              }
+              
+            </div>
             <div className='main1_bannerBtns'>
-            <a href='/login'><button id ='mainloginBtn' className="main1_loginBtn">
+            <button id ='mainloginBtn' className="main1_loginBtn" onClick={()=>handleLoginBtnClick()}>
                 <span className="circle" aria-hidden="true">
                   <span className="icon arrow"></span>
                 </span>
-                <span className="button-text">로그인</span>
-              </button>
-            </a>
+                <span className="button-text">{loginClick?'돌아가기':'로그인'}</span>
+            </button>
+            
             <a href='/join'><button id ='mainjoinBtn' className="main1_loginBtn">
                 <span className="circle" aria-hidden="true">
                   <span className="icon arrow"></span>
