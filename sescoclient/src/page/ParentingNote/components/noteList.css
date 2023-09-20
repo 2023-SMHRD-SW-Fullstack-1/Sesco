@@ -26,6 +26,21 @@
 
 }
 
+/*태그 결과 텍스트로 */
+
+.tag-text{
+    /* background-color: #ffcccc;
+    color: #ff6666; */
+    font-size: 24px; 
+    padding: 5px 10px; 
+    border-radius: 10px; 
+    display: inline-block; 
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
+    margin-top: 100px;
+    margin-left: 150px;
+    
+}
+
 
 /* 수첩 영역 */
 .notes-container {
@@ -128,6 +143,24 @@
 
 }
 
+/*수첩 클릭 시 연령 색 변경*/
+.selected-note-text {
+    color: #eba852; 
+    animation: twinkling 2s infinite;
+  }
+  @keyframes twinkling {
+    0% {
+      color: #eba852;
+    }
+    50% {
+      color: #ffc107; /* 다른 색상으로 변경할 중간 지점 */
+    }
+    100% {
+      color: #eba852;
+    }
+  }
+  
+
 @keyframes sparkle {
     0% {
         transform: scale(1);
@@ -136,4 +169,13 @@
     100% {
         transform: scale(1.1);
     }
+}
+
+/**노트 자물쇠*/
+.noteLock-container {
+    position: absolute;
+    margin-top: 130px;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* 겹치는 순서를 조절합니다. */
 }

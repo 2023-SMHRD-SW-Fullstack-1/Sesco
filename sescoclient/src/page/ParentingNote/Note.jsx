@@ -44,19 +44,33 @@ const Note = () => {
   // useEffect(() => {
   //   getNotes();
   // }, []);
-
-
+  
 
   //노트 클릭시
   const handleNoteClick = async (note_seq) => {
+  
     console.log('클릭한 노트의 note_seq:', note_seq);
+    // 클릭 가능한 노트와 클릭 불가능한 노트를 구분합니다.
+  const clickedNote = clickableNotes.find((note) => note.note_seq === note_seq);
+  const lockedNote = lockedNotes.find((note) => note.note_seq === note_seq);
+    if(clickedNote){
+
     // 만약 이미 선택된 노트를 다시 클릭했다면
     if (selectedNoteSeq === note_seq) {
       setSelectedNoteSeq(null);
+      //setIsDiaryOpen(false);
+      
     } else {
       try {
         // notes에서 선택한 note_seq 값과 일치하는 노트 찾기
-        const selectedNote = notes.filter((note) => note.note_seq === note_seq);
+        const selectedNote = notes.find((note) => note.note_seq === note_seq);
+
+        // //현재 날짜
+        // const todatDate = new Date();
+
+        // //노트 n_s_date를 날짜 객체 변환
+        // const noteStartDate = new Date(selectedNote.n_s_date);
+
 
         // 선택한 아이의 정보 찾기
         const selectedKid = kids.find((kid) => kid.kid_seq === kidSelect);
@@ -76,6 +90,7 @@ const Note = () => {
             tagSearchResult: tagSearchResult[note_seq] || []
           };
           setNoteData(noteData);
+          //setIsDiaryOpen(true);
           console.log("다이어리 컴포넌트에 전달하는 noteData : ", noteData)
         }
       } catch (error) {
@@ -83,7 +98,11 @@ const Note = () => {
       }
 
       setSelectedNoteSeq(note_seq);
+      
     }
+  }else{
+    return;
+  }
 
   }
 
@@ -92,8 +111,12 @@ const Note = () => {
   //---------Diary start-----------//
 
   // 일기 열었을때 닫기 버튼 클릭시
+  const [isDiaryOpen, setIsDiaryOpen] = useState(false);
   const handleDiaryClose = () => {
+    
     setSelectedNoteSeq(null);
+    setIsDiaryOpen(false);
+   
     console.log("일기 닫기 버튼 클릭 ")
   };
 
@@ -130,15 +153,19 @@ const Note = () => {
   }, []);
 
   //옵션 선택한 아이 저장 
-  const [kidSelect, setKidSelect] = useState(null)
+  const [kidSelect, setKidSelect] = useState("none")
 
   //<select> useRef
   const selectRef = useRef();
 
   const defaultSelect = () => {
+    console.log("fwfwfwfwfwfwfw",kidSeq)
     kidSeq ? selectRef.current.value = kidSeq : selectRef.current.selectedIndex = 0
-    const temp = selectRef.current.value
-    setKidSelect(temp)
+  
+    // const temp = selectRef.current.value
+    // const tmtmm = selectRef.current.options[0].value
+    // console.log(tmtmm)
+    // setKidSelect(temp)
   }
 
   //로드시 세션에 저장된 kid_seq값이 있는 경우에는 해당 아이로 설정 없는 경우에는 처음에있는 아이로 설정
@@ -162,13 +189,42 @@ const Note = () => {
 
 
   //선택한 아이의 노트 정보를 불러옴 (다시)
+  
+  // 클릭 가능한 노트와 클릭 불가능한 노트를 저장할 상태 변수
+const [clickableNotes, setClickableNotes] = useState([]);
+const [lockedNotes, setLockedNotes] = useState([]);
+
   useEffect(() => {
     const getNotesByKid = async () => {
       console.log("선택한 아이 : ", kidSelect)
       try {
         const reseponse = await axios.post('http://localhost:8081/sesco/note/createnotev2', { "kid_seq": kidSelect });
+        
+        //현재 연도,월  가져오기
+        const currentYear = new Date().getFullYear();
+      const currentMonth = new Date().getMonth() + 1;
+
+      // 각 노트의 n_s_date를 연도와 월로 분해하고 현재 연월과 비교하여 클릭 가능한 노트와 클릭 불가능한 노트로 구분
+      const clickableNotes = [];
+      const lockedNotes = [];
+
+      reseponse.data.forEach((note) => {
+        const noteYear = new Date(note.n_s_date).getFullYear();
+        const noteMonth = new Date(note.n_s_date).getMonth() + 1;
+        
+        if (currentYear > noteYear || (currentYear === noteYear && currentMonth >= noteMonth)) {
+          clickableNotes.push(note);
+        } else {
+          lockedNotes.push(note);
+        }
+      });
+        
         setNotes(reseponse.data)
-        console.log("노트 설정완료 : ", reseponse.data)
+        setLockedNotes(lockedNotes);
+        setClickableNotes(clickableNotes)
+        console.log("노트 설정완료 : ",reseponse.data)
+        console.log("클릭 가능한 노트 설정 : ",clickableNotes)
+        console.log("클릭 !불가능한 노트 설정 : ",lockedNotes)
         //아이를 선택했을때 태그 검색 값 초기화 되도록 !
         setTagSearchResult({});
         setTagResultNumbers({});
@@ -254,6 +310,10 @@ const Note = () => {
       }
       setSearchTag("")
       setCurrentSearchTag(searchTag);
+    //    // 태그 검색 완료 후에 setCurrentSearchTag 호출
+    // const newCurrentSearchTag = searchTag; // 현재 검색어를 저장
+    // setCurrentSearchTag(newCurrentSearchTag);
+    //   console.log("태그 검색 완료 후 : ", currentSearchTag)
 
     } catch (e) {
       console.error("태그 검색 실패 : ", e)
@@ -268,6 +328,13 @@ const Note = () => {
       setSearchTag("")
     }
   }
+
+  // 태그 검색 완료 후에 처리할 작업을 useEffect 내에서 실행
+useEffect(() => {
+  console.log("태그 검색 완료 후11 : ", currentSearchTag);
+  setCurrentSearchTag(currentSearchTag)
+}, [currentSearchTag]); // currentSearchTag 상태가 변경될 때마다 실행
+
 
 
 
@@ -317,14 +384,17 @@ const Note = () => {
             n_name: note.n_name,
             n_s_date: note.n_s_date,
             n_e_date: note.n_e_date,
-            note_seq: note.note_seq,
-            tagSearchResults: tagResultNumbers
+            note_seq: note.note_seq,  
           }))}
           onNoteClick={(note_seq) => handleNoteClick(note_seq)}
           kidSeq={kidSelect}
           kids={kids}
           tagSearchResults={tagResultNumbers}
           newTagSearchResult={tagSearchResult}
+          isDiaryOpen={isDiaryOpen}
+          tagSearchText= {currentSearchTag}
+          clickableNotes = {clickableNotes}
+          lockedNotes = {lockedNotes}
         />
 
         {/** 선택된 연도와 노트 있을 경우 다이어리 표시 */}
