@@ -23,7 +23,7 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
 
    const [isImg , setIsImg] = useState("");
 
-   const [tagItem, setTagItem] = useState('');
+  const [tagItem, setTagItem] = useState('');
   const [tagList, setTagList] = useState([]);
   const [tagsToSend, setTagsToSend] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
