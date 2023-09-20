@@ -126,13 +126,14 @@ public class MemberController {
         org.json.JSONObject jsonObject = new org.json.JSONObject(decodedPayload);
         String user_id = jsonObject.getString("email");
         String user_name = jsonObject.getString("name");
-        String login_type = map.get("login_type").toString();
+        //String login_type = map.get("login_type").toString();
+        
         
         // Member 객체 저장
         Member member = new Member();
         member.setUser_id(user_id);
         member.setUser_name(user_name);
-        member.setLogin_type(login_type);
+        //member.setLogin_type(login_type);
         
         // 회원가입 여부 판단
         int googleCheck = memberService.GoogleUserCheck(member);
@@ -144,7 +145,7 @@ public class MemberController {
         	System.out.println("로그인성공" + Object );
         	return Object;
         }else { // 미가입된 유저
-        	Object.put("null", null);
+        	Object.put("Member", null);
         	System.out.println("로그인실패"+Object);
         	return Object;
         }
@@ -158,7 +159,7 @@ public class MemberController {
 	
 	// 구글 회원가입
 	@PostMapping("/member/googlejoin")
-	public boolean GoogleJoin(@RequestBody Map<String, Object> map) {
+	public JSONObject GoogleJoin(@RequestBody Map<String, Object> map) {
 	    
 	        // JWT 데이터 추출
 	        String jwtData = map.get("res").toString();
@@ -182,11 +183,16 @@ public class MemberController {
 	        // 닉네임 중복판별
 	        int nick_Check = memberService.nick_Check(user_nick);
 	        
-	        if(nick_Check==0) { // 닉네임중복 X 회원가입 성공
+	        JSONObject Object = new JSONObject();
+	        if(nick_Check==0) { 
 	        	memberService.GoogleJoin(member);
-	        	return true;
-	        } else {
-	        	return false;
+	        	Object.put("Member", member);
+	        	System.out.println("로그인성공" + Object );
+	        	return Object;
+	        }else {
+	        	Object.put("Member", null);
+	        	System.out.println("로그인실패"+Object);
+	        	return Object;
 	        }
 	    
 	}

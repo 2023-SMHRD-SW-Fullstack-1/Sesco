@@ -15,6 +15,7 @@ const Gallery = () => {
 
   //선택한 지역
   const [clickedLocal, setClickedLocal] = useState()
+
   //도시 선택
   const [selectedCity, setSelectedCity] = useState(null)
 
@@ -28,12 +29,13 @@ const Gallery = () => {
 
   // 사진정보객체리스트(noteInfo랑 인덱스 공유)
   const [imgInfoList, setImgInfoList] = useState([])
-  // 이미지정보객체 리스트 
+  
+  //사진을 보유한 도시 분류
+  const [hasCity, setHasCity] = useState(new Set([]))
   
   useEffect(() => {
     //회원정보가 있는지 확인하기
-    //1. 세션에서 회원정보 가져오기 ->? 오류처리
-    // if()
+    //세션에서 회원정보 가져오기 ->null 오류처리 할것
     let user_id = 'user1'
 
 
@@ -63,6 +65,13 @@ const Gallery = () => {
     }).catch((err)=>console.log("데이터 불러오기 실패"+err))
   }, []) 
   
+  //이미지 정보가 update되면 보유한 지역도 동기화
+  //* 사실상 초기 설정 이후에 변동되지 않음
+  useEffect(()=>{
+    const tempCityList = imgInfoList.map((info)=>(info.firstName))
+    setHasCity(new Set([...tempCityList]))
+  },[imgInfoList])
+
   
   //해당 지역에 대한 정보 filtering하기 위함
   function updateList(){
@@ -80,22 +89,19 @@ const Gallery = () => {
     updateList()
     setSelectedCity(null)
     console.log(secondNameList)
-    //현민
-    console.log(imgInfoList);
-    
   },[clickedLocal])
   
   return (
     <>
-      <Banner/>
+      <Banner />
         <LocalContext.Provider value={{clickedLocal, setClickedLocal}}>
-            <div className="gallery-top-container" style={{ display:'flex', width:"100%", height:"100%" }}>
-              <div style={{ width:"fit-content", height: "fit-content", marginTop:"100px" }}>
-                <GalleryMap firstNameList={new Set(firstNameList)} secondNameList={new Set(secondNameList)} ></GalleryMap>
+            <div className="gallery-top-container">
+              <div style={{height: "fit-content"}}>
+                {hasCity && <GalleryMap hasCity={hasCity} ></GalleryMap>}
               </div>
               <div className='gallery-city-container'>
                 {/* 선택한 지역이 있으면 List출력 */}
-                <h1>{selectedCity? selectedCity : clickedLocal}</h1>
+                <h1>{selectedCity? selectedCity : clickedLocal}</h1> 
                 <br />
                 {
                   // 선택한 지역이아직 없는경우
@@ -109,7 +115,7 @@ const Gallery = () => {
                       selectedCity==null ?
                       <CityList imgNameList={imgNameList}secondNameList={secondNameList} setSelectedCity={setSelectedCity}></CityList>
                       :
-                      <CityGallery imgInfoList={imgInfoList} localName={clickedLocal} cityName={selectedCity}></CityGallery>
+                      <CityGallery imgInfoList={imgInfoList} localName={clickedLocal} cityName={selectedCity} setSelectedCity={setSelectedCity}></CityGallery>
                     )
                   :
                   <GallerySearchFail></GallerySearchFail>
