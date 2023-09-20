@@ -94,10 +94,20 @@
 .password_txt span{
     margin-right: 82px;
 }
+.login_password_txt{
+    display: flex;
+    justify-content: space-between;
+}
+.login_password_txt a{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-decoration: none;
+}
 .loginBtn{
-    margin-top: 35px;
-    margin-bottom: 30px;
-    width: 61%;
+    margin-top: 10px;
+    margin-bottom: 16px;
+    width: 60%;
     height: 40px;
     border: none;
     background-color: rgb(37, 131, 255);
@@ -116,6 +126,17 @@
     color: rgb(243, 243, 243);
     font-weight: 900;
 }
+.loginInputId,
+.passInput{
+    width: 60%;
+    margin-bottom: 19px;
+}
+.idInput,
+.pwInput{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 .kakaoBtn,
 .googleBtn{
     width: 80px;
@@ -125,11 +146,34 @@
     border-radius: 8px;
     margin: 10px 35px 15px 0px;
 }
+.login_googleBtn{
+    border: none;
+    background-color: rgb(255, 242, 55);
+    border-radius: 8px;
+    width: 100%;
+    height: 40px;
+}
+.loginfrom{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.loginfrom h2{
+    margin-bottom: 40px;
+}
 .socialBtns{
     width: 60%;
     display: flex;
     justify-content: center;
     margin-left: 40px;
+    margin-bottom: 10px;
+}
+.login_socialBtns{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
 }
 .img_container{
     display: flex;
@@ -147,6 +191,7 @@
     width: 50%;
     height: 650px;
     margin-top: 100px;
+    margin-left: 10px;
     display: flex;
     background-color: rgb(254, 255, 176);
     justify-content: center;

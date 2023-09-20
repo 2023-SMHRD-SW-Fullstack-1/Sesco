@@ -75,6 +75,9 @@ const Header = () => {
     }
 
   }
+  const onLogout=()=>{
+    sessionStorage.removeItem('user_id')
+  }
 
 
 
@@ -90,7 +93,7 @@ const Header = () => {
               <HeaderLJTxt href='/join'><GoPersonAdd /> 회원가입</HeaderLJTxt>
             </div>
             :
-            <HeaderLJTxt href='/login'><GoPerson />로그아웃 </HeaderLJTxt>
+            <HeaderLJTxt href='/' onClick={()=>onLogout()}><GoPerson />로그아웃 </HeaderLJTxt>
 
           }
         </HeaderLJContainer>

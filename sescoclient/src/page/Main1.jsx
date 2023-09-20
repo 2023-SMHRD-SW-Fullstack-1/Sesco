@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import main3Img from '../img/main1/maintest2.jpg'
 import bookIcon from '../img/main1/main1_bookIcon.png'
 import tipIcon from '../img/main1/main1_TipIcon.png'
@@ -12,7 +12,12 @@ import testImg from '../img/main1/testImg.png'
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import Button from 'react-bootstrap/Button';
+import './Main1.scss'
+import LoginFrom from '../components/LoginFrom'
 
+
+// 메인 갤러리 설명란 책 클래스
 const Page = React.forwardRef((props, ref) => {
   return (
     <div className="demoPage" ref={ref}>
@@ -22,6 +27,7 @@ const Page = React.forwardRef((props, ref) => {
   );
 });
 
+//메인
 const Main1 = () => {
 
   function SampleNextArrow(props) {
@@ -35,6 +41,7 @@ const Main1 = () => {
     );
   }
 
+  // Tip 설명란 슬라이드 왼쪽 오른쪽 버튼
   function SamplePrevArrow(props) {
     const { className, style, onClick } = props;
     return (
@@ -46,7 +53,7 @@ const Main1 = () => {
     );
   }
 
-
+// slick slide 설정
   const settings = {
     dots: true,
     infinite: true,
@@ -60,8 +67,43 @@ const Main1 = () => {
 
   };
 
-
   const nav = useNavigate();
+  // 미니 아이콘 클릭 체크 
+  const [bookIconClick,setBookIconClick] =useState(false);
+  const [galleryIconClick,setGalleryIconClick] =useState(false);
+  const [tipIconClick,setTipIconClick] =useState(false);
+
+  // 로그인 버튼 클릭 체크 
+  const [loginClick,setLoginClick]=useState(false);
+
+
+const handleMiniIconsClicked=(item)=>{
+  switch (item) {
+    case 'book':
+      setBookIconClick(true);
+      setGalleryIconClick(false);
+      setTipIconClick(false);
+      break;
+    case 'gallery':
+      setGalleryIconClick(true);
+      setBookIconClick(false);
+      setTipIconClick(false);
+      break;
+    case 'tip':
+      setTipIconClick(true);
+      setGalleryIconClick(false);
+      setBookIconClick(false);
+      break;
+  }
+}
+
+const handleLoginBtnClick =()=>{
+  setLoginClick(!loginClick);
+  console.log('로그인 버튼' , loginClick);
+}
+
+console.log('book',bookIconClick, 'gallery',galleryIconClick,'tip',tipIconClick);
+// console.log('로그인 버튼' , loginClick);
   return (
     <div>
       {/* 메인 사진 */}
@@ -71,17 +113,40 @@ const Main1 = () => {
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
       }}>
-        <div className='M2banner_info'>
-          <h1>baby's</h1>
+        <div className='main1_infoBackground'>
+          <div className='M2banner_info'>
+            <div className='main1Infocontainer'>
+              {!loginClick? 
+              <div>
+                <h1>Baby's</h1>
+                <h4>내 아이의 상태와 정보를 한눈에 <br />확인할 수 있어요 !</h4>
+              </div>
+              :
+              <LoginFrom/>
+              }
+              
+            </div>
+            <div className='main1_bannerBtns'>
+            <button id ='mainloginBtn' className="main1_loginBtn" onClick={()=>handleLoginBtnClick()}>
+                <span className="circle" aria-hidden="true">
+                  <span className="icon arrow"></span>
+                </span>
+                <span className="button-text">{loginClick?'돌아가기':'로그인'}</span>
+            </button>
+            
+            <a href='/join'><button id ='mainjoinBtn' className="main1_loginBtn">
+                <span className="circle" aria-hidden="true">
+                  <span className="icon arrow"></span>
+                </span>
+                <span className="button-text">회원가입</span>
+              </button>
+            </a>
 
-          <h4>내 아이의 상태와 정보를 한눈에 <br />확인할 수 있어요 !</h4>
-          <div>
-            <button className='mainImg_loginBtn' onClick={() => nav('/login')}>로그인</button>
-            <button className='mainImg_joinBtn' onClick={() => nav('/join')}>회원가입</button>
+            </div>
+            <Link to="DetailInfo" spy={true} smooth={false}>
+              <button className='mainImg_scrollBtn' variant="btntoggle">⇓</button>
+            </Link>
           </div>
-          <Link to="DetailInfo" spy={true} smooth={false}>
-            <button className='mainImg_scrollBtn' variant="btntoggle">⇓</button>
-          </Link>
         </div>
       </div>
       <Box position="relative" id="DetailInfo">
@@ -94,7 +159,7 @@ const Main1 = () => {
               <span>다이어리</span>
               <Link to="diaryDetail" spy={true} smooth={false}>
                 <p variant="btntoggle">⇓</p>
-                <button className='detailBtn' >자세히보기</button>
+                <button className='detailBtn' onClick={()=>handleMiniIconsClicked('book')}>자세히보기</button>
               </Link>
             </div>
 
@@ -103,7 +168,7 @@ const Main1 = () => {
               <span>갤러리</span>
               <Link to="galleryDetail" spy={true} smooth={false}>
                 <p variant="btntoggle">⇓</p>
-                <button className='detailBtn' variant="btntoggle">자세히보기</button>
+                <button className='detailBtn' variant="btntoggle" onClick={()=>handleMiniIconsClicked('gallery')}>자세히보기</button>
               </Link>
             </div>
 
@@ -112,7 +177,7 @@ const Main1 = () => {
               <span>육아TIP</span>
               <Link to="tipDetail" spy={true} smooth={false}>
                 <p variant="btntoggle">⇓</p>
-                <button className='detailBtn' variant="btntoggle">자세히보기</button>
+                <button className='detailBtn' variant="btntoggle" onClick={()=>handleMiniIconsClicked('tip')}>자세히보기</button>
               </Link>
             </div>
 
@@ -153,33 +218,34 @@ const Main1 = () => {
       <Box position="relative" id="diaryDetail">
         <div className='main1Diary_box'>
           <div className='main1Icons_box'>
-            <Link to="diaryDetail" spy={true} smooth={false}>
-              <div className='diaryIcon_box'>
-                <img src={bookIcon} style={{ width: '90px' }} />
+            {/* 미니 아이콘 이동 */}
+            <Link to="diaryDetail" spy={true} smooth={false} onClick={()=>handleMiniIconsClicked('book')}>
+              <div className={"diaryIcon_box " + (bookIconClick && "book_book")}>
+                <img src={bookIcon} style={{ width: '75px' }} />
               </div>
             </Link>
-            <Link to="galleryDetail" spy={true} smooth={false}>
-              <div className='diaryIcon_box'>
-                <img src={galleryIcon} style={{ width: '90px' }} />
+            <Link to="galleryDetail" spy={true} smooth={false} onClick={()=>handleMiniIconsClicked('gallery')}>
+              <div className={"diaryIcon_box " + (galleryIconClick && "book_gallery")}>
+                <img src={galleryIcon} style={{ width: '75px' }} />
               </div>
             </Link>
-            <Link to="tipDetail" spy={true} smooth={false}>
-              <div className='diaryIcon_box'>
-                <img src={tipIcon} style={{ width: '90px' }} />
+            <Link to="tipDetail" spy={true} smooth={false} onClick={()=>handleMiniIconsClicked('tip')}>
+              <div className={"diaryIcon_box " + (tipIconClick && "book_tip")}>
+                <img src={tipIcon} style={{ width: '75px' }} />
               </div>
             </Link>
 
-
+            {/* book 애니메이션 */}
             <div className='main1_bookPageBorder'>
             </div>
             <div className='main1_bookPage'>
 
               <div>
-                <HTMLFlipBook width={460} height={500} mobileScrollSupport={false}>
-                  <Page number="1"><img className='bookPage_img' width={'460px'} height={'500px'} src={testImg} /></Page>
-                  <Page number="2"><img className='bookPage_img' width={'460px'} height={'500px'} src={testImg} /></Page>
-                  <Page number="3"><img className='bookPage_img' width={'460px'} height={'500px'} src={testImg} /></Page>
-                  <Page number="4"><img className='bookPage_img' width={'460px'} height={'500px'} src={testImg} /></Page>
+                <HTMLFlipBook width={430} height={500} mobileScrollSupport={false}>
+                  <Page number="1"><img className='bookPage_img' width={'430px'} height={'500px'} src={testImg} /></Page>
+                  <Page number="2"><img className='bookPage_img' width={'430px'} height={'500px'} src={testImg} /></Page>
+                  <Page number="3"><img className='bookPage_img' width={'430px'} height={'500px'} src={testImg} /></Page>
+                  <Page number="4"><img className='bookPage_img' width={'430px'} height={'500px'} src={testImg} /></Page>
                 </HTMLFlipBook>
 
               </div>
@@ -191,11 +257,11 @@ const Main1 = () => {
               </div>
               <div className='main1_diaryBoxlogin'>
                 <h6><br /> 로그인 하러가기 ⇒</h6>
-                <button className='mainBox_loginBtn' onClick={() => nav('/login')}>로그인</button>
+                <a href='/login'><Button variant="warning" className='mainBox_loginBtn' >로그인</Button></a>
               </div>
             </div>
-
           </div>
+
 
         </div>
       </Box>
@@ -203,38 +269,41 @@ const Main1 = () => {
       <Box position="relative" id="galleryDetail">
         <div className='main1Gallery_box'>
           <div className='main1Icons_box'>
-            <Link to="diaryDetail" spy={true} smooth={false}>
-              <div className='diaryIcon_box'>
-                <img src={bookIcon} style={{ width: '90px' }} />
+            {/* 미니 아이콘 이동 */}
+            <Link to="diaryDetail" spy={true} smooth={false} onClick={()=>handleMiniIconsClicked('book')}>
+              <div className={"diaryIcon_box " + (bookIconClick && "gallery_book")}>
+                <img src={bookIcon} style={{ width: '75px' }} />
               </div>
             </Link>
-            <Link to="galleryDetail" spy={true} smooth={false}>
-              <div className='diaryIcon_box'>
-                <img src={galleryIcon} style={{ width: '90px' }} />
+            <Link to="galleryDetail" spy={true} smooth={false} onClick={()=>handleMiniIconsClicked('gallery')}>
+              <div className={"diaryIcon_box " + (galleryIconClick && "gallery_gallery")}>
+                <img src={galleryIcon} style={{ width: '75px' }} />
               </div>
             </Link>
-            <Link to="tipDetail" spy={true} smooth={false}>
-              <div className='diaryIcon_box'>
-                <img src={tipIcon} style={{ width: '90px' }} />
+            <Link to="tipDetail" spy={true} smooth={false} onClick={()=>handleMiniIconsClicked('tip')}>
+              <div className={"diaryIcon_box " + (tipIconClick && "gallery_tip")}>
+                <img src={tipIcon} style={{ width: '75px' }} />
               </div>
             </Link>
           </div>
 
           <div className='main1_galleryPage'>
             <div className='main1_galleryContextFir'>
-              <img src={testImg} width={'415px'} height={'500px'} />
+              <img src={testImg} width={'375px'} height={'450px'} />
               <h4>나의 아이 캐릭터를 등록 하면 아이의 상태와 정보를  한눈에 볼 수 있어요 !</h4>
               <h6><br />  - 나의 아이가 성장 할수록 아이 캐릭터도 조금씩 성장해요</h6>
             </div>
             <div className='main1_galleryContextSec'>
               <h4>나의 아이 캐릭터를 등록 하면 아이의 상태와 정보를 한눈에 볼 수 있어요 !</h4>
               <h6><br />  - 나의 아이가 성장 할수록 아이 캐릭터도 조금씩 성장해요</h6>
-              <img src={testImg} width={'415px'} height={'500px'} />
+              <img src={testImg} width={'375px'} height={'450px'} />
             </div>
           </div>
           <div className='main1_boxlogin'>
             <h6><br /> 로그인 하러가기 ⇒</h6>
-            <button className='mainBox_loginBtn' onClick={() => nav('/login')}>로그인</button>
+            <a href='/login'>
+              <Button variant="warning" className='mainBox_loginBtn' >로그인</Button>
+            </a>
           </div>
         </div>
       </Box>
@@ -242,31 +311,34 @@ const Main1 = () => {
       <Box position="relative" id="tipDetail">
         <div className='main1Tip_box'>
           <div className='main1Icons_box'>
-            <Link to="diaryDetail" spy={true} smooth={false}>
-              <div className='diaryIcon_box'>
-                <img src={bookIcon} style={{ width: '90px' }} />
+            {/* 미니 아이콘 이동 */}
+            <Link to="diaryDetail" spy={true} smooth={false} onClick={()=>handleMiniIconsClicked('book')}>
+              <div className={"diaryIcon_box " + (bookIconClick && "tip_book")}>
+                <img src={bookIcon} style={{ width: '75px' }} />
               </div>
             </Link>
-            <Link to="galleryDetail" spy={true} smooth={false}>
-              <div className='diaryIcon_box'>
-                <img src={galleryIcon} style={{ width: '90px' }} />
+            <Link to="galleryDetail" spy={true} smooth={false} onClick={()=>handleMiniIconsClicked('gallery')}> 
+              <div className={"diaryIcon_box " + (galleryIconClick && "tip_gallery")}>
+                <img src={galleryIcon} style={{ width: '75px' }} />
               </div>
             </Link>
-            <Link to="tipDetail" spy={true} smooth={false}>
-              <div className='diaryIcon_box'>
-                <img src={tipIcon} style={{ width: '90px' }} />
+            <Link to="tipDetail" spy={true} smooth={false} onClick={()=>handleMiniIconsClicked('tip')}>
+              <div className={"diaryIcon_box " + (tipIconClick && "tip_tip")}>
+                <img src={tipIcon} style={{ width: '75px' }} />
               </div>
             </Link>
           </div>
           <div className='main1_tipContainer'>
             <div className='main1_tipContainer_border'></div>
             <div className='main1_tipContext'>
-              <h4>나의 아이 캐릭터를 등록 하면 아이의 상태와 <br /> 정보를 한눈에 볼 수 있어요 !</h4>
+              <h4>나의 아이 캐릭터를 등록 하면 아이의 상태 <br /> 정보를 한눈에 볼 수 있어요 !</h4>
               <h5><br />  - 나의 아이가 성장 할수록 아이 캐릭터도 조금씩 성장해요</h5>
               <h6><br />  - 나의 아이가 성장 할수록 아이 캐릭터도 조금씩 성장해요</h6>
               <div className='main1_boxlogin'>
                 <h6><br /> 로그인 하러가기 ⇒</h6>
-                <button className='mainBox_loginBtn' onClick={() => nav('/login')}>로그인</button>
+                <a href='/login'>
+                  <Button variant="warning" className='mainBox_loginBtn' >로그인</Button>
+                </a>
               </div>
             </div>
             <Slider {...settings} style={{ width: '500px', height: '600px', marginLeft: '7%', marginTop: '50px' }}>

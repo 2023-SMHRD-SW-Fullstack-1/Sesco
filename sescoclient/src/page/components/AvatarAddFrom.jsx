@@ -17,21 +17,11 @@ const AvatarAddFrom = () => {
 
     console.log('kid_name', kid_name, 'kid_birth', kid_birth, 'kid_weight', kid_weight, 'kid_height', kid_height, 'kid_gender', kid_gender, 'user_id', user_id);
 
-    const saveKidInfo = () => {
-        if (!fetchData()) {
-            alert('값을 입력 해주세요')
-        } else {
-            fetchData();
-            window.location.replace("/main")
-            console.log('kid_name', kid_name, 'kid_birth', kid_birth, 'kid_weight', kid_weight, 'kid_height', kid_height, 'kid_gender', kid_gender, 'user_id', user_id);
-
-        }
-    }
     const config = {
         headers: { 'Content-Type': 'application/json;charset=UTF-8' }
     }
-
     const fetchData = () => {
+        
         const requestData = {
             kid_name: kid_name,
             kid_birth: kid_birth,
@@ -40,27 +30,51 @@ const AvatarAddFrom = () => {
             kid_gender: kid_gender,
             user_id: user_id
         };
-        axios.post(`http://localhost:8081/sesco/kid/register`, requestData, config)
-            .then((res) => {
-
-                try {
-
-                    if (res.data) {
-                        alert('아이등록 완료')
-                    } else {
-                        alert('등록 실패')
-                    }
-
-                } catch {
-
+        return axios.post(`http://localhost:8081/sesco/kid/register`, requestData, config).then((res) => {
+            
+            try {
+                
+                if (res.data) {
+                    alert('아이등록 완료')
+                    return true;
+                } else {
+                    alert('등록 실패')
+                    return false
                 }
-            })
+                
+            } catch {
+                
+            }
+        })
+        
+    }
+    
 
+    const saveKidInfo = () => {
+
+        if(!kid_name || !kid_birth|| !kid_weight || !kid_height|| !kid_gender|| !user_id){
+            alert('다시 입력해주세요.');
+        }else if(kid_birth.length!=10){
+            alert('출생년도를 바르게 입력해주세요')
+        }else{
+            fetchData().then((value) => {
+                if (value) {
+                    window.location.replace('/main');
+                } else {
+                    alert('다시 입력해주세요.');
+                }
+            }).catch((error) => {
+                alert('다시 입력해주세요.');
+                console.error('에러 발생:', error);
+                // 에러 처리 로직 추가
+            });
+        }
+            
+     
     }
 
-
     return (
-
+        
         <div className='avatar'>
             <div className='avatar-container'>
                 <img style={{ width: '550px', height: '450px', marginLeft: '10px', marginRight: '10px', borderRadius: '8px' }} src={avatarBg} />
