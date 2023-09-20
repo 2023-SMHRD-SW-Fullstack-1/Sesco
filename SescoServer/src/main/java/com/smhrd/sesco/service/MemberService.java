@@ -74,6 +74,12 @@ public class MemberService {
 	public Member GoogleLogin(Member member) {
 		return memberMapper.GoogleLogin(member);
 	}
+
+	// 구글 회원가입
+	public void GoogleJoin(Member member) {
+		
+		memberMapper.GoogleJoin(member);
+	}
 	
 	
 
