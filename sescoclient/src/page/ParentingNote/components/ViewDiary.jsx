@@ -3,13 +3,12 @@ import styled from "styled-components";
 import axios from "axios";
 import EXIF from "exif-js";
 
-const ViewDiary = ({ selectdate }) => {
+const ViewDiary = ({ selectdate, noteData}) => {
   const [tags, setTags] = useState([]);
   const [current, setCurrent] = useState(0);
   const [isEditing, setIsEditing] = useState(false); // 수정 모드 플래그
   const [editedTitle, setEditedTitle] = useState("");
   const [editedContent, setEditedContent] = useState("");
-  // const [editedTags, setEditedTags] = useState("");
   const [editedImage, setEditedImage] = useState(null);
   const [editedImagePreview, setEditedImagePreview] = useState(null);
   const [editedLatitude, setEditedLatitude] = useState(null);
@@ -24,8 +23,7 @@ const ViewDiary = ({ selectdate }) => {
   const [tagsToSend,  setTagsToSend] = useState('');
   const [noteseq, setNoteseq] = useState(''); 
   useEffect(()=>{
-console.log(selectdate);
-    setNoteseq("100345720715870951");
+    setNoteseq(noteData.noteSeq)
   },[])
 
   
@@ -43,14 +41,12 @@ console.log(selectdate);
     }
   }
 
-
   useEffect(() => {
-    if (selectdate[current] && selectdate[current].tag) {
-      const tagArray = selectdate[current].tag.split('#').filter(tag => tag);
-      setTags(tagArray);
+    if (selectdate[current] && selectdate[current].tags) {
+      const tagsWithoutHash = selectdate[current].tags.filter(tag => !tag.includes('#'));
+      setTags(tagsWithoutHash)
     } else {
-      // tag가 null 또는 undefined인 경우 처리할 내용 추가
-      // 예: setTags([]); 또는 다른 기본값 설정
+      
     }
   }, [selectdate, current]);
 

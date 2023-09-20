@@ -17,8 +17,6 @@ const Diarycopy = ({noteData}) => {
   // 전체 일기 리스트 관리
   const [listDiary, setListDiary] = useState([]);
   
-  // const [searchResult, setSearchResult] = useState()
-
   // -------------------------fullcalendar start-------------------------------------//
 
   //선택한 날짜
@@ -33,7 +31,7 @@ const Diarycopy = ({noteData}) => {
 
     const tempDiaryList = listDiary.filter((diary)=> diary.date == formatDate(selectedDate))
     setSelectedDiaryList(tempDiaryList)  
-
+console.log("너 뭐들었니?",selectedDiaryList);
     setListClickVisible(true);
 
   },[selectedDate])
@@ -250,7 +248,7 @@ const Diarycopy = ({noteData}) => {
         
         {listClickVisible && selectedDiaryList && selectedDiaryList.length > 0 && (
   <ViewDiary
-    selectdate={selectedDiaryList}
+    selectdate={selectedDiaryList} noteData={noteData}
   />  
 )}
 
