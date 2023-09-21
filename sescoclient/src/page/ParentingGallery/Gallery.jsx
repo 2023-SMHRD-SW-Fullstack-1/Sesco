@@ -10,6 +10,7 @@ import CityGallery from './components/CityGallery'
 import GalleryGuide from './components/GalleryGuide'
 import Footer from '../../common/Footer'
 import GallerySearchFail from './components/GallerySearchFail'
+import { useNavigate } from 'react-router-dom';
 
 const Gallery = () => {
 
@@ -33,10 +34,23 @@ const Gallery = () => {
   //사진을 보유한 도시 분류
   const [hasCity, setHasCity] = useState(new Set([]))
   
+  const navigate = useNavigate();
+
+  let user_nick
+
+  const backToMain=()=>{
+    navigate("/")
+  }
+  
   useEffect(() => {
     //회원정보가 있는지 확인하기
     //세션에서 회원정보 가져오기 ->null 오류처리 할것
-    let user_id = 'user1'
+    let user_id = sessionStorage.getItem("user_id")
+    user_nick =sessionStorage.getItem("user_nick")
+
+    if(user_id == null || user_nick == null){
+       backToMain()
+    }
 
 
     //회원정보 중 이미지가 있는 일기 정보를 다 불러옴 
@@ -76,11 +90,9 @@ const Gallery = () => {
   //해당 지역에 대한 정보 filtering하기 위함
   function updateList(){
     const filteredList = imgInfoList.filter(info => info.firstName == clickedLocal)
-    
     setImgNameList([...filteredList.map(info => info.imgName)])
     setFirstNameList([...filteredList.map(info => info.firstName)])
     setSecondNameList([...filteredList.map(info => info.secondName)])
-
   } 
   
 
@@ -93,7 +105,7 @@ const Gallery = () => {
   
   return (
     <>
-      <Banner />
+      <Banner user_nick={user_nick}/>
         <LocalContext.Provider value={{clickedLocal, setClickedLocal}}>
             <div className="gallery-top-container">
               <div style={{height: "fit-content"}}>

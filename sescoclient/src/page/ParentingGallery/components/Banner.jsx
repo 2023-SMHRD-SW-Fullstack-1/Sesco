@@ -2,7 +2,7 @@ import React from 'react'
 import gimg from '../../../img/cimg.png'
 import '../galleryroot.css';
 
-const Gallery = () => {
+const Gallery = ({user_nick}) => {
   return (
         <div className='banner' style={{
           backgroundImage: `url("${gimg}")`,
@@ -11,7 +11,7 @@ const Gallery = () => {
           backgroundSize: 'cover',
         }}>
           <div className='banner_info'>
-            <h2>"00"님의<br/> 이곳저곳</h2>
+            <h2>"{user_nick}"님의<br/> 이곳저곳</h2>
           </div>
         </div>
   )

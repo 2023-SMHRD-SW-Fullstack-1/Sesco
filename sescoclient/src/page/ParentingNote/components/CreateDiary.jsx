@@ -229,6 +229,7 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
        <h2>일기 작성</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
+          
           <label htmlFor="title">제목</label>
           <input
             type="text"
@@ -244,6 +245,7 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
             <Button onClick={deleteTagItem}>X</Button>
           </TagItem>
         ))}
+        
         <TagInput
           type="text"
           placeholder="Press enter to add tags"
