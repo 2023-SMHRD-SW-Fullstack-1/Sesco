@@ -32,7 +32,7 @@ const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults, isDiaryO
         setSelectedNoteIndex(null);
     }, [kidSeq]);
 
- 
+
 
     //노트 클릭했을 때 
     const handleNoteItemClick = (index) => {
@@ -103,11 +103,10 @@ const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults, isDiaryO
 
                             {/* 연령대 표시 */}
                             <div className='noteAge-container'>
-                                <span className={`noteList-age ${isDiaryOpen &&selectedNoteIndex === index ? 'selected-note-text' : ''}`}>
+                                <span className={`noteList-age ${isDiaryOpen && selectedNoteIndex === index ? 'selected-note-text' : ''}`}>
                                     {tagSearchResults[note.note_seq] ? `${note.n_name}` : `${index}세`}
                                 </span>
                             </div>
-                            
 
                             {/* noteKid 이미지 표시 */}
                             <div className='noteKid-container'>
@@ -123,14 +122,12 @@ const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults, isDiaryO
                                     {tagSearchResults[note.note_seq]}
                                 </div>
                             )}
-                            
                         </div>
-                        
                     ))}
                     {/*노트 테이블 */}
                     <div className='noteTable-container'>
-                                <img src={noteTable} className='noteTable'/>
-                            </div>
+                        <img src={noteTable} className='noteTable' />
+                    </div>
                 </div>
             </div>
         </div>
