@@ -248,6 +248,11 @@ const Note = () => {
   const handleTagSearch = async () => {
 
     console.log("검색 결과는 : ", currentSearchTag)
+    //태그 검색 후 다이어리가 열려있을때 다시 태그검색할 때 다이어리 닫음
+    if(isDiaryOpen===true){
+      setSelectedNoteSeq(null);
+      setIsDiaryOpen(false)
+    }
 
     try {
       if (searchTag.trim() === "") return;
@@ -336,6 +341,7 @@ const Note = () => {
   useEffect(() => {
     console.log("태그 검색 완료 후11 : ", currentSearchTag);
     setCurrentSearchTag(currentSearchTag)
+    
   }, [currentSearchTag]); // currentSearchTag 상태가 변경될 때마다 실행
 
 
