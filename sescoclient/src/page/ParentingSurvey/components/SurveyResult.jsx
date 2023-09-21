@@ -5,7 +5,7 @@ import tip_img from '../../../img/surveyResult.png'
 
 const SurveyResult = ({ bundle }) => {
 
-    console.log(bundle)
+    console.log('bundle result',bundle)
     const socialTotal = bundle[0].total
     const socialCheck = bundle[0].check
     const socialCheckList = bundle[0].checkList

@@ -252,7 +252,7 @@ function Survey({ kid, user_id }) {
                 <SurveyResult bundle={resultBundle} />
             ) : (
                 showPreSurveyResult ? (
-                    <PreSurveyResult kid={kid} kidMonth={kidMonth} setShowPreSurveyResult={setShowPreSurveyResult} />
+                    <PreSurveyResult kid={kid} kidMonth={kidMonth} bundle={resultBundle} setShowPreSurveyResult={setShowPreSurveyResult} />
                 ) : (
                     <div className="survey-middle-container">
                         <div className="surBox-container">
