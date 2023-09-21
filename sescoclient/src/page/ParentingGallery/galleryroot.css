@@ -1,5 +1,5 @@
 .banner_info{
-    position: flex;
+    position: relative;
     align-items: start;
     justify-content: start;
     top: 37%;
@@ -14,19 +14,27 @@
 
 .gallery-top-container{
     align-items: center;
-    background-color: rgb(153, 224, 248);
-    justify-content: flex-start;
-    padding-left: 20%;
-    
+    background-color: none;
+    justify-content: center;
+    /* padding-left: 20%; */
+    border-top : 10px solid rgb(131, 180, 236);
+
+    display:flex; 
+    width:100%;
+    height:900px;
+    margin-top:20px;
+
+    background-image: url("/public/galleryimg/tripbackg.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 120%;
 }
 
 .gallery-city-container{
-    height: 500px;
-    margin-top: 100px;
+    height: 600px;
     width: 675px !important;
     /* background-color: rgb(226 244 237 / 67%); */
     background-color: rgb(255, 255, 255);
-    padding: 40px 60px 50px 50px;
+    padding: 40px 50px 50px 50px;
     border-color: #D0E7E0;
     border-radius: 5px;
     border-width: 5px;

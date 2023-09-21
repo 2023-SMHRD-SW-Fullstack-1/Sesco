@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Join = () => {
-    const nav= useNavigate();
+    const nav = useNavigate();
 
     const [user_name, setNameValue] = useState('');
     const [user_id, setIdValue] = useState('');
@@ -18,18 +18,6 @@ const Join = () => {
     const [pwCheckValue, setPwCheckValue] = useState('');
     const [user_nick, setNickValue] = useState('');
     const user_email = emailValue + '@' + emailAdsValue;
-    const [loginResult,setLoginResult] = useState('');
-
-    // const userInfo = {
-    //     'user_name':user_name,
-    //     'user_id':user_id,
-    //     'user_email':user_email,
-    //     'user_pw':user_pw,
-    //     'user_nick':user_nick 
-    // }
-
-
-
 
 
     const fetchData = async () => {
@@ -37,13 +25,14 @@ const Join = () => {
         try {
 
 
-            await axios.post("http://localhost:8081/sesco/member/join", {
-                user_id : user_id,
-                user_pw :user_pw,
-                user_email:user_email,
-                user_nick : user_nick,
-                user_name : user_name
-            }).then((res)=>setLoginResult(res.data));
+            const res = await axios.post("http://localhost:8081/sesco/member/join", {
+                user_id: user_id,
+                user_pw: user_pw,
+                user_email: user_email,
+                user_nick: user_nick,
+                user_name: user_name
+            })
+            return res.data;
 
         } catch (error) {
             console.error('데이터를 불러오는 중 오류 발생:', error)
@@ -52,18 +41,28 @@ const Join = () => {
 
 
     const saveUserInfo = () => {
-        if(loginResult==='id중복'){
-            alert('ID중복입니다. ID를 확인하세요')
-        }else if(loginResult==='nick중복'){
-            alert('닉네임 중복입니다. 닉네임을 확인하세요')
-        }else if(loginResult==='email중복'){
-            alert('이메일 중복입니다. 이메일을 확인하세요')
-        }else if(loginResult==='success'){
-            alert('🎺회원가입 성공🎺')
-            nav('/login')
+        if (!user_id || !user_pw || !user_email || !user_nick || !user_name) {
+            alert('다시 입력해주세요.');
+        } else {
+            fetchData()
+                .then((result) => {
+                    if (result === 'id중복') {
+                        alert('ID중복입니다. ID를 확인하세요');
+                    } else if (result === 'nick중복') {
+                        alert('닉네임 중복입니다. 닉네임을 확인하세요');
+                    } else if (result === 'email중복') {
+                        alert('이메일 중복입니다. 이메일을 확인하세요');
+                    } else if (result === 'success') {
+                        alert('🎺회원가입 성공🎺');
+                        nav('/login');
+                    }
+                    console.log('name:', user_name, 'nick:', user_nick, 'id:', user_id, 'email:', user_email, 'pw:', user_pw, 'pwCheck:', pwCheckValue);
+                })
+                .catch((error) => {
+                    // 에러 처리 로직 추가
+                });
         }
-        fetchData();
-        console.log('name:', user_name, 'nick:', user_nick, 'id:', user_id, 'email:', user_email, 'pw:', user_pw, 'pwCheck:', pwCheckValue);
+
     }
 
 
@@ -76,7 +75,7 @@ const Join = () => {
 
                 <div className='join_img_container'>
                     {/* 회원가입 이미지 */}
-                    <img src={LoginImg} style={{ borderRadius: '0px 10px 10px 0px', height: '770px' }} />
+                    <img src={LoginImg} style={{ borderRadius: '0px 10px 10px 0px', height: '720px' }} />
                 </div>
                 {/* 회원가입 입력 */}
                 <div className='joinInput_container'>
@@ -111,19 +110,19 @@ const Join = () => {
                     {/* 비밀번호 입력 */}
                     <span className='password_txt'>비밀번호 확인</span>
                     <input className='joinInput' placeholder='비밀번호를 입력해주세요.' type='password' onChange={(e) => setPwCheckValue(e.target.value)} value={pwCheckValue} />
-                    {user_pw===pwCheckValue?
-                    <span className='password_txt'>비밀번호 일치 </span>
-                    :
-                    <span className='password_txt'>다시 입력해주세요 </span>
+                    {user_pw === pwCheckValue ?
+                        <span className='password_txt'>비밀번호 일치 </span>
+                        :
+                        <span className='password_txt'>다시 입력해주세요 </span>
                     }
                     {/* 로그인 버튼 */}
                     <button className='joginBtn' onClick={() => saveUserInfo()} >회원가입</button>
-                    <p className='login_jointxt'> 계정이 있으신가요? <a href='/login'>로그인하러가기</a></p>
+
                     {/* 소셜 로그인 버튼  */}
-                    <div className='socialBtns'>
-                        <button className='kakaoBtn'>카카오</button>
-                        <button className='googleBtn'>구글</button>
+                    <div className='login_socialBtns'>
+                        <button className='login_googleBtn'>소셜 로그인</button>
                     </div>
+
 
                 </div>
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import EXIF from "exif-js";
+import './viewDiary.css'
 
 const ViewDiary = ({ selectdate, noteData}) => {
   const [tags, setTags] = useState([]);
@@ -229,23 +230,23 @@ const ViewDiary = ({ selectdate, noteData}) => {
 
     const handleDeleteDiary = async () => {
       try {
-        const dSeqToDelete = selectdate[current].d_seq;
+        const dSeqToDelete = selectdate[current].d_seq
         const response = await axios.post(
           `http://localhost:8081/sesco/diary/delete`, {d_seq: dSeqToDelete}
-        );
+        )
   
         if (response.status === 200) {
           // 삭제 요청이 성공한 경우
           // 이후에 필요한 작업 수행 (예: 일기 목록 다시 불러오기)
-          console.log("Diary deleted successfully.");
+          console.log("Diary deleted successfully.")
           // 다음 일기 또는 이전 일기로 이동하거나 원하는 작업 수행
           // 예: getNext(), getPrevious() 호출 또는 다른 작업 수행
         } else {
           // 실패한 경우에 대한 처리
-          console.error("Failed to delete diary.");
+          console.error("Failed to delete diary.")
         }
       } catch (error) {
-        console.error("Error while deleting diary:", error);
+        console.error("Error while deleting diary:", error)
       }
     };
 
@@ -253,29 +254,30 @@ const ViewDiary = ({ selectdate, noteData}) => {
 
 
   return (
-    <Container>
+    <div className="view-top-container">
       {isEditing ? (
         // Editing mode
-        <EditForm>
-          <EditInput
+        <form>
+          <input
             type="text"
             placeholder="제목"
             value={editedTitle}
             onChange={(e) => setEditedTitle(e.target.value)}
           />
-          <EditTextArea
+          <textarea
             placeholder="내용"
             value={editedContent}
             onChange={(e) => setEditedContent(e.target.value)}
           />
-          <TagBox>
+          <div className="tag-box">
         {tagList.map((tagItem, index) => (
-          <TagItem key={index}>
-            <Text>{tagItem}</Text>
-            <Button onClick={deleteTagItem}>X</Button>
-          </TagItem>
+          <div className="tag-item" key={index}>
+            <span>{tagItem}</span>
+            <button className="cancel-tag-item" onClick={deleteTagItem}>X</button>
+          </div>
         ))}
-        <TagInput
+        <input
+          className="add-tag-item"
           type="text"
           placeholder="Press enter to add tags"
           tabIndex={2}
@@ -283,181 +285,58 @@ const ViewDiary = ({ selectdate, noteData}) => {
           value={tagItem}
           onKeyPress={onKeyPress}
         />
-        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-      </TagBox>
-          {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-          <EditImagePreview>
+        {errorMessage && <div>{errorMessage}</div>}
+      </div>
+          {errorMessage && <div>{errorMessage}</div>}
+          <div>
             {editedImagePreview && (
-              <Image src={editedImagePreview} alt="이미지 미리보기" />
+              <img src={editedImagePreview} alt="이미지 미리보기" />
             )}
-          </EditImagePreview>
-          <EditImageInput
+          </div>
+          <input
             type="file"
             accept="image/*"
             onChange={handleImageUpload}
           />
-          <SaveChangesButton onClick={handleSaveChanges}>
+          <button onClick={handleSaveChanges}>
             수정 완료
-          </SaveChangesButton>
-          <CancelButton onClick={handleCancelEdit}>취소</CancelButton>
-        </EditForm>
+          </button>
+          <button onClick={handleCancelEdit}>취소</button>
+        </form>
       ) : (
         // View mode
-        <ViewContainer>
-          <Title>{selectdate[current].title}</Title>
-          <Content>{selectdate[current].content}</Content>
-          {selectdate[current].img && (
-            <ImageContainer>
-              <Image src={"data:image/;base64," + selectdate[current].img} alt="" />
-            </ImageContainer>
-          )}
-          {tags.length > 0 && (
-            <TagBox>
-              {tags.map((tag, index) => (
-                <TagItem key={index}>{tag}</TagItem>
-              ))}
-            </TagBox>
-          )}
+        <div className="view-container">
+          <div className="view-box">
+            {selectdate[current].img && (
+              <div className="view-diary-img-box">
+                <img className="view-diary-img" src={"data:image/;base64," + selectdate[current].img} alt="" />
+              </div>
+            )}
+            <p className="view-diary-title">{selectdate[current].title}</p>
+            
+            {tags.length > 0 && (
+              <div className="tag-box">
+                {tags.map((tag, index) => (
+                  <div className="tag-item" key={index}>{tag}</div>
+                ))}
+              </div>
+            )}
 
-<div>
-        <button onClick={getPrevious}>이전</button>
-        <button onClick={getNext}>다음</button>
-      </div>
+            <p className="view-diary-content">{selectdate[current].content}</p>
 
-          <EditButton onClick={handleEditClick}>수정하기</EditButton>
-          <DeleteButton onClick={handleDeleteDiary}>일기 삭제</DeleteButton>
-        </ViewContainer>
+            <div>
+              <button onClick={getPrevious}>이전</button>
+              <button onClick={getNext}>다음</button>
+            </div>
+
+            <button onClick={handleEditClick}>수정하기</button>
+            <button onClick={handleDeleteDiary}>일기 삭제</button>
+          </div>
+        </div>
       )}
-    </Container>
+    </div>
   )
 };
-
-const WholeBox = styled.div`
-  padding: 10px;
-  height: 100vh;
-`;
-
-const TagBox = styled.div`
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  min-height: 50px;
-  margin: 10px;
-  padding: 0 10px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-`;
-
-const TagItem = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 5px;
-  padding: 5px;
-  background-color: tomato;
-  border-radius: 5px;
-  color: white;
-  font-size: 13px;
-`;
-
-
-const Button = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50px;
-  height: 50px;
-  margin-left: 5px;
-  background-color: white;
-  border-radius: 50%;
-  color: tomato;
-`;
-
-const Container = styled.div`
-position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-  z-index:6
-`;
-const DeleteButton = styled.button`
-  /* 삭제 버튼 스타일을 정의하세요 */
-`;
-
-const Title = styled.p`
-  font-size: 24px;
-  font-weight: bold;
-`;
-
-const Content = styled.p`
-  margin-top: 10px;
-`;
-
-const ImageContainer = styled.p`
-   width: "50px";
-   height:"50px";
-`;
-
-const Image = styled.img`
-  width: 100px;
-  height: 100px;
-`;
-
-const EditForm = styled.form`
-  /* Define your styles for the editing form here */
-`;
-
-const EditInput = styled.input`
-  /* Define your styles for input fields here */
-`;
-
-const EditTextArea = styled.textarea`
-  /* Define your styles for text areas here */
-`;
-
-const ErrorMessage = styled.div`
-  /* Define your styles for error messages here */
-`;
-
-const EditImagePreview = styled.div`
-  /* Define your styles for image previews here */
-`;
-
-const EditImageInput = styled.input`
-  /* Define your styles for image inputs here */
-`;
-
-const SaveChangesButton = styled.button`
-  /* Define your styles for the save changes button here */
-`;
-
-const CancelButton = styled.button`
-  /* Define your styles for the cancel button here */
-`;
-
-const ViewContainer = styled.div`
-  /* Define your styles for the view container here */
-`;
-
-const EditButton = styled.button`
-  /* Define your styles for the edit button here */
-`;
-
-
-
-const Text = styled.span``;
-
-
-
-const TagInput = styled.input`
-  display: inline-flex;
-  min-width: 150px;
-  background: transparent;
-  border: none;
-  outline: none;
-  cursor: text;
-`;
 
 
 export default ViewDiary;

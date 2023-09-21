@@ -16,7 +16,8 @@ export const LOCAL ={
     DAEGU : "대구광역시",
     DAEJEON : "대전광역시",
     SEOUL :"서울특별시",
-    INCHEON :"인천광역시"
+    INCHEON :"인천광역시",
+    SEJONG :"세종특별자치시"
 }
 
 export const JEOLLANAM_DO = {

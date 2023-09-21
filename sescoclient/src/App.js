@@ -34,9 +34,9 @@ function App() {
       <Route path="/diary" element={<Diarycopy/>}></Route>
       <Route path="/google" element={<GoogleLog/>}></Route>
 
-
     </Routes>
 
+    <Footer/>
 
       {/* <Footer /> */}
     </>

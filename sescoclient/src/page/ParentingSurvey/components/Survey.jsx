@@ -3,7 +3,7 @@ import axios from 'axios';
 import SurveyResult from './SurveyResult';
 import PreSurveyResult from './PreSurveyResult';
 import './Survey.css';
-import { FaCheckCircle } from 'react-icons/fa'
+import '../../Main1.scss'
 
 function Survey({ kid, user_id }) {
     const category = ['사회/정서적 영역', '언어/의사소통 영역', '인지(학습,사고,문제해결능력)', '운동/신체발달 영역'];
@@ -11,11 +11,19 @@ function Survey({ kid, user_id }) {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [resultBundle, setResultBundle] = useState(null);
+    const [showPreSurveyResult, setShowPreSurveyResult] = useState(false);
+
+    // ⭕버튼에 대한 체크리스트
     const [socialCheckList, setSocialCheckList] = useState([]);
     const [languageCheckList, setLanguageCheckList] = useState([]);
     const [brainCheckList, setBrainCheckList] = useState([]);
     const [physicalCheckList, setPhysicalCheckList] = useState([]);
-    const [showPreSurveyResult, setShowPreSurveyResult] = useState(false);
+
+    // ❌버튼에 대한 체크리스트
+    const [socialXCheckList, setSocialXCheckList] = useState([]);
+    const [languageXCheckList, setLanguageXCheckList] = useState([]);
+    const [brainXCheckList, setBrainXCheckList] = useState([]);
+    const [physicalXCheckList, setPhysicalXchecklist] = useState([]);
 
     console.log(kid)
 
@@ -65,19 +73,100 @@ function Survey({ kid, user_id }) {
         }
     }
 
-    function toggleCheckList(item) {
+    // O 체크박스
+    // function toggleCheckList(item) {
+    //     if (item.hsvd_category === category[0]) {
+    //         setSocialCheckList(prevList => prevList.includes(item.hsvd_seq) ? prevList.filter(id => id !== item.hsvd_seq) : [...prevList, item.hsvd_seq]);
+    //         setSocialXCheckList(prevXlist => prevXlist.includes(item.hsvd_seq) ? prevXlist.filter(id => id !== item.hsvd_seq) : []); // X버튼용 리스트
+    //     } else if (item.hsvd_category === category[1]) {
+    //         setLanguageCheckList(prevList => prevList.includes(item.hsvd_seq) ? prevList.filter(id => id !== item.hsvd_seq) : [...prevList, item.hsvd_seq]);
+    //     } else if (item.hsvd_category === category[2]) {
+    //         setBrainCheckList(prevList => prevList.includes(item.hsvd_seq) ? prevList.filter(id => id !== item.hsvd_seq) : [...prevList, item.hsvd_seq]);
+    //     } else if (item.hsvd_category === category[3]) {
+    //         setPhysicalCheckList(prevList => prevList.includes(item.hsvd_seq) ? prevList.filter(id => id !== item.hsvd_seq) : [...prevList, item.hsvd_seq]);
+    //     }
+    // }
+
+    function toggleOButton(item) {
         if (item.hsvd_category === category[0]) {
-            setSocialCheckList(prevList => prevList.includes(item.hsvd_seq) ? prevList.filter(id => id !== item.hsvd_seq) : [...prevList, item.hsvd_seq]);
-        } else if (item.hsvd_category === category[1]) {
-            setLanguageCheckList(prevList => prevList.includes(item.hsvd_seq) ? prevList.filter(id => id !== item.hsvd_seq) : [...prevList, item.hsvd_seq]);
-        } else if (item.hsvd_category === category[2]) {
-            setBrainCheckList(prevList => prevList.includes(item.hsvd_seq) ? prevList.filter(id => id !== item.hsvd_seq) : [...prevList, item.hsvd_seq]);
-        } else if (item.hsvd_category === category[3]) {
-            setPhysicalCheckList(prevList => prevList.includes(item.hsvd_seq) ? prevList.filter(id => id !== item.hsvd_seq) : [...prevList, item.hsvd_seq]);
+            // ⭕버튼 클릭시 ❌버튼 체크 해제
+            if (socialXCheckList.includes(item.hsvd_seq)) {
+                const newSocialxlist = socialXCheckList.filter(id => id !== item.hsvd_seq);
+                setSocialXCheckList(newSocialxlist);
+            }
+            // 현재 아이템의 체크상태 변경
+            setSocialCheckList(socialCheckList.includes(item.hsvd_seq) ? socialCheckList.filter(id => id !== item.hsvd_seq) : [...socialCheckList, item.hsvd_seq]);
         }
+        if (item.hsvd_category === category[1]) {
+            // ⭕버튼 클릭시 ❌버튼 체크 해제
+            if (languageXCheckList.includes(item.hsvd_seq)) {
+                const newLanguagexlist = languageXCheckList.filter(id => id !== item.hsvd_seq);
+                setLanguageXCheckList(newLanguagexlist);
+            }
+            // 현재 아이템의 체크상태 변경
+            setLanguageCheckList(languageCheckList.includes(item.hsvd_seq) ? languageCheckList.filter(id => id !== item.hsvd_seq) : [...languageCheckList, item.hsvd_seq]);
+        }
+        if (item.hsvd_category === category[2]) {
+            // ⭕버튼 클릭시 ❌버튼 체크 해제
+            if (brainXCheckList.includes(item.hsvd_seq)) {
+                const newBrainxlist = brainXCheckList.filter(id => id !== item.hsvd_seq);
+                setBrainXCheckList(newBrainxlist);
+            }
+            // 현재 아이템의 체크상태 변경
+            setBrainCheckList(brainCheckList.includes(item.hsvd_seq) ? brainCheckList.filter(id => id !== item.hsvd_seq) : [...brainCheckList, item.hsvd_seq]);
+        }
+        if (item.hsvd_category === category[3]) {
+            // ⭕버튼 클릭시 ❌버튼 체크 해제
+            if (physicalXCheckList.includes(item.hsvd_seq)) {
+                const newPhysicalxlist = physicalXCheckList.filter(id => id !== item.hsvd_seq);
+                setPhysicalXchecklist(newPhysicalxlist);
+            }
+            // 현재 아이템의 체크상태 변경
+            setPhysicalCheckList(physicalCheckList.includes(item.hsvd_seq) ? physicalCheckList.filter(id => id !== item.hsvd_seq) : [...physicalCheckList, item.hsvd_seq]);
+        }
+        
     }
 
-    
+    function toggleXButton(item) {
+        if (item.hsvd_category === category[0]) {
+            // ❌버튼 클릭시 ⭕버튼 체크 해제
+            if (socialCheckList.includes(item.hsvd_seq)) {
+                const newSocialolist = socialCheckList.filter(id => id !== item.hsvd_seq);
+                setSocialCheckList(newSocialolist);
+            }
+            // 현재 아이템의 체크상태 변경
+            setSocialXCheckList(socialXCheckList.includes(item.hsvd_seq) ? socialXCheckList.filter(id => id !== item.hsvd_seq) : [...socialXCheckList, item.hsvd_seq]);
+        }
+        if (item.hsvd_category === category[1]) {
+            // ❌버튼 클릭시 ⭕버튼 체크 해제
+            if (languageCheckList.includes(item.hsvd_seq)) {
+                const newLanguageolist = languageCheckList.filter(id => id !== item.hsvd_seq);
+                setLanguageCheckList(newLanguageolist);
+            }
+            // 현재 아이템의 체크상태 변경
+            setLanguageXCheckList(languageXCheckList.includes(item.hsvd_seq) ? languageXCheckList.filter(id => id !== item.hsvd_seq) : [...languageXCheckList, item.hsvd_seq]);
+        }
+        if (item.hsvd_category === category[2]) {
+            // ❌버튼 클릭시 ⭕버튼 체크 해제
+            if (brainCheckList.includes(item.hsvd_seq)) {
+                const newBrainolist = brainCheckList.filter(id => id !== item.hsvd_seq);
+                setBrainCheckList(newBrainolist);
+            }
+            // 현재 아이템의 체크상태 변경
+            setBrainXCheckList(brainXCheckList.includes(item.hsvd_seq) ? brainXCheckList.filter(id => id !== item.hsvd_seq) : [...brainXCheckList, item.hsvd_seq]);
+        }
+        if (item.hsvd_category === category[3]) {
+            // ❌버튼 클릭시 ⭕버튼 체크 해제
+            if (physicalCheckList.includes(item.hsvd_seq)) {
+                const newPhysicalolist = physicalCheckList.filter(id => id !== item.hsvd_seq);
+                setPhysicalCheckList(newPhysicalolist);
+            }
+            // 현재 아이템의 체크상태 변경
+            setPhysicalXchecklist(physicalXCheckList.includes(item.hsvd_seq) ? physicalXCheckList.filter(id => id !== item.hsvd_seq) : [...physicalXCheckList, item.hsvd_seq]);
+        }
+        
+    }
+
 
     function removeCheckList(item) {
         if (item.hsvd_category === category[0]) {
@@ -163,26 +252,34 @@ function Survey({ kid, user_id }) {
                 <SurveyResult bundle={resultBundle} />
             ) : (
                 showPreSurveyResult ? (
-                    <PreSurveyResult kid={kid} kidMonth={kidMonth} setShowPreSurveyResult={setShowPreSurveyResult} />
+                    <PreSurveyResult kid={kid} kidMonth={kidMonth} bundle={resultBundle} setShowPreSurveyResult={setShowPreSurveyResult} />
                 ) : (
                     <div className="survey-middle-container">
                         <div className="surBox-container">
                             {/* 사회/정서 */}
                             <div className="surBox1">
+
                                 <div className="sur_category">
                                     <h5>{category[0]}</h5>
                                 </div>
+                                <div className='OXselect'><div className='oselect'>⭕</div><div className='xselect'>❌</div></div>
                                 <div className="sur_content_detail">
                                     {filteredData1.map((item) => (
                                         <div className="survey_btncheck" key={item.id}>
                                             <li>{item.hsvd_content}</li>
                                             <label>
-                                                <input className="survey-oBtn" type="checkbox" checked={socialCheckList.includes(item.hsvd_seq) && item.hsvd_category == category[0]} onChange={() => toggleCheckList(item)} />
-                                                O
+                                                <input
+                                                    className="survey-oBtn"
+                                                    type="checkbox"
+                                                    checked={socialCheckList.includes(item.hsvd_seq)}
+                                                    onChange={() => toggleOButton(item)} />
                                             </label>
                                             <label>
-                                                <input className="survey-xBtn" type="checkbox" checked={!socialCheckList.includes(item.hsvd_seq) && item.hsvd_category == category[0]} onChange={() => toggleCheckList(item)} />
-                                                X
+                                                <input
+                                                    className="survey-xBtn"
+                                                    type="checkbox"
+                                                    checked={socialXCheckList.includes(item.hsvd_seq)}
+                                                    onChange={() => toggleXButton(item)} />
                                             </label>
                                         </div>
                                     ))}
@@ -193,17 +290,24 @@ function Survey({ kid, user_id }) {
                                 <div className="sur_category2">
                                     <h5>{category[1]}</h5>
                                 </div>
+                                <div className='OXselect'><div className='oselect'>⭕</div><div className='xselect'>❌</div></div>
                                 <div className="sur_content_detail">
                                     {filteredData2.map((item) => (
                                         <div className="survey_btncheck" key={item.id}>
                                             <li>{item.hsvd_content}</li>
                                             <label>
-                                                <input className="survey-oBtn" type="checkbox" checked={languageCheckList.includes(item.hsvd_seq) && item.hsvd_category == category[1]} onChange={() => toggleCheckList(item)} />
-                                                O
+                                                <input
+                                                    className="survey-oBtn"
+                                                    type="checkbox"
+                                                    checked={languageCheckList.includes(item.hsvd_seq)}
+                                                    onChange={() => toggleOButton(item)} />
                                             </label>
                                             <label>
-                                                <input className="survey-xBtn" type="checkbox" checked={!languageCheckList.includes(item.hsvd_seq) && item.hsvd_category == category[1]} onChange={() => toggleCheckList(item)} />
-                                                X
+                                                <input
+                                                    className="survey-xBtn"
+                                                    type="checkbox"
+                                                    checked={languageXCheckList.includes(item.hsvd_seq)}
+                                                    onChange={() => toggleXButton(item)} />
                                             </label>
                                         </div>
                                     ))}
@@ -214,17 +318,24 @@ function Survey({ kid, user_id }) {
                                 <div className="sur_category3">
                                     <h5>{category[2]}</h5>
                                 </div>
+                                <div className='OXselect'><div className='oselect'>⭕</div><div className='xselect'>❌</div></div>
                                 <div className="sur_content_detail">
                                     {filteredData3.map((item) => (
                                         <div className="survey_btncheck" key={item.id}>
                                             <li>{item.hsvd_content}</li>
                                             <label>
-                                                <input className="survey-oBtn" type="checkbox" checked={brainCheckList.includes(item.hsvd_seq) && item.hsvd_category == category[2]} onChange={() => toggleCheckList(item)} />
-                                                O
+                                                <input
+                                                    className="survey-oBtn"
+                                                    type="checkbox"
+                                                    checked={brainCheckList.includes(item.hsvd_seq)}
+                                                    onChange={() => toggleOButton(item)} />
                                             </label>
                                             <label>
-                                                <input className="survey-xBtn" type="checkbox" checked={!brainCheckList.includes(item.hsvd_seq) && item.hsvd_category == category[2]} onChange={() => toggleCheckList(item)} />
-                                                X
+                                                <input
+                                                    className="survey-xBtn"
+                                                    type="checkbox"
+                                                    checked={brainXCheckList.includes(item.hsvd_seq)}
+                                                    onChange={() => toggleXButton(item)} />
                                             </label>
                                         </div>
                                     ))}
@@ -235,25 +346,45 @@ function Survey({ kid, user_id }) {
                                 <div className="sur_category4">
                                     <h5>{category[3]}</h5>
                                 </div>
+                                <div className='OXselect'><div className='oselect'>⭕</div><div className='xselect'>❌</div></div>
                                 <div className="sur_content_detail">
                                     {filteredData4.map((item) => (
                                         <div className="survey_btncheck" key={item.id}>
                                             <li>{item.hsvd_content}</li>
                                             <label>
-                                                <input className="survey-oBtn" type="checkbox" checked={physicalCheckList.includes(item.hsvd_seq) && item.hsvd_category == category[3]} onChange={() => toggleCheckList(item)} />
-                                                O
+                                                <input
+                                                    className="survey-oBtn"
+                                                    type="checkbox"
+                                                    checked={physicalCheckList.includes(item.hsvd_seq)}
+                                                    onChange={() => toggleOButton(item)} />
                                             </label>
                                             <label>
-                                                <input className="survey-xBtn" type="checkbox" checked={!physicalCheckList.includes(item.hsvd_seq) && item.hsvd_category == category[3]} onChange={() => toggleCheckList(item)} />
-                                                X
+                                                
+                                                <input
+                                                    className="survey-xBtn"
+                                                    type="checkbox"
+                                                    checked={physicalXCheckList.includes(item.hsvd_seq)}
+                                                    onChange={() => toggleXButton(item)} />
                                             </label>
                                         </div>
                                     ))}
                                 </div>
                             </div>
                             <div className="survey-bottom-container">
-                                <button className="survey_btnPreResult" onClick={() => setShowPreSurveyResult(true)}>이전 설문 불러오기</button>
-                                <button className="btnResult" onClick={submitResult}>결과보기</button>
+
+                                <button id='mainloginBtn' className="main1_loginBtn" onClick={() => setShowPreSurveyResult(true)}>
+                                    <span className="circle" aria-hidden="true">
+                                        <span className="icon arrow"></span>
+                                    </span>
+                                    <span className="button-text">이전 설문 불러오기</span>
+                                </button>
+
+                                <button id='mainloginBtn' className="main1_loginBtn" onClick={submitResult}>
+                                    <span className="circle" aria-hidden="true">
+                                        <span className="icon arrow"></span>
+                                    </span>
+                                    <span className="button-text">결과보기</span>
+                                </button>
                             </div>
                         </div>
                     </div>

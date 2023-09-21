@@ -1,5 +1,6 @@
 package com.smhrd.sesco.mapper;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -40,15 +41,20 @@ public interface MemberMapper {
 	public void MemberDelete(String user_id);
 
 	//구글계정 중복확인
-	@Select("select count(*) from t_member where user_id=#{user_id} and user_name=#{user_name} and login_type=#{login_type}")
+	@Select("select count(*) from t_member where user_id=#{user_id} and user_name=#{user_name} and login_type='G'")
 	public int GoogleUserCheck(Member member);
 	
 	// 구글 로그인 
-	@Select("select * from t_member where user_id=#{user_id} and user_name=#{user_name} and login_type=#{login_type}")
+	@Select("select * from t_member where user_id=#{user_id} and user_name=#{user_name} and login_type='G'")
 	public Member GoogleLogin(Member member);
+
 
 	//카카오 로그인
 	@Select("select * from t_member where user_id=#{user_id} and user_name=#{user_name} and login_type=#{login_type}")
 	public void kakaoCallback(Member member);
+
+	// 구글 회원가입
+	public void GoogleJoin(Member member);
+
 
 }

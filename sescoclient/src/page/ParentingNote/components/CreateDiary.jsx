@@ -265,15 +265,35 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
         </div>
         <div className="form-group">
           {/* 이미지 미리보기 */}
-          {imagePreview && <img src={imagePreview} alt="이미지 미리보기" style={{width : "50px", height : "50px"}} />}
+         
+          <label htmlFor="image">
+            {/* 사진바꾸기가 추가 되어야 함? */}
+            <div className="img-upload-container"> 
+            {imagePreview ?
 
-          <label htmlFor="image">이미지 첨부</label>
-          <input
-            type="file"
-            id="image"
-            accept="image/*"
-            onChange={handleImageUpload}
-          />
+               <img className="img-pre-view" src={imagePreview} alt="이미지 미리보기" /> 
+              //  <input
+              //       type="file"
+              //       id="image"
+              //       accept="image/*"
+              //       onChange={handleImageUpload}
+              // />
+            
+            : 
+               <div className="img-upload-box">
+                 <img className="img-upload-icon" src={"/cameraicon.png"}></img>
+                  <input
+                    type="file"
+                    id="image"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                  />
+              </div>
+            } 
+            </div>
+          </label>
+
+          
         </div>
 
         <button type="submit">작성완료</button>
