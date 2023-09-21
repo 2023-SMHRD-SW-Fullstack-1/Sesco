@@ -79,7 +79,7 @@ public class MemberService {
 	public void kakaoCallback(Member member) {
 		
 		memberMapper.kakaoCallback(member);
-
+	}
 	// 구글 회원가입
 	public void GoogleJoin(Member member) {
 		
