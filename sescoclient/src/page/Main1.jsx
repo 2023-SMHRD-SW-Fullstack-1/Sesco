@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import main3Img from '../img/main1/maintest2.jpg'
 import bookIcon from '../img/main1/main1_bookIcon.png'
 import tipIcon from '../img/main1/main1_TipIcon.png'
@@ -15,6 +15,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import Button from 'react-bootstrap/Button';
 import './Main1.scss'
 import LoginFrom from '../components/LoginFrom'
+import MainMenu from './MainMenu'
 
 
 // 메인 갤러리 설명란 책 클래스
@@ -29,7 +30,7 @@ const Page = React.forwardRef((props, ref) => {
 
 //메인
 const Main1 = () => {
-
+// 슬라이드 버튼
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (
@@ -103,7 +104,43 @@ const handleLoginBtnClick =()=>{
 }
 
 console.log('book',bookIconClick, 'gallery',galleryIconClick,'tip',tipIconClick);
-// console.log('로그인 버튼' , loginClick);
+
+
+
+const [isMenuVisible, setIsMenuVisible] = useState(false);
+const [menuFixed, setMenuFixed] = useState(false);
+
+// 스크롤 감지 -메뉴버튼
+useEffect(() => {
+  const handleScroll = () => {
+    const scrollPosition = window.scrollY;
+    if (scrollPosition >= 1335 && scrollPosition<=2097) {
+      setIsMenuVisible(true);
+      setMenuFixed(false)
+      console.log('현재 스크롤',window.scrollY,'픽스',menuFixed,'메뉴',isMenuVisible);
+    } else if(scrollPosition>2097){
+      setIsMenuVisible(true);
+      setMenuFixed(true)
+      console.log('현재 스크롤',window.scrollY,'픽스',menuFixed,'메뉴',isMenuVisible);
+      
+    }else {
+      setMenuFixed(false)
+      setIsMenuVisible(false);
+      console.log('현재 스크롤',window.scrollY,'픽스',menuFixed,'메뉴',isMenuVisible);
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll)
+
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+  };
+}, [window.scrollY]);
+
+
+
+
+
   return (
     <div>
       {/* 메인 사진 */}
@@ -113,6 +150,11 @@ console.log('book',bookIconClick, 'gallery',galleryIconClick,'tip',tipIconClick)
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
       }}>
+        {/* 'main1_menu' */}
+              <div className={isMenuVisible&&!menuFixed? 'menuVisible': isMenuVisible && menuFixed? 'noMenuVisible':"defaultMenu"}>
+                <MainMenu/> 
+
+              </div>
         <div className='main1_infoBackground'>
           <div className='M2banner_info'>
             <div className='main1Infocontainer'>
@@ -218,23 +260,7 @@ console.log('book',bookIconClick, 'gallery',galleryIconClick,'tip',tipIconClick)
       <Box position="relative" id="diaryDetail">
         <div className='main1Diary_box'>
           <div className='main1Icons_box'>
-            {/* 미니 아이콘 이동 */}
-            <Link to="diaryDetail" spy={true} smooth={false} onClick={()=>handleMiniIconsClicked('book')}>
-              <div className={"diaryIcon_box " + (bookIconClick && "book_book")}>
-                <img src={bookIcon} style={{ width: '75px' }} />
-              </div>
-            </Link>
-            <Link to="galleryDetail" spy={true} smooth={false} onClick={()=>handleMiniIconsClicked('gallery')}>
-              <div className={"diaryIcon_box " + (galleryIconClick && "book_gallery")}>
-                <img src={galleryIcon} style={{ width: '75px' }} />
-              </div>
-            </Link>
-            <Link to="tipDetail" spy={true} smooth={false} onClick={()=>handleMiniIconsClicked('tip')}>
-              <div className={"diaryIcon_box " + (tipIconClick && "book_tip")}>
-                <img src={tipIcon} style={{ width: '75px' }} />
-              </div>
-            </Link>
-
+            
             {/* book 애니메이션 */}
             <div className='main1_bookPageBorder'>
             </div>
@@ -255,10 +281,7 @@ console.log('book',bookIconClick, 'gallery',galleryIconClick,'tip',tipIconClick)
                 <br />
                 <h5><br />  - 나의 아이가 성장 할수록 아이 캐릭터도 조금씩 성장해요</h5>
               </div>
-              <div className='main1_diaryBoxlogin'>
-                <h6><br /> 로그인 하러가기 ⇒</h6>
-                <a href='/login'><Button variant="warning" className='mainBox_loginBtn' >로그인</Button></a>
-              </div>
+              
             </div>
           </div>
 
@@ -268,24 +291,7 @@ console.log('book',bookIconClick, 'gallery',galleryIconClick,'tip',tipIconClick)
       {/* 갤러리 설명란 */}
       <Box position="relative" id="galleryDetail">
         <div className='main1Gallery_box'>
-          <div className='main1Icons_box'>
-            {/* 미니 아이콘 이동 */}
-            <Link to="diaryDetail" spy={true} smooth={false} onClick={()=>handleMiniIconsClicked('book')}>
-              <div className={"diaryIcon_box " + (bookIconClick && "gallery_book")}>
-                <img src={bookIcon} style={{ width: '75px' }} />
-              </div>
-            </Link>
-            <Link to="galleryDetail" spy={true} smooth={false} onClick={()=>handleMiniIconsClicked('gallery')}>
-              <div className={"diaryIcon_box " + (galleryIconClick && "gallery_gallery")}>
-                <img src={galleryIcon} style={{ width: '75px' }} />
-              </div>
-            </Link>
-            <Link to="tipDetail" spy={true} smooth={false} onClick={()=>handleMiniIconsClicked('tip')}>
-              <div className={"diaryIcon_box " + (tipIconClick && "gallery_tip")}>
-                <img src={tipIcon} style={{ width: '75px' }} />
-              </div>
-            </Link>
-          </div>
+          
 
           <div className='main1_galleryPage'>
             <div className='main1_galleryContextFir'>
@@ -299,47 +305,20 @@ console.log('book',bookIconClick, 'gallery',galleryIconClick,'tip',tipIconClick)
               <img src={testImg} width={'375px'} height={'450px'} />
             </div>
           </div>
-          <div className='main1_boxlogin'>
-            <h6><br /> 로그인 하러가기 ⇒</h6>
-            <a href='/login'>
-              <Button variant="warning" className='mainBox_loginBtn' >로그인</Button>
-            </a>
-          </div>
+          
         </div>
       </Box>
       {/* 팁 설명란 */}
       <Box position="relative" id="tipDetail">
         <div className='main1Tip_box'>
-          <div className='main1Icons_box'>
-            {/* 미니 아이콘 이동 */}
-            <Link to="diaryDetail" spy={true} smooth={false} onClick={()=>handleMiniIconsClicked('book')}>
-              <div className={"diaryIcon_box " + (bookIconClick && "tip_book")}>
-                <img src={bookIcon} style={{ width: '75px' }} />
-              </div>
-            </Link>
-            <Link to="galleryDetail" spy={true} smooth={false} onClick={()=>handleMiniIconsClicked('gallery')}> 
-              <div className={"diaryIcon_box " + (galleryIconClick && "tip_gallery")}>
-                <img src={galleryIcon} style={{ width: '75px' }} />
-              </div>
-            </Link>
-            <Link to="tipDetail" spy={true} smooth={false} onClick={()=>handleMiniIconsClicked('tip')}>
-              <div className={"diaryIcon_box " + (tipIconClick && "tip_tip")}>
-                <img src={tipIcon} style={{ width: '75px' }} />
-              </div>
-            </Link>
-          </div>
+          
           <div className='main1_tipContainer'>
             <div className='main1_tipContainer_border'></div>
             <div className='main1_tipContext'>
               <h4>나의 아이 캐릭터를 등록 하면 아이의 상태 <br /> 정보를 한눈에 볼 수 있어요 !</h4>
               <h5><br />  - 나의 아이가 성장 할수록 아이 캐릭터도 조금씩 성장해요</h5>
               <h6><br />  - 나의 아이가 성장 할수록 아이 캐릭터도 조금씩 성장해요</h6>
-              <div className='main1_boxlogin'>
-                <h6><br /> 로그인 하러가기 ⇒</h6>
-                <a href='/login'>
-                  <Button variant="warning" className='mainBox_loginBtn' >로그인</Button>
-                </a>
-              </div>
+           
             </div>
             <Slider {...settings} style={{ width: '500px', height: '600px', marginLeft: '7%', marginTop: '50px' }}>
               <div>
