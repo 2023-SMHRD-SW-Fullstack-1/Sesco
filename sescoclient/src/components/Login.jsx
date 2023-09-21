@@ -135,7 +135,7 @@ const Login = () => {
           </p>
           {/* 소셜 로그인 버튼  */}
           <div className="socialBtns">
-            <button className="kakaoBtn" onClick={<KakaoLogin/>}>
+            <button className="kakaoBtn">
               카카오
             </button>
             <button className="googleBtn">구글</button>
