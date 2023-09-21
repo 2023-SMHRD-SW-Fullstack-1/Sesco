@@ -47,4 +47,8 @@ public interface MemberMapper {
 	@Select("select * from t_member where user_id=#{user_id} and user_name=#{user_name} and login_type=#{login_type}")
 	public Member GoogleLogin(Member member);
 
+	//카카오 로그인
+	@Select("select * from t_member where user_id=#{user_id} and user_name=#{user_name} and login_type=#{login_type}")
+	public void kakaoCallback(Member member);
+
 }

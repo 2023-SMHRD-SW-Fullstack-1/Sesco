@@ -74,6 +74,11 @@ public class MemberService {
 	public Member GoogleLogin(Member member) {
 		return memberMapper.GoogleLogin(member);
 	}
+
+	public void kakaoCallback(Member member) {
+		
+		memberMapper.kakaoCallback(member);
+	}
 	
 	
 
