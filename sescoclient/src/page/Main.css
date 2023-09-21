@@ -39,24 +39,31 @@
     height: 480px;
     background-color: rgb(255, 252, 223);
     border-radius: 8px;
-    margin-bottom: 130px;
+    margin-bottom: 100px;
+    margin-top: 50px;
 }
 
-.avatarAdd {
+.babyAdd {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    align-items: end;
+    justify-content: start;
     width: 60%;
-    height: 480px;
-    background-color: rgb(236, 236, 236);
-    border-radius: 8px;
-    text-align: center;
+}
+.babyAdd button{
+    margin-left: 15px;
+    width: 200px;
+    background: none;
+    color: #ff9f0e;
+    font-size: 30px;
+    font-weight: 600;
+    font-family: 'GangwonEduSaeeum_OTFMediumA';
 }
 
 .main2-avatarcontainer {
     display: flex;
     justify-content: center;
-    margin-top: 150px;
+    margin-top: 50px;
     align-items: center;
     flex-direction: column;
     margin-bottom: 100px;
@@ -118,25 +125,93 @@
     width: 30%;
     height: 50px;
     margin-left: 35%;
-    margin-top: 40px;
+    margin-top: 40px !important;
+    font-size: 25px !important;
+    padding-top: 10px !important;
+    border-radius: 50px !important;
+    background-color: #ffe658 !important;
+    color: #3d3d3d !important;
+    border-color: #ffe44b!important;
+    font-family: 'GangwonEduSaeeum_OTFMediumA' !important;
+}
+.addBabyInfoBtn:hover{
+    background-color: #ffcb5c !important;
+    border-color: #ffc547!important;
+    box-shadow: 0 2px 15px rgba(255, 152, 33, 0.8) !important;
+}
+.addBabyInfoBtn {
+    width: 250px !important;
+    height: 50px;
+    margin-left: 35%;
+    margin-top: 0px !important;
+    font-size: 25px !important;
+    padding-top: 10px !important;
+    border-radius: 20px !important;
+    background-color: #ffb158 !important;
+    color: #fcfcfc !important;
+    border-color: rgb(255, 162, 75)!important;
+    font-family: 'GangwonEduSaeeum_OTFMediumA' !important;
+}
+
+.main2babyAdd_txt{
+    position: relative;
+    border: none;
+    background: none;
+    bottom: 362px;
+    left: 370px;
+    font-family: 'GangwonEduSaeeum_OTFMediumA' !important;
+    font-size: 40px;
+    font-weight: 600;
+    color: #f7f7f7;
+    background-color: #ffffff2c;
+    padding: 20px 27px 10px 27px;
+    border-radius: 55px;
+}
+.main2babyAddImg{
+    position: relative;
+    top: 6px;
+    right: 130px;
+    transform: rotate(-7deg);
+}
+.main2babyAdd{
+    position: relative;
+    top: 100px;
+    margin-bottom: 50px;
+    border-radius: 70px;
+    box-shadow: 0 2px 15px rgba(156, 156, 156, 0.8) !important;
+}
+
+
+.saveBabyInfoBtn:hover{
+    background-color: #ffeb79 !important;
+    border-color: #ffe866!important;
 }
 
 #babyInfoInput1 {
     width: 140px;
     height: 40px;
     padding-left: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(212, 212, 212, 0.8);
+    border: 1.5px solid #cfcfcfa6;
 }
 
 #babyInfoInput2 {
     width: 140px;
     height: 40px;
     padding-left: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(212, 212, 212, 0.8);
+    border: 1.5px solid #cfcfcfa6;
 }
 
 #babyInfoInput3 {
     width: 140px;
     height: 40px;
     padding-left: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(212, 212, 212, 0.8);
+    border: 1.5px solid #cfcfcfa6;
 
 }
 
@@ -144,6 +219,9 @@
     width: 140px;
     height: 40px;
     padding-left: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(212, 212, 212, 0.8);
+    border: 1.5px solid #cfcfcfa6;
 }
 
 .saveBabyName {
@@ -294,13 +372,13 @@
 
 .babyNameTag {
     position: relative;
-    padding: 10px 40px 10px 40px;
+    padding: 10px 60px 10px 60px;
     border-radius: 30PX;
     height: 76px;
     border: 1px solid beige;
     background-color: rgb(197, 220, 255);
     right: 21%;
-    top: 34px;
+    top: 85px;
     z-index: -1;
 }
 
