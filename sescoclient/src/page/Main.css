@@ -437,6 +437,7 @@
     font-size: 60px;
     margin-left: 25px;
     text-align: center;
+    color: #8f8f8f;
 
 }
 
@@ -655,7 +656,7 @@
     align-items: center;
     padding: 60px 40px;
     z-index: 5;
-    margin-top: 30px;
+    margin-top: 15px;
 }
 
 .main1_avatar_card {
@@ -774,13 +775,12 @@
 }
 
 .diaryIcon_box {
-    width: 87px;
-    height: 87px;
+    width: 60px;
+    height: 60px;
     border-radius: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 20px;
     cursor: pointer;
 
 }

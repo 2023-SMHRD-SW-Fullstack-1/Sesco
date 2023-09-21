@@ -58,7 +58,7 @@ const Main2 = () => {
         }
           
           <div className='avatarAdd'>
-            <button onClick={()=>BabyAddClicked()}>아이 추가</button>
+            <button onClick={()=>BabyAddClicked()}>{babyAdd?"취소":"아이 추가"}</button>
           </div>
 
 
