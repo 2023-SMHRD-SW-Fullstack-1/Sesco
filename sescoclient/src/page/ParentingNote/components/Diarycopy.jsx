@@ -194,6 +194,7 @@ console.log("너 뭐들었니?",selectedDiaryList);
               eventTextColor={"#FFF"}
               eventColor={"#F2921D"}
               height={"300px"}
+              width={"100%"}
             />
           </div>
 

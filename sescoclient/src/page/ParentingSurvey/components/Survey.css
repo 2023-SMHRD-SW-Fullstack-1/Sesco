@@ -83,12 +83,17 @@
 .survey-bottom-container {
   display: flex;
   justify-content: center;
+  height: 80px;
   margin-top: 60px;
 }
 
 .surBox1-container {
   width: 100%;
   margin-right: 20px;
+}
+
+.disEnough-container{
+  margin-bottom: 20px;
 }
 
 

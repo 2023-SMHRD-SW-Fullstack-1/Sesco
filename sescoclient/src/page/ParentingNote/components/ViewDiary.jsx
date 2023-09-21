@@ -230,23 +230,23 @@ const ViewDiary = ({ selectdate, noteData}) => {
 
     const handleDeleteDiary = async () => {
       try {
-        const dSeqToDelete = selectdate[current].d_seq;
+        const dSeqToDelete = selectdate[current].d_seq
         const response = await axios.post(
           `http://localhost:8081/sesco/diary/delete`, {d_seq: dSeqToDelete}
-        );
+        )
   
         if (response.status === 200) {
           // 삭제 요청이 성공한 경우
           // 이후에 필요한 작업 수행 (예: 일기 목록 다시 불러오기)
-          console.log("Diary deleted successfully.");
+          console.log("Diary deleted successfully.")
           // 다음 일기 또는 이전 일기로 이동하거나 원하는 작업 수행
           // 예: getNext(), getPrevious() 호출 또는 다른 작업 수행
         } else {
           // 실패한 경우에 대한 처리
-          console.error("Failed to delete diary.");
+          console.error("Failed to delete diary.")
         }
       } catch (error) {
-        console.error("Error while deleting diary:", error);
+        console.error("Error while deleting diary:", error)
       }
     };
 
@@ -307,13 +307,13 @@ const ViewDiary = ({ selectdate, noteData}) => {
         // View mode
         <div className="view-container">
           <div className="view-box">
-            <p className="view-diary-title">{selectdate[current].title}</p>
-            <p>{selectdate[current].content}</p>
             {selectdate[current].img && (
               <div className="view-diary-img-box">
                 <img className="view-diary-img" src={"data:image/;base64," + selectdate[current].img} alt="" />
               </div>
             )}
+            <p className="view-diary-title">{selectdate[current].title}</p>
+            
             {tags.length > 0 && (
               <div className="tag-box">
                 {tags.map((tag, index) => (
@@ -322,10 +322,12 @@ const ViewDiary = ({ selectdate, noteData}) => {
               </div>
             )}
 
-              <div>
-                <button onClick={getPrevious}>이전</button>
-                <button onClick={getNext}>다음</button>
-              </div>
+            <p className="view-diary-content">{selectdate[current].content}</p>
+
+            <div>
+              <button onClick={getPrevious}>이전</button>
+              <button onClick={getNext}>다음</button>
+            </div>
 
             <button onClick={handleEditClick}>수정하기</button>
             <button onClick={handleDeleteDiary}>일기 삭제</button>
