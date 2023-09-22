@@ -46,7 +46,15 @@
     inset -10px 0 30px -10px rgba(0,0,0,.3),
     -2px 2px 1px rgba(0,0,0,.8);
 }
-
+.fc .fc-scrollgrid table{
+  width: 100% !important;
+}
+.fc-col-header{
+  width: 100% !important;
+}
+.fc .fc-daygrid-body{
+  width: 100% !important;
+}
 /** Right Page **/
 .diary-right-container {
   position: absolute;

@@ -142,6 +142,9 @@ const Main2Avatar = ({ baby }) => {
     const moveToTip = () => {
         sessionStorage.setItem("kid_seq", baby.kid_seq)
     }
+    const moveToDiary = () => {
+        sessionStorage.setItem("kid_seq", baby.kid_seq)
+    }
 
     return (
         <>
@@ -166,7 +169,7 @@ const Main2Avatar = ({ baby }) => {
                     <div className='avatar-contents'>
                         {/* 아이 정보 */}
                         <div className='avatar-content'>
-                            <div className='avatar-context'><img src={babyAgeIcon} /> 출생년도<br />{baby?.kid_birth}</div>
+                            <div className='avatar-context'><img src={babyAgeIcon} />출생년도<br />{baby?.kid_birth}</div>
                             <div className='avatar-context'><img src={babyGenderIcon} />성별 <br /> {baby?.kid_gender == 'M' ? '남' : '여'}아</div>
                         </div>
                         <div className='avatar-content'>
@@ -193,11 +196,17 @@ const Main2Avatar = ({ baby }) => {
                         {/* 메뉴 아이콘 */}
                         <div className='avatar-content'>
                             <div className='avatarIcon-context'>
-                                <img width={'100px'} src={diaryIcon} />
-                                <img width={'100px'} src={galleryIcon} />
-                                <Link to="/tip" onClick={() => moveToTip()}>
+                                <a href="/note" onClick={() => moveToDiary()} >
+                                    <img width={'100px'} src={diaryIcon} />
+
+                                </a>
+                                <a href="/gallery">
+
+                                    <img width={'100px'} src={galleryIcon} />
+                                </a>
+                                <a href="/tip" onClick={() => moveToTip()}>
                                     <img width={'100px'} src={tipIcon} />
-                                </Link>
+                                </a>
                             </div>
                         </div>
                     </div>
