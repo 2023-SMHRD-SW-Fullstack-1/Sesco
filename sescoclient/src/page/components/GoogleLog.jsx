@@ -7,6 +7,7 @@ import styled from 'styled-components'
 import { keyframes } from 'styled-components';
 import { Button, Alert} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import '../../components/Login.css'
 
 const GoogleLog = () => {
   const clientId = '620860754662-apr8p8bcdhhs98e8ug6iugr30rsv4l3d.apps.googleusercontent.com'
@@ -24,6 +25,9 @@ const GoogleLog = () => {
   const submitNick=()=>{
     const inputValue = inputRef.current.value;
     setIsError(false)
+    if(inputValue==null){
+      setIsError(!isError)
+    }else{
     axios.post('http://localhost:8081/sesco/member/googlejoin', {
       res : memberToken,
       user_nick : inputValue
@@ -36,11 +40,12 @@ const GoogleLog = () => {
         setIsError(!isError)
       }
     })
+    }
   }
 
  
   return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "80vh" }}>
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "40px" }}>
       <div>
       <GoogleOAuthProvider clientId={clientId}>
         <GoogleLogin
@@ -101,12 +106,15 @@ const createJoin = keyframes`
 const GoogleJoinContainer = styled.div`
   padding:50px;
   position:absolute;
+  top:100px;
   width:500px; 
   height:400px; 
-  animation:${createJoin} 0.7s
+  animation:${createJoin} 0.7s;
+  z-index: 15;
 `
 const GoogleJoinBox = styled.div`
   background-color:white;
+  z-index: 100;
   width:100%; 
   height:100%;
   // border : 3px solid #ff7f00;

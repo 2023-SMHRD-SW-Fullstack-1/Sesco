@@ -35,6 +35,7 @@ const [userInfo, setUserInfo] = useState(false);
 
 
 
+
     // 로그인 버튼
     const saveUserInfo = () => {
         fetchData();
@@ -55,11 +56,75 @@ const [userInfo, setUserInfo] = useState(false);
     }
 
     // 아이디 찾기 확인 버튼 
-    const findUserInfoResult = () => {
-        console.log("확인 버튼 이메일 : ", userEmail, "이름 : ", userName, "아이디: ", userIdCheck);
-
+    const findUserIdResult = () => {
+        console.log("확인 버튼 이메일 : ", userEmail, "이름 : ", userName);
+        findIdData()
+    }
+    const findUserPwResult=()=>{
+        findPwData()
     }
 
+    const findPwData=()=>{
+        const requestData = {
+            user_id : userIdCheck,
+            user_email: userEmail,
+            user_name : userName
+        };
+        axios.post(`http://localhost:8081/sesco/member/searchpw`, requestData, config)
+            .then((res) => {
+
+                try {
+                    // id와 pw가 로그인정보와 일치하다면
+                        
+                        // 세션에 id, nick, sns 정보 저장
+                        // sessionStorage.getItem(user_pw);
+                        // console.log(user_id);
+                        // 로그인 여부 : true 
+                       
+                        console.log( 'res',res.data);
+                        console.log(sessionStorage.user_id);
+                        if(res.data){
+                            alert(`회원님의 아이디 : ${res.data} 입니다`)
+                        }else{
+                            alert('일치하는 비밀번호가 없습니다')
+
+                        }
+                } catch {
+                    alert('조회 실패')
+                    console.log('res',res.data);
+                }
+            })
+    }
+    const findIdData=()=>{
+        const requestData = {
+            user_email: userEmail,
+            user_name : userName
+        };
+        axios.post(`http://localhost:8081/sesco/member/searchid`, requestData, config)
+            .then((res) => {
+
+                try {
+                    // id와 pw가 로그인정보와 일치하다면   
+                        // 세션에 id, nick, sns 정보 저장
+                        sessionStorage.getItem(user_id);
+                        console.log(user_id);
+                        // 로그인 여부 : true 
+                        if(res.data){
+                            alert(`회원님의 아이디 : ${res.data} 입니다`)
+                        }else{
+                            alert('일치하는 아이디가 없습니다')
+
+                        }
+                        console.log( 'res',res.data);
+                        console.log(sessionStorage.user_id);
+                 
+                } catch {
+                    alert('조회 실패')
+                    console.log('res',res.data);
+                }
+            })
+    }
+    
     const fetchData = () => {
         const requestData = {
             user_id: user_id,
@@ -108,9 +173,16 @@ const [userInfo, setUserInfo] = useState(false);
                             onChange={(e) => { userInfoIdPw ? setUserName(e.target.value) : setUserIdCheck(e.target.value) }}
                             value={userInfoIdPw ? userName : userIdCheck} />
                     </div>
+                    {!userInfoIdPw?
+                    <div className='idInput'>
+                        <input className='loginInputId' placeholder='이름 입력해주세요' type='text' onChange={(e) => setUserName(e.target.value)} value={userName} />
+                    </div>
+                    :
+                    ""
+                    }
 
                     {/* 찾기 버튼 */}
-                    <button className='loginFindBtn' onClick={() => findUserInfoResult()}>확인</button>
+                    <button className='loginFindBtn' onClick={() =>{userInfoIdPw?findUserIdResult() : findUserPwResult()} }>확인</button>
 
                     {/* 결과 -> 아이디 or 비밀번호 표시란 */}
                     {userInfo ?
