@@ -54,9 +54,9 @@ public class MemberService {
 		return memberMapper.MemberLogin(user_id, user_pw);
 	}
 
-	// 회원정보수정
-	public void MemberUpdate(Member member) {
-		memberMapper.MemberUpdate(member);
+	// 아이디 찾기
+	public void SearchId(Member member) {
+		memberMapper.SearchId(member);
 	}
 
 	// 기존회원탈퇴
@@ -84,6 +84,11 @@ public class MemberService {
 		
 		memberMapper.GoogleJoin(member);
 
+	}
+
+	public void SearchPw(Member member) {
+		memberMapper.SearchPw(member);
+		
 	}
 	
 	

@@ -1,64 +1,63 @@
+.fc-day {
+    font-family: 'insungitCutelivelyjisu';
+}
 
 .fc-day-sun a {
     color: red !important;
     text-decoration: none;
-  }
+}
+
 .fc-day a {
     color: black;
     text-decoration: none;
-    
-  }
-
-.fc-col-header-cell-cushion, .fc-daygrid-day-number {
-  font-size: 15px !important;
-
 }
+
+.fc-col-header-cell-cushion,
+.fc-daygrid-day-number {
+    font-size: 15px !important;
+    color: rgb(236, 236, 231);
+}
+
 /* 제목 */
 .fc .fc-toolbar-title {
-    font-size: 11px;
+    font-size: 25px;
     margin: 0px;
     font-weight: bold;
-    color : rgb(177, 136, 136)
-    
-  }
-
-.fc-toolbar-title {
-    font-size: x-large !important;
-  }
+    font-family: 'KCCMurukmuruk';
+    color: rgb(177, 136, 136)
+}
 
 .fc-event-title-container {
-  height: 30px;
-  font-size: 15px;
-  font-weight: bold;
-  color:rgb(45, 36, 49) ;
-  text-align: center;
+    height: 20px;
+    font-size: 10px;
+    font-family: 'insungitCutelivelyjisu';
+
+    color: rgb(45, 36, 49);
+    text-align: center;
 }
 
 .fc-border-bg-color {
-  z-index: -1 !important;
+    z-index: -1 !important;
 }
-
-.fc-event.fc-event-start.fc-event-end.fc-event-past.fc-daygrid-event.fc-daygrid-block-event.fc-h-event{
-    color: rgb(177, 136, 136) !important;
-}
-
 
 /* 오늘, 이전, 다음 */
-.fc-prev-button, .fc-next-button {
-    background-color:rgb(177, 136, 136) !important;
+.fc-prev-button,
+.fc-next-button {
+    background-color: rgb(177, 136, 136) !important;
     border-radius: 15px !important;
     border-color: rgb(177, 136, 136) !important;
     width: 50px;
     height: 40px;
-   }
+}
 
 
 .fc-today-button {
-  background-color:rgb(177, 136, 136) !important;
-  border-radius: 10px !important;
-  border-color: rgb(177, 136, 136) !important;
-  width: 50px;
-  height: 40px;
-  font-size: 20px;
-  align-items: center !important;
+    background-color: rgb(177, 136, 136) !important;
+    border-radius: 10px !important;
+    border-color: rgb(177, 136, 136) !important;
+    width: 50px;
+    height: 40px;
+    font-size: 20px;
+    align-items: center !important;
+
 }

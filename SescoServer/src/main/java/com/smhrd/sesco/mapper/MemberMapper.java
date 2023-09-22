@@ -33,8 +33,13 @@ public interface MemberMapper {
 	@Select("select * from t_member where user_id=#{user_id} and user_pw=#{user_pw} and user_d_yn='n'")
 	public Member MemberLogin(String user_id, String user_pw);
 
-	// 회원정보수정
-	public void MemberUpdate(Member member);
+	// 아이디 찾기
+	@Select("select user_id from t_member where user_nick=#{user_nick} and user_email=#{user_email}")
+	public void SearchId(Member member);
+	
+	//비밀번호 찾기
+	@Select("select user_pw from t_member where user_id=#{user_id}, user_email=#{user_email}, user_nick=#{user_nick}")
+	public void SearchPw(Member member);
 
 	// 기존회원탈퇴
 	@Update("update t_member set user_d_yn='y' where user_id=#{user_id}")
@@ -55,6 +60,9 @@ public interface MemberMapper {
 
 	// 구글 회원가입
 	public void GoogleJoin(Member member);
+
+	
+	
 
 
 }
