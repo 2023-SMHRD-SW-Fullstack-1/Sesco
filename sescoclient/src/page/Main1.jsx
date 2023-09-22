@@ -12,11 +12,10 @@ import testImg from '../img/main1/testImg.png'
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Button from 'react-bootstrap/Button';
 import './Main1.scss'
 import LoginFrom from '../components/LoginFrom'
 import MainMenu from './MainMenu'
-
+import { HiChevronDoubleDown } from "react-icons/hi2";
 
 // 메인 갤러리 설명란 책 클래스
 const Page = React.forwardRef((props, ref) => {
@@ -68,42 +67,15 @@ const Main1 = () => {
 
   };
 
-  const nav = useNavigate();
-  // 미니 아이콘 클릭 체크 
-  const [bookIconClick,setBookIconClick] =useState(false);
-  const [galleryIconClick,setGalleryIconClick] =useState(false);
-  const [tipIconClick,setTipIconClick] =useState(false);
-
   // 로그인 버튼 클릭 체크 
   const [loginClick,setLoginClick]=useState(false);
 
 
-const handleMiniIconsClicked=(item)=>{
-  switch (item) {
-    case 'book':
-      setBookIconClick(true);
-      setGalleryIconClick(false);
-      setTipIconClick(false);
-      break;
-    case 'gallery':
-      setGalleryIconClick(true);
-      setBookIconClick(false);
-      setTipIconClick(false);
-      break;
-    case 'tip':
-      setTipIconClick(true);
-      setGalleryIconClick(false);
-      setBookIconClick(false);
-      break;
-  }
-}
 
 const handleLoginBtnClick =()=>{
   setLoginClick(!loginClick);
   console.log('로그인 버튼' , loginClick);
 }
-
-console.log('book',bookIconClick, 'gallery',galleryIconClick,'tip',tipIconClick);
 
 
 
@@ -114,7 +86,7 @@ const [menuFixed, setMenuFixed] = useState(false);
 useEffect(() => {
   const handleScroll = () => {
     const scrollPosition = window.scrollY;
-    if (scrollPosition >= 1335 && scrollPosition<=2097) {
+    if (scrollPosition >= 1135 && scrollPosition<=2097) {
       setIsMenuVisible(true);
       setMenuFixed(false)
       console.log('현재 스크롤',window.scrollY,'픽스',menuFixed,'메뉴',isMenuVisible);
@@ -152,7 +124,7 @@ useEffect(() => {
       }}>
         {/* 'main1_menu' */}
               <div className={isMenuVisible&&!menuFixed? 'menuVisible': isMenuVisible && menuFixed? 'noMenuVisible':"defaultMenu"}>
-                <MainMenu/> 
+                <MainMenu setLoginClick={setLoginClick}/> 
 
               </div>
         <div className='main1_infoBackground'>
@@ -186,7 +158,7 @@ useEffect(() => {
 
             </div>
             <Link to="DetailInfo" spy={true} smooth={false}>
-              <button className='mainImg_scrollBtn' variant="btntoggle">⇓</button>
+              <button className='mainImg_scrollBtn' variant="btntoggle"><HiChevronDoubleDown/></button>
             </Link>
           </div>
         </div>
@@ -198,28 +170,28 @@ useEffect(() => {
 
             <div className='diaryIcon'>
               <img src={bookIcon} style={{ width: '170px', height: '150px', marginTop: '15px', marginBottom: '10px' }} />
-              <span>다이어리</span>
+              <span>내 아이를 위한 <br/>일기를 기록 해보세요</span>
               <Link to="diaryDetail" spy={true} smooth={false}>
                 <p variant="btntoggle">⇓</p>
-                <button className='detailBtn' onClick={()=>handleMiniIconsClicked('book')}>자세히보기</button>
+                <button className='detailBtn' >자세히보기</button>
               </Link>
             </div>
 
             <div className='galleryIcon'>
               <img src={galleryIcon} style={{ width: '160px', height: '150px', marginTop: '25px' }} />
-              <span>갤러리</span>
+              <span>내 아이와의 추억을<br/> 확인할 수 있어요</span>
               <Link to="galleryDetail" spy={true} smooth={false}>
                 <p variant="btntoggle">⇓</p>
-                <button className='detailBtn' variant="btntoggle" onClick={()=>handleMiniIconsClicked('gallery')}>자세히보기</button>
+                <button className='detailBtn' variant="btntoggle">자세히보기</button>
               </Link>
             </div>
 
             <div className='tipIcon'>
               <img src={tipIcon} style={{ width: '170px', height: '175px' }} />
-              <span>육아TIP</span>
+              <span>육아TIP을 <br/>받아볼 수 있어요</span>
               <Link to="tipDetail" spy={true} smooth={false}>
                 <p variant="btntoggle">⇓</p>
-                <button className='detailBtn' variant="btntoggle" onClick={()=>handleMiniIconsClicked('tip')}>자세히보기</button>
+                <button className='detailBtn' variant="btntoggle">자세히보기</button>
               </Link>
             </div>
 

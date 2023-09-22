@@ -76,6 +76,13 @@
     width: 63%;
    
 }
+.passwordCheck_txt{
+    display: flex;
+    font-size: 12px;
+    margin: 8px;
+    width: 63%;
+   color: rgb(255, 33, 33);
+}
 .name_nick_txt span{
     margin-right: 110px;
 }

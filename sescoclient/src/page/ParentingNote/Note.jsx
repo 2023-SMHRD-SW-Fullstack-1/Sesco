@@ -217,8 +217,8 @@ const Note = () => {
       }
     }
 
-    if( kidSelect ){
-    getNotesByKid();
+    if (kidSelect) {
+      getNotesByKid();
     }
   }, [kidSelect]);
 
@@ -248,6 +248,12 @@ const Note = () => {
   const handleTagSearch = async () => {
 
     console.log("검색 결과는 : ", currentSearchTag)
+    //태그 검색 후 다이어리가 열려있을때 다시 태그검색할 때 다이어리 닫음
+    if (isDiaryOpen === true) {
+      setSelectedNoteSeq(null);
+      setIsDiaryOpen(false)
+    }
+
 
     try {
       if (searchTag.trim() === "") return;
@@ -258,20 +264,20 @@ const Note = () => {
       setTagSearchResult(response.data);
 
       // 응답 데이터를 기반으로 클릭 가능한 노트와 클릭 불가능한 노트를 업데이트
-    const newClickableNotes = [];
-    const newLockedNotes = [];
-    response.data.forEach((note) => {
-      // 여기에서 클릭 가능 여부를 판단하고, 클릭 가능한 노트와 클릭 불가능한 노트로 분류
-      const isClickable = clickableNotes
-      if (isClickable) {
-        newClickableNotes.push(note);
-      } else {
-        newLockedNotes.push(note);
-      }
-    });
-    // 클릭 가능한 노트와 클릭 불가능한 노트를 업데이트
-    setClickableNotes(newClickableNotes);
-    setLockedNotes(newLockedNotes);
+      const newClickableNotes = [];
+      const newLockedNotes = [];
+      response.data.forEach((note) => {
+        // 여기에서 클릭 가능 여부를 판단하고, 클릭 가능한 노트와 클릭 불가능한 노트로 분류
+        const isClickable = clickableNotes
+        if (isClickable) {
+          newClickableNotes.push(note);
+        } else {
+          newLockedNotes.push(note);
+        }
+      });
+      // 클릭 가능한 노트와 클릭 불가능한 노트를 업데이트
+      setClickableNotes(newClickableNotes);
+      setLockedNotes(newLockedNotes);
       // 각 노트에 대한 태그 검색 결과 수 
       const newTagResultNumbers = {};
 
@@ -302,21 +308,40 @@ const Note = () => {
       //태그 검색 버튼 결과가 없을 때 
       if (Object.keys(response.data).length === 0) {
         alert("태그 검색 결과가 없습니다.😥")
-        // 첫째 아이의  수첩 불러오기
+        
+        //  아이의  수첩 다시 불러오기
         const reseponse = await axios.post('http://localhost:8081/sesco/note/createnotev2', { "kid_seq": kidSelect });
         setNotes(reseponse.data);
 
-        console.log("태그 검색 결과 없을때 다시 첫째 아이 : ", reseponse.data);
+
+        console.log("태그 검색 결과 없을때 다시 수첩 : ", reseponse.data);
+
+        // 클릭 가능한 노트와 클릭 불가능한 노트를 다시 판단
+
+        const currentYear = new Date().getFullYear();
+        const currentMonth = new Date().getMonth() + 1;
+        const newClickableNotes = [];
+        const newLockedNotes = [];
+
+        reseponse.data.forEach((note) => {
+          const noteYear = new Date(note.n_s_date).getFullYear();
+          const noteMonth = new Date(note.n_s_date).getMonth() + 1;
+
+          if (currentYear > noteYear || (currentYear === noteYear && currentMonth >= noteMonth)) {
+            newClickableNotes.push(note);
+          } else {
+            newLockedNotes.push(note);
+          }
+        })
+        setNotes(reseponse.data)
+        setClickableNotes(newClickableNotes);
+        setLockedNotes(newLockedNotes);
+        console.log("태그 검색 결과 없을 때 클릭 or 클릭 불가 : ", newClickableNotes)
+
+
       }
       setSearchTag("")
       setCurrentSearchTag(searchTag);
-
-      setClickableNotes(newClickableNotes);
-    setLockedNotes(newLockedNotes);
-      //    // 태그 검색 완료 후에 setCurrentSearchTag 호출
-      // const newCurrentSearchTag = searchTag; // 현재 검색어를 저장
-      // setCurrentSearchTag(newCurrentSearchTag);
-      //   console.log("태그 검색 완료 후 : ", currentSearchTag)
 
     } catch (e) {
       console.error("태그 검색 실패 : ", e)
@@ -336,6 +361,8 @@ const Note = () => {
   useEffect(() => {
     console.log("태그 검색 완료 후11 : ", currentSearchTag);
     setCurrentSearchTag(currentSearchTag)
+
+
   }, [currentSearchTag]); // currentSearchTag 상태가 변경될 때마다 실행
 
 
@@ -398,7 +425,7 @@ const Note = () => {
           tagSearchText={currentSearchTag}
           clickableNotes={clickableNotes}
           lockedNotes={lockedNotes}
-          
+
         />
 
         {/** 선택된 연도와 노트 있을 경우 다이어리 표시 */}
