@@ -156,14 +156,7 @@ const Note = () => {
           }
         }
 
-        // if(kidSeq){
-        //   setKidSelect(kidSeq)
-        //   console.log("kidSeq값있어요",kidSelect)
-        // }else if(response.data.length>0){
-        //   const firstKid = response.data[0];
-        //   setKidSelect(firstKid.kid_seq);
-        //   console.log("kidSeq값없어요",kidSelect)
-        // }
+
 
       } catch (e) {
         console.error("아이 정보 불러오기 실패", e)
