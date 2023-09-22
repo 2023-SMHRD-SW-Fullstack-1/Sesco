@@ -55,8 +55,8 @@ public class MemberService {
 	}
 
 	// 아이디 찾기
-	public void SearchId(Member member) {
-		memberMapper.SearchId(member);
+	public String SearchId(Member member) {
+		return memberMapper.SearchId(member);
 	}
 
 	// 기존회원탈퇴
@@ -86,9 +86,9 @@ public class MemberService {
 
 	}
 
-	public void SearchPw(Member member) {
-		memberMapper.SearchPw(member);
-		
+	//비밀번호 찾기
+	public String SearchPw(Member member) {
+		return (String) memberMapper.SearchPw(member);
 	}
 	
 	

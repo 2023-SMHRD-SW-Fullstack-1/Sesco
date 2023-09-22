@@ -87,27 +87,15 @@ public class MemberController {
 
 	// 아이디 찾기
 	@PostMapping(value = "member/searchid")
-	public JSONObject SearchId(@RequestBody Map<String, Object> map) {
-		System.out.println(map);
-		String user_email = map.get("user_email").toString();
-		String user_name = map.get("user_name").toString();
-		Member member = new Member(user_email,user_name);
-		memberService.SearchId(member);
-		JSONObject obj = new JSONObject();
-		obj.put("loginUser", member);
-		return obj;
+	public String SearchId(@RequestBody Member member) {
+		System.out.println("진입");
+		return memberService.SearchId(member);
 	}
 
 	//비밀번호 찾기
 	@PostMapping(value = "member/searchpw")
-	public JSONObject SearchPw(@RequestBody Member member) {
-		String user_id = member.getUser_id();
-		String user_email = member.getUser_email();
-		String user_nick = member.getUser_nick();
-		memberService.SearchPw(member);
-		JSONObject obj = new JSONObject();
-		obj.put("searchpw", obj);
-		return obj;
+	public String SearchPw(@RequestBody Member member) {
+		return memberService.SearchPw(member);
 	}
 	
 	// 기존회원 탈퇴
