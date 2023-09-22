@@ -3,7 +3,7 @@
     align-items: start;
     justify-content: start;
     top: 37%;
-    left: 60%;
+    left: 55%;
     width: 200px;
 }
 .banner{
@@ -36,7 +36,7 @@
     background-color: rgb(255, 255, 255);
     padding: 40px 50px 50px 50px;
     border-color: #D0E7E0;
-    border-radius: 5px;
+    border-radius: 10px;
     border-width: 5px;
     border-style: solid;
     text-align: left;
