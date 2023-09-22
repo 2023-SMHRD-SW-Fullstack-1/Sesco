@@ -24,6 +24,7 @@
     margin-left: 150px;
     margin-right: 800px;
     align-items: center;
+    font-family: 'insungitCutelivelyjisu';
 
 }
 
@@ -39,6 +40,7 @@
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
     margin-top: 100px;
     margin-left: 150px;
+    font-family: 'insungitCutelivelyjisu';
 
     
 }
@@ -53,6 +55,7 @@
     justify-content: flex-start;
     margin-left: 120px;
     margin-top: 50px;
+    font-family: 'insungitCutelivelyjisu';
     
 }
 
@@ -157,7 +160,7 @@
     background-color: #ffcccc;
     color: #ff6666;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-
+    font-family: 'insungitCutelivelyjisu';
 }
 
 /*수첩 클릭 시 연령 색 변경*/

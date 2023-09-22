@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState,useNavigate } from 'react'
 import NoteList from './components/NoteList'
 import noteBackground from './noteImg/noteBackground.png'
 import noteFind from './noteImg/noteFind.png'
@@ -8,6 +8,25 @@ import Diarycopy from './components/Diarycopy'
 
 const Note = () => {
 
+  const navigate = useNavigate();
+
+  let user_nick
+
+  const backToMain=()=>{
+    navigate("/")
+  }
+  
+  useEffect(() => {
+    //회원정보가 있는지 확인하기
+    //세션에서 회원정보 가져오기 ->null 오류처리 할것
+    let user_id = sessionStorage.getItem("user_id")
+    user_nick =sessionStorage.getItem("user_nick")
+
+    if(user_id == null || user_nick == null){
+       backToMain()
+    }
+  });
+  
 
   //세션에서 로그인한 유저 아이디/닉네임 정보가져오기
   const userId = sessionStorage.getItem("user_id");
