@@ -6,7 +6,7 @@ import './Survey.css';
 import '../../Main1.scss'
 
 function Survey({ kid, user_id }) {
-    const category = ['사회/정서적 영역', '언어/의사소통 영역', '인지(학습,사고,문제해결능력)', '운동/신체발달 영역'];
+    const category = ['사회/정서적 영역', '언어/의사소통 영역', '인지(학습,사고,문제해결력)', '운동/신체발달 영역'];
 
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -124,7 +124,7 @@ function Survey({ kid, user_id }) {
             // 현재 아이템의 체크상태 변경
             setPhysicalCheckList(physicalCheckList.includes(item.hsvd_seq) ? physicalCheckList.filter(id => id !== item.hsvd_seq) : [...physicalCheckList, item.hsvd_seq]);
         }
-        
+
     }
 
     function toggleXButton(item) {
@@ -164,7 +164,7 @@ function Survey({ kid, user_id }) {
             // 현재 아이템의 체크상태 변경
             setPhysicalXchecklist(physicalXCheckList.includes(item.hsvd_seq) ? physicalXCheckList.filter(id => id !== item.hsvd_seq) : [...physicalXCheckList, item.hsvd_seq]);
         }
-        
+
     }
 
 
@@ -218,6 +218,7 @@ function Survey({ kid, user_id }) {
                 });
                 const responseData = response.data;
                 setData(responseData);
+                console.log('res',response);
             } catch (error) {
                 console.error('데이터를 불러오는 중 오류 발생:', error);
                 setData([]);
@@ -237,6 +238,8 @@ function Survey({ kid, user_id }) {
     const filteredData2 = data.filter((item) => item.hsvd_category === category[1]);
     const filteredData3 = data.filter((item) => item.hsvd_category === category[2]);
     const filteredData4 = data.filter((item) => item.hsvd_category === category[3]);
+
+    console.log('인지', filteredData3.hsvd_content);
 
     return (
         <div className="survey">
@@ -262,11 +265,17 @@ function Survey({ kid, user_id }) {
                                 <div className="sur_category">
                                     <h5>{category[0]}</h5>
                                 </div>
-                                <div className='OXselect'><div className='oselect'>⭕</div><div className='xselect'>❌</div></div>
+                         
+                                    <div className='OXselect'>
+                                        <div className='oselect'>⭕</div>
+                                        <div className='xselect'>❌</div>
+                                    </div>
+
+                                
                                 <div className="sur_content_detail">
                                     {filteredData1.map((item) => (
                                         <div className="survey_btncheck" key={item.id}>
-                                            <li>{item.hsvd_content}</li>
+                                            <li>- {item.hsvd_content}</li>
                                             <label>
                                                 <input
                                                     className="survey-oBtn"
@@ -294,7 +303,7 @@ function Survey({ kid, user_id }) {
                                 <div className="sur_content_detail">
                                     {filteredData2.map((item) => (
                                         <div className="survey_btncheck" key={item.id}>
-                                            <li>{item.hsvd_content}</li>
+                                            <li>- {item.hsvd_content}</li>
                                             <label>
                                                 <input
                                                     className="survey-oBtn"
@@ -322,7 +331,7 @@ function Survey({ kid, user_id }) {
                                 <div className="sur_content_detail">
                                     {filteredData3.map((item) => (
                                         <div className="survey_btncheck" key={item.id}>
-                                            <li>{item.hsvd_content}</li>
+                                            <li>- {item.hsvd_content}</li>
                                             <label>
                                                 <input
                                                     className="survey-oBtn"
@@ -350,7 +359,7 @@ function Survey({ kid, user_id }) {
                                 <div className="sur_content_detail">
                                     {filteredData4.map((item) => (
                                         <div className="survey_btncheck" key={item.id}>
-                                            <li>{item.hsvd_content}</li>
+                                            <li>- {item.hsvd_content}</li>
                                             <label>
                                                 <input
                                                     className="survey-oBtn"
@@ -359,7 +368,7 @@ function Survey({ kid, user_id }) {
                                                     onChange={() => toggleOButton(item)} />
                                             </label>
                                             <label>
-                                                
+
                                                 <input
                                                     className="survey-xBtn"
                                                     type="checkbox"
@@ -372,14 +381,14 @@ function Survey({ kid, user_id }) {
                             </div>
                             <div className="survey-bottom-container">
 
-                                <button id='mainloginBtn' className="main1_loginBtn" onClick={() => setShowPreSurveyResult(true)}>
+                                <button id='preMainloginBtn' className="main1_loginBtn" onClick={() => setShowPreSurveyResult(true)}>
                                     <span className="circle" aria-hidden="true">
                                         <span className="icon arrow"></span>
                                     </span>
-                                    <span className="button-text">이전 설문 불러오기</span>
+                                    <span className="preButton-text">이전 설문 불러오기</span>
                                 </button>
 
-                                <button id='mainloginBtn' className="main1_loginBtn" onClick={submitResult}>
+                                <button id='mainjoinBtn' className="main1_loginBtn" onClick={submitResult}>
                                     <span className="circle" aria-hidden="true">
                                         <span className="icon arrow"></span>
                                     </span>

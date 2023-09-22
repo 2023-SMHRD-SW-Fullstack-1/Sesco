@@ -14,6 +14,12 @@
     font-style: normal;
 }
 @font-face {
+    font-family: 'omyu_pretty';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
     font-family: 'Minhye';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Minhye.woff') format('woff');
     font-weight: normal;
@@ -450,9 +456,12 @@
 .babyCorrectInput1,
 .babyCorrectInput2 {
     margin: 0px 3px 0px 5px;
-    width: 44px;
-
+    width: 53px;
+    border-radius: 8px;
+    border: 1.5px solid rgb(104, 104, 104);
     text-align: center;
+    padding-left: 8px;
+    padding-top: 5px;
 }
 
 .main1_infoContainer {
@@ -1044,6 +1053,7 @@
 }
 .main1_tipContextImg{
     margin-left: 17px;
+    border-radius: 8px;
     width: 470px;
     box-shadow: 0 5px 10px rgba(77, 77, 77, 0.8);
 
