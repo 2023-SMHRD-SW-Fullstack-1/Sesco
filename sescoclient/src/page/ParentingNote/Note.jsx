@@ -6,7 +6,7 @@ import noteFind from './noteImg/noteFind.png'
 import './note.css';
 import Diarycopy from './components/Diarycopy'
 import { useNavigate } from 'react-router';
-const Note = () => {
+const Note = ({onTagClose}) => {
 
   const navigate = useNavigate();
 
@@ -129,6 +129,7 @@ const Note = () => {
 
   //----------Diary end----------//
 
+  
 
   ///-------------------------Note end ----------------------//
 
@@ -149,14 +150,15 @@ const Note = () => {
         //첫 번째 아이 선택
         if (response.data.length > 0) {
           if(kidSeq){
+            console.log("kidSeq있니 ",kidSeq)
             setKidSelect(kidSeq);
           }else{
+            
           const firstKid = response.data[0];
           setKidSelect(firstKid.kid_seq);
+          console.log("kidSeq없니 ",firstKid)
           }
         }
-
-
 
       } catch (e) {
         console.error("아이 정보 불러오기 실패", e)
@@ -392,10 +394,48 @@ const Note = () => {
     console.log("태그 검색 완료 후11 : ", currentSearchTag);
     setCurrentSearchTag(currentSearchTag)
 
-
   }, [currentSearchTag]); // currentSearchTag 상태가 변경될 때마다 실행
 
+  // 태그 검색 결과를 초기화하는 함수
+  const handleTagClose = async() => {
+    console.log("태그 취소 시 초기화 !  ", currentSearchTag)
+    setCurrentSearchTag(''); // 상태 초기화
+    setSelectedNoteSeq(null)
+    setIsDiaryOpen(false)
+    setSearchTag("")
+    setTagSearchResult({})
 
+     //  아이의  수첩 다시 불러오기
+     const reseponse = await axios.post('http://localhost:8081/sesco/note/createnotev2', { "kid_seq": kidSelect });
+     setNotes(reseponse.data);
+
+
+     console.log("태그 검색 결과 초기화 수첩 : ", reseponse.data);
+
+     // 클릭 가능한 노트와 클릭 불가능한 노트를 다시 판단
+
+     const currentYear = new Date().getFullYear();
+     const currentMonth = new Date().getMonth() + 1;
+     const newClickableNotes = [];
+     const newLockedNotes = [];
+
+     reseponse.data.forEach((note) => {
+       const noteYear = new Date(note.n_s_date).getFullYear();
+       const noteMonth = new Date(note.n_s_date).getMonth() + 1;
+
+       if (currentYear > noteYear || (currentYear === noteYear && currentMonth >= noteMonth)) {
+         newClickableNotes.push(note);
+       } else {
+         newLockedNotes.push(note);
+       }
+     })
+     setNotes(reseponse.data)
+     setClickableNotes(newClickableNotes);
+     setLockedNotes(newLockedNotes);
+     console.log("태그 검색 결과 없을 때 클릭 or 클릭 불가 : ", newClickableNotes)
+   
+    
+  };
 
 
   ///-------------------------TAG end ---------------------//
@@ -455,7 +495,7 @@ const Note = () => {
           tagSearchText={currentSearchTag}
           clickableNotes={clickableNotes}
           lockedNotes={lockedNotes}
-
+          onTagClose={handleTagClose}
         />
 
         {/** 선택된 연도와 노트 있을 경우 다이어리 표시 */}
