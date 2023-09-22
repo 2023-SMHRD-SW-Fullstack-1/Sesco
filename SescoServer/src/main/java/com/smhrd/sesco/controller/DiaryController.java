@@ -66,7 +66,8 @@ public class DiaryController {
 	//일기 등록
 		@PostMapping(value = "/diary/creatediary" , consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
 		public void DiaryRegister(@ModelAttribute Diary diary, @RequestPart(name = "file", required = false) MultipartFile file){
-			
+			String test = diary.getNote_seq();
+			System.out.println("test"+test);
 ////			 d_date 값을 String 타입으로 받아옴
 //	        String dateString = diary.getD_date().toString();
 //	        

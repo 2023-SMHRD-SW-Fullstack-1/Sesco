@@ -307,13 +307,15 @@ const ViewDiary = ({ selectdate, noteData}) => {
         // View mode
         <div className="view-container">
           <div className="view-box">
+            <div className="view-diary-title">제목 : {selectdate[current].title}</div>
             {selectdate[current].img && (
               <div className="view-diary-img-box">
                 <img className="view-diary-img" src={"data:image/;base64," + selectdate[current].img} alt="" />
               </div>
             )}
-            <p className="view-diary-title">{selectdate[current].title}</p>
             
+            <p className="view-diary-content">{selectdate[current].content}</p>
+
             {tags.length > 0 && (
               <div className="tag-box">
                 {tags.map((tag, index) => (
@@ -321,8 +323,6 @@ const ViewDiary = ({ selectdate, noteData}) => {
                 ))}
               </div>
             )}
-
-            <p className="view-diary-content">{selectdate[current].content}</p>
 
             <div>
               <button onClick={getPrevious}>이전</button>
