@@ -8,6 +8,7 @@ import "./diary.css";
 import ViewDiary from "./ViewDiary";
 import axios from "axios";
 import moment from 'moment';
+import "../../../../src/Fullcalendar.css"
 
 
 const Diarycopy = ({noteData}) => {
@@ -192,7 +193,7 @@ console.log("너 뭐들었니?",selectedDiaryList);
               selectable true
               eventDisplay={"block"}
               eventTextColor={"#FFF"}
-              eventColor={"#F2921D"}
+              eventColor={"rgb(236, 236, 231)"}
               height={"300px"}
               width={"100%"}
             />
