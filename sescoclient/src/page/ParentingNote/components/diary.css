@@ -3,7 +3,7 @@
 /** Notebook Base **/
 .diary-whole-container {
   position: absolute;
-  width: 1000px; height: 700px;
+  width: 1000px; height: 600px;
   top: 50%; left: 35%;
   margin: -175px 0 0 -250px;
   /* 위치 배치 수정 position: relative; */
@@ -39,29 +39,21 @@
   left: 10px; right: 50%;
   top: 10px; bottom: 10px;
   
-  background: #fdfaf0;
+  background: rgb(255, 255, 255);
   
   border-radius: 10px 0 0 10px;
   box-shadow:
     inset -10px 0 30px -10px rgba(0,0,0,.3),
     -2px 2px 1px rgba(0,0,0,.8);
 }
-.fc .fc-scrollgrid table{
-  width: 100% !important;
-}
-.fc-col-header{
-  width: 100% !important;
-}
-.fc .fc-daygrid-body{
-  width: 100% !important;
-}
+
 /** Right Page **/
 .diary-right-container {
   position: absolute;
   left: 50%; right: 10px;
   top: 10px; bottom: 10px;
   
-  background: #fdfaf0;
+  background: #ffffff;
   
   border-radius: 0 10px 10px 0;
   box-shadow:
@@ -121,49 +113,16 @@
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
-.fc .fc-toolbar-title {
-  font-size: 11px;
-  margin: 0px;
-}
+
 .diaryAddBtn{
-  height: 40px;
-  width: 40px;
-  background: #42A5F5;
-  border-radius: 30px;
-  position: absolute;
-  text-align: center;
-  color: #fff;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-size: 24px;
-  font-size: 1.5rem;
-  font-weight: 500;
-  z-index: 5;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  padding-bottom: 3px;
-  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.4);
-  -webkit-transition: all .2s ease-out;
-  transition: all .2s ease-out;
-  cursor: pointer;
+  border: 2px solid #cecece;
+  border-radius: 4px;
 }
 .diaryAddBtn:hover{
-  background: #66b1ee;;
-  -webkit-transform: scale(1.1);
-  -ms-transform: scale(1.1);
-  transform: scale(1.1);
-  -webkit-transition: all .2s ease-out;
-  transition: all .2s ease-out;
+  border: 2px solid #b9b9b9;
+  border-radius: 4px;
+  box-shadow: 1px 1px 1px 1px #dadada;
 }
-
 .oval-button {
   width: 90px;
   height: 30px;
@@ -181,8 +140,5 @@
 .b{
   display: flex;
   justify-content: space-around;
-  
-}
-.c{
   
 }

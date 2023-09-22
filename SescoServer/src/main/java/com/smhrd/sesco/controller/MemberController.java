@@ -1,4 +1,4 @@
-package com.smhrd.sesco.controller;
+  package com.smhrd.sesco.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -85,24 +85,19 @@ public class MemberController {
 		}
 	}
 
-	// 회원정보수정
-	@PostMapping(value = "member/update")
-	public JSONObject MemberUpdate(@RequestBody Map<String, Object> map) {
-		System.out.println(map);
-
-		String user_id = map.get("user_id").toString();
-		String user_pw = map.get("user_pw").toString();
-		String user_nick = map.get("user_nick").toString();
-		Member member = new Member(user_id, user_pw, user_nick);
-		memberService.MemberUpdate(member);
-		JSONObject obj = new JSONObject();
-		obj.put("loginUser", member);
-		// System.out.println("update obj : "+obj);
-
-		return obj;
-
+	// 아이디 찾기
+	@PostMapping(value = "member/searchid")
+	public String SearchId(@RequestBody Member member) {
+		System.out.println("진입");
+		return memberService.SearchId(member);
 	}
 
+	//비밀번호 찾기
+	@PostMapping(value = "member/searchpw")
+	public String SearchPw(@RequestBody Member member) {
+		return memberService.SearchPw(member);
+	}
+	
 	// 기존회원 탈퇴
 	@PostMapping("member/delete")
 	public void delete(@RequestBody Map<String, Object> map) {
