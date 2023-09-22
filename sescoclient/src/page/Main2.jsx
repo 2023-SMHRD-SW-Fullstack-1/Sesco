@@ -4,10 +4,15 @@ import Main2Avatar from './components/Main2Avatar';
 import './Main.css';
 import AvatarAddFrom from './components/AvatarAddFrom';
 import axios from 'axios';
+import main2babyAddImg from '../img/main2/main2babyAddImg.png'
+import main2babyAdd from '../img/main2/main2babyAdd.png'
+import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Main2 = () => {
   const [babyAdd, setBabyAdd] = useState(false);
   const [babyList,setBabyList] = useState([]);
+  const [babyAddCheck, setBabyAddCheck] = useState(true);
   const age = new Date();
   const month = age.getMonth()+1;
   const year = age.getFullYear();
@@ -18,6 +23,12 @@ const Main2 = () => {
   babyList.forEach( (item, index) => console.log(index,item.kid_birth))
   
   const BabyAddClicked=()=>{
+    if(babyList.length<=0 && babyAddCheck){
+      setBabyAddCheck(false)
+    }else if(babyList.length<=0 && !babyAddCheck){
+      setBabyAddCheck(true)
+
+    }
     if(babyAdd){
       setBabyAdd(false)
     }else{
@@ -51,15 +62,27 @@ const Main2 = () => {
       <Banner />
 
       <div className='main2-avatarcontainer'>
-      {babyList.map((baby,index)=><Main2Avatar key={index} baby={baby}/>)}
-        
+          <div className='babyAdd'>
+            <img className='main2babyAddImg' width={'85px'} src={main2babyAddImg}/>
+            <Button variant="warning" className='addBabyInfoBtn' onClick={()=>BabyAddClicked()}>{babyAdd?"등록 취소":"아이 등록하기"}</Button>
+          </div>
+          {babyList.length<=0 && babyAddCheck?
+            <div className='main2babyAddContainer'>
+              <img className='main2babyAdd' width={'900px'}height={'630px'}src={main2babyAdd}/>
+              <br/>
+              <button className='main2babyAdd_txt' onClick={()=>BabyAddClicked()}>등록된 아이가 없어요 ! <br/>아이를 등록해주세요.</button>
+              
+            </div>
+            :
+            ""
+            }
         {babyAdd &&
           <AvatarAddFrom  />
         }
+
+      {babyList.map((baby,index)=><Main2Avatar key={index} baby={baby}/>)}
+        
           
-          <div className='avatarAdd'>
-            <button onClick={()=>BabyAddClicked()}>아이 추가</button>
-          </div>
 
 
       </div>

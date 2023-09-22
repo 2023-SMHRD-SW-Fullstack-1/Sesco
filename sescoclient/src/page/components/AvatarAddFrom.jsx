@@ -3,7 +3,8 @@ import avatarBg from '../../img/avatarBg.png'
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+
 
 const AvatarAddFrom = () => {
 
@@ -127,7 +128,7 @@ const AvatarAddFrom = () => {
                         </div>
                     </div>
 
-                    <button className='saveBabyInfoBtn' onClick={() => saveKidInfo()}>등록하기</button>
+                    <Button variant="warning" className='saveBabyInfoBtn' onClick={() => saveKidInfo()}>등록하기</Button>
 
 
                 </div>

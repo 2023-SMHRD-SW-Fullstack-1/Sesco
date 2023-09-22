@@ -15,7 +15,7 @@
 /* 배경이미지 */
 .noteBackground {
   width: 100%;
-  height: 570px;
+  height: 350px;
   flex-shrink: 0;
 }
 
@@ -30,9 +30,9 @@
   font: 600 50px/50px;
   /* font-feature-settings: 'clig' off, 'liga' off;
   font-family: "Playfair Display", sans-serif; */
-  font-size: 50px;
+  font-size: 46px;
   font-style: normal;
-  font-weight: 600;
+  /* font-weight: 600; */
   line-height: 44px;
   letter-spacing: -0.64px;
 }
@@ -95,7 +95,7 @@
   background: #FFF;
   text-align: center;
   margin-top: 66px;
-  margin-bottom: 2813px;
+  /* margin-bottom: 2813px; */
   margin-left: 580px;
   margin-right: 45px;
   outline: none;
@@ -111,7 +111,7 @@
   background: #FCFCFC;
   box-shadow: 0px 0px 6px 0px #D9D9D9;
   margin-top: 66px;
-  margin-bottom: 2813px;
+  /* margin-bottom: 2813px; */
   margin-left: 45px;
   margin-right: 509px;
   color: #505050;
@@ -145,9 +145,9 @@
 }
 
 .diary-container.active {
-  min-height: 800px;
+  min-height: 300px;
   /* 다이어리가 나타날 때 노트가 가려지지 않도록 높이를 조절 */
-  margin-bottom: 400px;
+  margin-bottom: 370px;
 }
 
 @keyframes pop {
@@ -179,10 +179,7 @@
   position: absolute;
   top: 5px;
   right: 430px;
-  margin-top: 200px;
   height: auto;
-
-
 }
 
 .diary-close:hover {
