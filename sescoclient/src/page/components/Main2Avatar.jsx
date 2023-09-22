@@ -146,6 +146,11 @@ const Main2Avatar = ({ baby }) => {
         sessionStorage.setItem("kid_seq", baby.kid_seq)
     }
 
+    const moveToNote = ()=>{
+        sessionStorage.setItem("kid_seq",baby.kid_seq);
+        console.log("노트페이지로 이동 : ", baby.kid_seq)
+    }
+
     return (
         <>
 
