@@ -143,6 +143,11 @@ const Main2Avatar = ({ baby }) => {
         sessionStorage.setItem("kid_seq", baby.kid_seq)
     }
 
+    const moveToNote = ()=>{
+        sessionStorage.setItem("kid_seq",baby.kid_seq);
+        console.log("노트페이지로 이동 : ", baby.kid_seq)
+    }
+
     return (
         <>
 
@@ -193,7 +198,9 @@ const Main2Avatar = ({ baby }) => {
                         {/* 메뉴 아이콘 */}
                         <div className='avatar-content'>
                             <div className='avatarIcon-context'>
+                                <Link to="/note" onClick={() => moveToNote()}>
                                 <img width={'100px'} src={diaryIcon} />
+                                </Link>
                                 <img width={'100px'} src={galleryIcon} />
                                 <Link to="/tip" onClick={() => moveToTip()}>
                                     <img width={'100px'} src={tipIcon} />

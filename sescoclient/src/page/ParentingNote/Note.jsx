@@ -1,11 +1,11 @@
 import axios from 'axios';
-import React, { useEffect, useRef, useState,useNavigate } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import NoteList from './components/NoteList'
 import noteBackground from './noteImg/noteBackground.png'
 import noteFind from './noteImg/noteFind.png'
 import './note.css';
 import Diarycopy from './components/Diarycopy'
-
+import { useNavigate } from 'react-router';
 const Note = () => {
 
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const Note = () => {
     if(user_id == null || user_nick == null){
        backToMain()
     }
-  });
+  },[]);
   
 
   //세션에서 로그인한 유저 아이디/닉네임 정보가져오기
@@ -34,6 +34,8 @@ const Note = () => {
 
   //세션에 프로필에서 가져온 kidSeq값이 있는지 확인 
   const kidSeq = sessionStorage.getItem("kid_seq")
+
+ 
 
 
 
@@ -144,11 +146,25 @@ const Note = () => {
         const response = await axios.post('http://localhost:8081/sesco/kid/getkidlist', { user_id: userId })
         setKids(response.data)
         console.log("사용자 아이 불러오기 성공", response.data)
-        // 첫 번째 아이 선택
+        //첫 번째 아이 선택
         if (response.data.length > 0) {
+          if(kidSeq){
+            setKidSelect(kidSeq);
+          }else{
           const firstKid = response.data[0];
           setKidSelect(firstKid.kid_seq);
+          }
         }
+
+        // if(kidSeq){
+        //   setKidSelect(kidSeq)
+        //   console.log("kidSeq값있어요",kidSelect)
+        // }else if(response.data.length>0){
+        //   const firstKid = response.data[0];
+        //   setKidSelect(firstKid.kid_seq);
+        //   console.log("kidSeq값없어요",kidSelect)
+        // }
+
       } catch (e) {
         console.error("아이 정보 불러오기 실패", e)
       }
@@ -158,7 +174,7 @@ const Note = () => {
   }, []);
 
   //옵션 선택한 아이 저장 
-  const [kidSelect, setKidSelect] = useState(null)
+  const [kidSelect, setKidSelect] = useState(undefined)
 
   //<select> useRef
   const selectRef = useRef();
@@ -167,7 +183,9 @@ const Note = () => {
     console.log("fwfwfwfwfwfwfw", kidSeq)
     kidSeq ? selectRef.current.value = kidSeq : selectRef.current.selectedIndex = 0
     const temp = selectRef.current.value
+    if(!kidSeq){
     setKidSelect(temp)
+    }
   }
 
   //로드시 세션에 저장된 kid_seq값이 있는 경우에는 해당 아이로 설정 없는 경우에는 처음에있는 아이로 설정
