@@ -1,5 +1,6 @@
 import React from 'react';
 import  { useState, useEffect } from 'react';
+import { FcGoogle } from "react-icons/fc";
 
 function GoogleLogin() {
     const [authCode, setAuthCode] = useState(null);
@@ -26,8 +27,8 @@ function GoogleLogin() {
         }
       }, []);
     return (
-        <button onClick={handleLogin}>
-            구글로그인
+        <button className='login_googleBtn' onClick={handleLogin}>
+            <FcGoogle/> 구글로그인
         </button>
     );
 }

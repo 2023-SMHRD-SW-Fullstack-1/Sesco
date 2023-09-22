@@ -3,22 +3,61 @@ import './Login.css'
 import LoginImg from '../img/LoginImg.png'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import GoogleLogin from './GoogleLogin';
+
 
 
 
 const LoginFrom = () => {
+const nav = useNavigate();
 
-    const [user_id, setUserId] = useState('');
-    const [user_pw, setUserPw] = useState('');
-    const [user_nick, setUserNick] = useState('');
 
-    const nav = useNavigate();
+// 로그인시 유저 아이디 체크
+const [user_id, setUserId] = useState('');
+// 로그인시 유저 비밀번호 체크
+const [user_pw, setUserPw] = useState('');
+// 로그인시 유저 닉네임 체크
+const [user_nick, setUserNick] = useState('');
+// 로그인 화면 보여줄지 찾기 화면 보여줄지 확인
+const [findBtnClick, setFindBtnClick] = useState(false);
+// 찾기 화면 보여줄때 아이디 찾기 보여줄지 비밀번호 찾기 보여줄지 확인
+const [userInfoIdPw, setUserInfoIdPw] = useState(false);
+// 찾기시 이메일 저장
+const [userEmail, setUserEmail] = useState('');
+// 찾기시 이름 저장
+const [userName, setUserName] = useState('');
+// 찾기시 아이디 저장
+const [userIdCheck, setUserIdCheck] = useState('');
+// 찾기시 입력값에 일치한 결과 있는지 확인
+const [userInfo, setUserInfo] = useState(false);
+
+
+
+
+
+    // 로그인 버튼
     const saveUserInfo = () => {
         fetchData();
         console.log('user_id:', user_id, 'pw:', user_pw);
     }
     const config = {
         headers: { 'Content-Type': 'application/json;charset=UTF-8' }
+    }
+
+    // 아이디,비밀번호 찾기 버튼
+    const findUserInfo = (data) => {
+        if (data === 'id') {
+            setUserInfoIdPw(true);
+        } else {
+            setUserInfoIdPw(false);
+        }
+        { findBtnClick ? setFindBtnClick(false) : setFindBtnClick(true) }
+    }
+
+    // 아이디 찾기 확인 버튼 
+    const findUserInfoResult = () => {
+        console.log("확인 버튼 이메일 : ", userEmail, "이름 : ", userName, "아이디: ", userIdCheck);
+
     }
 
     const fetchData = () => {
@@ -53,38 +92,62 @@ const LoginFrom = () => {
     }
 
     return (
-        <div className='loginfrom'>
+        <>
+            {findBtnClick ?
+                // 아이디 찾기 /비밀번호 찾기 
 
-                <h2>로그인</h2>
-                {/* 이메일 입력 */}
-                <div className='idInput'>
-                    <input className='loginInputId' placeholder='아이디를 입력해주세요' type='text' onChange={(e) => setUserId(e.target.value)} value={user_id} />
+                <div className='loginfrom'>
+                    <h2>{userInfoIdPw ? '아이디 찾기' : '비밀번호 찾기'}</h2>
+                    {/* 이메일 입력 */}
+                    <div className='idInput'>
+                        <input className='loginInputId' placeholder='이메일을 입력해주세요' type='text' onChange={(e) => setUserEmail(e.target.value)} value={userEmail} />
+                    </div>
+                    {/* 이름/ 아이디 입력 */}
+                    <div className='pwInput'>
+                        <input className='passInput' placeholder={userInfoIdPw ? '이름을 입력해주세요' : '아이디를 입력해주세요'} type='text'
+                            onChange={(e) => { userInfoIdPw ? setUserName(e.target.value) : setUserIdCheck(e.target.value) }}
+                            value={userInfoIdPw ? userName : userIdCheck} />
+                    </div>
+
+                    {/* 찾기 버튼 */}
+                    <button className='loginFindBtn' onClick={() => findUserInfoResult()}>확인</button>
+
+                    {/* 결과 -> 아이디 or 비밀번호 표시란 */}
+                    {userInfo ?
+                        <div className='findResult'>{userInfoIdPw ? '아이디' : '비밀번호'} : </div>
+                        : ""
+                    }
+
                 </div>
 
+                :
 
-
-                {/* 비밀번호 입력 */}
-                <div className='pwInput'>
-                    <input className='passInput' placeholder='비밀번호를 입력해주세요.' type='password' onChange={(e) => setUserPw(e.target.value)} value={user_pw} />
+                // 일반 로그인 화면 
+                <div className='loginfrom'>
+                    <h2>로그인</h2>
+                    {/* 이메일 입력 */}
+                    <div className='idInput'>
+                        <input className='loginInputId' placeholder='아이디를 입력해주세요' type='text' onChange={(e) => setUserId(e.target.value)} value={user_id} />
+                    </div>
+                    {/* 비밀번호 입력 */}
+                    <div className='pwInput'>
+                        <input className='passInput' placeholder='비밀번호를 입력해주세요.' type='password' onChange={(e) => setUserPw(e.target.value)} value={user_pw} />
+                    </div>
+                    {/* 비밀번호 찾기 */}
+                    <div className='login_password_txt'>
+                        <button className='idFindBtn' onClick={() => findUserInfo('id')}>아이디 찾기</button>
+                        <button className='pwFindBtn' onClick={() => findUserInfo('pw')}>비밀번호 찾기</button>
+                    </div>
+                    {/* 로그인 버튼 */}
+                    <button className='loginBtn' onClick={() => saveUserInfo()}>로그인</button>
+                    {/* 소셜 로그인 버튼  */}
+                    <div className='login_socialBtns'>
+                        <GoogleLogin/>
+                    </div>
                 </div>
-                {/* 비밀번호 찾기 */}
-                <div className='login_password_txt'>
-                    <a href='#'>아이디 찾기</a>
-                    <a href='#'>비밀번호 찾기</a>
-                </div>
-                
-                {/* 로그인 버튼 */}
-                <button className='loginBtn' onClick={() => saveUserInfo()}>로그인</button>
-                
-                {/* 소셜 로그인 버튼  */}
-                <div className='login_socialBtns'>
-                    <button className='login_googleBtn'>소셜 로그인</button>
-                </div>
+            }
 
-           
-
-
-        </div>
+        </>
     )
 }
 

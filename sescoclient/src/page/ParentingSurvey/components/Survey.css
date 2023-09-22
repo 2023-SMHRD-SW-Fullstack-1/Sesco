@@ -5,7 +5,7 @@
   top: 0px;
   bottom: 0px;
   width: 100%;
-  height: 238.5vh;
+  height: 294.2vh;
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
@@ -15,7 +15,8 @@
 
 /* modal창 */
 .modalBody {
-  position: absolute;
+  position: fixed;
+  top: 50px;
   width: 700px;
   height: auto;
   text-align: center;
@@ -43,23 +44,31 @@
   display: flex;
   height: auto;
   flex-direction: column;
-  justify-content: center
+  justify-content: center;
 }
 
 .survey-top-container {
   display: flex;
+  border-radius: 8px 8px  0px 0px;
   justify-content: center;
-  padding-bottom: 20px;
+  padding-bottom: 25px;
+  padding-top: 5px;
   background-color: #4590FF;
 }
 
-
+.survey-title{
+  font-family: 'insungitCutelivelyjisu';
+  font-size: 26px;
+  padding-top: 5px;
+  margin-bottom: 10px;
+}
 .survey-title-container {
   background-color: #4590FF;
   width: 100%;
   height: 50px;
   padding-top: 18px;
   text-align: center;
+  border-radius: 8px;
   color: aliceblue;
 }
 
@@ -91,9 +100,16 @@
   width: 100%;
   margin-right: 20px;
 }
+.disEnough_icon{
+  padding-bottom: 10px;
+}
 
 .disEnough-container{
   margin-bottom: 20px;
+}
+.disEnough-container h3{
+  font-family: 'GangwonEduSaeeum_OTFMediumA';
+  font-size: 38px;
 }
 
 
@@ -110,9 +126,9 @@
 }
 
 .sur_category {
-  padding-top: 20px;
-  padding-bottom: 13px;
+  padding-top: 15px;
   width: 100%;
+  font-family: 'GangwonEduSaeeum_OTFMediumA';
   height: auto;
   background-color: #1ab0ca;
   color: rgb(255, 255, 255);
@@ -120,10 +136,17 @@
   border-top-left-radius: 9px;
   border-top-right-radius: 9px;
 }
+.sur_category h5,
+.sur_category2 h5,
+.sur_category3 h5,
+.sur_category4 h5{
+  font-size: 34px;
+  padding-bottom: 0 !important;
+}
 
 .sur_category2 {
-  padding-top: 20px;
-  padding-bottom: 13px;
+  font-family: 'GangwonEduSaeeum_OTFMediumA';
+  padding-top: 15px;
   width: 100%;
   height: auto;
   background-color: #fc9d21;
@@ -133,8 +156,8 @@
 }
 
 .sur_category3 {
-  padding-top: 20px;
-  padding-bottom: 13px;
+  font-family: 'GangwonEduSaeeum_OTFMediumA';
+  padding-top: 15px;
   width: 100%;
   height: auto;
   background-color: #f34444;
@@ -144,8 +167,8 @@
 }
 
 .sur_category4 {
-  padding-top: 20px;
-  padding-bottom: 13px;
+  font-family: 'GangwonEduSaeeum_OTFMediumA';
+  padding-top: 15px;
   width: 100%;
   height: auto;
   background-color: #a373fc;
@@ -155,13 +178,16 @@
 }
 
 .sur_content {
+  font-family: 'GangwonEduSaeeum_OTFMediumA';
   display: flex;
   justify-content: space-around;
 }
 
 .sur_content_detail li {
   display: flex;
+  font-family: 'GangwonEduSaeeum_OTFMediumA';
   justify-content: left;
+  font-size: 20px;
   width: 70%;
   text-align: start;
   margin-right: 20px;
@@ -175,7 +201,6 @@
   flex-direction: column;
   justify-content: left;
   align-items: center;
-  margin-top: 10px;
   width: 100%;
   padding: 10px;
 }
@@ -200,7 +225,7 @@
 }
 
 .survey-all{
-  height: 1000px;
+  height: 800px;
   overflow-y: scroll;
 }
 
@@ -213,7 +238,7 @@
   justify-content: center;
   flex-direction: column;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .survey-result-Table {
@@ -221,7 +246,9 @@
   /* 테이블 셀 경계를 병합 */
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 80%;
+  margin-left: 72px;
+  
 }
 
 .survey-result-Table tr,
@@ -229,8 +256,8 @@
   
   /* 각 셀에 경계선 스타일 적용 */
   padding: 15px;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 35px;
+  padding-right: 35px;
   padding-top: 20px;
   
 }
