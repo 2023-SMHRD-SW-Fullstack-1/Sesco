@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./Login.css";
 import LoginImg from "../img/LoginImg.png";
 import axios from "axios";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+
 
 const Login = () => {
   const [user_id, setUserId] = useState("");
   const [user_pw, setUserPw] = useState("");
   const [user_nick, setUserNick] = useState("");
+
+
+
+  
 
   const nav = useNavigate();
 
@@ -15,51 +21,15 @@ const Login = () => {
     fetchData();
     console.log("user_id:", user_id, "pw:", user_pw);
   };
+
+
+
   const config = {
     headers: { "Content-Type": "application/json;charset=UTF-8" },
   };
-  // const clientId = "27256ac4e21a4b8106bcf1137ed16b87";
-  // const redirectUri = "http://localhost:3000/login/oauth2/callback/kakao";
-  // const KAKAO_AUTH_URI = `https://kauth.kakao.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code`;
-  // success : res=>{
-  //   const kakao_account = res.kakao_account
-  //   console.log(kakao_account);
-
     
-  // }
-  window.Kakao.init("27256ac4e21a4b8106bcf1137ed16b87")
-  const Kakao = () => {
-    window.Kakao.Auth.login({
-      scope: 'profile_nickname, profile_image, account_email',
-      success: async function (authObj) {
-        console.log(authObj);
-        const response = await window.Kakao.API.request({
-          url: '/v2/user/me',
-        });
-        const kakaoAccount = response.kakao_account;
-        console.log(kakaoAccount);
-  
-        // Kakao 사용자 정보를 Spring 서버로 전송
-        try {
-          await axios.post("http://localhost:8081/sesco/login/kakao", {
-            id: authObj.id, // Kakao 사용자 고유 ID
-            nickname: kakaoAccount.profile.nickname, // 닉네임
-            profile_image_url: kakaoAccount.profile.profile_image_url, // 프로필 이미지 URL
-            email: kakaoAccount.email, // 이메일
-          })
-          .then((res)=>{
-            console.log("Kakao 정보 서버로 전송 완료",res.data);
-            if(res.data.user_nick==null){
-              //미가입된 회원이니까 회원가입으로 넘겨서 닉네임 입력받고 스프링으로 회원가입 넘기면 댐!
-              
-            }
-          })
-        } catch (error) {
-          console.error("Kakao 정보 서버로 전송 실패:", error);
-        }
-      },
-    });
-  };
+
+ 
 
   const fetchData = () => {
     const requestData = {
@@ -134,8 +104,9 @@ const Login = () => {
             계정이 없으신가요? <a href="/join">회원가입</a>
           </p>
           {/* 소셜 로그인 버튼  */}
+          
           <div className="socialBtns">
-            <button className="kakaoBtn" onClick={Kakao}>
+            <button className="kakaoBtn">
               카카오
             </button>
             <button className="googleBtn">구글</button>
@@ -152,5 +123,7 @@ const Login = () => {
     </div>
   );
 };
+
+
 
 export default Login;

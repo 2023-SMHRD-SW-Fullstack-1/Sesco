@@ -50,8 +50,8 @@ public interface MemberMapper {
 
 
 	//카카오 로그인
-	@Select("select * from t_member where user_id=#{user_id} and user_name=#{user_name} and login_type=#{login_type}")
-	public void kakaoCallback(Member member);
+	@Select("select * from t_member where user_id=#{user_id} and user_name=#{user_name} and login_type='K'")
+	public Member kakaoCallback(Member member);
 
 	// 구글 회원가입
 	public void GoogleJoin(Member member);

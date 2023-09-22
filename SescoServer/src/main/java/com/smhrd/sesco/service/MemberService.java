@@ -76,9 +76,8 @@ public class MemberService {
 	}
 
 
-	public void kakaoCallback(Member member) {
-		
-		memberMapper.kakaoCallback(member);
+	public Member kakaoCallback(Member member) {
+		return memberMapper.kakaoCallback(member);
 	}
 	// 구글 회원가입
 	public void GoogleJoin(Member member) {
