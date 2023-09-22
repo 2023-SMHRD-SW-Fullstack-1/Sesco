@@ -1,42 +1,36 @@
-import React, { useEffect } from "react";
+// import React, { useEffect } from "react";
 
-import { useSearchParams } from "react-router-dom";
- 
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+// import { useSearchParams } from "react-router-dom";
 
-const Callback = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+// import axios from "axios";
+// import { useNavigate } from "react-router-dom";
 
-  const code = searchParams.get("code");
-  const navigate = useNavigate();
+// const Callback = () => {
+//   const [searchParams, setSearchParams] = useSearchParams();
 
-    console.log("code :", code);
-    const clientId = 'fa08f9dd3f1a65f4f4c681ca677d334c'
+//   const code = searchParams.get("code");
+//   const navigate = useNavigate();
 
-    const loginHandler = () => {
-        window.location.href = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${clientId}&redirect_uri=${redirectUri}&code=${code}"`
-      };
+//   console.log("code :", code);
+//   const clientId = "fa08f9dd3f1a65f4f4c681ca677d334c";
 
-      
-  return (
-    <div>
-      Callback
-      <button onClick={loginHandler}>
-          로그인
-        </button>
+//   const loginHandler = () => {
+//     window.location.href = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${clientId}&redirect_uri=${redirectUri}&code=${code}"`;
+//   };
 
-      <button
-        onClick={() => {
-          navigate("/about");
-        }}
-      >
-        이동
-      </button>
-    </div>
-  );
-};
+//   return (
+//     <div>
+//       Callback
+//       <button onClick={loginHandler}>로그인</button>
+//       <button
+//         onClick={() => {
+//           navigate("/about");
+//         }}
+//       >
+//         이동
+//       </button>
+//     </div>
+//   );
+// };
 
-
-export default Callback;
-
+// export default Callback;
