@@ -307,7 +307,7 @@ const ViewDiary = ({ selectdate, noteData}) => {
         // View mode
         <div className="view-container">
           <div className="view-box">
-            <div className="view-diary-title">{selectdate[current].title}</div>
+            <div className="view-diary-title">제목 : {selectdate[current].title}</div>
             {selectdate[current].img && (
               <div className="view-diary-img-box">
                 <img className="view-diary-img" src={"data:image/;base64," + selectdate[current].img} alt="" />
