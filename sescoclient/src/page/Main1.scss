@@ -34,7 +34,7 @@ $black: #282936;
   text-decoration: none;
   background: transparent;
   padding: 0;
-  &.main1_loginBtn, {
+  &.main1_loginBtn {
     width: 12rem;
     height: auto;
     .circle {
@@ -104,4 +104,18 @@ $black: #282936;
       color: $white;
     }
   }
+}
+
+.slick-prev{
+  content: url("../img/leftarrow.png");
+  width: 28px;
+  height: 28px;
+  left: -8%;
+}
+
+.slick-next{
+  content: url("../img/rightarrow.png");
+  width: 28px;
+  height: 28px;
+  right: -8%;
 }
