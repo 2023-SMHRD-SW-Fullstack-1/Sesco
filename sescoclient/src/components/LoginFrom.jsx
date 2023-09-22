@@ -84,7 +84,7 @@ const [userInfo, setUserInfo] = useState(false);
                         console.log( 'res',res.data);
                         console.log(sessionStorage.user_id);
                         if(res.data){
-                            alert(`회원님의 아이디 : ${res.data} 입니다`)
+                            alert(`회원님의 비밀번호는 ' ${res.data} '  입니다`)
                         }else{
                             alert('일치하는 비밀번호가 없습니다')
 
@@ -110,7 +110,7 @@ const [userInfo, setUserInfo] = useState(false);
                         console.log(user_id);
                         // 로그인 여부 : true 
                         if(res.data){
-                            alert(`회원님의 아이디 : ${res.data} 입니다`)
+                            alert(`회원님의 아이디는 ' ${res.data} ' 입니다`)
                         }else{
                             alert('일치하는 아이디가 없습니다')
 
