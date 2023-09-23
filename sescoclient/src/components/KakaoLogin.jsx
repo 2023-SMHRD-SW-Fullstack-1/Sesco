@@ -7,10 +7,8 @@ import styled from 'styled-components'
 import { keyframes } from 'styled-components';
 import { Button, Alert} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import '../../components/Login.css'
 
-const GoogleLog = () => {
-  const clientId = '620860754662-apr8p8bcdhhs98e8ug6iugr30rsv4l3d.apps.googleusercontent.com'
+const KakaoLogin = () => {
   const [memberToken, setMemberToken] = useState(0);
   const [isJoin, setIsJoin] = useState(false);
   const [isError,setIsError] = useState(false);
@@ -25,10 +23,7 @@ const GoogleLog = () => {
   const submitNick=()=>{
     const inputValue = inputRef.current.value;
     setIsError(false)
-    if(inputValue==null){
-      setIsError(!isError)
-    }else{
-    axios.post('http://localhost:8081/sesco/member/googlejoin', {
+    axios.post('http://localhost:8081/sesco/member/kakao', {
       res : memberToken,
       user_nick : inputValue
     }).then((res)=>{
@@ -40,47 +35,45 @@ const GoogleLog = () => {
         setIsError(!isError)
       }
     })
-    }
   }
-
+  window.Kakao.init("27256ac4e21a4b8106bcf1137ed16b87")
+  const Kakao = () => {
+    window.Kakao.Auth.login({
+      scope: 'profile_nickname, profile_image, account_email',
+      success: async function (authObj) {
+        console.log(authObj);
+        setMemberToken(authObj.access_token)
+        const response = await window.Kakao.API.request({
+          url: '/v2/user/me',
+        });
+        const kakaoAccount = response.kakao_account;
+        console.log(kakaoAccount);
+  
+        // Kakao 사용자 정보를 Spring 서버로 전송
+        try {
+          await axios.post("http://localhost:8081/sesco/login/kakao", {
+            id: authObj.id, // Kakao 사용자 고유 ID
+            nickname: kakaoAccount.profile.nickname, // 닉네임
+            email: kakaoAccount.email, // 이메일
+          })
+          .then((res)=>{
+            console.log("Kakao 정보 서버로 전송 완료",res.data);
+            if(res.data==null){
+              //미가입된 회원이니까 회원가입으로 넘겨서 닉네임 입력받고 스프링으로 회원가입 넘기면 댐!
+              
+            }
+          })
+        } catch (error) {
+          console.error("Kakao 정보 서버로 전송 실패:", error);
+        }
+      },
+    });
+  };
  
   return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "40px" }}>
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "80vh" }}>
       <div>
-      <GoogleOAuthProvider clientId={clientId}>
-        <GoogleLogin
-          useOneTap={false}
-          onSuccess={(res) => {
-            //console.log("성공")
-            //console.log(res);
-            const googleLogResult = async () => {
-              try {
-                const response = await axios.post('http://localhost:8081/sesco/member/googlelogin', {
-                   res: res.credential
-                }, config);
-
-                if (response.status === 200) {
-                setMemberToken(res.credential);
-                  if(response.data.Member==null){
-                    setIsJoin(!isJoin)
-                  }else{
-                    sessionStorage.setItem("user_nick",response.data.Member.user_nick)
-                    sessionStorage.setItem("user_id",response.data.Member.user_id)
-                    navigate('/main');
-                  }
-                }
-              } catch (error) {
-                console.error('결과 저장 중 오류 발생:', error);
-              }
-            };
-            googleLogResult();
-          }}
-          onFailure={(err) => {
-            console.log("실패")
-            console.log(err);
-          }}
-        />
-      </GoogleOAuthProvider>
+        
       </div>
       {isJoin && <GoogleJoinContainer>
           <GoogleJoinBox>
@@ -106,15 +99,12 @@ const createJoin = keyframes`
 const GoogleJoinContainer = styled.div`
   padding:50px;
   position:absolute;
-  top:100px;
   width:500px; 
   height:400px; 
-  animation:${createJoin} 0.7s;
-  z-index: 15;
+  animation:${createJoin} 0.7s
 `
 const GoogleJoinBox = styled.div`
   background-color:white;
-  z-index: 100;
   width:100%; 
   height:100%;
   // border : 3px solid #ff7f00;
@@ -138,4 +128,4 @@ const Input = styled.input`
   border: 2px solid rgba(194, 194, 194, 0.8);
 `
 
-export default GoogleLog
+export default KakaoLogin

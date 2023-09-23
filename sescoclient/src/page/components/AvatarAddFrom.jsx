@@ -89,6 +89,7 @@ const AvatarAddFrom = () => {
                             <div>
                                 <Form.Check
                                     inline
+                                    className='gendercheck'
                                     label="남"
                                     name="group1"
                                     type="radio"
@@ -98,6 +99,7 @@ const AvatarAddFrom = () => {
                                 />
                                 <Form.Check
                                     inline
+                                    className='gendercheck'
                                     label="여"
                                     name="group1"
                                     type="radio"

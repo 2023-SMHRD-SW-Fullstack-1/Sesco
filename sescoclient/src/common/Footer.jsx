@@ -10,19 +10,19 @@ const Footer = () => {
                 <FooterImage src={logo} alt="이미지" />
                     <FooterLinkTitle>Baby's 엄마들을 위한 수첩</FooterLinkTitle>
                     <FooterLinkContent>
-                        <FooterLink href="/">
+                        <FooterLink href="https://github.com/Qiga">
                             박정현
                         </FooterLink>
                         <FooterLink href="https://github.com/kimsohee12">
                             김소희
                         </FooterLink>
-                        <FooterLink href="/">
+                        <FooterLink href="https://github.com/LeeSeona-dev">
                             이선아
                         </FooterLink>
-                        <FooterLink href="/">
+                        <FooterLink href="https://github.com/CheonHyeonMin">
                             천현민 
                         </FooterLink>
-                        <FooterLink href="/">
+                        <FooterLink href="https://github.com/JaeSeongHong">
                             홍재성
                         </FooterLink>
                     </FooterLinkContent>

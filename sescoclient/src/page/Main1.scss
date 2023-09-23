@@ -13,7 +13,18 @@ $black: #282936;
         }
     }
 }
-.main1_loginBtn {
+#preMainloginBtn{
+    &.main1_loginBtn{
+        .circle {
+            background: rgb(253, 207, 0);
+        }
+    }
+}
+#preMainloginBtn{
+  width: 14.5rem !important;
+
+}
+.main1_loginBtn{
   position: relative;
   display: inline-block;
   cursor: pointer;
@@ -62,7 +73,8 @@ $black: #282936;
         }
       }
     }
-    .button-text {
+    .button-text,
+    .preButton-text {
       @include transition(all, 0.45s, cubic-bezier(0.65,0,.076,1));
       position: absolute;
       top: 0;
@@ -92,4 +104,18 @@ $black: #282936;
       color: $white;
     }
   }
+}
+
+.slick-prev{
+  content: url("../img/leftarrow.png");
+  width: 28px;
+  height: 28px;
+  left: -8%;
+}
+
+.slick-next{
+  content: url("../img/rightarrow.png");
+  width: 28px;
+  height: 28px;
+  right: -8%;
 }

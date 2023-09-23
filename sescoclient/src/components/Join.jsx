@@ -5,6 +5,8 @@ import { MDBInput } from 'mdb-react-ui-kit';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { FcGoogle } from "react-icons/fc";
+import GoogleLog from '../page/components/GoogleLog';
 
 
 const Join = () => {
@@ -120,7 +122,7 @@ const Join = () => {
 
                     {/* 소셜 로그인 버튼  */}
                     <div className='login_socialBtns'>
-                        <button className='login_googleBtn'>소셜 로그인</button>
+                        <GoogleLog/>
                     </div>
 
 

@@ -24,8 +24,11 @@
     margin-left: 150px;
     margin-right: 800px;
     align-items: center;
+    font-family: 'insungitCutelivelyjisu';
 
 }
+
+
 
 /*태그 결과 텍스트로 */
 
@@ -39,11 +42,33 @@
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
     margin-top: 100px;
     margin-left: 150px;
-
+    font-family: 'insungitCutelivelyjisu';
+    align-items: center
     
 }
 
 
+.tagResultText{
+    display: flex;
+    align-items: center; 
+  }
+
+  .tagClose {
+    background-color: #ff6666;
+    width: 60px;
+    font-size: 20px;
+    line-height: 32px;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    transition: transform 0.3s ease-in-out;
+    border-radius: 10px;
+    height: auto;
+    margin-top: 100px;
+    margin-left: 30px;
+    font-family: 'insungitCutelivelyjisu';
+  }
 
 
 /* 수첩 영역 */
@@ -53,6 +78,7 @@
     justify-content: flex-start;
     margin-left: 120px;
     margin-top: 50px;
+    font-family: 'insungitCutelivelyjisu';
     
 }
 
@@ -157,8 +183,9 @@
     background-color: #ffcccc;
     color: #ff6666;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-
+    font-family: 'insungitCutelivelyjisu';
 }
+
 
 /*수첩 클릭 시 연령 색 변경*/
 .selected-note-text {
@@ -200,4 +227,5 @@
 .allNoteList-container{
     height: fit-content;
     margin-bottom: 300px;
+    
 }

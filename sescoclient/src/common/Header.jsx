@@ -9,7 +9,7 @@ import { GoPerson, GoPersonAdd } from "react-icons/go";
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
-  const [log, setLog] = useState('로그인');
+  const [logo, setLogo] = useState(false);
   const [clickHome, setClickHome] = useState(true);
   const [menuContext, setMenuContext] = useState('');
   const [clickTip, setClickTip] = useState(false);
@@ -85,7 +85,11 @@ const Header = () => {
   return (
     <div>
       <HeaderLogoContainer >
+        {!user_id?
+        <HeaderImgLogsize onClick={() => handleClickLogo()} />
+        :
         <HeaderImgLogo onClick={() => handleClickLogo()} />
+        }
         <HeaderLJContainer>
           {!user_id ?
             ""
@@ -174,9 +178,13 @@ width:85px;
 margin:10px 10px 10px 20px;
 cursor:pointer;
 `;
+const HeaderImgLogsize = styled.img.attrs({src:  `${logo2}`})`
+width:120px;
+margin:15px 15px 10px 30px;
+cursor:pointer;
+`;
 const HeaderTabImgLogo = styled.img`
 width:110px;
-    
 margin-right:35px;
 height:40px;
 cursor:pointer;

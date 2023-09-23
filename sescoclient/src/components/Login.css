@@ -59,7 +59,10 @@
     width: 50%;
 }
 .joinInput_container h2{
-    margin-bottom: 35px;
+    margin-bottom: 30px;
+    font-family: 'GangwonEduSaeeum_OTFMediumA';
+    font-size: 42px;
+    font-weight: 600;
 }
 
 
@@ -71,10 +74,17 @@
 .password_txt,
 .name_nick_txt{
     display: flex;
-    font-size: 12px;
-    margin: 8px;
-    width: 63%;
+    font-size: 20px;
+    font-family: 'GangwonEduSaeeum_OTFMediumA';
+    width: 75%;
+    padding: 5px 0px 0px 23px;
+    margin: 2px;
    
+}
+.joginBtn{
+    font-size: 26px;
+    font-weight: 400 !important;
+    font-family: 'GangwonEduSaeeum_OTFMediumA';
 }
 .passwordCheck_txt{
     display: flex;
@@ -83,8 +93,18 @@
     width: 63%;
    color: rgb(255, 33, 33);
 }
+.idFindBtn,
+.pwFindBtn{
+    background: none;
+    border: none;
+    color: rgb(0, 30, 197);
+}
+.idFindBtn:hover,
+.pwFindBtn:hover{
+    color: rgb(96, 120, 255);
+}
 .name_nick_txt span{
-    margin-right: 110px;
+    margin-right: 145px;
 }
 
 .login_jointxt{
@@ -104,8 +124,14 @@
 .login_password_txt{
     display: flex;
     width: 340px;
-    margin-bottom: 10px;
     justify-content: space-between;
+    font-family: 'GangwonEduSaeeum_OTFMediumA';
+    font-size: 22.5px;
+}
+.loginBtn{
+    font-family: 'GangwonEduSaeeum_OTFMediumA';
+    font-size: 25px;
+    padding-top: 3px;
 }
 .login_password_txt a{
     display: flex;
@@ -116,6 +142,20 @@
 .loginBtn{
     margin-top: 10px;
     margin-bottom: 16px;
+    width: 60%;
+    height: 40px;
+    border: none;
+    background-color: rgb(37, 131, 255);
+    border-radius: 8px;
+    color: rgb(243, 243, 243);
+    font-weight: 900;
+}
+.findResult{
+    margin-bottom: 47.7px;
+}
+.loginFindBtn{
+    margin-top: 10px;
+    margin-bottom: 47.7px;
     width: 60%;
     height: 40px;
     border: none;
@@ -139,6 +179,15 @@
 .passInput{
     width: 60%;
     margin-bottom: 19px;
+    font-size: 20px;
+    padding-top: 17px;
+    
+}
+.passInput{
+    font-family: 'omyu_pretty';
+}
+.loginInputId{
+    font-family: 'omyu_pretty';
 }
 .idInput,
 .pwInput{
@@ -169,7 +218,10 @@
     flex-direction: column;
 }
 .loginfrom h2{
-    margin-bottom: 40px;
+    margin-bottom: 24px;
+    font-family: 'GangwonEduSaeeum_OTFMediumA';
+    font-size: 45px;
+    font-weight: 600;
 }
 .socialBtns{
     width: 60%;
@@ -182,7 +234,15 @@
     width: 60%;
     display: flex;
     justify-content: center;
-    margin-bottom: 30px;
+    font-size: 24px;
+    margin-bottom: 26px;
+    padding-top: 2px;
+    font-family: 'GangwonEduSaeeum_OTFMediumA';
+}
+.loginFindBtn{
+    font-family: 'GangwonEduSaeeum_OTFMediumA';
+    padding-top: 5px;
+    font-size: 25px;
 }
 .img_container{
     display: flex;
@@ -233,6 +293,7 @@
     width: 55%;
     height: 720px;
     margin-top: 20px;
+    margin-bottom: 100px;
     display: flex;
     background-color: rgb(254, 255, 176);
     justify-content: center;
@@ -243,9 +304,8 @@
     flex-direction: column;
     width: 55%;
     height: 720px;
+    
 }
-
-
 
 
 
