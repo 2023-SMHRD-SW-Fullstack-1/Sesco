@@ -6,7 +6,8 @@ import './viewDiary.css'
 import Button from 'react-bootstrap/Button';
 
 
-const ViewDiary = ({ selectdate, noteData, fetchDiaryList}) => {
+
+const ViewDiary = ({ selectdate, noteData}) => {
   const [tags, setTags] = useState([]);
   const [current, setCurrent] = useState(0);
   const [isEditing, setIsEditing] = useState(false); // 수정 모드 플래그
@@ -29,10 +30,6 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList}) => {
     setNoteseq(noteData.noteSeq)
   },[])
 
-  useEffect(()=>{
-    console.log("tags",tags);
-    console.log("tagList",tagList);
-  })
   
   
 
@@ -53,6 +50,7 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList}) => {
       const tagsWithoutHash = selectdate[current].tags.filter(tag => !tag.includes('#'));
       setTags(tagsWithoutHash)
     } else {
+      
     }
   }, [selectdate, current]);
 
@@ -64,7 +62,6 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList}) => {
       // setEditedTags(selectdate[current].tag);
       setEditedImage(null); // 이미지는 초기화
       setEditedImagePreview(null);
-      setTags(selectdate[current].tags);
       setProvince(selectdate[current].img_do);
       setCity(selectdate[current].img_si);
     }
@@ -114,10 +111,9 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList}) => {
   };
 
   const deleteTagItem = (e) => {
-    e.preventDefault()
     const deleteTagItem = e.target.parentElement.firstChild.innerText;
-    const filteredTagList = tags.filter((tagItem) => tagItem !== deleteTagItem);
-    setTags(filteredTagList);
+    const filteredTagList = tagList.filter((tagItem) => tagItem !== deleteTagItem);
+    setTagList(filteredTagList);
   };
   
 
@@ -244,8 +240,7 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList}) => {
   
         if (response.status === 200) {
           // 삭제 요청이 성공한 경우
-          // 이후에 필요한 작업 수행 (예: 일기 목록 다시 불러오기) 
-          fetchDiaryList()
+          // 이후에 필요한 작업 수행 (예: 일기 목록 다시 불러오기)
           console.log("Diary deleted successfully.")
           // 다음 일기 또는 이전 일기로 이동하거나 원하는 작업 수행
           // 예: getNext(), getPrevious() 호출 또는 다른 작업 수행
@@ -266,20 +261,25 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList}) => {
     <div className="view-top-container">
       {isEditing ? (
         // Editing mode
-        <form>
-          <input
-            type="text"
-            placeholder="제목"
-            value={editedTitle}
-            onChange={(e) => setEditedTitle(e.target.value)}
-          />
-          <textarea
-            placeholder="내용"
-            value={editedContent}
-            onChange={(e) => setEditedContent(e.target.value)}
-          />
+        <form className="viewForm">
+          <div className="view-Editedtop-container">
+            <input
+            className="viewEditedTitle"
+              type="text"
+              placeholder="제목"
+              value={editedTitle}
+              onChange={(e) => setEditedTitle(e.target.value)}
+            />
+            <textarea
+            className="viewEditedContent"
+              placeholder="내용"
+              value={editedContent}
+              onChange={(e) => setEditedContent(e.target.value)}
+            />
+          </div>
+          
           <div className="tag-box">
-        {tags.map((tagItem, index) => (
+        {tagList.map((tagItem, index) => (
           <div className="tag-item" key={index}>
             <span>{tagItem}</span>
             <button className="cancel-tag-item" onClick={deleteTagItem}>X</button>
@@ -303,14 +303,16 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList}) => {
             )}
           </div>
           <input
+          className="imageUpload"
             type="file"
             accept="image/*"
             onChange={handleImageUpload}
           />
-          <button onClick={handleSaveChanges}>
-            수정 완료
-          </button>
-          <button onClick={handleCancelEdit}>취소</button>
+          <div className="changescontainer">
+
+          <Button variant="warning" className='changescontent' onClick={handleSaveChanges}>수정 완료</Button>
+          <Button variant="warning" className='changescontent' onClick={handleCancelEdit}>취소</Button>
+          </div>
         </form>
       ) : (
         // --------------------------------------View Mode----------------------------------
@@ -345,6 +347,7 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList}) => {
       </div>
       
       )}
+
      <button className="view-delete-btn" onClick={handleDeleteDiary}>일기 삭제</button>
      <button className="view-edit-btn" onClick={handleEditClick}>수정하기</button> 
     </div>

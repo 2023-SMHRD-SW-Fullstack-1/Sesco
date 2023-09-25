@@ -49,7 +49,7 @@ const MainMenu = ({setLoginClick}) => {
     return (
         <div>
             <div className='floating-menu' role="menu">
-                <button id="floating" aria-controls="floating-items" className={`floationbtn is-floating is-primary ${isActivated ? 'is-activate' : ''}`} onClick={() => handleFloatingClick()}><span><FiMenu/></span></button>
+                <button id="floating" aria-controls="floating-items" className={`btn is-floating is-primary ${isActivated ? 'is-activate' : ''}`} onClick={() => handleFloatingClick()}><span><FiMenu/></span></button>
                 
                 <a  id='loginMenu' className="is-floating" onClick={(event)=>handleLoginClick(event)}><FiUser className='icon'/><span>로그인</span></a>
                 <Link to="tipDetail" className='is-floating' spy={true} smooth={false} onClick={() => handleMiniIconsClicked('tip')}>
@@ -67,6 +67,10 @@ const MainMenu = ({setLoginClick}) => {
                         <img src={bookIcon} style={{ width: '50px' }} />
                     </div>
                 </Link>
+                
+                
+
+            
                 
             </div>
         </div>

@@ -3,6 +3,11 @@
 /** Notebook Base **/
 .fc .fc-daygrid-day-number{
   cursor: pointer !important;
+  
+}
+.fc .fc-daygrid-day-number:hover{
+  color: #0f3bff !important;
+
 }
 .diary-whole-container {
   position: relative;
