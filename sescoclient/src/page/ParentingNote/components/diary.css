@@ -1,6 +1,9 @@
 /* body {background: rgb(225, 228, 232)} */
 
 /** Notebook Base **/
+.fc .fc-daygrid-day-number{
+  cursor: pointer !important;
+}
 .diary-whole-container {
   position: relative;
   width: 1000px; 

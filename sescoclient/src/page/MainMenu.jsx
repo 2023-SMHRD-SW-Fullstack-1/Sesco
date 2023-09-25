@@ -68,10 +68,6 @@ const MainMenu = ({setLoginClick}) => {
                     </div>
                 </Link>
                 
-                
-
-            
-                
             </div>
         </div>
     );
