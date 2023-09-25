@@ -36,7 +36,7 @@ const Gallery = () => {
   
   const navigate = useNavigate();
 
-  let user_nick
+  // let user_nick
 
   const backToMain=()=>{
     navigate("/")
@@ -45,8 +45,8 @@ const Gallery = () => {
   useEffect(() => {
     //회원정보가 있는지 확인하기
     //세션에서 회원정보 가져오기 ->null 오류처리 할것
-    let user_id = sessionStorage.getItem("user_id")
-    user_nick =sessionStorage.getItem("user_nick")
+    // let user_id = sessionStorage.getItem("user_id")
+    // user_nick =sessionStorage.getItem("user_nick")
 
     if(user_id == null || user_nick == null){
        backToMain()
@@ -79,6 +79,9 @@ const Gallery = () => {
     }).catch((err)=>console.log("데이터 불러오기 실패"+err))
   }, []) 
   
+  const user_id = sessionStorage.getItem('user_id');
+  const user_nick = sessionStorage.getItem('user_nick');
+
   //이미지 정보가 update되면 보유한 지역도 동기화
   //* 사실상 초기 설정 이후에 변동되지 않음
   useEffect(()=>{
@@ -113,7 +116,7 @@ const Gallery = () => {
               </div>
               <div className='gallery-city-container'>
                 {/* 선택한 지역이 있으면 List출력 */}
-                <h1>{selectedCity? selectedCity : clickedLocal}</h1> 
+                <h1 style={{fontFamily:'GangwonEduSaeeum_OTFMediumA', fontSize:'44px'}}>{selectedCity? selectedCity : clickedLocal}</h1> 
                 <br />
                 {
                   // 선택한 지역이아직 없는경우
@@ -135,7 +138,6 @@ const Gallery = () => {
               </div>
             </div>
         </LocalContext.Provider>
-        <Footer></Footer>
     </>
   );
 };

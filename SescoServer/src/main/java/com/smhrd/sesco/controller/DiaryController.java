@@ -166,7 +166,6 @@ public class DiaryController {
 	private ArrayList<Diary> getDiaryListWithImg(@RequestBody Member member){
 		ArrayList<Diary> resultList = new ArrayList<Diary>();
 		resultList.addAll(diaryService.getDiaryListWithImg(member.getUser_id()));
-		System.out.println("ee"+resultList);
 		return resultList;
 	}
 	

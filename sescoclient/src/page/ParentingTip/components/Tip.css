@@ -82,17 +82,22 @@
     align-items: center;
    
 }
-.Tbanner_info{
+.tip_titleIcon{
     position: relative;
-    top: 150px;
+    left: 500px;
+    bottom: 65px;
+}
+.Tbanner_info {
+    position: relative;
+    top: 160px;
     margin-left: 200px;
     font-family: 'insungitCutelivelyjisu';
     font-size: 48px;
 }
 .Tbanner_info h2{
     font-family: 'insungitCutelivelyjisu';
-    font-size: 42px;
-    color: rgb(87, 87, 87);
+    font-size: 46px;
+    color: rgb(77, 77, 77);
 }
 .Mbanner_info h1{
     color: rgb(255, 174, 0);
@@ -100,9 +105,14 @@
 }
 .Mbanner_info{
     position: relative;
-    top: 90px;
-    margin-left: 80px;
+    top: 30px;
+    left: -20px;
     font-family: 'insungitCutelivelyjisu';
+}
+.Mbanner_info p{
+    width: 850px;
+    margin-top: 10px;
+    font-size: 19px;
 }
 .timeline{
     display: flex;

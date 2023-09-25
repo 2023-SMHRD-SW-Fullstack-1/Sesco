@@ -1,6 +1,6 @@
 /* 연도 */
 .noteList-container {
-    margin-top: 100px;
+    margin-top: 130px;
     height: auto;
 }
 
@@ -76,8 +76,7 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    margin-left: 120px;
-    margin-top: 50px;
+    margin-left: 420px;
     font-family: 'insungitCutelivelyjisu';
     
 }
@@ -86,8 +85,7 @@
     position: relative;
     align-items: center;
     cursor: pointer;
-    margin-left: 10px;
-    margin-right: 70px;
+    margin-right: 55px;
     margin-top: 100px;
     display: flex;
 
@@ -117,12 +115,14 @@
 /**노트 테이블*/
 .noteTable-container{
     position: absolute;
-    margin-top: 250px;
-    left: -10px;
+    margin-top: 205px;
+    left: 200px;
+    
+    
 }
 .noteTable{
-   height: 120px;
-   width: 1900px;
+   height: 60px;
+   width: 1500px;
 }
 
 /*수첩 밑 연령 표시 **/
@@ -131,8 +131,8 @@
     width: 336.069px;
     height: 69px;
     flex-shrink: 0;
-    margin-top: 500px;
-    padding-left: 50px;
+    margin-top: 350px;
+    margin-left: 35px;
 }
 
 .noteList-age {
@@ -141,7 +141,7 @@
     text-align: center;
     /* font-feature-settings: 'clig' off, 'liga' off;
     font-family: Playfair Display; */
-    font-size: 40px;
+    font-size: 32px;
     font-style: normal;
     font-weight: 600;
     line-height: 44px;
@@ -149,24 +149,25 @@
     /* 62.857% */
     letter-spacing: -0.64px;
 }
-
+.noteKid-image{
+    width: 55px;
+}
 .noteKid-container {
-    width: 91px;
+    width: 80px;
     height: 154px;
     flex-shrink: 0;
     z-index: 2;
     position: absolute;
-    margin-top: 130px;
+    margin-top: 115px;
     animation: sparkle 1.5s infinite alternate;
 }
 
 .tagResultItem {
     position: absolute;
     /* top: -10px; */
-    right: -10px;
+    right: -40px;
     /* background-color: #FF5733;
         color: white; */
-   
     /* font-family: 'Akshar', sans-serif;  */
     font-size: 20px;
     border-radius: 10%;
@@ -187,6 +188,9 @@
 }
 
 
+.noteTagAndKid-container{
+    height: 120px !important;
+}
 /*수첩 클릭 시 연령 색 변경*/
 .selected-note-text {
     color: #eba852; 
@@ -197,10 +201,10 @@
       color: #eba852;
     }
     50% {
-      color: #ffc107; /* 다른 색상으로 변경할 중간 지점 */
+      color: #ffb007; /* 다른 색상으로 변경할 중간 지점 */
     }
     100% {
-      color: #eba852;
+      color: #f8930f;
     }
   }
   
@@ -223,9 +227,16 @@
     height: 100%;
     z-index: 1; 
 }
+.noteLock-image{
+    width: 50px;
+    position: relative;
+    bottom: 22px;
+}
 
 .allNoteList-container{
     height: fit-content;
     margin-bottom: 300px;
+    position: relative;
+    bottom: 100px;
     
 }

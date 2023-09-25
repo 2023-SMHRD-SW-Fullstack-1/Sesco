@@ -9,7 +9,7 @@
     right: 50%;
     bottom: 50%;
   }
-  .btn.is-primary {
+  .floationbtn.is-primary {
     z-index: 2;
     border: 0;
     width: 60px;
@@ -24,16 +24,16 @@
     background: linear-gradient(to right, #4EABFF, #0F8DFF);
     opacity: 1;
   }
-  .btn.is-primary:hover {
+  .floationbtn.is-primary:hover {
       background: linear-gradient(to right, #4EABFF, #0F8DFF);
   }
   
-  .btn.is-primary.is-activate {
+  .floationbtn.is-primary.is-activate {
     box-shadow: 0 0 0;
     transform: translateY(3px);
   }
   
-  .btn span {
+  .floationbtn span {
     display: block;
     width: 20px;
     margin-bottom: 2px;
@@ -42,7 +42,7 @@
     transition: all .275s;
   }
   
-  .btn.is-primary.is-activate span {
+  .floationbtn.is-primary.is-activate span {
     transform: rotate(1turn);
   }
   

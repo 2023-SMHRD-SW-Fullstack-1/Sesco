@@ -3,6 +3,8 @@ import styled from "styled-components";
 import axios from "axios";
 import EXIF from "exif-js";
 import './viewDiary.css'
+import Button from 'react-bootstrap/Button';
+
 
 const ViewDiary = ({ selectdate, noteData, fetchDiaryList}) => {
   const [tags, setTags] = useState([]);
@@ -260,6 +262,7 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList}) => {
 
 
   return (
+
     <div className="view-top-container">
       {isEditing ? (
         // Editing mode
@@ -310,37 +313,42 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList}) => {
           <button onClick={handleCancelEdit}>취소</button>
         </form>
       ) : (
-        // View mode
+        // --------------------------------------View Mode----------------------------------
+      <div style={{display:"flex"}}>
+        <Button variant="outline-secondary" className="view-pre-btn" onClick={getNext}>👈</Button>
         <div className="view-container">
           <div className="view-box">
-            <div className="view-diary-title">제목 : {selectdate[current].title}</div>
+            
             {selectdate[current].img && (
               <div className="view-diary-img-box">
                 <img className="view-diary-img" src={"data:image/;base64," + selectdate[current].img} alt="" />
               </div>
             )}
-            
+            <div className="view-diary-title">제목 : {selectdate[current].title}
+            </div>
             <p className="view-diary-content">{selectdate[current].content}</p>
 
             {tags.length > 0 && (
               <div className="tag-box">
                 {tags.map((tag, index) => (
                   <div className="tag-item" key={index}>{tag}</div>
-                ))}
+                  ))}
               </div>
             )}
 
-            <div>
-              <button onClick={getPrevious}>이전</button>
-              <button onClick={getNext}>다음</button>
-            </div>
-
-            <button onClick={handleEditClick}>수정하기</button>
-            <button onClick={handleDeleteDiary}>일기 삭제</button>
+            
+          
           </div>
         </div>
+        <Button variant="outline-secondary" className="view-next-btn" onClick={getNext}>👉</Button>
+          
+      </div>
+      
       )}
+     <button className="view-delete-btn" onClick={handleDeleteDiary}>일기 삭제</button>
+     <button className="view-edit-btn" onClick={handleEditClick}>수정하기</button> 
     </div>
+
   )
 };
 

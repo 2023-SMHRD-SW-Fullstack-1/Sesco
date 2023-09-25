@@ -1,14 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Tip from './components/Tip'
 import Banner from './components/Banner'
 import './components/Tip.css'
+import { useNavigate } from 'react-router'
 
 
 const TipMain = () => {
   
+  const nav = useNavigate();
   const user_id = sessionStorage.getItem('user_id');
   const user_nick = sessionStorage.getItem('user_nick');
   
+  const backToMain=()=>{
+    nav("/")
+  }
+
+  useEffect(()=>{
+    if(user_id == null || user_nick == null){
+      backToMain()
+   }
+  },[])
 
   // 메인에서 아이를 클릭하면 {
     // 세션생성

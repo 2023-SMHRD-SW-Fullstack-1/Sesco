@@ -94,7 +94,7 @@ const Header = () => {
           {!user_id ?
             ""
             :
-            <HeaderLJTxt href='/' onClick={()=>onLogout()}><GoPerson />로그아웃 </HeaderLJTxt>
+            <HeaderLJTxt href='/' onClick={()=>onLogout()}><GoPerson /> 로그아웃 </HeaderLJTxt>
 
           }
         </HeaderLJContainer>
@@ -196,6 +196,9 @@ margin-top:22px;
 const HeaderLJTxt = styled.a`
 margin-right:30px;
 color: gray;
+font-size: 24px;
+margin-left: 20px;
+font-family: 'GangwonEduSaeeum_OTFMediumA';
 text-decoration: none;
 `;
 

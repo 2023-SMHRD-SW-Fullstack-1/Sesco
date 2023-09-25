@@ -2,8 +2,9 @@
 
 /** Notebook Base **/
 .diary-whole-container {
-  position: absolute;
-  width: 1000px; height: 600px;
+  position: relative;
+  width: 1000px; 
+  height: 600px;
   top: 50%; left: 35%;
   margin: -175px 0 0 -250px;
   /* 위치 배치 수정 position: relative; */
@@ -115,12 +116,26 @@
 
 
 .diaryAddBtn{
-  border: 2px solid #cecece;
-  border-radius: 4px;
+  z-index: 2;
+  border: 0;
+  width: 60px;
+  height: 60px;
+  font-size: 20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #FFF;
+  background: linear-gradient(to right, #4EABFF, #0F8DFF);
+  opacity: 1;
+  position: fixed;
+  right: 350px;
+  bottom: 100px;
 }
 .diaryAddBtn:hover{
   border: 2px solid #b9b9b9;
-  border-radius: 4px;
+  border-radius: 50%;
   box-shadow: 1px 1px 1px 1px #dadada;
 }
 .oval-button {
@@ -140,5 +155,5 @@
 .b{
   display: flex;
   justify-content: space-around;
-  
 }
+

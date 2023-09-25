@@ -1,5 +1,6 @@
 import React from 'react'
-import tImg from '../../../img/tImg.png'
+import tImg from '../../../img/tImg.png';
+import { FcIdea } from "react-icons/fc";
 
 
 const Banner = ({user_nick}) => {
@@ -12,7 +13,7 @@ const Banner = ({user_nick}) => {
           backgroundSize: 'cover',
         }}>
           <div className='Tbanner_info'>
-            <h2>"{user_nick}"님을 위한  육아TIP</h2>
+            <h2>"{user_nick}"님을 위한  육아TIP <div className='tip_titleIcon'><FcIdea size='1.2em'/></div> </h2>
           </div>
         </div>
   )
