@@ -72,17 +72,23 @@
 
 .view-diary-title {
   border-bottom: 5px double black;
+  font-family: 'insungitCutelivelyjisu';
+  font-size: large;
+  height: fit-content;
+  min-height: 50px;
+  padding-top: 10px;
+  padding-left: 5px;
 }
 
 .view-diary-img-box {
   position: relative;
   width: inherit;
   height: 250px;
-  background: #fff;
+  /* background: #fff; */
   margin: 0 auto;
   flex-shrink: 0;
-  border: 1px solid #B8B8B8;
-  background: rgb(246, 248, 243);
+  border-bottom: 5px double black;
+  /* background: rgb(246, 248, 243); */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -103,6 +109,7 @@
   background-image: repeating-linear-gradient(white 0px, white 25px, #B8B8B8 26px);
   font-family: 'Minhye';
   line-height: 107.5%;
+  padding-left: 7px;
 }
 
 .view-pre-btn{
@@ -115,4 +122,42 @@
   height: 80px;
   border-width: 0px !important;
   align-self: center;
+}
+
+.view-edit-btn{
+  z-index: 2;
+  border: 0;
+  width: 60px;
+  height: 60px;
+  font-size: 20px;
+  border-radius: 50%;
+  position: fixed;
+  right: 350px;
+  bottom: 170px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #FFF;
+  background: linear-gradient(to right, #4EABFF, #0F8DFF);
+  opacity: 1;
+}
+
+.view-delete-btn{
+  z-index: 2;
+  border: 0;
+  width: 60px;
+  height: 60px;
+  font-size: 20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #FFF;
+  background: linear-gradient(to right, #4EABFF, #0F8DFF);
+  opacity: 1;
+  position: fixed;
+  right: 350px;
+  bottom: 240px;
 }
