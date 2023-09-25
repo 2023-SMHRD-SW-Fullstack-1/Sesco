@@ -50,6 +50,9 @@ const GoogleLog = () => {
       <GoogleOAuthProvider clientId={clientId}>
         <GoogleLogin
           useOneTap={false}
+          size="medium"
+          width={360}
+          locale='kr'
           onSuccess={(res) => {
             //console.log("성공")
             //console.log(res);

@@ -3,7 +3,7 @@ import './Login.css'
 import LoginImg from '../img/LoginImg.png'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import GoogleLogin from './GoogleLogin';
+import GoogleLog from '../page/components/GoogleLog';
 
 
 
@@ -214,7 +214,7 @@ const [userInfo, setUserInfo] = useState(false);
                     <button className='loginBtn' onClick={() => saveUserInfo()}>로그인</button>
                     {/* 소셜 로그인 버튼  */}
                     <div className='login_socialBtns'>
-                        <GoogleLogin/>
+                        <GoogleLog/>
                     </div>
                 </div>
             }
