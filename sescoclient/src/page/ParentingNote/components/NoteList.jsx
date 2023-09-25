@@ -105,8 +105,8 @@ const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults, isDiaryO
                             key={index}
                             onClick={() => handleNoteItemClick(index)}
                             style={{
-                                width: '200px',
-                                height: '200px',
+                                width: '130px',
+                                height: '130px',
                                 backgroundImage: isDiaryOpen ? (noteOpenStatus[index] ? `url(${noteOpen})` : `url(${noteClose})`) : `url(${noteClose})`,
                                 backgroundSize: 'cover',
                             }}

@@ -8,6 +8,7 @@ import main2babyAddImg from '../img/main2/main2babyAddImg.png'
 import main2babyAdd from '../img/main2/main2babyAdd.png'
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Banner2 from './components/Banner2';
 
 const Main2 = () => {
   const [babyAdd, setBabyAdd] = useState(false);
@@ -59,8 +60,8 @@ const Main2 = () => {
 
   return (
     <div>
-      <Banner />
-
+      {/* <Banner /> */}
+      <Banner2/>
       <div className='main2-avatarcontainer'>
           <div className='babyAdd'>
             <img className='main2babyAddImg' width={'85px'} src={main2babyAddImg}/>

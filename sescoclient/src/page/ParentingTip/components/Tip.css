@@ -100,9 +100,12 @@
 }
 .Mbanner_info{
     position: relative;
-    top: 90px;
-    margin-left: 80px;
+    top: 30px;
+    left: -20px;
     font-family: 'insungitCutelivelyjisu';
+}
+.Mbanner_info p{
+    width: 850px;
 }
 .timeline{
     display: flex;

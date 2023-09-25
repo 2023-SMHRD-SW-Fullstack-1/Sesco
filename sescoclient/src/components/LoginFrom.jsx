@@ -3,6 +3,7 @@ import './Login.css'
 import LoginImg from '../img/LoginImg.png'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import GoogleLogin from './GoogleLogin';
 import GoogleLog from '../page/components/GoogleLog';
 
 

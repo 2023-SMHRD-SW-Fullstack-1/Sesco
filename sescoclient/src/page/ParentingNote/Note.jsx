@@ -468,6 +468,7 @@ const Note = ({onTagClose}) => {
 
         {/* 아이선택 div */}
         <div className='noteKidSelect'>
+          
           {/* value 값은 현재 선택한 아이 kid_seq값으로 설정 */}
           <select ref={selectRef} className='note-myKidSelect' title="아이 선택" onChange={handlekidSelectChange} value={kidSelect}>
             {kids.map((kid) => (
