@@ -2,8 +2,9 @@
 
 /** Notebook Base **/
 .diary-whole-container {
-  position: absolute;
-  width: 1000px; height: 600px;
+  position: relative;
+  width: 1000px; 
+  height: 600px;
   top: 50%; left: 35%;
   margin: -175px 0 0 -250px;
   /* 위치 배치 수정 position: relative; */

@@ -1,6 +1,7 @@
 /* modal창 외부화면 */
 .Modal {
-
+  font-family: 'GangwonEduSaeeum_OTFMediumA';
+  font-size: 24px;
   position: absolute;
   top: 0px;
   bottom: 0px;
@@ -309,6 +310,11 @@
 .we-kid{
   margin-top: 15px;
   margin-bottom: 20px;
+}
+.we-kid h4{
+  font-size: 38px;
+  color: #424242;
+  font-weight: 600;
 }
 
 .Survey-tip{
