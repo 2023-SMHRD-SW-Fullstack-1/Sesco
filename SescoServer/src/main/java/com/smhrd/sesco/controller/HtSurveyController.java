@@ -87,7 +87,7 @@ public class HtSurveyController {
 		 
 		 List<HtSurveyDetail> presurveylist = new ArrayList<HtSurveyDetail>();
 		 presurveylist.addAll(htsurService.preSurveyList(kidSeq,hsvSeq));
-		 System.out.println("똑똑똑 "+presurveylist);
+		
 		
 		 return presurveylist;
 	 }
