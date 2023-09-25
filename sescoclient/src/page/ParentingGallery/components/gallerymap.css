@@ -17,9 +17,10 @@
 }
 
 .gallerymap-total-container{
-    border : 5px solid cadetblue;
-    background-color: rgb(165, 247, 250);
-    margin-right: 10px;
+    border-radius: 8px;
+    background-color: rgb(150, 230, 255);
+    margin-right: 8px;
+    box-shadow: 0 5px 30px rgba(194, 194, 194, 0.8);
     display: flex;
     flex-wrap: wrap;
     

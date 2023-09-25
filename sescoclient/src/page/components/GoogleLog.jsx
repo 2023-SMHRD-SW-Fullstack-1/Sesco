@@ -49,6 +49,8 @@ const GoogleLog = () => {
       <div>
       <GoogleOAuthProvider clientId={clientId}>
         <GoogleLogin
+        width={365}
+        size='medium'
           useOneTap={false}
           onSuccess={(res) => {
             //console.log("성공")

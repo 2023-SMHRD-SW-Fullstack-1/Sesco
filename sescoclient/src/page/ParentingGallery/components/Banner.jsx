@@ -11,7 +11,7 @@ const Gallery = ({user_nick}) => {
           backgroundSize: 'cover',
         }}>
           <div className='banner_info'>
-            <h2>"{user_nick}"님의<br/> 이곳저곳</h2>
+            <h2>"{user_nick}"님의<br/> 이곳저곳 📷</h2>
           </div>
         </div>
   )
