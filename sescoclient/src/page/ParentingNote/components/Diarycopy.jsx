@@ -9,6 +9,7 @@ import ViewDiary from "./ViewDiary";
 import axios from "axios";
 import moment from 'moment';
 import "../../../../src/Fullcalendar.css"
+import { render } from "@fullcalendar/core/preact";
 
 
 const Diarycopy = ({noteData}) => {
@@ -29,12 +30,10 @@ const Diarycopy = ({noteData}) => {
 
   //날짜변경 시 일기를 해당 날짜 기준으로 필터링
   useEffect(()=>{
-
     const tempDiaryList = listDiary.filter((diary)=> diary.date == formatDate(selectedDate))
     setSelectedDiaryList(tempDiaryList)  
-console.log("너 뭐들었니?",selectedDiaryList);
+    console.log("너 뭐들었니?",tempDiaryList);
     setListClickVisible(true);
-
   },[selectedDate])
 
   
@@ -63,12 +62,24 @@ console.log("너 뭐들었니?",selectedDiaryList);
   // --------------------------------------일기 start-----------------------------------//
 
 
+   const [isCalendarShow, setIsCalendarShow] = useState(true);
+    const [initialDate, setInitialDate] = useState(noteData.n_s_date);
+  
+    useEffect(() => {
+      setIsCalendarShow(false)
+      // noteData.n_s_date 값이 변경될 때마다 initialDate를 업데이트합니다.
+      setInitialDate(noteData.n_s_date)
+    }, [noteData.n_s_date])
+
 
   // 일기 리스트 초기화
   useEffect(() => {
-    console.log("fqiwhoqwifhjowiq", noteData.noteSeq)
     fetchDiaryList(noteData.tagSearchText);
   }, [noteData]);
+
+  useEffect(()=>{
+    setIsCalendarShow(true)
+  },[initialDate])
 
 
   
@@ -127,13 +138,16 @@ console.log("너 뭐들었니?",selectedDiaryList);
     }
 
     //일기 작성 완료 처리 함수
-    function onComplete(title, content,tags) {
+    function onComplete(title, content, imgFile, tags) {
       
+      console.log(title, content, tags, imgFile)
+
     if (selectedDate && title && content) {
 
       const newDiary = {
         date: formatDate(selectedDate),
         title: title,
+        img : imgFile,
         content: content,
         tags: tags,
       };
@@ -147,18 +161,19 @@ console.log("너 뭐들었니?",selectedDiaryList);
       //이게 끝나면 CreateDiary로 감
     }
 
-    setIsClick(false);
-    if( selectedDate != null){
-      setSelectedDate();
-    }
+      setIsClick(false);
+      if( selectedDate != null){
+        setSelectedDate();
+      }
     }
 
     //해당 날짜의 일기 리스트 출력
     function handleDateClick(info, index) {
       console.log("handleDateClick");
       setSelectedDate(formatDate(info.date));
-      setSelectedDiaryList()  
+      setSelectedDiaryList()
     }
+
   // --------------------------------------일기 end-----------------------------------//
 
   
@@ -173,6 +188,7 @@ console.log("너 뭐들었니?",selectedDiaryList);
       <div className="diary-left-container">
         <div className="diary-page-inner">
           <div className="diary-left-calendar">
+            {isCalendarShow &&
             <FullCalendar
               //풀캘린더 플러그인
               timeZoneParam="YYYY-MM-DD"
@@ -196,8 +212,11 @@ console.log("너 뭐들었니?",selectedDiaryList);
               eventColor={"rgb(236, 236, 231)"}
               height={"530px"}
               width={"100%"}
+              initialDate={initialDate}
             />
+          }
           </div>
+          
           
           <div class='diaryAddBtn' onClick={CreateDiaryForm}>
              +
@@ -211,8 +230,6 @@ console.log("너 뭐들었니?",selectedDiaryList);
               border: "solid 2px red",
             }}
           >
-
-
             일기 리스트 출력
             여기서 누른 날짜의 일기리스트를 제공
             <div className="c">
@@ -236,11 +253,11 @@ console.log("너 뭐들었니?",selectedDiaryList);
             // CreateDiary 컴포넌트에 선택된 날짜 전달 (props로)
             // 예시: <CreateDiary selectedDate={selectedDate} />
             // 필요에 따라 선택된 날짜를 CreateDiary 컴포넌트로 전달해주세요.
-            <CreateDiary selectedDate={selectedDate} onComplete={onComplete} date={selectedDate}  formatDate={formatDate} noteData={noteData}/>
+            <CreateDiary selectedDate={selectedDate} onComplete={onComplete}formatDate={formatDate} noteData={noteData}/>
           )}
         {listClickVisible && selectedDiaryList && selectedDiaryList.length > 0 && (
   <ViewDiary
-    selectdate={selectedDiaryList} noteData={noteData}
+  fetchDiaryList={fetchDiaryList} selectdate={selectedDiaryList} noteData={noteData}
   />  
 )}
         </div>
