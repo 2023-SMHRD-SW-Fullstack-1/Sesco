@@ -1135,3 +1135,7 @@
     margin-left: 10px !important;
     margin-right: 10px !important;
 }
+.dropdown-item:hover{
+    background-color: #0096C3 !important;
+    border-radius: 50px !important;
+}
