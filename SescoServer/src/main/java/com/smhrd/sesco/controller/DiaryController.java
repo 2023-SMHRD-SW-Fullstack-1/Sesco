@@ -68,6 +68,7 @@ public class DiaryController {
 		public void DiaryRegister(@ModelAttribute Diary diary, @RequestPart(name = "file", required = false) MultipartFile file){
 			String test = diary.getNote_seq();
 			System.out.println("test"+test);
+			System.out.println(diary.getD_tags());
 ////			 d_date 값을 String 타입으로 받아옴
 //	        String dateString = diary.getD_date().toString();
 //	        

@@ -6,7 +6,7 @@ import './viewDiary.css'
 import Button from 'react-bootstrap/Button';
 
 
-const ViewDiary = ({ selectdate, noteData}) => {
+const ViewDiary = ({ selectdate, noteData, fetchDiaryList}) => {
   const [tags, setTags] = useState([]);
   const [current, setCurrent] = useState(0);
   const [isEditing, setIsEditing] = useState(false); // 수정 모드 플래그
@@ -29,6 +29,10 @@ const ViewDiary = ({ selectdate, noteData}) => {
     setNoteseq(noteData.noteSeq)
   },[])
 
+  useEffect(()=>{
+    console.log("tags",tags);
+    console.log("tagList",tagList);
+  })
   
   
 
@@ -49,7 +53,6 @@ const ViewDiary = ({ selectdate, noteData}) => {
       const tagsWithoutHash = selectdate[current].tags.filter(tag => !tag.includes('#'));
       setTags(tagsWithoutHash)
     } else {
-      
     }
   }, [selectdate, current]);
 
@@ -61,6 +64,7 @@ const ViewDiary = ({ selectdate, noteData}) => {
       // setEditedTags(selectdate[current].tag);
       setEditedImage(null); // 이미지는 초기화
       setEditedImagePreview(null);
+      setTags(selectdate[current].tags);
       setProvince(selectdate[current].img_do);
       setCity(selectdate[current].img_si);
     }
@@ -110,9 +114,10 @@ const ViewDiary = ({ selectdate, noteData}) => {
   };
 
   const deleteTagItem = (e) => {
+    e.preventDefault()
     const deleteTagItem = e.target.parentElement.firstChild.innerText;
-    const filteredTagList = tagList.filter((tagItem) => tagItem !== deleteTagItem);
-    setTagList(filteredTagList);
+    const filteredTagList = tags.filter((tagItem) => tagItem !== deleteTagItem);
+    setTags(filteredTagList);
   };
   
 
@@ -239,7 +244,8 @@ const ViewDiary = ({ selectdate, noteData}) => {
   
         if (response.status === 200) {
           // 삭제 요청이 성공한 경우
-          // 이후에 필요한 작업 수행 (예: 일기 목록 다시 불러오기)
+          // 이후에 필요한 작업 수행 (예: 일기 목록 다시 불러오기) 
+          fetchDiaryList()
           console.log("Diary deleted successfully.")
           // 다음 일기 또는 이전 일기로 이동하거나 원하는 작업 수행
           // 예: getNext(), getPrevious() 호출 또는 다른 작업 수행
@@ -273,7 +279,7 @@ const ViewDiary = ({ selectdate, noteData}) => {
             onChange={(e) => setEditedContent(e.target.value)}
           />
           <div className="tag-box">
-        {tagList.map((tagItem, index) => (
+        {tags.map((tagItem, index) => (
           <div className="tag-item" key={index}>
             <span>{tagItem}</span>
             <button className="cancel-tag-item" onClick={deleteTagItem}>X</button>

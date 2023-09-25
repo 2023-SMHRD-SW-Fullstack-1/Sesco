@@ -104,34 +104,68 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
     }
   };
 
+  //최종 전 지우기
+  // const onKeyPress = (e) => {
+  //   if (e.key === 'Enter') {
+  //     e.preventDefault(); // 엔터 키의 기본 동작(폼 제출) 방지
+  //     if (isValidTag(tagItem)) {
+  //       submitTagItem();
+  //       const tagsString = tagList.join('#');
+  //       setTagsToSend(tagsString);
+  //       console.log(tagsToSend);
+  //       setErrorMessage('');
+  //     } else {
+  //       setErrorMessage('태그는 알파벳, 숫자, 하이픈, 언더스코어만 포함해야 합니다.');
+  //     }
+  //   }
+  // };
+
+  useEffect(() => {
+    console.log(tagsToSend); // tagsToSend가 업데이트될 때마다 로그 출력
+  }, [tagsToSend]);
+  
   const onKeyPress = (e) => {
     if (e.key === 'Enter') {
-      e.preventDefault(); // 엔터 키의 기본 동작(폼 제출) 방지
+      e.preventDefault() // 엔터 키의 기본 동작(폼 제출) 방지
       if (isValidTag(tagItem)) {
-        submitTagItem();
-        const tagsString = tagList.join('#');
-        setTagsToSend(tagsString);
-        setErrorMessage('');
+        let tags = submitTagItem()
+        // setTagsToSend를 호출하면 위의 useEffect가 실행됩니다.
+        const tagsString = tags.join('#')
+        setTagsToSend(tagsString)
+        setErrorMessage('')
       } else {
-        setErrorMessage('태그는 알파벳, 숫자, 하이픈, 언더스코어만 포함해야 합니다.');
+        setErrorMessage('태그는 알파벳, 숫자, 하이픈, 언더스코어만 포함해야 합니다.')
       }
     }
   };
 
   const isValidTag = (tag) => {
-    const regex = /^[a-zA-Z0-9가-힣_-]+$/;
+    const regex = /^[a-zA-Z0-9가-힣_#-]+$/
     return regex.test(tag);
   };
 
   
 
+  // const submitTagItem = () => {
+  //   let updatedTagList = [...tagList];
+  //   updatedTagList.push(tagItem);
+  //   setTagList(updatedTagList);
+    
+  //   setTagItem('');
+    
+  // };
+
+
   const submitTagItem = () => {
-    let updatedTagList = [...tagList];
-    updatedTagList.push(tagItem);
-    setTagList(updatedTagList);
-    
-    setTagItem('');
-    
+    if (isValidTag(tagItem)) {
+      let updatedTagList = [...tagList]
+      updatedTagList.push(tagItem)
+      setTagList([...updatedTagList])
+      setTagItem('')
+      return updatedTagList
+    } else {
+      setErrorMessage('태그는 알파벳, 숫자, 하이픈, 언더스코어만 포함해야 합니다.');
+    }
   };
 
   const deleteTagItem = (e) => {
@@ -177,6 +211,7 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
 
     
     const formData = new FormData();
+    console.log("태그 업데이트? :", tagsToSend)
     formData.append("d_title", title);
     formData.append("d_date", formatDate(selectedDate));
     formData.append("d_content", content);
@@ -207,8 +242,8 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
       
 
       // 작성완료 눌렀을 시
-      // 완료 콜백 호출하여 부모 컴포넌트에 데이터 전달
-      onComplete(title, content, imageFile, submitTagItem);
+      // 완료 콜백 호출하여 부모 컴포넌트에 데이터 전달 
+      onComplete(title, content, imageFile, tagList);
 
       // 입력값 초기화
       setTitle("");
