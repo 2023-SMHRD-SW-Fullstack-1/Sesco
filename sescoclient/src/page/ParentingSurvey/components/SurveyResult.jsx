@@ -58,7 +58,7 @@ const SurveyResult = ({ bundle }) => {
                                 <td className='table-result'>{languageTotal}중 {languageTotal - languageCheck}개 부족</td>
                             </tr>
                             <tr>
-                                <td className='table-brain-category'>인지(학습,사고,문제해결력)</td>
+                                <td className='table-brain-category'>인지(학습,사고,문제해결능력)</td>
                                 <td className='table-result'>{brainCheck === brainTotal ? "충분" : "불충족"}</td>
                                 <td className='table-result'>{brainTotal}중 {brainTotal - brainCheck}개 부족</td>
                             </tr>

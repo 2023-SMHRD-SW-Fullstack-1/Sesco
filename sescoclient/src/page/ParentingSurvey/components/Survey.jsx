@@ -6,7 +6,7 @@ import './Survey.css';
 import '../../Main1.scss'
 
 function Survey({ kid, user_id }) {
-    const category = ['사회/정서적 영역', '언어/의사소통 영역', '인지(학습,사고,문제해결력)', '운동/신체발달 영역'];
+    const category = ['사회/정서적 영역', '언어/의사소통 영역', '인지(학습,사고,문제해결능력)', '운동/신체발달 영역'];
 
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -72,20 +72,6 @@ function Survey({ kid, user_id }) {
             !physicalCheckList.includes(item.hsvd_seq) && setPhysicalCheckList([...physicalCheckList, item.hsvd_seq]);
         }
     }
-
-    // O 체크박스
-    // function toggleCheckList(item) {
-    //     if (item.hsvd_category === category[0]) {
-    //         setSocialCheckList(prevList => prevList.includes(item.hsvd_seq) ? prevList.filter(id => id !== item.hsvd_seq) : [...prevList, item.hsvd_seq]);
-    //         setSocialXCheckList(prevXlist => prevXlist.includes(item.hsvd_seq) ? prevXlist.filter(id => id !== item.hsvd_seq) : []); // X버튼용 리스트
-    //     } else if (item.hsvd_category === category[1]) {
-    //         setLanguageCheckList(prevList => prevList.includes(item.hsvd_seq) ? prevList.filter(id => id !== item.hsvd_seq) : [...prevList, item.hsvd_seq]);
-    //     } else if (item.hsvd_category === category[2]) {
-    //         setBrainCheckList(prevList => prevList.includes(item.hsvd_seq) ? prevList.filter(id => id !== item.hsvd_seq) : [...prevList, item.hsvd_seq]);
-    //     } else if (item.hsvd_category === category[3]) {
-    //         setPhysicalCheckList(prevList => prevList.includes(item.hsvd_seq) ? prevList.filter(id => id !== item.hsvd_seq) : [...prevList, item.hsvd_seq]);
-    //     }
-    // }
 
     function toggleOButton(item) {
         if (item.hsvd_category === category[0]) {
