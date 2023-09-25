@@ -4,6 +4,9 @@ import bookIcon from '../img/main1/main1_bookIcon.png'
 import tipIcon from '../img/main1/main1_TipIcon.png'
 import galleryIcon from '../img/main1/main1_galleryIcon.png'
 import avatarImg from '../img/main1/main1_avatarImg.png'
+import tip1Img from '../img/main1/tip1img.png'
+import tip2Img from '../img/main1/tip2img.png'
+import tip3Img from '../img/main1/tip3img.png'
 import { Link } from 'react-scroll';
 import { Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom'
@@ -12,11 +15,10 @@ import testImg from '../img/main1/testImg.png'
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Button from 'react-bootstrap/Button';
 import './Main1.scss'
 import LoginFrom from '../components/LoginFrom'
 import MainMenu from './MainMenu'
-
+import { HiChevronDoubleDown } from "react-icons/hi2";
 
 // 메인 갤러리 설명란 책 클래스
 const Page = React.forwardRef((props, ref) => {
@@ -36,7 +38,7 @@ const Main1 = () => {
     return (
       <div
         className={className}
-        style={{ ...style, display: "block", background: "red" }}
+        style={{ ...style, display: "block"}}
         onClick={onClick}
       />
     );
@@ -48,7 +50,7 @@ const Main1 = () => {
     return (
       <div
         className={className}
-        style={{ ...style, display: "block", background: "green" }}
+        style={{ ...style, display: "block" }}
         onClick={onClick}
       />
     );
@@ -68,42 +70,15 @@ const Main1 = () => {
 
   };
 
-  const nav = useNavigate();
-  // 미니 아이콘 클릭 체크 
-  const [bookIconClick,setBookIconClick] =useState(false);
-  const [galleryIconClick,setGalleryIconClick] =useState(false);
-  const [tipIconClick,setTipIconClick] =useState(false);
-
   // 로그인 버튼 클릭 체크 
   const [loginClick,setLoginClick]=useState(false);
 
 
-const handleMiniIconsClicked=(item)=>{
-  switch (item) {
-    case 'book':
-      setBookIconClick(true);
-      setGalleryIconClick(false);
-      setTipIconClick(false);
-      break;
-    case 'gallery':
-      setGalleryIconClick(true);
-      setBookIconClick(false);
-      setTipIconClick(false);
-      break;
-    case 'tip':
-      setTipIconClick(true);
-      setGalleryIconClick(false);
-      setBookIconClick(false);
-      break;
-  }
-}
 
 const handleLoginBtnClick =()=>{
   setLoginClick(!loginClick);
   console.log('로그인 버튼' , loginClick);
 }
-
-console.log('book',bookIconClick, 'gallery',galleryIconClick,'tip',tipIconClick);
 
 
 
@@ -114,7 +89,7 @@ const [menuFixed, setMenuFixed] = useState(false);
 useEffect(() => {
   const handleScroll = () => {
     const scrollPosition = window.scrollY;
-    if (scrollPosition >= 1335 && scrollPosition<=2097) {
+    if (scrollPosition >= 1135 && scrollPosition<=2097) {
       setIsMenuVisible(true);
       setMenuFixed(false)
       console.log('현재 스크롤',window.scrollY,'픽스',menuFixed,'메뉴',isMenuVisible);
@@ -152,7 +127,7 @@ useEffect(() => {
       }}>
         {/* 'main1_menu' */}
               <div className={isMenuVisible&&!menuFixed? 'menuVisible': isMenuVisible && menuFixed? 'noMenuVisible':"defaultMenu"}>
-                <MainMenu/> 
+                <MainMenu setLoginClick={setLoginClick}/> 
 
               </div>
         <div className='main1_infoBackground'>
@@ -186,7 +161,7 @@ useEffect(() => {
 
             </div>
             <Link to="DetailInfo" spy={true} smooth={false}>
-              <button className='mainImg_scrollBtn' variant="btntoggle">⇓</button>
+              <button className='mainImg_scrollBtn' variant="btntoggle"><HiChevronDoubleDown/></button>
             </Link>
           </div>
         </div>
@@ -198,28 +173,28 @@ useEffect(() => {
 
             <div className='diaryIcon'>
               <img src={bookIcon} style={{ width: '170px', height: '150px', marginTop: '15px', marginBottom: '10px' }} />
-              <span>다이어리</span>
+              <span>내 아이를 위한 <br/>일기를 기록 해보세요</span>
               <Link to="diaryDetail" spy={true} smooth={false}>
                 <p variant="btntoggle">⇓</p>
-                <button className='detailBtn' onClick={()=>handleMiniIconsClicked('book')}>자세히보기</button>
+                <button className='detailBtn' >자세히보기</button>
               </Link>
             </div>
 
             <div className='galleryIcon'>
               <img src={galleryIcon} style={{ width: '160px', height: '150px', marginTop: '25px' }} />
-              <span>갤러리</span>
+              <span>내 아이와의 추억을<br/> 확인할 수 있어요</span>
               <Link to="galleryDetail" spy={true} smooth={false}>
                 <p variant="btntoggle">⇓</p>
-                <button className='detailBtn' variant="btntoggle" onClick={()=>handleMiniIconsClicked('gallery')}>자세히보기</button>
+                <button className='detailBtn' variant="btntoggle">자세히보기</button>
               </Link>
             </div>
 
             <div className='tipIcon'>
               <img src={tipIcon} style={{ width: '170px', height: '175px' }} />
-              <span>육아TIP</span>
+              <span>육아TIP을 <br/>받아볼 수 있어요</span>
               <Link to="tipDetail" spy={true} smooth={false}>
                 <p variant="btntoggle">⇓</p>
-                <button className='detailBtn' variant="btntoggle" onClick={()=>handleMiniIconsClicked('tip')}>자세히보기</button>
+                <button className='detailBtn' variant="btntoggle">자세히보기</button>
               </Link>
             </div>
 
@@ -315,21 +290,21 @@ useEffect(() => {
           <div className='main1_tipContainer'>
             <div className='main1_tipContainer_border'></div>
             <div className='main1_tipContext'>
-              <h4>나의 아이 캐릭터를 등록 하면 아이의 상태 <br /> 정보를 한눈에 볼 수 있어요 !</h4>
-              <h5><br />  - 나의 아이가 성장 할수록 아이 캐릭터도 조금씩 성장해요</h5>
-              <h6><br />  - 나의 아이가 성장 할수록 아이 캐릭터도 조금씩 성장해요</h6>
+              <h4> 내 아이의 발달 단계에 체크하여 <br /> 육아 정보들을 확인할 수있어요 !</h4>
+              <h5><br />  - 내 아이 연령에 맞는 설문을 통해 발달 단계를 <br />확인할 수 있어요.</h5>
+              <h5><br />  - 연령별로 분류되어 있는 전체 육아 정보도 <br /> 확인할 수 있어요.</h5>
            
             </div>
             <Slider {...settings} style={{ width: '500px', height: '600px', marginLeft: '7%', marginTop: '50px' }}>
               <div>
 
-                <img className='main1_tipContextImg' src={testImg} />
+                <img className='main1_tipContextImg' src={tip1Img} />
               </div>
               <div>
-                <img className='main1_tipContextImg' src={testImg} />
+                <img className='main1_tipContextImg' src={tip2Img} />
               </div>
               <div>
-                <img className='main1_tipContextImg' src={testImg} />
+                <img className='main1_tipContextImg' src={tip3Img} />
               </div>
 
             </Slider>

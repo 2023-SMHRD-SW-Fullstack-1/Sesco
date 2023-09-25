@@ -5,6 +5,8 @@ import { MDBInput } from 'mdb-react-ui-kit';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { FcGoogle } from "react-icons/fc";
+import GoogleLog from '../page/components/GoogleLog';
 
 
 const Join = () => {
@@ -54,7 +56,7 @@ const Join = () => {
                         alert('이메일 중복입니다. 이메일을 확인하세요');
                     } else if (result === 'success') {
                         alert('🎺회원가입 성공🎺');
-                        nav('/login');
+                        nav('/');
                     }
                     console.log('name:', user_name, 'nick:', user_nick, 'id:', user_id, 'email:', user_email, 'pw:', user_pw, 'pwCheck:', pwCheckValue);
                 })
@@ -113,14 +115,14 @@ const Join = () => {
                     {user_pw === pwCheckValue ?
                         <span className='password_txt'>비밀번호 일치 </span>
                         :
-                        <span className='password_txt'>다시 입력해주세요 </span>
+                        <span className='passwordCheck_txt'>비밀번호가 불일치 </span>
                     }
                     {/* 로그인 버튼 */}
                     <button className='joginBtn' onClick={() => saveUserInfo()} >회원가입</button>
 
                     {/* 소셜 로그인 버튼  */}
                     <div className='login_socialBtns'>
-                        <button className='login_googleBtn'>소셜 로그인</button>
+                        <GoogleLog/>
                     </div>
 
 

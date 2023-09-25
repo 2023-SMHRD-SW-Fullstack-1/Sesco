@@ -8,6 +8,7 @@ import "./diary.css";
 import ViewDiary from "./ViewDiary";
 import axios from "axios";
 import moment from 'moment';
+import "../../../../src/Fullcalendar.css"
 
 
 const Diarycopy = ({noteData}) => {
@@ -192,24 +193,17 @@ console.log("너 뭐들었니?",selectedDiaryList);
               selectable true
               eventDisplay={"block"}
               eventTextColor={"#FFF"}
-              eventColor={"#F2921D"}
-              height={"300px"}
+              eventColor={"rgb(236, 236, 231)"}
+              height={"530px"}
               width={"100%"}
             />
           </div>
-
-          <div>
-            <button
-            className="diaryAddBtn"
-              onClick={CreateDiaryForm}
-              style={{ width: "460px", height: "100px", marginTop: "10px" }}
-            >
-              
-              일기추가
-            </button>
+          
+          <div class='diaryAddBtn' onClick={CreateDiaryForm}>
+             +
           </div>
 
-          <div
+          {/* <div
             style={{
               width: "455px",
               height: "100px",
@@ -219,13 +213,13 @@ console.log("너 뭐들었니?",selectedDiaryList);
           >
 
 
-            {/* 일기 리스트 출력 */}
-            {/* 여기서 누른 날짜의 일기리스트를 제공 */}
+            일기 리스트 출력
+            여기서 누른 날짜의 일기리스트를 제공
             <div className="c">
                 
             </div>
             
-          </div>
+          </div> */}
         </div>
       </div>
 

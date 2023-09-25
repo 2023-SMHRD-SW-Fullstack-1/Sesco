@@ -4,8 +4,9 @@ import noteClose from '../noteImg/noteClose.png'
 import noteOpen from '../noteImg/noteOpen.png'
 import noteKid from '../noteImg/noteKid.png'
 import noteLock from '../noteImg/noteLock.png'
+import noteTable from '../noteImg/noteTable.png'
 
-const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults, isDiaryOpen, tagSearchText, clickableNotes, lockedNotes }) => {
+const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults, isDiaryOpen, tagSearchText, clickableNotes, lockedNotes,onTagClose }) => {
     const [noteOpenStatus, setNoteOpenStatus] = useState(Array(notes.length).fill(false));
 
     const [noteKidStatus, setNoteKidStatus] = useState(Array(notes.length).fill(false));
@@ -31,7 +32,7 @@ const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults, isDiaryO
         setSelectedNoteIndex(null);
     }, [kidSeq]);
 
- 
+
 
     //노트 클릭했을 때 
     const handleNoteItemClick = (index) => {
@@ -63,6 +64,12 @@ const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults, isDiaryO
         }
     };
 
+    //태그 취소 클릭
+    const tagClose =()=>{
+        console.log("태그 취소 클릭 " )
+        onTagClose();
+
+    }
 
     return (
         <div>
@@ -74,12 +81,21 @@ const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults, isDiaryO
                     </span>
                 </div>
 
-                {/*태그 검색한 텍스트 표시 */}
+                {/*태그 검색한 텍스트 표시, 취소 버튼 */}
                 {tagSearchText ? (
                     <div className='tagResultText'>
                         <span className="tag-text">태그 검색 : {tagSearchText}</span>
+                    
+                        {tagSearchText ? (
+                    <div className='tagClose-container'>
+                        <button className="tagClose" onClick={tagClose}>취소</button>
                     </div>
                 ) : null}
+                    </div>
+                ) : null}
+
+                
+
                 {/* 노트 감싸는 큰 영역 */}
                 <div className="notes-container">
 
@@ -102,11 +118,10 @@ const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults, isDiaryO
 
                             {/* 연령대 표시 */}
                             <div className='noteAge-container'>
-                                <span className={`noteList-age ${isDiaryOpen &&selectedNoteIndex === index ? 'selected-note-text' : ''}`}>
+                                <span className={`noteList-age ${isDiaryOpen && selectedNoteIndex === index ? 'selected-note-text' : ''}`}>
                                     {tagSearchResults[note.note_seq] ? `${note.n_name}` : `${index}세`}
                                 </span>
                             </div>
-
 
                             {/* noteKid 이미지 표시 */}
                             <div className='noteKid-container'>
@@ -124,6 +139,10 @@ const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults, isDiaryO
                             )}
                         </div>
                     ))}
+                    {/*노트 테이블 */}
+                    <div className='noteTable-container'>
+                        <img src={noteTable} className='noteTable' />
+                    </div>
                 </div>
             </div>
         </div>

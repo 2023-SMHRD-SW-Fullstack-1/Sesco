@@ -113,10 +113,7 @@
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
-.fc .fc-toolbar-title {
-  font-size: 11px;
-  margin: 0px;
-}
+
 .diaryAddBtn{
   border: 2px solid #cecece;
   border-radius: 4px;
@@ -143,8 +140,5 @@
 .b{
   display: flex;
   justify-content: space-around;
-  
-}
-.c{
   
 }

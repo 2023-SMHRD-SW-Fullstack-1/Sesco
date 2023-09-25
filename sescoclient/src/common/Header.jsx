@@ -9,7 +9,7 @@ import { GoPerson, GoPersonAdd } from "react-icons/go";
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
-  const [log, setLog] = useState('로그인');
+  const [logo, setLogo] = useState(false);
   const [clickHome, setClickHome] = useState(true);
   const [menuContext, setMenuContext] = useState('');
   const [clickTip, setClickTip] = useState(false);
@@ -23,6 +23,7 @@ const Header = () => {
   const handleClickLogo = () => {
     if (!user_id) {
       nav('/')
+      window.location.replace("/")
       setMain2_header(true)
     } else {
       nav('/main')
@@ -84,7 +85,11 @@ const Header = () => {
   return (
     <div>
       <HeaderLogoContainer >
+        {!user_id?
+        <HeaderImgLogsize onClick={() => handleClickLogo()} />
+        :
         <HeaderImgLogo onClick={() => handleClickLogo()} />
+        }
         <HeaderLJContainer>
           {!user_id ?
             ""
@@ -96,14 +101,14 @@ const Header = () => {
       </HeaderLogoContainer>
       {user_id ?
         <HeaderTabContainer>
-          <HeaderTabImgLogo src={tab1} home={clickHome} onClick={() => handleClickMenu('home')} />
-          <HeaderMenuContextMain home={clickHome} onClick={() => handleClickMenu('home')}>홈</HeaderMenuContextMain>
-          <HeaderTabImgLogo src={tab2} tip={clickTip} onClick={() => handleClickMenu('tip')} />
-          <HeaderMenuContextTip tip={clickTip} onClick={() => handleClickMenu('tip')}>육아 TIP</HeaderMenuContextTip>
-          <HeaderTabImgLogo src={tab3} note={clickNote} onClick={() => handleClickMenu('note')} />
-          <HeaderMenuContextNote note={clickNote} onClick={() => handleClickMenu('note')}>수첩</HeaderMenuContextNote>
-          <HeaderTabImgLogo src={tab4} gallery={clickGallery} onClick={() => handleClickMenu('gallery')} />
-          <HeaderMenuContextGallery gallery={clickGallery} onClick={() => handleClickMenu('gallery')}>갤러리</HeaderMenuContextGallery>
+          <HeaderTabImgLogo src={tab1} home={clickHome ? 'true' : 'false'} onClick={() => handleClickMenu('home')} />
+          <HeaderMenuContextMain home={clickHome ? 'true' : 'false'} onClick={() => handleClickMenu('home')}>홈</HeaderMenuContextMain>
+          <HeaderTabImgLogo src={tab2} tip={clickTip ? 'true' : 'false'} onClick={() => handleClickMenu('tip')} />
+          <HeaderMenuContextTip tip={clickTip ? 'true' : 'false'} onClick={() => handleClickMenu('tip')}>육아 TIP</HeaderMenuContextTip>
+          <HeaderTabImgLogo src={tab3} note={clickNote ? 'true' : 'false'} onClick={() => handleClickMenu('note')} />
+          <HeaderMenuContextNote note={clickNote ? 'true' : 'false'} onClick={() => handleClickMenu('note')}>수첩</HeaderMenuContextNote>
+          <HeaderTabImgLogo src={tab4} gallery={clickGallery ? 'true' : 'false'} onClick={() => handleClickMenu('gallery')} />
+          <HeaderMenuContextGallery gallery={clickGallery ? 'true' : 'false'} onClick={() => handleClickMenu('gallery')}>갤러리</HeaderMenuContextGallery>
 
 
         </HeaderTabContainer>
@@ -117,19 +122,20 @@ const Header = () => {
 const HeaderMenuContextMain = styled.span`
 position: absolute;
 margin-left:62px;
-margin-top: 7px;
-font-weight: 900;
-font-size: 15px;
-color: ${({home})=>home?'rgb(194, 126, 0)':'rgb(121, 121, 121)'};
+margin-top: 9px;
+font-family: 'insungitCutelivelyjisu';
+font-size: 17px;
+color: ${({home})=>home==='true'? 'rgb(194, 126, 0)':'rgb(121, 121, 121)'};
+
 cursor:pointer;
 `;
 const HeaderMenuContextTip = styled.span`
 position: absolute;
-margin-left: 203px;
-margin-top:8px;
-font-weight: 900;
-font-size: 15px;
-color: ${({tip})=>tip?'rgb(150, 53, 53)':'rgb(121, 121, 121)'};
+margin-left: 201px;
+margin-top:10px;
+font-family: 'insungitCutelivelyjisu';
+font-size: 17px;
+color: ${({tip})=>tip==='true'?'rgb(150, 53, 53)':'rgb(121, 121, 121)'};
 cursor:pointer;
 
 `;
@@ -137,18 +143,18 @@ const HeaderMenuContextNote = styled.span`
 position: absolute;
 margin-left: 373px;
 margin-top: 8px;
-font-weight: 900;
-font-size: 15px;
-color: ${({note})=>note?'rgb(52, 74, 145)':'rgb(121, 121, 121)'};
+font-family: 'insungitCutelivelyjisu';
+font-size: 17px;
+color: ${({note})=>note==='true'?'rgb(52, 74, 145)':'rgb(121, 121, 121)'};
 cursor:pointer;
 `;
 const HeaderMenuContextGallery = styled.span`
 position: absolute;
 margin-left: 529px;
 margin-top: 8px;
-font-weight: 900;
-font-size: 15px;
-color: ${({gallery})=>gallery?'rgb(50, 80, 17)':'rgb(121, 121, 121)'};
+font-family: 'insungitCutelivelyjisu';
+font-size: 17px;
+color: ${({gallery})=>gallery==='true'?'rgb(50, 80, 17)':'rgb(121, 121, 121)'};
 cursor:pointer;
 `;
 
@@ -172,9 +178,13 @@ width:85px;
 margin:10px 10px 10px 20px;
 cursor:pointer;
 `;
+const HeaderImgLogsize = styled.img.attrs({src:  `${logo2}`})`
+width:120px;
+margin:15px 15px 10px 30px;
+cursor:pointer;
+`;
 const HeaderTabImgLogo = styled.img`
 width:110px;
-    
 margin-right:35px;
 height:40px;
 cursor:pointer;

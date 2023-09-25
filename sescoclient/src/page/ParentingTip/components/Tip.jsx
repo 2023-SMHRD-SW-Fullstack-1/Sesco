@@ -149,6 +149,17 @@ const Tip = ({ user_id }) => {
             </div>
 
             <div>
+            <div className='kidSurveySelect'>
+                    <button className="btn-4" onClick={() => openSurveyModal()}><span>아이 설문하러 가기 <FiBookOpen /></span></button>
+
+                    <select onChange={handleChange} className='kidSelect' value={kid_seq}>
+                        <option>{NONE}</option>
+                        {kidInfoList.map((kid,index) => (
+                            <option key={index} value={kid.kid_seq}> {kid.kid_name} </option>
+                        ))}
+                    </select>
+
+                </div>
                 <div className='tip-content-container'>
                     {activeButtonId == 0 ?
                         <div className='tip-mainContent'>
@@ -166,31 +177,26 @@ const Tip = ({ user_id }) => {
                                     {datas[activeButtonId]?.mainContext?.map((one, index) => <li className='mainText' key={index}>{one}</li>)}
                                 </div>
                             </div>
+                            <br/>
                             <h4>신체발달</h4>
                             {datas[activeButtonId]?.detailOne?.map((one, index) => <li key={index}>{one}</li>)}
+                            <br/>
                             <h4>정서발달</h4>
                             {datas[activeButtonId]?.detailTwo?.map((one, index) => <li key={index}>{one}</li>)}
+                            <br/>
                             <h4>사회성발달</h4>
                             {datas[activeButtonId]?.detailTree?.map((one, index) => <li key={index}>{one}</li>)}
+                            <br/>
                             <h4>언어발달</h4>
                             {datas[activeButtonId]?.detailFour?.map((one, index) => <li key={index}>{one}</li>)}
+                            <br/>
                             <h4>인지발달</h4>
                             {datas[activeButtonId]?.detailFive?.map((one, index) => <li key={index}>{one}</li>)}
                         </div>
                     }
 
                 </div>
-                <div className='kidSurveySelect'>
-                    <button className="btn-4" onClick={() => openSurveyModal()}><span>아이 설문하러 가기 <FiBookOpen /></span></button>
-
-                    <select onChange={handleChange} className='kidSelect'>
-                        <option>{NONE}</option>
-                        {kidInfoList.map((kid) => (
-                            <option value={kid.kid_seq} selected={kid.kid_seq === kid_seq}> {kid.kid_name} </option>
-                        ))}
-                    </select>
-
-                </div>
+               
                 {surveyUp && <Modal kid={sendKid} surveyUp={surveyUp} closeSurveyModal={closeSurveyModal} />}
 
             </div>

@@ -5,7 +5,7 @@
 }
 
 .noteList-year {
-    width: 182px;
+    /* width: 182px; */
     height: 79px;
     flex-shrink: 0;
     color: #000;
@@ -24,14 +24,17 @@
     margin-left: 150px;
     margin-right: 800px;
     align-items: center;
+    font-family: 'insungitCutelivelyjisu';
 
 }
+
+
 
 /*태그 결과 텍스트로 */
 
 .tag-text{
-    /* background-color: #ffcccc;
-    color: #ff6666; */
+    background-color: #ffcccc;
+    color: #ff6666;
     font-size: 24px; 
     padding: 5px 10px; 
     border-radius: 10px; 
@@ -39,8 +42,33 @@
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
     margin-top: 100px;
     margin-left: 150px;
+    font-family: 'insungitCutelivelyjisu';
+    align-items: center
     
 }
+
+
+.tagResultText{
+    display: flex;
+    align-items: center; 
+  }
+
+  .tagClose {
+    background-color: #ff6666;
+    width: 60px;
+    font-size: 20px;
+    line-height: 32px;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    transition: transform 0.3s ease-in-out;
+    border-radius: 10px;
+    height: auto;
+    margin-top: 100px;
+    margin-left: 30px;
+    font-family: 'insungitCutelivelyjisu';
+  }
 
 
 /* 수첩 영역 */
@@ -50,6 +78,8 @@
     justify-content: flex-start;
     margin-left: 120px;
     margin-top: 50px;
+    font-family: 'insungitCutelivelyjisu';
+    
 }
 
 .note-item-container {
@@ -64,6 +94,8 @@
     flex-direction: row;
 
     align-items: center;
+    
+    z-index: 2;
 
 }
 
@@ -82,6 +114,16 @@
 
 }
 
+/**노트 테이블*/
+.noteTable-container{
+    position: absolute;
+    margin-top: 250px;
+    left: -10px;
+}
+.noteTable{
+   height: 120px;
+   width: 1900px;
+}
 
 /*수첩 밑 연령 표시 **/
 
@@ -122,16 +164,16 @@
     position: absolute;
     /* top: -10px; */
     right: -10px;
-    /*background-color: #FF5733;
-        color: white;
-    */
+    /* background-color: #FF5733;
+        color: white; */
+   
     /* font-family: 'Akshar', sans-serif;  */
     font-size: 20px;
     border-radius: 10%;
     width: 125px;
     height: 40px;
 
-    margin-top: 300px;
+    margin-top: 200px;
     margin-right: 40px;
 
     display: flex;
@@ -141,8 +183,9 @@
     background-color: #ffcccc;
     color: #ff6666;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-
+    font-family: 'insungitCutelivelyjisu';
 }
+
 
 /*수첩 클릭 시 연령 색 변경*/
 .selected-note-text {
@@ -183,4 +226,6 @@
 
 .allNoteList-container{
     height: fit-content;
+    margin-bottom: 300px;
+    
 }

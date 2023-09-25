@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'GangwonEduSaeeum_OTFMediumA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduSaeeum_OTFMediumA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 .floating-menu {
     position: absolute;
     right: 50%;
@@ -6,8 +12,8 @@
   .btn.is-primary {
     z-index: 2;
     border: 0;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     font-size: 20px;
     border-radius: 50%;
     display: flex;
@@ -47,8 +53,8 @@
     align-items: center;
     justify-content: center;
     padding: 0;
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     color: #479CE8;
     text-decoration: none;
     font-weight: bold;
@@ -69,29 +75,46 @@
   /* A */
   .is-activate ~ .is-floating {
     opacity: 1;
-    transform: translateX(-130%) translateY(5%);
+    transform: translateX(-120%) translateY(5%);
   }
   /* B */
   .is-activate ~ .is-floating:nth-of-type(2) {
     opacity: 1;
-    transform: translateX(-260%) translateY(5%);
+    transform: translateX(-240%) translateY(5%);
   }
   /* C */
   .is-activate ~ .is-floating:nth-of-type(3) {
     opacity: 1;
-    transform: translateX(-400%) translateY(5%);
+    transform: translateX(-360%) translateY(5%);
     
   }
   /* D */
   .is-activate ~ .is-floating:nth-of-type(4) {
     opacity: 1;
     
-    transform: translateX(-550%) translateY(5%);
+    transform: translateX(-480%) translateY(5%);
+  }
+  #loginMenu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+  }
+  #loginMenu .icon{
+    margin-bottom: 6px;
+    font-size: 20px;
+  }
+  #loginMenu span{
+    font-size: 18px;
+    font-family: 'GangwonEduSaeeum_OTFMediumA';
   }
   
+  .loginMenuIcon{
+    width: 30px !important;
+  }
 .is-floating{
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
 }
 .menuVisible{
     position: absolute;

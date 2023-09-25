@@ -1,4 +1,3 @@
-
 .tag-box {
   display: flex;
   align-items: center;
@@ -22,41 +21,43 @@
   font-size: 13px;
 }
 
-.cancel-tag-item{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    height: 50px;
-    margin-left: 5px;
-    background-color: white;
-    border-radius: 50%;
-    color: tomato;
+.cancel-tag-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  margin-left: 5px;
+  background-color: white;
+  border-radius: 50%;
+  color: tomato;
 }
 
-.view-top-container{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-    z-index:6
+.view-top-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 6
 }
 
 
 
-.view-container{
+.view-container {
   content: '';
-  width: 100%;
-  height: 500px;
+  width: 95%;
+  height: 586px;
+  border: 3px solid #B8B8B8;
 }
 
-.view-box{
-  
+.view-box {
+  height: fit-content;
+  /* background-image: repeating-linear-gradient(white 1px, white 23px, rgb(162, 215, 165) 25px) */
+
 }
 
 
-.add-tag-item{
+.add-tag-item {
   display: inline-flex;
   min-width: 150px;
   background: transparent;
@@ -68,31 +69,42 @@
 
 /* -------------------다이어리 내부 요소 정리----------------------- */
 
-.view-diary-img-box{
-    position: relative;
-    width: 350px;
-    height: 250px;
-    background: #fff;
-    margin: 0 auto;
-    border-radius: 4px;
-    border: 2px solid rgba(194, 194, 194, 0.8);
-    box-shadow: 0 5px 20px rgba(194, 194, 194, 0.7);
-    
+.view-diary-title {
+  padding-left: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  height: 30px;
+  border: 2px solid #B8B8B8;
+  background: #EFEFEF;
+  width: inherit;
 }
 
-.view-diary-img{
-    width: inherit;
-    height: inherit;
-    object-fit: scale;
+.view-diary-img-box {
+  position: relative;
+  width: inherit;
+  height: 250px;
+  background: #fff;
+  margin: 0 auto;
+  flex-shrink: 0;
+  border: 2px solid #B8B8B8;
+  background: #EFEFEF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.view-diary-title{
-    font-size: 24px;
-    font-weight: bold;
+.view-diary-img {
+  width: inherit;
+  height: 230px;
+  object-fit: scale;
 }
 
 
-.view-diary-content{
-    height: fit-content;
-    background-image: repeating-linear-gradient(white 0px, white 24px, teal 25px);
+.view-diary-content {
+  border: 2px solid #B8B8B8;
+  background: #EFEFEF;
+  overflow-y: scroll;
+  height: fit-content;
+  min-height: 300px;
+  background-image: repeating-linear-gradient(#EFEFEF 0px, #EFEFEF 24px, #B8B8B8 25px);
 }

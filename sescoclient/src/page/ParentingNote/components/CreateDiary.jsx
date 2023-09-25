@@ -129,7 +129,7 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
     let updatedTagList = [...tagList];
     updatedTagList.push(tagItem);
     setTagList(updatedTagList);
-    setNoteseq(noteData.noteSeq)
+    
     setTagItem('');
     
   };
@@ -168,11 +168,14 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
     setContent(e.target.value);
   };
 
+  useEffect(()=>{
+    setNoteseq(noteData.noteSeq)
+  },[])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     
-    console.log(noteseq);
     const formData = new FormData();
     formData.append("d_title", title);
     formData.append("d_date", formatDate(selectedDate));
@@ -182,6 +185,7 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
     formData.append("img_si", city);     // 시 정보
     formData.append("file", imageFile);
     formData.append("note_seq",noteseq);
+    console.log("노트 시퀀스",noteseq);
     if(imageFile){
       formData.append("d_img_yn","Y"); //이미지 있냐 없냐
     }
@@ -229,6 +233,7 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
        <h2>일기 작성</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
+          
           <label htmlFor="title">제목</label>
           <input
             type="text"
@@ -244,6 +249,7 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
             <Button onClick={deleteTagItem}>X</Button>
           </TagItem>
         ))}
+        
         <TagInput
           type="text"
           placeholder="Press enter to add tags"

@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { FcCheckmark } from "react-icons/fc";
 
 const PreSurveyResult = ({ closePreSurveyResult, setShowPreSurveyResult, kid, kidMonth, bundle }) => {
-  const category = ['사회/정서적 영역', '언어/의사소통 영역', '인지(학습,사고,문제해결능력)', '운동/신체발달 영역'];
+  const category = ['사회/정서적 영역', '언어/의사소통 영역', '인지(학습,사고,문제해결력)', '운동/신체발달 영역'];
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [socialCheckList, setSocialCheckList] = useState([]);
@@ -86,7 +87,7 @@ const PreSurveyResult = ({ closePreSurveyResult, setShowPreSurveyResult, kid, ki
     <div className="survey">
 
       <div className='survey-middle-container'>
-        <div className='disEnough-container'><h3>✔ 불충족 항목 ✔</h3></div>
+        <div className='disEnough-container'><h3><FcCheckmark className='disEnough_icon'/> 불충족 항목 <FcCheckmark className='disEnough_icon'/></h3></div>
         <div className="surBox-container">
           {/* 사회/정서 */}
           <div className="surBox1">
@@ -145,7 +146,7 @@ const PreSurveyResult = ({ closePreSurveyResult, setShowPreSurveyResult, kid, ki
               <span className="circle" aria-hidden="true">
                 <span className="icon arrow"></span>
               </span>
-              <span className="button-text">닫기</span>
+              <span className="button-text">뒤로가기</span>
             </button>
           </div>
 
