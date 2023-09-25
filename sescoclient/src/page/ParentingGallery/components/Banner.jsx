@@ -2,7 +2,8 @@ import React from 'react'
 import gimg from '../../../img/cimg.png'
 import '../galleryroot.css';
 
-const Gallery = ({user_nick}) => {
+const Banner = ({user_nick}) => {
+
   return (
         <div className='banner' style={{
           backgroundImage: `url("${gimg}")`,
@@ -17,4 +18,4 @@ const Gallery = ({user_nick}) => {
   )
 }
 
-export default Gallery
+export default Banner

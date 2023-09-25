@@ -52,6 +52,9 @@ const GoogleLog = () => {
         width={365}
         size='medium'
           useOneTap={false}
+          size="medium"
+          width={360}
+          locale='kr'
           onSuccess={(res) => {
             //console.log("성공")
             //console.log(res);

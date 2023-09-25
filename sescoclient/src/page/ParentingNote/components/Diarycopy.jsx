@@ -199,9 +199,9 @@ console.log("너 뭐들었니?",selectedDiaryList);
             />
           </div>
           
-          <div className='diaryAddBtn' onClick={CreateDiaryForm}>
+          <button class='diaryAddBtn' onClick={CreateDiaryForm}>
              +
-          </div>
+          </button>
 
           {/* <div
             style={{

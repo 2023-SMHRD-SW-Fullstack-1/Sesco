@@ -33,27 +33,10 @@
   color: tomato;
 }
 
-.view-top-container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 6
-}
-
-
-
-.view-container {
-  content: '';
-  width: 95%;
-  height: 586px;
-  border: 3px solid #B8B8B8;
-}
 
 .view-box {
   height: fit-content;
   /* background-image: repeating-linear-gradient(white 1px, white 23px, rgb(162, 215, 165) 25px) */
-
 }
 
 
@@ -66,28 +49,46 @@
   cursor: text;
 }
 
-
 /* -------------------다이어리 내부 요소 정리----------------------- */
 
+.view-top-container {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  flex-direction: column;
+  align-items: center;
+  z-index: 6;
+  overflow-y: auto ;
+}
+
+.view-container {
+  content: '';
+  width: 350px;
+  height: fit-content;
+  /* border: 1px solid #B8B8B8; */
+  overflow-y: auto;
+}
+
 .view-diary-title {
+  border-bottom: 5px double black;
+  font-family: 'insungitCutelivelyjisu';
+  font-size: large;
+  height: fit-content;
+  min-height: 50px;
+  padding-top: 10px;
   padding-left: 5px;
-  font-size: 18px;
-  font-weight: bold;
-  height: 30px;
-  border: 2px solid #B8B8B8;
-  background: #EFEFEF;
-  width: inherit;
 }
 
 .view-diary-img-box {
   position: relative;
   width: inherit;
   height: 250px;
-  background: #fff;
+  /* background: #fff; */
   margin: 0 auto;
   flex-shrink: 0;
-  border: 2px solid #B8B8B8;
-  background: #EFEFEF;
+  border-bottom: 5px double black;
+  /* background: rgb(246, 248, 243); */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -101,10 +102,62 @@
 
 
 .view-diary-content {
-  border: 2px solid #B8B8B8;
-  background: #EFEFEF;
-  overflow-y: scroll;
+  border-bottom: 5px double black;
   height: fit-content;
-  min-height: 300px;
-  background-image: repeating-linear-gradient(#EFEFEF 0px, #EFEFEF 24px, #B8B8B8 25px);
+  min-height: 230px;
+  font-size: 25px;
+  background-image: repeating-linear-gradient(white 0px, white 25px, #B8B8B8 26px);
+  font-family: 'Minhye';
+  line-height: 107.5%;
+  padding-left: 7px;
+}
+
+.view-pre-btn{
+  height: 100px;
+  border-width: 0px !important;
+  align-self: center;
+}
+
+.view-next-btn{
+  height: 80px;
+  border-width: 0px !important;
+  align-self: center;
+}
+
+.view-edit-btn{
+  z-index: 2;
+  border: 0;
+  width: 60px;
+  height: 60px;
+  font-size: 20px;
+  border-radius: 50%;
+  position: fixed;
+  right: 350px;
+  bottom: 170px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #FFF;
+  background: linear-gradient(to right, #4EABFF, #0F8DFF);
+  opacity: 1;
+}
+
+.view-delete-btn{
+  z-index: 2;
+  border: 0;
+  width: 60px;
+  height: 60px;
+  font-size: 20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #FFF;
+  background: linear-gradient(to right, #4EABFF, #0F8DFF);
+  opacity: 1;
+  position: fixed;
+  right: 350px;
+  bottom: 240px;
 }

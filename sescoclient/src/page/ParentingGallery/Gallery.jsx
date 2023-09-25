@@ -116,7 +116,7 @@ const Gallery = () => {
               </div>
               <div className='gallery-city-container'>
                 {/* 선택한 지역이 있으면 List출력 */}
-                <h1>{selectedCity? selectedCity : clickedLocal}</h1> 
+                <h1 style={{fontFamily:'GangwonEduSaeeum_OTFMediumA', fontSize:'44px'}}>{selectedCity? selectedCity : clickedLocal}</h1> 
                 <br />
                 {
                   // 선택한 지역이아직 없는경우
