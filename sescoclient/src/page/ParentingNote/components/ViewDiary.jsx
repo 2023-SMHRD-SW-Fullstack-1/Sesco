@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 
 
 
-const ViewDiary = ({ selectdate, noteData, fetchDiaryList, setListClickVisible}) => {
+const ViewDiary = ({ selectdate, noteData, fetchDiaryList, setListClickVisible, updateDiaryList}) => {
   const [tags, setTags] = useState([]);
   const [current, setCurrent] = useState(0);
   const [isEditing, setIsEditing] = useState(false); // 수정 모드 플래그
@@ -29,6 +29,7 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList, setListClickVisible})
   useEffect(()=>{
     setNoteseq(noteData.noteSeq)
     console.log("tl", selectdate[0])
+    
   },[])
 
   
@@ -132,6 +133,8 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList, setListClickVisible})
     updatedTagList.push(tagItem);
     setTagList([...updatedTagList]);
     setTags([...updatedTagList]);
+    // const tagsString = updatedTagList.join('#');
+    // setTagsToSend(tagsString)
     // setTagsToSend([...updatedTagList])
 
     setTagItem('');
@@ -262,8 +265,8 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList, setListClickVisible})
       console.log("Diary modification response:", response);
 
       // After successful modification, exit the edit mode
+      fetchDiaryList()
       setIsEditing(false);
-      fetchDiaryList();
     }; 
 
     const handleDeleteDiary = async () => {
@@ -360,7 +363,7 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList, setListClickVisible})
 
         // --------------------------------------View Mode----------------------------------
       <div className="viewMode">
-        <Button variant="outline-secondary" className="view-pre-btn" onClick={getNext}>👈</Button>
+        <Button variant="outline-secondary" className="view-pre-btn" onClick={getPrevious}>👈</Button>
         <div className="view-container">
 
         <div className="view-diary-title">
