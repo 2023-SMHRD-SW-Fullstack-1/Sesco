@@ -152,7 +152,7 @@ const Tip = ({ user_id }) => {
             <div className='kidSurveySelect'>
                     <button className="btn-4" onClick={() => openSurveyModal()}><span>아이 설문하러 가기 <FiBookOpen /></span></button>
 
-                    <select onChange={handleChange} className='kidSelect' value={kid_seq}>
+                    <select onChange={handleChange} className='kidSelect' value={kid_seq||''}>
                         <option>{NONE}</option>
                         {kidInfoList.map((kid,index) => (
                             <option key={index} value={kid.kid_seq}> {kid.kid_name} </option>
