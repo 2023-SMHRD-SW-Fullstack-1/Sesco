@@ -60,3 +60,8 @@
     height: inherit;
     width: auto;
   }
+  .createBtns{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+  }

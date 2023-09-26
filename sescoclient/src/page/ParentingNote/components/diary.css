@@ -61,7 +61,7 @@
   position: absolute;
   left: 50%; right: 10px;
   top: 10px; bottom: 10px;
-  
+  padding-bottom: 20px;
   background: #ffffff;
   
   border-radius: 0 10px 10px 0;
@@ -165,3 +165,8 @@
   justify-content: space-around;
 }
 
+.createForm{
+  height: 460px;
+  overflow: scroll;
+  width: 110%;
+}
