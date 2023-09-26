@@ -258,7 +258,7 @@ const Diarycopy = ({noteData}) => {
   />  
 )}
         </div>
-        
+        <button className="diaryAddBtn" onClick={()=>CreateDiaryForm()}>+</button>
 
       </div>
     </div>
