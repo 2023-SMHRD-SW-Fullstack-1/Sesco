@@ -28,6 +28,7 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList, setListClickVisible})
   const [noteseq, setNoteseq] = useState(''); 
   useEffect(()=>{
     setNoteseq(noteData.noteSeq)
+    console.log("tl", selectdate[0])
   },[])
 
   
@@ -362,7 +363,6 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList, setListClickVisible})
         <Button variant="outline-secondary" className="view-pre-btn" onClick={getNext}>👈</Button>
         <div className="view-container">
 
-
         <div className="view-diary-title">
               제목 : {selectdate[current].title}
             </div>
@@ -370,8 +370,7 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList, setListClickVisible})
           <div className="view-box">
             <div className="view-diary-img-box">
             {selectdate[current].img && (
-                <img className="view-diary-img" src={"data:image/;base64," + selectdate[current].img} alt="" />
-              
+                <img className="view-diary-img" src={"data:image/;base64," + selectdate[current].img} alt=""/>
             )}
             </div>
 

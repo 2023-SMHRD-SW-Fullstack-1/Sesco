@@ -141,9 +141,9 @@ const Diarycopy = ({noteData}) => {
     //일기 작성 완료 처리 함수
     function onComplete(title, content, imgFile, tags) {
       
-      console.log(title, content, tags, imgFile)
+      console.log(`제목 : ${title}, 내용 :${content}, 태그 : ${tags}, 이미지파일 ${imgFile}`)
 
-    if (selectedDate && title && content) {
+    if (selectedDate) {
 
       const newDiary = {
         date: formatDate(selectedDate),
@@ -155,6 +155,7 @@ const Diarycopy = ({noteData}) => {
       
       //현재 일기 값에서 일기작성한 값 추가해주기
       setListDiary([...listDiary, newDiary]);
+      fetchDiaryList()
       //한국 표준시 이렇게 나옴 초기상태
       console.log("seletedDate", selectedDate);
       //DB값 전부 불러옴
