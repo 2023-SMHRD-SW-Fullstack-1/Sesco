@@ -316,7 +316,7 @@ const ViewDiary = ({ selectdate, noteData}) => {
         </form>
       ) : (
         // --------------------------------------View Mode----------------------------------
-      <div style={{display:"flex"}}>
+      <div style={{display:"flex" , marginTop:'20px'}}>
         <Button variant="outline-secondary" className="view-pre-btn" onClick={getNext}>👈</Button>
         <div className="view-container">
           <div className="view-box">

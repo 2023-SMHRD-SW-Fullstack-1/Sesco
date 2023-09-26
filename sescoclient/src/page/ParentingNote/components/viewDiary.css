@@ -38,10 +38,16 @@
   height: fit-content;
   /* background-image: repeating-linear-gradient(white 1px, white 23px, rgb(162, 215, 165) 25px) */
 }
+.cancel-tag-item{
+  height: 20px;
+  width: 20px;
+}
 
 
 .add-tag-item {
   display: inline-flex;
+  font-family: 'Minhye' !important;
+  font-size: 18px;
   min-width: 150px;
   background: transparent;
   border: none;
@@ -105,10 +111,12 @@
   border-bottom: 5px double black;
   height: fit-content;
   min-height: 230px;
+  margin-top: 5px;
+  padding-top: 1px;
   font-size: 25px;
   background-image: repeating-linear-gradient(white 0px, white 25px, #B8B8B8 26px);
   font-family: 'Minhye';
-  line-height: 107.5%;
+  line-height: 120.5%;
   padding-left: 7px;
 }
 
@@ -169,7 +177,9 @@
   width: 100%;
 }
 .viewEditedTitle{
-margin-top: 40px;
+  margin-top: 40px;
+  font-size: 17px;
+  font-family: 'insungitCutelivelyjisu';
   height: 40px;
   border: none;
   border-bottom: 5px double black;
@@ -177,11 +187,14 @@ margin-top: 40px;
 }
 .viewEditedContent{
   width: 100%;
+  font-family: 'Minhye';
   background-image: repeating-linear-gradient(white 0px, white 25px, #B8B8B8 26px);
   margin-bottom: 20px;
   height: 250px;
+  font-size: 20px;
+  margin-top: 6px;
   border: none;
-  line-height: 107.5%;
+  line-height: 120.5%;
 }
 .viewForm{
   width: 70%;
