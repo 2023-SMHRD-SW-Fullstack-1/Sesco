@@ -27,7 +27,7 @@ const SurveyResult = ({ bundle }) => {
 
 
     useEffect(() => {
-        axios.post('http://localhost:8081/sesco/survey/agetip', {
+        axios.post('http://172.30.1.39:8081/sesco/survey/agetip', {
             hsv_seq: 6,
         }).then((res) => {
             console.log(res.data)
