@@ -25,7 +25,7 @@ import io.jsonwebtoken.Jwts;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://172.30.1.56:3000")
 public class MemberController {
 
 	@Autowired

@@ -23,7 +23,7 @@ const KakaoLogin = () => {
   const submitNick=()=>{
     const inputValue = inputRef.current.value;
     setIsError(false)
-    axios.post('http://localhost:8081/sesco/member/kakao', {
+    axios.post('http://172.30.1.39:8081/sesco/member/kakao', {
       res : memberToken,
       user_nick : inputValue
     }).then((res)=>{
@@ -51,7 +51,7 @@ const KakaoLogin = () => {
   
         // Kakao 사용자 정보를 Spring 서버로 전송
         try {
-          await axios.post("http://localhost:8081/sesco/login/kakao", {
+          await axios.post("http://172.30.1.39:8081/sesco/login/kakao", {
             id: authObj.id, // Kakao 사용자 고유 ID
             nickname: kakaoAccount.profile.nickname, // 닉네임
             email: kakaoAccount.email, // 이메일

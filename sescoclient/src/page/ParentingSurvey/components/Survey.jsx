@@ -185,7 +185,7 @@ function Survey({ kid, user_id }) {
             hsv_seq: kidMonth
         };
         try {
-            const response = await axios.post('http://localhost:8081/sesco/survey/saveresult', resultsData, config);
+            const response = await axios.post('http://172.30.1.56:8081/sesco/survey/saveresult', resultsData, config);
 
             if (response.status === 200) {
                 console.log('결과가 성공적으로 저장되었습니다.');
@@ -199,7 +199,7 @@ function Survey({ kid, user_id }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.post('http://localhost:8081/sesco/survey/agechecklist', {
+                const response = await axios.post('http://172.30.1.56:8081/sesco/survey/agechecklist', {
                     hsv_seq: kidMonth,
                 });
                 const responseData = response.data;

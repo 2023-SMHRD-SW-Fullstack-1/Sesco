@@ -60,7 +60,7 @@ const Main2Avatar = ({ baby }) => {
         };
 
         console.log(requestData)
-        axios.post(`http://localhost:8081/sesco/kid/update`, requestData, config)
+        axios.post(`http://172.30.1.56:8081/sesco/kid/update`, requestData, config)
             .then((res) => {
 
                 try {
