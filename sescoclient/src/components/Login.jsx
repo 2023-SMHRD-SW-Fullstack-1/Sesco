@@ -37,7 +37,7 @@ const Login = () => {
       user_pw: user_pw,
     };
     axios
-      .post(`http://172.30.1.39:8081/sesco/member/login`, requestData, config)
+      .post(`http://172.30.1.56:8081/sesco/member/login`, requestData, config)
       .then((res) => {
         try {
           // id와 pw가 로그인정보와 일치하다면

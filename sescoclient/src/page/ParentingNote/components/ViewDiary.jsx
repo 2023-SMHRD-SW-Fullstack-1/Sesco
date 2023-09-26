@@ -215,7 +215,7 @@ const ViewDiary = ({ selectdate, noteData}) => {
       }
 
       const response = await axios.post(
-        "http://172.30.1.39:8081/sesco/diary/update",
+        "http://172.30.1.56:8081/sesco/diary/update",
         formData,
         {
           headers: {
@@ -235,7 +235,7 @@ const ViewDiary = ({ selectdate, noteData}) => {
       try {
         const dSeqToDelete = selectdate[current].d_seq
         const response = await axios.post(
-          `http://172.30.1.39:8081/sesco/diary/delete`, {d_seq: dSeqToDelete}
+          `http://172.30.1.56:8081/sesco/diary/delete`, {d_seq: dSeqToDelete}
         )
   
         if (response.status === 200) {

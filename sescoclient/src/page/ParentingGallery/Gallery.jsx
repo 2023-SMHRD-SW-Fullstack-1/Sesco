@@ -54,7 +54,7 @@ const Gallery = () => {
 
 
     //회원정보 중 이미지가 있는 일기 정보를 다 불러옴 
-    axios.post("http://172.30.1.39:8081/sesco/diary/getdiarylist/img",{
+    axios.post("http://172.30.1.56:8081/sesco/diary/getdiarylist/img",{
         "user_id" : user_id
     }).then((res)=>{
       //이미지가 있는 일기 정보를 전부다 가져왔음

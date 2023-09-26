@@ -28,7 +28,7 @@ const GoogleLog = () => {
     if(inputValue==null){
       setIsError(!isError)
     }else{
-    axios.post('http://172.30.1.39:8081/sesco/member/googlejoin', {
+    axios.post('http://172.30.1.56:8081/sesco/member/googlejoin', {
       res : memberToken,
       user_nick : inputValue
     }).then((res)=>{
@@ -52,15 +52,13 @@ const GoogleLog = () => {
         width={365}
         size='medium'
           useOneTap={false}
-          size="medium"
-          width={360}
           locale='kr'
           onSuccess={(res) => {
             //console.log("성공")
             //console.log(res);
             const googleLogResult = async () => {
               try {
-                const response = await axios.post('http://172.30.1.39:8081/sesco/member/googlelogin', {
+                const response = await axios.post('http://172.30.1.56:8081/sesco/member/googlelogin', {
                    res: res.credential
                 }, config);
 

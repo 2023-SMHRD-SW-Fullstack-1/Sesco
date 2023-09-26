@@ -44,7 +44,7 @@ const Main2 = () => {
     
     const getKids = async () => {
       try {
-        const response = await axios.post('http://172.30.1.39:8081/sesco/kid/getkidlist', { user_id: user_id })
+        const response = await axios.post('http://172.30.1.56:8081/sesco/kid/getkidlist', { user_id: user_id })
         setBabyList(response.data)
         console.log("아이 불러오기 성공 response: ", response.data)
         

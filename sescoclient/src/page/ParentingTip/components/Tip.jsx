@@ -67,7 +67,7 @@ const Tip = ({ user_id }) => {
 
     useEffect(() => {
         console.log(surveyUp);
-        axios.get('http://localhost:5000/tip')
+        axios.get('http://172.30.1.56:5000/tip')
             .then(res => {
                 setDatas(res.data);
                 console.log(res.data);
@@ -81,7 +81,7 @@ const Tip = ({ user_id }) => {
             axios.post('http://localhost:8081/kid/'){
                 [아이1, 아이2, 아이3]
             } */}
-        axios.post('http://172.30.1.39:8081/sesco/kid/getkidlist', {
+        axios.post('http://172.30.1.56:8081/sesco/kid/getkidlist', {
             "user_id": user_id
         }).then((res) => {
             setKidInfoList(res.data)

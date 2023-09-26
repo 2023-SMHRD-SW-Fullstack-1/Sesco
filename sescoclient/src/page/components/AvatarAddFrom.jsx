@@ -31,7 +31,7 @@ const AvatarAddFrom = () => {
             kid_gender: kid_gender,
             user_id: user_id
         };
-        return axios.post(`http://172.30.1.39:8081/sesco/kid/register`, requestData, config).then((res) => {
+        return axios.post(`http://172.30.1.56:8081/sesco/kid/register`, requestData, config).then((res) => {
             
             try {
                 
