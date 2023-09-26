@@ -15,7 +15,7 @@ import com.smhrd.sesco.domain.Kid;
 import com.smhrd.sesco.service.KidService;
 
 @RestController
-@CrossOrigin("http://172.30.1.56:3000")
+@CrossOrigin("http://localhost:3000")
 public class KidController {
 
 	@Autowired

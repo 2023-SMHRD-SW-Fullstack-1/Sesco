@@ -25,7 +25,7 @@ import com.smhrd.sesco.service.SurveyService;
 
 
 @RestController
-@CrossOrigin("http://172.30.1.56:3000")
+@CrossOrigin("http://localhost:3000")
 public class HtSurveyController {
 
 	
