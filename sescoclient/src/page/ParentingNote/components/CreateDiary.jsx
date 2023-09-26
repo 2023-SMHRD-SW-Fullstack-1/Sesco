@@ -234,7 +234,7 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
     console.log("태그 합친거 :", tagsToSend);
     // Spring 서버로 POST 요청 보내기
     try {
-      const response = await axios.post("http://172.30.1.56:8081/sesco/diary/creatediary", formData, {
+      const response = await axios.post("http://localhost:8081/sesco/diary/creatediary", formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

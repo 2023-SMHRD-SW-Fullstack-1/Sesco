@@ -23,7 +23,7 @@ import com.smhrd.sesco.service.DiaryService;
 import com.smhrd.sesco.service.MemberService;
 
 @RestController 
-@CrossOrigin(origins = "http://172.30.1.56:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 public class KakaoController { 
 	@Autowired
 	private MemberService memberService;
