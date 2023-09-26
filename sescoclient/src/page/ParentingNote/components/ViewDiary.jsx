@@ -24,7 +24,7 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList, setListClickVisible})
 
   const [tagItem, setTagItem] = useState('');
   const [tagList, setTagList] = useState([]);   
-  const [tagsToSend,  setTagsToSend] = useState('');
+  const [tagsToSend,  setTagsToSend] = useState([]);
   const [noteseq, setNoteseq] = useState(''); 
   useEffect(()=>{
     setNoteseq(noteData.noteSeq)
@@ -106,13 +106,13 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList, setListClickVisible})
     if (e.key === 'Enter') {
       e.preventDefault(); // 엔터 키의 기본 동작(폼 제출) 방지
       if (isValidTag(tagItem)) {
-        submitTagItem();
+        let tempTagList = submitTagItem();
         // setTagsToSend를 호출하면 위의 useEffect가 실행됩니다.
-        const tagsString = tagList.join('#');
+        const tagsString = tempTagList.join('#');
         setTagsToSend(tagsString);
         setErrorMessage('');
         // const tempTag =  [...tags]
-        // setTags([...tempTag, e.value])
+        // setTags([...tempTag, ])
       } else {
         setErrorMessage('태그는 알파벳, 숫자, 하이픈, 언더스코어만 포함해야 합니다.');
       }
@@ -130,7 +130,12 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList, setListClickVisible})
     let updatedTagList = [...tagList];
     updatedTagList.push(tagItem);
     setTagList([...updatedTagList]);
+    setTags([...updatedTagList]);
+    // setTagsToSend([...updatedTagList])
+
     setTagItem('');
+
+    return updatedTagList
     
   };
 
@@ -138,8 +143,10 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList, setListClickVisible})
     e.preventDefault()
     const deleteTagItem = e.target.parentElement.firstChild.innerText;
     const filteredTagList = tags.filter((tagItem) => tagItem !== deleteTagItem);
-    setTags(filteredTagList);
-    // setTagsToSend(filteredTagList)
+    setTags(filteredTagList)
+    const tagsString = filteredTagList.join('#');
+    setTagsToSend(tagsString)
+    setTagList(filteredTagList)
   };
   
 
@@ -224,7 +231,7 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList, setListClickVisible})
       formData.append("d_title", editedTitle);
       formData.append("d_date",selectdate[current].date)
       formData.append("d_content", editedContent);
-      // formData.append("d_tags", tagsToSend);
+      formData.append("d_tags", tagsToSend);
       formData.append("img_do", province);
       formData.append("file",editedImage);
       formData.append("img_si", city);

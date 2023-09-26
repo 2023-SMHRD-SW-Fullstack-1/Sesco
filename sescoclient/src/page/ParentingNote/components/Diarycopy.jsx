@@ -102,6 +102,7 @@ const Diarycopy = ({noteData}) => {
     })
       .then((res) => {
         const fetchedEvents = res.data.diary.map((event, idx) => {
+          console.log("태그값 확인", event.d_tags)
           return {
             d_seq: event.d_seq,
             title: event.d_title,
