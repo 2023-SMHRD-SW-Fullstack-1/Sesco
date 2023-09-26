@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { FcCheckmark } from "react-icons/fc";
 
 const PreSurveyResult = ({ closePreSurveyResult, setShowPreSurveyResult, kid, kidMonth, bundle }) => {
-  const category = ['사회/정서적 영역', '언어/의사소통 영역', '인지(학습,사고,문제해결력)', '운동/신체발달 영역'];
+  const category = ['사회/정서적 영역', '언어/의사소통 영역', '인지(학습,사고,문제해결능력)', '운동/신체발달 영역'];
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [socialCheckList, setSocialCheckList] = useState([]);
