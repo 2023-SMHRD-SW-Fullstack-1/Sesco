@@ -27,7 +27,7 @@ const Join = () => {
         try {
 
 
-            const res = await axios.post("http://172.30.1.56:8081/sesco/member/join", {
+            const res = await axios.post("http://localhost:8081/sesco/member/join", {
                 user_id: user_id,
                 user_pw: user_pw,
                 user_email: user_email,

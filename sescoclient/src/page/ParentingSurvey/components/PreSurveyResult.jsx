@@ -58,7 +58,7 @@ const PreSurveyResult = ({ closePreSurveyResult, setShowPreSurveyResult, kid, ki
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post('http://172.30.1.56:8081/sesco/survey/presurveylist', {
+        const response = await axios.post('http://localhost:8081/sesco/survey/presurveylist', {
           kid_seq: kid.kid_seq,
           hsv_seq: kidMonth,
         });
