@@ -14,23 +14,23 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
   const [province, setProvince] = useState('');
   const [city, setCity] = useState('');
   // const [tags, setTags] = useState([]);
-   //위도
-   const [latitudedecimal, setLatitudeDecimal] = useState(null);
+  //위도
+  const [latitudedecimal, setLatitudeDecimal] = useState(null);
 
-   //경도
-   const [longitudedecimal, setLongitudeDecimal] = useState(null);
+  //경도
+  const [longitudedecimal, setLongitudeDecimal] = useState(null);
 
 
-   const [isImg , setIsImg] = useState("");
+  const [isImg, setIsImg] = useState("");
 
   const [tagItem, setTagItem] = useState('');
   const [tagList, setTagList] = useState([]);
   const [tagsToSend, setTagsToSend] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [noteseq, setNoteseq] = useState('');
- 
-  
-  
+
+
+
 
   useEffect(() => {
     const getExif = async () => {
@@ -123,7 +123,7 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
   useEffect(() => {
     console.log(tagsToSend); // tagsToSend가 업데이트될 때마다 로그 출력
   }, [tagsToSend]);
-  
+
   const onKeyPress = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault() // 엔터 키의 기본 동작(폼 제출) 방지
@@ -144,15 +144,15 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
     return regex.test(tag);
   };
 
-  
+
 
   // const submitTagItem = () => {
   //   let updatedTagList = [...tagList];
   //   updatedTagList.push(tagItem);
   //   setTagList(updatedTagList);
-    
+
   //   setTagItem('');
-    
+
   // };
 
 
@@ -186,7 +186,7 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
     const file = event.target.files[0];
     setImageFile(file);
     setImagePreview(URL.createObjectURL(file)); // 이미지 파일을 미리보기 URL로 설정
-    
+
   };
 
   // const handleTagChange = (e) => {
@@ -202,14 +202,14 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
     setContent(e.target.value);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     setNoteseq(noteData.noteSeq)
-  },[])
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    
+
     const formData = new FormData();
     console.log("태그 업데이트? :", tagsToSend)
     formData.append("d_title", title);
@@ -219,19 +219,19 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
     formData.append("img_do", province); // 도 정보
     formData.append("img_si", city);     // 시 정보
     formData.append("file", imageFile);
-    formData.append("note_seq",noteseq);
-    console.log("노트 시퀀스",noteseq);
-    if(imageFile){
-      formData.append("d_img_yn","Y"); //이미지 있냐 없냐
+    formData.append("note_seq", noteseq);
+    console.log("노트 시퀀스", noteseq);
+    if (imageFile) {
+      formData.append("d_img_yn", "Y"); //이미지 있냐 없냐
     }
-    else{
-      formData.append("d_img_yn", "N")    
+    else {
+      formData.append("d_img_yn", "N")
     }
 
     // if (tags.length > 0) {
     //   formData.append("tags", tags.join("#"));
     // }
-    console.log("태그 합친거 :",tagsToSend);
+    console.log("태그 합친거 :", tagsToSend);
     // Spring 서버로 POST 요청 보내기
     try {
       const response = await axios.post("http://172.30.1.39:8081/sesco/diary/creatediary", formData, {
@@ -239,7 +239,7 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
           'Content-Type': 'multipart/form-data'
         }
       })
-      
+
 
       // 작성완료 눌렀을 시
       // 완료 콜백 호출하여 부모 컴포넌트에 데이터 전달 
@@ -260,87 +260,90 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
     }
   };
 
-  
+
 
   return (
     <WholeBox>
-    <div className="create-diary-container">
-       <h2>일기 작성</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          
-          <label htmlFor="title">제목</label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={handleTitleChange}
-          />
-          
-      <TagBox>
-        {tagList.map((tagItem, index) => (
-          <TagItem key={index}>
-            <Text>{tagItem}</Text>
-            <Button onClick={deleteTagItem}>X</Button>
-          </TagItem>
-        ))}
-        
-        <TagInput
-          type="text"
-          placeholder="Press enter to add tags"
-          tabIndex={2}
-          onChange={(e) => setTagItem(e.target.value)}
-          value={tagItem}
-          onKeyPress={onKeyPress}
-        />
-        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-      </TagBox>
-        </div>
-        <div className="form-group">
-          <label htmlFor="content">내용</label>
-          <textarea
-            id="content"
-            value={content}
-            onChange={handleContentChange}
-          ></textarea>
-        </div>
-        <div className="form-group">
-          {/* 이미지 미리보기 */}
-         
-          <label htmlFor="image">
-            {/* 사진바꾸기가 추가 되어야 함? */}
-            <div className="img-upload-container"> 
-            {imagePreview ?
+      <div className="create-diary-container">
+        <h2>일기 작성</h2>
+        <form className="createForm" onSubmit={handleSubmit}>
+          <div className="form-group">
 
-               <img className="img-pre-view" src={imagePreview} alt="이미지 미리보기" /> 
-              //  <input
-              //       type="file"
-              //       id="image"
-              //       accept="image/*"
-              //       onChange={handleImageUpload}
-              // />
-            
-            : 
-               <div className="img-upload-box">
-                 <img className="img-upload-icon" src={"/cameraicon.png"}></img>
-                  <input
-                    type="file"
-                    id="image"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                  />
+            <label htmlFor="title">제목</label>
+            <input
+              type="text"
+              id="title"
+              value={title}
+              onChange={handleTitleChange}
+            />
+
+            <TagBox>
+              {tagList.map((tagItem, index) => (
+                <TagItem key={index}>
+                  <Text>{tagItem}</Text>
+                  <Button onClick={deleteTagItem}>X</Button>
+                </TagItem>
+              ))}
+
+              <TagInput
+                type="text"
+                placeholder="Press enter to add tags"
+                tabIndex={2}
+                onChange={(e) => setTagItem(e.target.value)}
+                value={tagItem}
+                onKeyPress={onKeyPress}
+              />
+              {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+            </TagBox>
+          </div>
+          <div className="form-group">
+            <label htmlFor="content">내용</label>
+            <textarea
+              id="content"
+              value={content}
+              onChange={handleContentChange}
+            ></textarea>
+          </div>
+          <div className="form-group">
+            {/* 이미지 미리보기 */}
+
+            <label htmlFor="image">
+              {/* 사진바꾸기가 추가 되어야 함? */}
+              <div className="img-upload-container">
+                {imagePreview ?
+
+                  <img className="img-pre-view" src={imagePreview} alt="이미지 미리보기" />
+                  //  <input
+                  //       type="file"
+                  //       id="image"
+                  //       accept="image/*"
+                  //       onChange={handleImageUpload}
+                  // />
+
+                  :
+                  <div className="img-upload-box">
+                    <img className="img-upload-icon" src={"/cameraicon.png"}></img>
+                  </div>
+                }
               </div>
-            } 
+            </label>
+            <div className="createBtns">
+              <input
+                type="file"
+                id="image"
+                accept="image/*"
+                onChange={handleImageUpload}
+              />
+
+              <button type="submit">작성완료</button>
             </div>
-          </label>
+            
 
-          
-        </div>
+          </div>
 
-        <button type="submit">작성완료</button>
 
-      </form>
-    </div>
+        </form>
+      </div>
     </WholeBox>
   );
 };
