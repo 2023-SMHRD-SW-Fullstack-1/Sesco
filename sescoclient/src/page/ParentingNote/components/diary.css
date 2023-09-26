@@ -109,16 +109,17 @@
 } 
 
 .diary-kid-name{
-    height: 18%;
+    height: 17%;
     width: 15%;
     margin-right: 1px;
-    background-color: violet;
+    background-color: rgb(170, 66, 66);
     border-radius: 5px;
     display: flex;
+    color: #ffffff;
     justify-content: center;
     align-items: center;
-    font-size: 10px;
-    font-weight: 400;
+    font-size: 15px;
+    font-weight: bold;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
@@ -165,8 +166,4 @@
   justify-content: space-around;
 }
 
-.createForm{
-  height: 460px;
-  overflow: scroll;
-  width: 110%;
-}
+

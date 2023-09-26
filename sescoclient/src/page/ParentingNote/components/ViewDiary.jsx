@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 
 
 
-const ViewDiary = ({ selectdate, noteData}) => {
+const ViewDiary = ({ selectdate, noteData, fetchDiaryList, setListClickVisible}) => {
   const [tags, setTags] = useState([]);
   const [current, setCurrent] = useState(0);
   const [isEditing, setIsEditing] = useState(false); // 수정 모드 플래그
@@ -23,7 +23,7 @@ const ViewDiary = ({ selectdate, noteData}) => {
 
 
   const [tagItem, setTagItem] = useState('');
-  const [tagList, setTagList] = useState([]);
+  const [tagList, setTagList] = useState([]);   
   const [tagsToSend,  setTagsToSend] = useState('');
   const [noteseq, setNoteseq] = useState(''); 
   useEffect(()=>{
@@ -62,12 +62,14 @@ const ViewDiary = ({ selectdate, noteData}) => {
       // setEditedTags(selectdate[current].tag);
       setEditedImage(null); // 이미지는 초기화
       setEditedImagePreview(null);
+      setTags(selectdate[current].tags);
       setProvince(selectdate[current].img_do);
       setCity(selectdate[current].img_si);
     }
   }, [selectdate, current]);
 
   const handleEditClick = () => {
+    setTagList([...tags])
     setIsEditing(true);
   };
 
@@ -76,19 +78,41 @@ const ViewDiary = ({ selectdate, noteData}) => {
   };
 
   const handleImageUpload = (event) => {
-    const file = event.target.files[0];
+    const file = event.target.files[0]  ;
     setEditedImage(file);
     setEditedImagePreview(URL.createObjectURL(file));
   };
 
+  // const onKeyPress = (e) => {
+  //   e.preventDefault()
+  //   if (e.key === 'Enter') {
+  //     e.preventDefault(); // 엔터 키의 기본 동작(폼 제출) 방지
+  //     if (isValidTag(tagItem)) {
+  //       submitTagItem();
+  //       const tagsString = tags.join('#');
+  //       setTagsToSend(tagsString);
+  //       setErrorMessage('');
+  //     } else {
+  //       setErrorMessage('태그는 알파벳, 숫자, 하이픈, 언더스코어만 포함해야 합니다.');
+  //     }
+  //   }
+  // };
+
+  useEffect(() => {
+    console.log(tagsToSend); // tagsToSend가 업데이트될 때마다 로그 출력
+  }, [tagsToSend]);
+  
   const onKeyPress = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault(); // 엔터 키의 기본 동작(폼 제출) 방지
       if (isValidTag(tagItem)) {
         submitTagItem();
+        // setTagsToSend를 호출하면 위의 useEffect가 실행됩니다.
         const tagsString = tagList.join('#');
         setTagsToSend(tagsString);
         setErrorMessage('');
+        // const tempTag =  [...tags]
+        // setTags([...tempTag, e.value])
       } else {
         setErrorMessage('태그는 알파벳, 숫자, 하이픈, 언더스코어만 포함해야 합니다.');
       }
@@ -105,15 +129,17 @@ const ViewDiary = ({ selectdate, noteData}) => {
   const submitTagItem = () => {
     let updatedTagList = [...tagList];
     updatedTagList.push(tagItem);
-    setTagList(updatedTagList);
+    setTagList([...updatedTagList]);
     setTagItem('');
     
   };
 
   const deleteTagItem = (e) => {
+    e.preventDefault()
     const deleteTagItem = e.target.parentElement.firstChild.innerText;
-    const filteredTagList = tagList.filter((tagItem) => tagItem !== deleteTagItem);
-    setTagList(filteredTagList);
+    const filteredTagList = tags.filter((tagItem) => tagItem !== deleteTagItem);
+    setTags(filteredTagList);
+    // setTagsToSend(filteredTagList)
   };
   
 
@@ -198,7 +224,7 @@ const ViewDiary = ({ selectdate, noteData}) => {
       formData.append("d_title", editedTitle);
       formData.append("d_date",selectdate[current].date)
       formData.append("d_content", editedContent);
-      formData.append("d_tags", tagsToSend);
+      // formData.append("d_tags", tagsToSend);
       formData.append("img_do", province);
       formData.append("file",editedImage);
       formData.append("img_si", city);
@@ -229,6 +255,7 @@ const ViewDiary = ({ selectdate, noteData}) => {
 
       // After successful modification, exit the edit mode
       setIsEditing(false);
+      fetchDiaryList();
     }; 
 
     const handleDeleteDiary = async () => {
@@ -241,6 +268,8 @@ const ViewDiary = ({ selectdate, noteData}) => {
         if (response.status === 200) {
           // 삭제 요청이 성공한 경우
           // 이후에 필요한 작업 수행 (예: 일기 목록 다시 불러오기)
+          fetchDiaryList()
+          setListClickVisible(false)
           console.log("Diary deleted successfully.")
           // 다음 일기 또는 이전 일기로 이동하거나 원하는 작업 수행
           // 예: getNext(), getPrevious() 호출 또는 다른 작업 수행
@@ -263,6 +292,7 @@ const ViewDiary = ({ selectdate, noteData}) => {
         // Editing mode
         <form className="viewForm">
           <div className="view-Editedtop-container">
+            
             <input
             className="viewEditedTitle"
               type="text"
@@ -270,6 +300,13 @@ const ViewDiary = ({ selectdate, noteData}) => {
               value={editedTitle}
               onChange={(e) => setEditedTitle(e.target.value)}
             />
+
+          <div>
+            {editedImagePreview && (
+              <img src={editedImagePreview} alt="이미지 미리보기" style={{width : "300px", height: "300px"}} />
+            )}
+          </div>
+
             <textarea
             className="viewEditedContent"
               placeholder="내용"
@@ -279,7 +316,8 @@ const ViewDiary = ({ selectdate, noteData}) => {
           </div>
           
           <div className="tag-box">
-        {tagList.map((tagItem, index) => (
+            {/* 이쪽 바꿔야됨 */}
+        {tags.map((tagItem, index) => (
           <div className="tag-item" key={index}>
             <span>{tagItem}</span>
             <button className="cancel-tag-item" onClick={deleteTagItem}>X</button>
@@ -297,11 +335,7 @@ const ViewDiary = ({ selectdate, noteData}) => {
         {errorMessage && <div>{errorMessage}</div>}
       </div>
           {errorMessage && <div>{errorMessage}</div>}
-          <div>
-            {editedImagePreview && (
-              <img src={editedImagePreview} alt="이미지 미리보기" />
-            )}
-          </div>
+          
           <input
           className="imageUpload"
             type="file"
@@ -315,21 +349,31 @@ const ViewDiary = ({ selectdate, noteData}) => {
           </div>
         </form>
       ) : (
+
         // --------------------------------------View Mode----------------------------------
-      <div style={{display:"flex" , marginTop:'20px'}}>
+      <div className="viewMode">
         <Button variant="outline-secondary" className="view-pre-btn" onClick={getNext}>👈</Button>
         <div className="view-container">
-          <div className="view-box">
-            
-            {selectdate[current].img && (
-              <div className="view-diary-img-box">
-                <img className="view-diary-img" src={"data:image/;base64," + selectdate[current].img} alt="" />
-              </div>
-            )}
-            <div className="view-diary-title">제목 : {selectdate[current].title}
-            </div>
-            <p className="view-diary-content">{selectdate[current].content}</p>
 
+
+        <div className="view-diary-title">
+              제목 : {selectdate[current].title}
+            </div>
+
+          <div className="view-box">
+            <div className="view-diary-img-box">
+            {selectdate[current].img && (
+                <img className="view-diary-img" src={"data:image/;base64," + selectdate[current].img} alt="" />
+              
+            )}
+            </div>
+
+            
+
+            <div className="viewtitle">
+            <p className="view-diary-content">{selectdate[current].content}</p>
+            </div>
+            
             {tags.length > 0 && (
               <div className="tag-box">
                 {tags.map((tag, index) => (
@@ -337,10 +381,8 @@ const ViewDiary = ({ selectdate, noteData}) => {
                   ))}
               </div>
             )}
-
-            
-          
           </div>
+
         </div>
         <Button variant="outline-secondary" className="view-next-btn" onClick={getNext}>👉</Button>
           

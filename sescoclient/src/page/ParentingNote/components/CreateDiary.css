@@ -1,6 +1,6 @@
-.create-diary-container {
+/* .create-diary-container {
     max-width: 400px;
-  }
+  } */
   
   .create-diary-container h2 {
     margin-bottom: 1rem;
@@ -73,3 +73,4 @@
     justify-content: space-between;
     padding: 15px;
   }
+

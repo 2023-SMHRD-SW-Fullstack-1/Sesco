@@ -254,7 +254,7 @@ const Diarycopy = ({noteData}) => {
           )}
         {listClickVisible && selectedDiaryList && selectedDiaryList.length > 0 && (
   <ViewDiary
-  fetchDiaryList={fetchDiaryList} selectdate={selectedDiaryList} noteData={noteData}
+  fetchDiaryList={fetchDiaryList} selectdate={selectedDiaryList} noteData={noteData} setListClickVisible={setListClickVisible}
   />  
 )}
         </div>
