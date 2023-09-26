@@ -86,7 +86,7 @@ console.log("너 뭐들었니?",selectedDiaryList);
   
   //DB에 저장된 일기 리스트 불러오기
   const fetchDiaryList = (tag) => {
-    axios.post(`http://localhost:8081/sesco/diary/selectlist`,{
+    axios.post(`http://172.30.1.39:8081/sesco/diary/selectlist`,{
       note_seq : noteData.noteSeq
     })
       .then((res) => {

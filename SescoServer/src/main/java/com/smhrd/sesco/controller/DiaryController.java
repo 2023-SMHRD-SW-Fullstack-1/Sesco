@@ -34,7 +34,7 @@ import com.smhrd.sesco.domain.Member;
 import com.smhrd.sesco.service.DiaryService;
 
 @RestController 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://172.30.1.39:3000")
 public class DiaryController {
 	
 	

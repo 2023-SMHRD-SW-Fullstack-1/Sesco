@@ -18,7 +18,7 @@ import com.smhrd.sesco.service.KidService;
 import com.smhrd.sesco.service.NoteService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://172.30.1.39:3000")
 public class NoteController {
 
 	@Autowired

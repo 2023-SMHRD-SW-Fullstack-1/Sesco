@@ -81,7 +81,7 @@ const Tip = ({ user_id }) => {
             axios.post('http://localhost:8081/kid/'){
                 [아이1, 아이2, 아이3]
             } */}
-        axios.post('http://localhost:8081/sesco/kid/getkidlist', {
+        axios.post('http://172.30.1.39:8081/sesco/kid/getkidlist', {
             "user_id": user_id
         }).then((res) => {
             setKidInfoList(res.data)

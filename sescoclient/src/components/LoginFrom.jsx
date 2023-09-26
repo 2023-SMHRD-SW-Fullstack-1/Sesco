@@ -70,7 +70,7 @@ const [userInfo, setUserInfo] = useState(false);
             user_email: userEmail,
             user_name : userName
         };
-        axios.post(`http://localhost:8081/sesco/member/searchpw`, requestData, config)
+        axios.post(`http://172.30.1.39:8081/sesco/member/searchpw`, requestData, config)
             .then((res) => {
 
                 try {
@@ -100,7 +100,7 @@ const [userInfo, setUserInfo] = useState(false);
             user_email: userEmail,
             user_name : userName
         };
-        axios.post(`http://localhost:8081/sesco/member/searchid`, requestData, config)
+        axios.post(`http://172.30.1.39:8081/sesco/member/searchid`, requestData, config)
             .then((res) => {
 
                 try {
@@ -130,7 +130,7 @@ const [userInfo, setUserInfo] = useState(false);
             user_id: user_id,
             user_pw: user_pw,
         };
-        axios.post(`http://localhost:8081/sesco/member/login`, requestData, config)
+        axios.post(`http://172.30.1.39:8081/sesco/member/login`, requestData, config)
             .then((res) => {
 
                 try {

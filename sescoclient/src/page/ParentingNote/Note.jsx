@@ -144,7 +144,7 @@ const Note = ({onTagClose}) => {
   useEffect(() => {
     const getKids = async () => {
       try {
-        const response = await axios.post('http://localhost:8081/sesco/kid/getkidlist', { user_id: userId })
+        const response = await axios.post('http://172.30.1.39:8081/sesco/kid/getkidlist', { user_id: userId })
         setKids(response.data)
         console.log("사용자 아이 불러오기 성공", response.data)
         //첫 번째 아이 선택
@@ -213,7 +213,7 @@ const Note = ({onTagClose}) => {
     const getNotesByKid = async () => {
       console.log("선택한 아이 : ", kidSelect)
       try {
-        const reseponse = await axios.post('http://localhost:8081/sesco/note/createnotev2', { "kid_seq": kidSelect });
+        const reseponse = await axios.post('http://172.30.1.39:8081/sesco/note/createnotev2', { "kid_seq": kidSelect });
 
         //현재 연도,월  가져오기
         const currentYear = new Date().getFullYear();
@@ -290,7 +290,7 @@ const Note = ({onTagClose}) => {
     try {
       if (searchTag.trim() === "") return;
       console.log("사용자 아이디값  : ", userId)
-      const response = await axios.get('http://localhost:8081/sesco/note/tagsearch', { params: { tag: searchTag, userId: userId } })
+      const response = await axios.get('http://172.30.1.39:8081/sesco/note/tagsearch', { params: { tag: searchTag, userId: userId } })
       setNotes(response.data)
       console.log("태그 검색 데이터 불러오기 : ", response.data)
       setTagSearchResult(response.data);
@@ -342,7 +342,7 @@ const Note = ({onTagClose}) => {
         alert("태그 검색 결과가 없습니다.😥")
         
         //  아이의  수첩 다시 불러오기
-        const reseponse = await axios.post('http://localhost:8081/sesco/note/createnotev2', { "kid_seq": kidSelect });
+        const reseponse = await axios.post('http://172.30.1.39:8081/sesco/note/createnotev2', { "kid_seq": kidSelect });
         setNotes(reseponse.data);
 
 
@@ -406,7 +406,7 @@ const Note = ({onTagClose}) => {
     setTagSearchResult({})
 
      //  아이의  수첩 다시 불러오기
-     const reseponse = await axios.post('http://localhost:8081/sesco/note/createnotev2', { "kid_seq": kidSelect });
+     const reseponse = await axios.post('http://172.30.1.39:8081/sesco/note/createnotev2', { "kid_seq": kidSelect });
      setNotes(reseponse.data);
 
 
