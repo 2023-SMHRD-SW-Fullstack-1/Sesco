@@ -50,7 +50,7 @@ function ModalGallery({closeModal, imgInfo}) {
 
   return (
     <div className="gallery-modal" onClick={()=>closeModal(false)}>
-      <div className="gallery-modal-body" onClick={(e) => e.stopPropagation()}>
+      <div className="gallery-modal-body" style={{overflowX:"auto"}} onClick={(e) => e.stopPropagation()}>
        { img && <div><ImageGallery items={img} /></div> }
       {/* <button classNam="modal-info-btn">eeeeeeeee</button> */}
       {/* <DiaryContent style={{position:"absoulte"}} diaryData={diaryData}></DiaryContent> */}

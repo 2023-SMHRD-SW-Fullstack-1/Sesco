@@ -25,7 +25,7 @@ public class Diary {
 //	}
 
 	//일기 날짜
-	private LocalDate d_date;
+	private String d_date;
 	
 	//일기 내용
 	private String d_content;
