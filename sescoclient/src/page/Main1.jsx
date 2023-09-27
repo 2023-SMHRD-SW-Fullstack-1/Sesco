@@ -4,6 +4,10 @@ import bookIcon from '../img/main1/main1_bookIcon.png'
 import tipIcon from '../img/main1/main1_TipIcon.png'
 import galleryIcon from '../img/main1/main1_galleryIcon.png'
 import avatarImg from '../img/main1/main1_avatarImg.png'
+import diary1 from '../img/main1/diary0.png'
+import diary2 from '../img/main1/diary1.png'
+import diary3 from '../img/main1/diary2.png'
+import diary4 from '../img/main1/diary3.png'
 import tip1Img from '../img/main1/tip1img.png'
 import tip2Img from '../img/main1/tip2img.png'
 import tip3Img from '../img/main1/tip3img.png'
@@ -11,7 +15,6 @@ import galleryImg1 from '../img/main1/galleryImg1.png'
 import galleryImg2 from '../img/main1/galleryImg2.png'
 import { Link } from 'react-scroll';
 import { Box } from '@mui/material';
-import { useNavigate } from 'react-router-dom'
 import HTMLFlipBook from "react-pageflip";
 import testImg from '../img/main1/testImg.png'
 import Slider from "react-slick";
@@ -245,10 +248,10 @@ useEffect(() => {
 
               <div>
                 <HTMLFlipBook width={430} height={500} mobileScrollSupport={false}>
-                  <Page number="1"><img className='bookPage_img' width={'430px'} height={'500px'} src={testImg} /></Page>
-                  <Page number="2"><img className='bookPage_img' width={'430px'} height={'500px'} src={testImg} /></Page>
-                  <Page number="3"><img className='bookPage_img' width={'430px'} height={'500px'} src={testImg} /></Page>
-                  <Page number="4"><img className='bookPage_img' width={'430px'} height={'500px'} src={testImg} /></Page>
+                  <Page number="1"><img className='bookPage_img' width={'430px'} height={'500px'} src={diary1} /></Page>
+                  <Page number="2"><img className='bookPage_img' width={'430px'} height={'500px'} src={diary2} /></Page>
+                  <Page number="3"><img className='bookPage_img' width={'430px'} height={'500px'} src={diary3} /></Page>
+                  <Page number="4"><img className='bookPage_img' width={'430px'} height={'500px'} src={diary4} /></Page>
                 </HTMLFlipBook>
 
               </div>
