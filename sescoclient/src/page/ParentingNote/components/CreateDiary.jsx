@@ -5,6 +5,7 @@ import { Calendar } from "@fullcalendar/core";
 import moment from "moment";
 import EXIF from 'exif-js';
 import styled from 'styled-components';
+import Btn from 'react-bootstrap/Button';
 
 const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
   const [title, setTitle] = useState("");
@@ -336,7 +337,7 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
                 onChange={handleImageUpload}
               />
 
-              <button type="submit">작성완료</button>
+              <Btn variant="warning" className='changescontent' type="submit">작성완료</Btn>
             </div>
             
 
