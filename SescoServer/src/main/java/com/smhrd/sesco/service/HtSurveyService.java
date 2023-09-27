@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.google.gson.JsonObject;
 import com.smhrd.sesco.domain.HtSurveyDetail;
 import com.smhrd.sesco.domain.HtSurveyTip;
 import com.smhrd.sesco.domain.Survey;

@@ -349,8 +349,12 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
 };
 
 const WholeBox = styled.div`
+border: solid rgba(177, 136, 136);
+border-radius: 3%;
   padding: 10px;
-  height: 100vh;
+  width: 460px;
+  height: 530px;
+  overflow-y: scroll;
 `;
 
 const TagBox = styled.div`

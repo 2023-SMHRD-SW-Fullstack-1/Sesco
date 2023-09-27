@@ -8,8 +8,6 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
-
-import com.google.gson.JsonObject;
 import com.smhrd.sesco.domain.HtSurveyDetail;
 import com.smhrd.sesco.domain.HtSurveyTip;
 import com.smhrd.sesco.domain.Survey;

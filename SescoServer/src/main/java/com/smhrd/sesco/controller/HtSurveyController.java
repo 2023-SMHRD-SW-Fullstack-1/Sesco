@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.smhrd.sesco.domain.HtSurveyDetail;
 import com.smhrd.sesco.domain.HtSurveyTip;
 import com.smhrd.sesco.domain.Survey;
