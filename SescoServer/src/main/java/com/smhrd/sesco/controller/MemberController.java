@@ -22,7 +22,7 @@ import com.smhrd.sesco.domain.Member;
 import com.smhrd.sesco.service.MemberService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://13.124.75.186:3000")
 public class MemberController {
 
 	@Autowired
@@ -33,7 +33,7 @@ public class MemberController {
 	public String MemberJoin(@RequestBody Map<String, Object> map) {
 
 		String user_id = map.get("user_id").toString();
-
+		
 		System.out.println(user_id);
 		String user_pw = map.get("user_pw").toString();
 		String user_nick = map.get("user_nick").toString();
