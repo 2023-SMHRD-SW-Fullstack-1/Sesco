@@ -58,7 +58,7 @@ const GoogleLog = () => {
             //console.log(res);
             const googleLogResult = async () => {
               try {
-                const response = await axios.post('http:/localhost:8081/sesco/member/googlelogin', {
+                const response = await axios.post('http://localhost:8081/sesco/member/googlelogin', {
                    res: res.credential
                 }, config);
 

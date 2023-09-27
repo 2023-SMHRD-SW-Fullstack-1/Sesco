@@ -221,6 +221,7 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
     formData.append("file", imageFile);
     formData.append("note_seq", noteseq);
     console.log("노트 시퀀스", noteseq);
+    console.log("파싱",formatDate(selectedDate));
     if (imageFile) {
       formData.append("d_img_yn", "Y"); //이미지 있냐 없냐
     }
