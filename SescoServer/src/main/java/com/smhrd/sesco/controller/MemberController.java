@@ -22,7 +22,7 @@ import com.smhrd.sesco.domain.Member;
 import com.smhrd.sesco.service.MemberService;
 
 @RestController
-@CrossOrigin(origins = "http://43.200.175.37:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 public class MemberController {
 
 	@Autowired
