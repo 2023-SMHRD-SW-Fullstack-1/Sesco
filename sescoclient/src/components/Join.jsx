@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
 import GoogleLog from '../page/components/GoogleLog';
+import Swal from "sweetalert2";
 
 
 const Join = () => {
@@ -44,18 +45,39 @@ const Join = () => {
 
     const saveUserInfo = () => {
         if (!user_id || !user_pw || !user_email || !user_nick || !user_name) {
-            alert('다시 입력해주세요.');
+          
+            Swal.fire({
+                icon: 'error',
+                title: '다시 입력해주세요.',
+              })
+            
         } else {
             fetchData()
                 .then((result) => {
                     if (result === 'id중복') {
-                        alert('ID중복입니다. ID를 확인하세요');
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'ID 중복입니다',
+                            text: 'ID를 확인하세요!',
+                          })
                     } else if (result === 'nick중복') {
-                        alert('닉네임 중복입니다. 닉네임을 확인하세요');
+                        Swal.fire({
+                            icon: 'error',
+                            title: '닉네임 중복입니다.',
+                            text: '닉네임을 확인하세요!',
+                          })
                     } else if (result === 'email중복') {
-                        alert('이메일 중복입니다. 이메일을 확인하세요');
+                        Swal.fire({
+                            icon: 'error',
+                            title: '이메일 중복입니다.',
+                            text: '이메일을 확인하세요!',
+                          })
                     } else if (result === 'success') {
-                        alert('🎺회원가입 성공🎺');
+                        Swal.fire(
+                            '회원가입 성공 !',
+                            '로그인 후 이용해주세요.',
+                            'success'
+                          )
                         nav('/');
                     }
                     console.log('name:', user_name, 'nick:', user_nick, 'id:', user_id, 'email:', user_email, 'pw:', user_pw, 'pwCheck:', pwCheckValue);
