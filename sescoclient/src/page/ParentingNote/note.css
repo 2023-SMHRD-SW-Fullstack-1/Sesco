@@ -61,7 +61,6 @@
 /* 태그 검색창 + 아이 선택 창 컨테이너 */
 .noteTagAndKid-container {
   display: flex;
-  justify-content: space-between;
   height: 200px;
   width: auto;
   margin-top: 130px;
@@ -117,7 +116,7 @@
   margin-top: 68px;
   /* margin-bottom: 2813px; */
   margin-left: 35px;
-  margin-right: 640px;
+  margin-right: 0px;
   color: #505050;
   cursor: pointer;
   outline: none;
