@@ -33,7 +33,7 @@ public class MemberController {
 	public String MemberJoin(@RequestBody Map<String, Object> map) {
 
 		String user_id = map.get("user_id").toString();
-
+		
 		System.out.println(user_id);
 		String user_pw = map.get("user_pw").toString();
 		String user_nick = map.get("user_nick").toString();

@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import GoogleLogin from './GoogleLogin';
 import GoogleLog from '../page/components/GoogleLog';
-
+import Swal from "sweetalert2";
 
 
 
@@ -85,13 +85,20 @@ const [userInfo, setUserInfo] = useState(false);
                         console.log( 'res',res.data);
                         console.log(sessionStorage.user_id);
                         if(res.data){
-                            alert(`회원님의 비밀번호는 ' ${res.data} '  입니다`)
+                            Swal.fire(`회원님의 비밀번호는 ' ${res.data} '  입니다`)
                         }else{
-                            alert('일치하는 비밀번호가 없습니다')
+                            Swal.fire({
+                                icon: 'error',
+                                title: '일치하는 비밀번호가 없습니다',
+                                text: '아이디를 확인해주세요!',
+                              })
 
                         }
                 } catch {
-                    alert('조회 실패')
+                    Swal.fire({
+                        icon: 'error',
+                        title: '조회 실패'
+                      })
                     console.log('res',res.data);
                 }
             })
@@ -111,16 +118,23 @@ const [userInfo, setUserInfo] = useState(false);
                         console.log(user_id);
                         // 로그인 여부 : true 
                         if(res.data){
-                            alert(`회원님의 아이디는 ' ${res.data} ' 입니다`)
+                            Swal.fire(`회원님의 아이디는 ' ${res.data} ' 입니다`)
                         }else{
-                            alert('일치하는 아이디가 없습니다')
+                            Swal.fire({
+                                icon: 'error',
+                                title: '일치하는 아이디가 없습니다',
+                                text: '아이디를 확인해주세요!',
+                              })
 
                         }
                         console.log( 'res',res.data);
                         console.log(sessionStorage.user_id);
                  
                 } catch {
-                    alert('조회 실패')
+                    Swal.fire({
+                        icon: 'error',
+                        title: '조회 실패'
+                      })
                     console.log('res',res.data);
                 }
             })
@@ -143,16 +157,27 @@ const [userInfo, setUserInfo] = useState(false);
                         sessionStorage.setItem('user_nick', res.data.loginUser.user_nick)
 
                         // 로그인 여부 : true 
-                        alert('로그인성공')
+                        Swal.fire({
+                            icon: 'success',
+                            title: '로그인 성공',
+                          })
                         nav('/main')
                         console.log(res.data);
                         console.log(sessionStorage.user_nick);
                     } else {
-                        alert('로그인정보가 일치하지 않습니다.')
+                        Swal.fire({
+                            icon: 'error',
+                            title: '로그인정보가 일치하지 않습니다.'
+                          })
                         console.log(res.data);
                     }
                 } catch {
-                    alert('로그인정보가 일치하지 않음')
+                    Swal.fire({
+                        icon: 'error',
+                        title: '로그인정보가 일치하지 않습니다.'
+                      })
+                    
+                    
                 }
             })
     }

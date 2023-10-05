@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
+import Swal from "sweetalert2";
 
 
 const AvatarAddFrom = () => {
@@ -36,10 +37,17 @@ const AvatarAddFrom = () => {
             try {
                 
                 if (res.data) {
-                    alert('아이등록 완료')
+                    Swal.fire({
+                        icon: 'success',
+                        title: '아이등록 완료'
+                      })
+                    
                     return true;
                 } else {
-                    alert('등록 실패')
+                    Swal.fire({
+                        icon: 'error',
+                        title: '등록 실패'
+                      })
                     return false
                 }
                 
@@ -54,18 +62,31 @@ const AvatarAddFrom = () => {
     const saveKidInfo = () => {
 
         if(!kid_name || !kid_birth|| !kid_weight || !kid_height|| !kid_gender|| !user_id){
-            alert('다시 입력해주세요.');
+            Swal.fire({
+                icon: "warning",
+                title: "다시 입력해주세요.",
+            })
         }else if(kid_birth.length!=10){
-            alert('출생년도를 바르게 입력해주세요')
+            Swal.fire({
+                icon: "warning",
+                title: "출생년도를 바르게 입력해주세요",
+            })
         }else{
             fetchData().then((value) => {
                 if (value) {
                     window.location.replace('/main');
                 } else {
-                    alert('다시 입력해주세요.');
+                    Swal.fire({
+                        icon: "warning",
+                        title: "다시 입력해주세요.",
+                    })
                 }
             }).catch((error) => {
-                alert('다시 입력해주세요.');
+                Swal.fire({
+                    icon: "warning",
+                    title: "다시 입력해주세요.",
+                })
+
                 console.error('에러 발생:', error);
                 // 에러 처리 로직 추가
             });

@@ -10,6 +10,7 @@ import axios from "axios";
 import moment from 'moment';
 import "../../../../src/Fullcalendar.css"
 import { render } from "@fullcalendar/core/preact";
+import { useFetcher } from "react-router-dom";
 
 
 const Diarycopy = ({noteData}) => {
@@ -50,11 +51,7 @@ const Diarycopy = ({noteData}) => {
 
 
 
-  // useEffect(()=>{
-  //   console.log("tjlclflcujwmx", searchResult)
-   
-  // }, [listDiary])
-
+ 
   // --------------------tag   end------------------//
 
 
@@ -94,6 +91,24 @@ const Diarycopy = ({noteData}) => {
     setIsClick(!isClick);
   }
 
+  const updateDiaryList=()=>{
+    setListClickVisible(false)
+    const tempDiaryList = listDiary.filter((diary)=> diary.date == formatDate(selectedDate))
+    setSelectedDiaryList(tempDiaryList)
+  }
+
+  useEffect(()=>{
+    setListClickVisible(true)
+  },[selectedDiaryList])
+
+  useEffect(()=>{
+    if(selectedDate){
+      const tempDiaryList = listDiary.filter((diary)=> diary.date == formatDate(selectedDate))
+      setSelectedDiaryList(tempDiaryList)  
+      setListClickVisible(true);
+    }
+  }, [listDiary])
+
   
   //DB에 저장된 일기 리스트 불러오기
   const fetchDiaryList = (tag) => {
@@ -102,6 +117,7 @@ const Diarycopy = ({noteData}) => {
     })
       .then((res) => {
         const fetchedEvents = res.data.diary.map((event, idx) => {
+          console.log("태그값 확인", event.d_tags)
           return {
             d_seq: event.d_seq,
             title: event.d_title,
@@ -140,9 +156,9 @@ const Diarycopy = ({noteData}) => {
     //일기 작성 완료 처리 함수
     function onComplete(title, content, imgFile, tags) {
       
-      console.log(title, content, tags, imgFile)
+      console.log(`제목 : ${title}, 내용 :${content}, 태그 : ${tags}, 이미지파일 ${imgFile}`)
 
-    if (selectedDate && title && content) {
+    if (selectedDate) {
 
       const newDiary = {
         date: formatDate(selectedDate),
@@ -154,6 +170,8 @@ const Diarycopy = ({noteData}) => {
       
       //현재 일기 값에서 일기작성한 값 추가해주기
       setListDiary([...listDiary, newDiary]);
+      fetchDiaryList()
+      updateDiaryList()
       //한국 표준시 이렇게 나옴 초기상태
       console.log("seletedDate", selectedDate);
       //DB값 전부 불러옴
@@ -249,12 +267,12 @@ const Diarycopy = ({noteData}) => {
           {isClick && (
             // CreateDiary 컴포넌트에 선택된 날짜 전달 (props로)
             // 예시: <CreateDiary selectedDate={selectedDate} />
-            // 필요에 따라 선택된 날짜를 CreateDiary 컴포넌트로 전달해주세요.
+            // 필요에 따라 선택된 날짜를 CreateDiary 컴포넌트로 전달해주세요. 
             <CreateDiary selectedDate={selectedDate} onComplete={onComplete}formatDate={formatDate} noteData={noteData}/>
           )}
         {listClickVisible && selectedDiaryList && selectedDiaryList.length > 0 && (
   <ViewDiary
-  fetchDiaryList={fetchDiaryList} selectdate={selectedDiaryList} noteData={noteData}
+  fetchDiaryList={fetchDiaryList} setSelectedDate={setSelectedDate} selectdate={selectedDiaryList} noteData={noteData} setListClickVisible={setListClickVisible} updateDiaryList={updateDiaryList}
   />  
 )}
         </div>

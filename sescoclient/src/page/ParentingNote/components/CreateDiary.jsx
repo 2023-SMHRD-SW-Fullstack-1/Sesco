@@ -5,6 +5,7 @@ import { Calendar } from "@fullcalendar/core";
 import moment from "moment";
 import EXIF from 'exif-js';
 import styled from 'styled-components';
+import Btn from 'react-bootstrap/Button';
 
 const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
   const [title, setTitle] = useState("");
@@ -221,6 +222,7 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
     formData.append("file", imageFile);
     formData.append("note_seq", noteseq);
     console.log("노트 시퀀스", noteseq);
+    console.log("파싱",formatDate(selectedDate));
     if (imageFile) {
       formData.append("d_img_yn", "Y"); //이미지 있냐 없냐
     }
@@ -335,7 +337,7 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
                 onChange={handleImageUpload}
               />
 
-              <button type="submit">작성완료</button>
+              <Btn variant="warning" className='changescontent' type="submit">작성완료</Btn>
             </div>
             
 
@@ -349,8 +351,12 @@ const CreateDiary = ({ onComplete, selectedDate, formatDate, noteData }) => {
 };
 
 const WholeBox = styled.div`
+border: solid rgba(177, 136, 136);
+border-radius: 3%;
   padding: 10px;
-  height: 100vh;
+  width: 460px;
+  height: 530px;
+  overflow-y: scroll;
 `;
 
 const TagBox = styled.div`

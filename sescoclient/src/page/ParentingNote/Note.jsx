@@ -6,6 +6,7 @@ import noteFind from './noteImg/noteFind.png'
 import './note.css';
 import Diarycopy from './components/Diarycopy'
 import { useNavigate } from 'react-router';
+import Swal from "sweetalert2";
 const Note = ({onTagClose}) => {
 
   const navigate = useNavigate();
@@ -339,7 +340,11 @@ const Note = ({onTagClose}) => {
 
       //태그 검색 버튼 결과가 없을 때 
       if (Object.keys(response.data).length === 0) {
-        alert("태그 검색 결과가 없습니다.😥")
+        Swal.fire({
+          icon: "error",
+          title: "검색 결과 없음",
+          text:"태그 검색 결과가 없습니다.😥"
+      })
         
         //  아이의  수첩 다시 불러오기
         const reseponse = await axios.post('http://localhost:8081/sesco/note/createnotev2', { "kid_seq": kidSelect });

@@ -3,6 +3,7 @@ import "./Login.css";
 import LoginImg from "../img/LoginImg.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 
@@ -51,7 +52,10 @@ const Login = () => {
             sessionStorage.setItem("user_nick", res.data.loginUser.user_nick);
 
             // 로그인 여부 : true
-            alert("로그인성공");
+            Swal.fire({
+              icon: 'success',
+              title: '로그인 성공',
+            })
             nav("/main");
             console.log(res.data);
             console.log(sessionStorage.user_nick);

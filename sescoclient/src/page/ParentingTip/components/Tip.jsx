@@ -12,8 +12,8 @@ import babyTip5 from '../../../img/baby5tip.png'
 import babyTip6 from '../../../img/baby6tip.png'
 import babyTip7 from '../../../img/baby7tip.png'
 import babyTip8 from '../../../img/baby8tip.png'
-import Survey from '../../ParentingSurvey/components/Survey';
 import Modal from '../../ParentingSurvey/Modal';
+import Swal from "sweetalert2";
 
 const Tip = ({ user_id }) => {
     const [datas, setDatas] = useState(['']);
@@ -38,7 +38,10 @@ const Tip = ({ user_id }) => {
             setSendKid(tempList[0])
             setSurveyUp(true);
         }else if (selectedKid == NONE || selectedKid == null) {
-            alert("아이를선택해야합니다")
+            Swal.fire({
+                icon: "warning",
+                title: "아이를선택해야합니다"
+            })
         } else {
             const tempList = kidInfoList.filter((kid) => kid.kid_seq === selectedKid)
             setSendKid(tempList[0])
@@ -152,7 +155,7 @@ const Tip = ({ user_id }) => {
             <div className='kidSurveySelect'>
                     <button className="btn-4" onClick={() => openSurveyModal()}><span>아이 설문하러 가기 <FiBookOpen /></span></button>
 
-                    <select onChange={handleChange} className='kidSelect' value={kid_seq}>
+                    <select onChange={handleChange} className='kidSelect' value={kid_seq||''}>
                         <option>{NONE}</option>
                         {kidInfoList.map((kid,index) => (
                             <option key={index} value={kid.kid_seq}> {kid.kid_name} </option>

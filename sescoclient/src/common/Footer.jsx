@@ -44,7 +44,7 @@ justify-content: center;
 align-items: center;
 padding: 30px 0;
 border-top: 1px solid rgb(	255, 253, 236);;
-width: 100%;
+width: 1897px;
 background-color : rgb(	255, 253, 236);
 position: relative;
 

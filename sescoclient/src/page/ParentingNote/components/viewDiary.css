@@ -35,9 +35,11 @@
 
 
 .view-box {
-  height: fit-content;
+  
+  /* height: fit-content; */
   /* background-image: repeating-linear-gradient(white 1px, white 23px, rgb(162, 215, 165) 25px) */
 }
+
 .cancel-tag-item{
   height: 20px;
   width: 20px;
@@ -55,13 +57,13 @@
   cursor: text;
 }
 
-/* -------------------다이어리 내부 요소 정리----------------------- */
+/*-------------------다이어리 내부 요소 정리-----------------------*/
 
 .view-top-container {
   position: relative;
   display: flex;
   width: 100%;
-  height: fit-content;
+  height: 550px;
   flex-direction: column;
   align-items: center;
   z-index: 6;
@@ -82,14 +84,13 @@
   font-size: large;
   height: fit-content;
   min-height: 50px;
-  padding-top: 10px;
+  margin-top: 30px;
   padding-left: 5px;
 }
 
 .view-diary-img-box {
   position: relative;
   width: inherit;
-  height: 250px;
   /* background: #fff; */
   margin: 0 auto;
   flex-shrink: 0;
@@ -101,11 +102,13 @@
 }
 
 .view-diary-img {
-  width: inherit;
-  height: 230px;
+  /* width: inherit; */
+  height: 200px;
+  width: fit-content;
+  margin-top: 20px;
+  margin-bottom: 20px;
   object-fit: scale;
 }
-
 
 .view-diary-content {
   border-bottom: 5px double black;
@@ -197,7 +200,11 @@
   line-height: 120.5%;
 }
 .viewForm{
-  width: 70%;
+  border: solid rgba(177, 136, 136);
+border-radius: 3%;
+  padding: 10px;
+  width: 400px;
+  height: fit-content;
 }
 .laqiuS {
   padding: 10px;
@@ -206,4 +213,14 @@
 }
 .dYuXOM {
   height: 500px !important;
+}
+
+.viewMode{
+  border: solid rgba(177, 136, 136);
+  border-radius: 3%;
+  width: 450px;
+  height: 530px;
+  display: flex;
+  margin-top: 20px;
+  overflow-y: scroll;
 }
