@@ -28,3 +28,14 @@
   margin-left: 530px;
   margin-top : -60px;
 }
+
+/* .gallery-modal-body > div{
+  max-width: inherit;
+  max-height: inherit;
+} */
+
+
+.image-gallery{
+  width: 80%;
+  max-height: inherit;
+}
