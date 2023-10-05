@@ -18,7 +18,7 @@ public interface NoteMapper {
 
 	// 태그 검색
 	//List<Note> selectNotesByTagAndYear(String tag, int year);
-	List<Note> selectNotesByTag(String tag, String userId);
+	List<Note> selectNotesByTag(String tag, String userId, String kidSeq);
 	// 수첩 생성
 	void noteInsert(Note note);
 

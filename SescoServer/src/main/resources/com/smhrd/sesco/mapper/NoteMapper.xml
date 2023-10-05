@@ -57,10 +57,13 @@
     AND
     n.note_d_yn = 'N'
     AND
+    n.kid_seq = #{kidSeq}
+    AND
     n.kid_seq IN (
        
         SELECT kid_seq FROM t_kid WHERE user_id = #{userId}
     )
+    
 </select>
 	
 

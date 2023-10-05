@@ -11,7 +11,7 @@ const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults, isDiaryO
 
     const [noteKidStatus, setNoteKidStatus] = useState(Array(notes.length).fill(false));
     const [selectedNoteIndex, setSelectedNoteIndex] = useState(null);
-    //console.log("******props start*******")
+    // console.log("******props start*******")
     // console.log("notes : ", notes)
     // console.log("kidSeq : ", kidSeq)
     // console.log("kids : ", kids)
@@ -21,7 +21,7 @@ const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults, isDiaryO
     // console.log("클릭 가능2 : ", clickableNotes)
     // console.log("클릭 불가3 : ", lockedNotes)
 
-    //console.log("******props end*******")
+    // console.log("******props end*******")
 
     // 다이어리를 닫을 때 선택된 노트 초기화
 
@@ -66,7 +66,8 @@ const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults, isDiaryO
 
     //태그 취소 클릭
     const tagClose =()=>{
-        console.log("태그 취소 클릭 " )
+        console.log("태그 취소 클릭 ",tagSearchText )
+        // tagSearchText("");
         onTagClose();
 
     }
@@ -131,12 +132,12 @@ const NoteList = ({ notes, onNoteClick, kidSeq, kids, tagSearchResults, isDiaryO
 
                             </div>
                             {/* 태그 검색 결과 숫자 표시 */}
-                            {tagSearchResults[note.note_seq] > 0 && (
+                            {tagSearchResults[note.note_seq] > 0 && tagSearchText ? (
                                 <div className='tagResultItem'>
                                     검색결과 :
                                     {tagSearchResults[note.note_seq]}
                                 </div>
-                            )}
+                            ) : null}
                         </div>
                     ))}
                     {/*노트 테이블 */}
