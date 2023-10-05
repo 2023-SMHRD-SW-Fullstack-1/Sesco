@@ -142,6 +142,9 @@
   right: 350px;
   bottom: 100px;
 }
+.addVisible{
+  visibility: hidden
+}
 .diaryAddBtn:hover{
   border: 2px solid #b9b9b9;
   border-radius: 50%;

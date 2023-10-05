@@ -160,8 +160,10 @@ const [userInfo, setUserInfo] = useState(false);
                         Swal.fire({
                             icon: 'success',
                             title: '로그인 성공',
+                          }).then(function(){
+                            nav('/main')
                           })
-                        nav('/main')
+                        
                         console.log(res.data);
                         console.log(sessionStorage.user_nick);
                     } else {

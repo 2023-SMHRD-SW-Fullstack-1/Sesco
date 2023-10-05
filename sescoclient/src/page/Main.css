@@ -901,24 +901,24 @@
 .main1Diary_box {
     width: 100%;
     height: 970px;
-    background-color: rgb(230, 244, 255);
-    margin-bottom: 20px;
+    background-color: rgba(230, 244, 255, 0.562);
+    margin-bottom: 30px;
     margin-top: 60px;
 }
 
 .main1Gallery_box {
     width: 100%;
     height: 970px;
-    background-color: rgba(183, 255, 177, 0.219);
-    margin-bottom: 20px;
+    background-color: rgba(183, 255, 177, 0.137);
+    margin-bottom: 30px;
 }
 
 .main1Tip_box {
     width: 100%;
     height: 970px;
-    background-color: rgba(255, 241, 238, 0.753);
+    background-color: rgba(255, 241, 238, 0.397);
     margin-bottom: 20%;
-    margin-bottom: 20px;
+    margin-bottom: 250px;
     padding-top: 90px;
     padding-right: 140px;
 }

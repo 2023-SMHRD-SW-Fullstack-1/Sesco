@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 
 
 
-const ViewDiary = ({ selectdate, noteData, fetchDiaryList, setListClickVisible, updateDiaryList}) => {
+const ViewDiary = ({ selectdate, noteData, fetchDiaryList, setListClickVisible, updateDiaryList,isAddVisible}) => {
   const [tags, setTags] = useState([]);
   const [current, setCurrent] = useState(0);
   const [isEditing, setIsEditing] = useState(false); // 수정 모드 플래그
@@ -292,7 +292,8 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList, setListClickVisible, 
         console.error("Error while deleting diary:", error)
       }
     };
-
+    
+  
     
 
 
@@ -399,8 +400,8 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList, setListClickVisible, 
       
       )}
 
-     <button className="view-delete-btn" onClick={handleDeleteDiary}>일기 삭제</button>
-     <button className="view-edit-btn" onClick={handleEditClick}>수정하기</button> 
+     <button className={`view-delete-btn ${isAddVisible ? '' : 'addVisible'}`} onClick={handleDeleteDiary}>일기 삭제</button>
+     <button className={isAddVisible? 'view-edit-btn': "addVisible"} onClick={handleEditClick}>수정하기</button> 
     </div>
 
   )

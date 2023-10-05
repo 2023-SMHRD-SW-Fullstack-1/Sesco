@@ -101,6 +101,30 @@ const Diarycopy = ({noteData}) => {
     setListClickVisible(true)
   },[selectedDiaryList])
 
+  const [isAddVisible, setIsAddVisible] = useState(false);
+  // 스크롤 감지 -메뉴버튼
+useEffect(() => {
+  const handleScroll = () => {
+    const scrollPosition = window.scrollY;
+    if (scrollPosition >= 505 && scrollPosition<= 1100) {
+      setIsAddVisible(true);
+      console.log('현재 스크롤',window.scrollY,'메뉴',isAddVisible);
+    } else if(scrollPosition>2097){
+      setIsAddVisible(true);
+      console.log('현재 스크롤',window.scrollY,'메뉴',isAddVisible);
+      
+    }else {
+      setIsAddVisible(false);
+      console.log('현재 스크롤',window.scrollY,'메뉴',isAddVisible);
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll)
+
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+  };
+}, [window.scrollY]);
   useEffect(()=>{
     if(selectedDate){
       const tempDiaryList = listDiary.filter((diary)=> diary.date == formatDate(selectedDate))
@@ -272,12 +296,12 @@ const Diarycopy = ({noteData}) => {
           )}
         {listClickVisible && selectedDiaryList && selectedDiaryList.length > 0 && (
   <ViewDiary
-  fetchDiaryList={fetchDiaryList} setSelectedDate={setSelectedDate} selectdate={selectedDiaryList} noteData={noteData} setListClickVisible={setListClickVisible} updateDiaryList={updateDiaryList}
+  fetchDiaryList={fetchDiaryList} setSelectedDate={setSelectedDate} selectdate={selectedDiaryList} noteData={noteData} setListClickVisible={setListClickVisible} updateDiaryList={updateDiaryList} isAddVisible={isAddVisible}
   />  
 )}
         </div>
-        <button className="diaryAddBtn" onClick={()=>CreateDiaryForm()}>+</button>
-
+        <button className={isAddVisible? 'diaryAddBtn': "addVisible"}onClick={()=>CreateDiaryForm()}>+</button>
+        
       </div>
     </div>
   )
