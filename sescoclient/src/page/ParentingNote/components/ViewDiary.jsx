@@ -401,7 +401,7 @@ const ViewDiary = ({ selectdate, noteData, fetchDiaryList, setListClickVisible, 
       )}
 
      <button className={`view-delete-btn ${isAddVisible ? '' : 'addVisible'}`} onClick={handleDeleteDiary}>일기 삭제</button>
-     <button className={isAddVisible? 'view-edit-btn': "addVisible"} onClick={handleEditClick}>수정하기</button> 
+     <button className={isAddVisible? 'view-edit-btn': "addVisible"} onClick={handleEditClick}>수정 하기</button> 
     </div>
 
   )

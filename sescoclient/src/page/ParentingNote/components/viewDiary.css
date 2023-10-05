@@ -137,6 +137,7 @@
 
 .view-edit-btn{
   z-index: 2;
+  font-family: 'omyu_pretty';
   border: 0;
   width: 60px;
   height: 60px;
@@ -156,6 +157,7 @@
 
 .view-delete-btn{
   z-index: 2;
+  font-family: 'omyu_pretty';
   border: 0;
   width: 60px;
   height: 60px;
@@ -174,6 +176,7 @@
 }
 .view-Editedtop-container {
   display: flex;
+
   flex-direction: column;
   justify-content: center;
   align-items: center;
