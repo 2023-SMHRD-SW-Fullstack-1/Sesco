@@ -291,7 +291,8 @@ const Note = ({onTagClose}) => {
     try {
       if (searchTag.trim() === "") return;
       console.log("사용자 아이디값  : ", userId)
-      const response = await axios.get('http://localhost:8081/sesco/note/tagsearch', { params: { tag: searchTag, userId: userId } })
+      const response = await axios.get('http://localhost:8081/sesco/note/tagsearch',
+       { params: { tag: searchTag, userId: userId , kidSeq:kidSelect} })
       setNotes(response.data)
       console.log("태그 검색 데이터 불러오기 : ", response.data)
       setTagSearchResult(response.data);
@@ -403,12 +404,14 @@ const Note = ({onTagClose}) => {
 
   // 태그 검색 결과를 초기화하는 함수
   const handleTagClose = async() => {
-    console.log("태그 취소 시 초기화 !  ", currentSearchTag)
+    
     setCurrentSearchTag(''); // 상태 초기화
     setSelectedNoteSeq(null)
     setIsDiaryOpen(false)
     setSearchTag("")
     setTagSearchResult({})
+    
+    console.log("태그 취소 시 초기화 !  ", currentSearchTag)
 
      //  아이의  수첩 다시 불러오기
      const reseponse = await axios.post('http://localhost:8081/sesco/note/createnotev2', { "kid_seq": kidSelect });

@@ -61,9 +61,9 @@ public class NoteController {
 //	}
 
 	@GetMapping("/note/tagsearch")
-	public List<Note> getNotesByTag(@RequestParam String tag, @RequestParam String userId) {
-		System.out.println("태그 검색 결과 : " + noteService.searchNotesByTag(tag, userId));
-		return noteService.searchNotesByTag(tag, userId);
+	public List<Note> getNotesByTag(@RequestParam String tag, @RequestParam String userId, @RequestParam String kidSeq) {
+		System.out.println("태그 검색 결과 : " + noteService.searchNotesByTag(tag, userId,kidSeq));
+		return noteService.searchNotesByTag(tag, userId,kidSeq);
 	}
 
 	// 수첩 생성
